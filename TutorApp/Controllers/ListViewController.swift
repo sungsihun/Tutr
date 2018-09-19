@@ -14,6 +14,24 @@ class ListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Action Methods 
+    
+    @IBAction func filterButtonPressed(_ sender: Any) {
+        let controller = UIAlertController(title: "Filter By:", message: nil, preferredStyle: .actionSheet)
+        let nameSortAction = UIAlertAction(title: "Name", style: .default) { _ in
+            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
+            self.tableView.reloadData()
+        }
+        let subjectSortAction = UIAlertAction(title: "Subject", style: .default) { _ in
+            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
+            self.tableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        controller.addAction(nameSortAction)
+        controller.addAction(subjectSortAction)
+        controller.addAction(cancelAction)
+        present(controller, animated: true, completion: nil)
+    }
     // MARK: - Properties
     
     var students = [Student]()
@@ -33,9 +51,11 @@ class ListViewController: UIViewController {
     
     // MARK: - Custom Methods
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.separatorInset = UIEdgeInsets.zero
+        tableView.tableFooterView = UIView(frame: .zero)
     }
+    
     
     // MARK: - Segue
     
@@ -59,6 +79,20 @@ class ListViewController: UIViewController {
 // MARK: - Table View Delegate & Data Source
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if students.count > 0 {
+            tableView.backgroundView = nil
+        } else {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            noDataLabel.text          = "Press + To Add Your First Student!"
+            noDataLabel.textColor     = UIColor.black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView  = noDataLabel
+        }
+        return 1
+    }
+    
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count

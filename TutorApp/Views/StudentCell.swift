@@ -12,6 +12,7 @@ class StudentCell: UITableViewCell {
     
     // MARK: - Properties
     
+    @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var studentNameLabel: UILabel!
     @IBOutlet weak var studentImageView: StudentImageView!
     
@@ -20,6 +21,7 @@ class StudentCell: UITableViewCell {
 
     func configure(with student: Student) {
         studentNameLabel.text = student.name
+        subjectLabel.text = student.subjectStudying
         
         if let studentImage = student.image {
             studentImageView.image = studentImage

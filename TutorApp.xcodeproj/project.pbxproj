@@ -17,6 +17,8 @@
 		BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5ED21517718001249AF /* StudentCell.swift */; };
 		BAB9E5F021518001001249AF /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5EF21518001001249AF /* AddStudentViewController.swift */; };
 		BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F121528230001249AF /* StudentImageView.swift */; };
+		BAB9E5F42152A7A2001249AF /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Homework.swift */; };
+		BAB9E5F62152B4EC001249AF /* HomeworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		BAB9E5ED21517718001249AF /* StudentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		BAB9E5EF21518001001249AF /* AddStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
 		BAB9E5F121528230001249AF /* StudentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentImageView.swift; sourceTree = "<group>"; };
+		BAB9E5F32152A7A2001249AF /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
+		BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				BAB9E5EB21517424001249AF /* Student.swift */,
+				BAB9E5F32152A7A2001249AF /* Homework.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 			children = (
 				BAB9E5D921517344001249AF /* Main.storyboard */,
 				BAB9E5ED21517718001249AF /* StudentCell.swift */,
+				BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */,
 				BAB9E5F121528230001249AF /* StudentImageView.swift */,
 			);
 			path = Views;
@@ -187,6 +193,8 @@
 				BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */,
 				BAB9E5EC21517424001249AF /* Student.swift in Sources */,
 				06D49AF72151C87100175B06 /* DetailViewController.swift in Sources */,
+				BAB9E5F62152B4EC001249AF /* HomeworkCell.swift in Sources */,
+				BAB9E5F42152A7A2001249AF /* Homework.swift in Sources */,
 				BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */,
 				BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */,
 			);

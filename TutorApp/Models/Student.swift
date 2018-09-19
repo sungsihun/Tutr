@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
-struct Student {
+class Student {
     
     var id: UUID
     var name: String
     var age: Int
     var subjectStudying: String
     var image: UIImage?
+    var homeworkItems = [Homework]()
     
     init(name: String, age: Int, subjectStudying: String, image: UIImage? = nil) {
         let uuid = UUID()
