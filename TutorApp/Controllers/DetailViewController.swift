@@ -38,6 +38,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadStudent()
+        setupButtons()
     }
     
     
@@ -53,16 +54,23 @@ class DetailViewController: UIViewController {
             studentImageView.layer.cornerRadius = studentImageView.frame.size.height / 2
             self.title = student.name
         }
-        
-        studentDetailsButton.isSelected = true
-        studentDetailsButton.isEnabled = false
     }
     
     private func toggle() {
         studentDetailsButton.isSelected = !studentDetailsButton.isSelected
         studentHomeworkButton.isSelected = !studentHomeworkButton.isSelected
-        studentDetailsButton.isEnabled = !studentDetailsButton.isSelected
-        studentHomeworkButton.isEnabled = !studentHomeworkButton.isSelected
+        
+        studentDetailsButton.isUserInteractionEnabled = !studentDetailsButton.isSelected
+        studentHomeworkButton.isUserInteractionEnabled = !studentHomeworkButton.isSelected
+
+    }
+    
+    private func setupButtons() {
+        studentDetailsButton.setTitleColor(UIColor.black, for: .selected)
+        studentDetailsButton.setTitleColor(UIColor.black, for: .disabled)
+        studentHomeworkButton.setTitleColor(UIColor.black, for: .disabled)
+        studentHomeworkButton.setTitleColor(UIColor.black, for: .selected)
+        studentDetailsButton.isSelected = true
     }
 
 }
