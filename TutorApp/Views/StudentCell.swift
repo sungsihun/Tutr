@@ -13,7 +13,7 @@ class StudentCell: UITableViewCell {
     // MARK: - Properties
     
     @IBOutlet weak var studentNameLabel: UILabel!
-    @IBOutlet weak var studentImageView: UIImageView!
+    @IBOutlet weak var studentImageView: StudentImageView!
     
     
     // MARK: - Custom Methods
@@ -23,8 +23,6 @@ class StudentCell: UITableViewCell {
         
         if let studentImage = student.image {
             studentImageView.image = studentImage
-            
-            studentImageView.layer.cornerRadius = studentImageView.frame.size.height / 2
         }
     }
     

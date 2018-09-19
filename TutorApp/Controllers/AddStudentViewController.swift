@@ -22,9 +22,14 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    
+    
     // MARK: - Properties
     
     weak var delegate: AddStudentViewControllerDelegate?
+    
+    
+    
     
     // MARK: - Action Methods
     
@@ -36,11 +41,11 @@ class AddStudentViewController: UIViewController {
         var student = Student(name: name, age: age, subjectStudying: subject)
         
         if studentImageView.image == #imageLiteral(resourceName: "addImage") {
-//            student.image = nil
             student.image = UIImage(named: "default-student")
         } else {
             student.image = studentImageView.image
         }
+        
         delegate?.add(studentViewController: self, student: student)
         dismiss(animated: true, completion: nil)
     }
@@ -48,6 +53,9 @@ class AddStudentViewController: UIViewController {
     @IBAction func cancelPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    
     
     // MARK: - Life Cycle
     
@@ -81,6 +89,13 @@ class AddStudentViewController: UIViewController {
     
 
 }
+
+
+
+
+
+
+// MARK: - Image Picker and Navigation Delegate
 
 extension AddStudentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

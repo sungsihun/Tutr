@@ -18,13 +18,19 @@ class ListViewController: UIViewController {
     
     var students = [Student]()
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         let student = Student(name: "Henry Cooper", age: 25, subjectStudying: "Swift", image: #imageLiteral(resourceName: "henry"))
         students.append(student)
     }
-  
+    
+   
+    
+    
+    
     // MARK: - Custom Methods
     
     func setupTableView() {

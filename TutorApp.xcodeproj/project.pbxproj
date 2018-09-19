@@ -16,6 +16,7 @@
 		BAB9E5EC21517424001249AF /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5EB21517424001249AF /* Student.swift */; };
 		BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5ED21517718001249AF /* StudentCell.swift */; };
 		BAB9E5F021518001001249AF /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5EF21518001001249AF /* AddStudentViewController.swift */; };
+		BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F121528230001249AF /* StudentImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BAB9E5EB21517424001249AF /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		BAB9E5ED21517718001249AF /* StudentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		BAB9E5EF21518001001249AF /* AddStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
+		BAB9E5F121528230001249AF /* StudentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				BAB9E5D921517344001249AF /* Main.storyboard */,
 				BAB9E5ED21517718001249AF /* StudentCell.swift */,
+				BAB9E5F121528230001249AF /* StudentImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			files = (
 				BAB9E5D821517344001249AF /* ListViewController.swift in Sources */,
 				BAB9E5F021518001001249AF /* AddStudentViewController.swift in Sources */,
+				BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */,
 				BAB9E5EC21517424001249AF /* Student.swift in Sources */,
 				06D49AF72151C87100175B06 /* DetailViewController.swift in Sources */,
 				BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */,
@@ -329,7 +333,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R23387N4SM;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				INFOPLIST_FILE = TutorApp/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -347,7 +351,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R23387N4SM;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				INFOPLIST_FILE = TutorApp/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
