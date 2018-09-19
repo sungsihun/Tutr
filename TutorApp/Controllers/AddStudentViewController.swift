@@ -36,7 +36,8 @@ class AddStudentViewController: UIViewController {
         var student = Student(name: name, age: age, subjectStudying: subject)
         
         if studentImageView.image == #imageLiteral(resourceName: "addImage") {
-            student.image = nil
+//            student.image = nil
+            student.image = UIImage(named: "default-student")
         } else {
             student.image = studentImageView.image
         }
@@ -62,8 +63,8 @@ class AddStudentViewController: UIViewController {
     // MARK: - Setup
     
     private func setupStudentImageView() {
-        studentImageView.layer.borderWidth = 3.0
-        studentImageView.layer.borderColor = UIColor.black.cgColor
+        studentImageView.layer.borderWidth = 1.5
+        studentImageView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private func setupTextFields() {
