@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Gh-ps-ZHZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Gh-ps-ZHZ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Students-->
+        <!--List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ListViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RYq-Hv-uwh">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="128" width="320" height="440"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentCell" rowHeight="96" id="aGd-d3-0yc" customClass="StudentCell" customModule="TutorApp" customModuleProvider="target">
@@ -75,29 +72,54 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="873-sh-ohs"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Joo-Er-jQE" userLabel="Header View Container">
+                                <rect key="frame" x="-2" y="-2" width="324" height="130"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="Uqp-PY-YdR" userLabel="Header ImageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="130"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Uqp-PY-YdR" firstAttribute="leading" secondItem="Joo-Er-jQE" secondAttribute="leading" id="77w-fx-0cf"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uqp-PY-YdR" secondAttribute="bottom" id="9Vr-wO-riy"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uqp-PY-YdR" secondAttribute="trailing" id="EXn-7w-Ve7"/>
+                                    <constraint firstItem="Uqp-PY-YdR" firstAttribute="top" secondItem="Joo-Er-jQE" secondAttribute="top" id="bgA-tb-a6Z"/>
+                                    <constraint firstAttribute="height" constant="130" id="eM4-tz-BB9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0kA-BD-PHe"/>
-                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="YiP-lP-a0o"/>
-                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Z0K-BR-T4q"/>
-                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zXT-YH-gPk"/>
+                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="P5K-za-M30"/>
+                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rgy-Ay-cLa"/>
+                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Sgy-sy-tHl"/>
+                            <constraint firstItem="Joo-Er-jQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-2" id="b6i-1G-b7m"/>
+                            <constraint firstItem="RYq-Hv-uwh" firstAttribute="top" secondItem="Joo-Er-jQE" secondAttribute="bottom" id="bNp-eE-wug"/>
+                            <constraint firstItem="Joo-Er-jQE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="2" id="beN-YN-jOO"/>
+                            <constraint firstItem="Joo-Er-jQE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-2" id="cT3-AD-Jdu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Students" id="OBQ-fI-3Wo">
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="eJa-Jk-fPE">
-                            <connections>
-                                <action selector="filterButtonPressed:" destination="BYZ-38-t0r" id="ytj-6j-WI5"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="Jaz-El-Nrh">
-                            <connections>
-                                <segue destination="En6-H8-jN4" kind="presentation" identifier="addStudent" id="iXo-3G-sIJ"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" id="OBQ-fI-3Wo">
+                        <barButtonItem key="backBarButtonItem" title=" " id="7c8-Fk-6VQ"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="adding-icon" id="Jaz-El-Nrh">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="En6-H8-jN4" kind="presentation" identifier="addStudent" id="iXo-3G-sIJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Filter" image="filter-icon" id="eJa-Jk-fPE">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="filterButtonPressed:" destination="BYZ-38-t0r" id="ytj-6j-WI5"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="headerHeightConstraint" destination="eM4-tz-BB9" id="pOb-2j-Eyr"/>
                         <outlet property="tableView" destination="RYq-Hv-uwh" id="MJZ-XQ-GBH"/>
                     </connections>
                 </viewController>
@@ -157,12 +179,12 @@
                         <viewLayoutGuide key="safeArea" id="yAO-nm-Tlg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add New Student" id="JEi-T3-o0Q">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uC5-Wg-nYR">
+                        <barButtonItem key="leftBarButtonItem" image="cancel3" id="uC5-Wg-nYR">
                             <connections>
                                 <action selector="cancelPressed:" destination="4E4-3g-vRh" id="FSV-Zb-OQ1"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Usz-Bd-0Fl">
+                        <barButtonItem key="rightBarButtonItem" image="save3" style="done" id="Usz-Bd-0Fl">
                             <connections>
                                 <action selector="savePressed:" destination="4E4-3g-vRh" id="dPB-xa-fz1"/>
                             </connections>
@@ -185,9 +207,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CsO-8x-DiW">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
+                        <rect key="frame" x="0.0" y="20" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -207,10 +230,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIv-qu-aaF" userLabel="Background View Container">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PfE-hw-t3u">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background1" translatesAutoresizingMaskIntoConstraints="NO" id="PfE-hw-t3u">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -222,20 +245,20 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uzj-fl-NRd" customClass="StudentImageView" customModule="TutorApp" customModuleProvider="target">
-                                <rect key="frame" x="99" y="84" width="122" height="122"/>
+                                <rect key="frame" x="99" y="131" width="122" height="121.5"/>
                                 <color key="backgroundColor" red="0.0020097530459999998" green="1" blue="0.14423110259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uzj-fl-NRd" secondAttribute="height" multiplier="1:1" id="gfu-3W-s5A"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgC-BT-2CP">
-                                <rect key="frame" x="127.5" y="216" width="66.5" height="31.5"/>
+                                <rect key="frame" x="127" y="262.5" width="66.5" height="31.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <color key="textColor" red="0.13335453864385824" green="0.59200507614213205" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCW-dh-sVH" userLabel="Stack View Container">
-                                <rect key="frame" x="20" y="257.5" width="280" height="36"/>
+                                <rect key="frame" x="20" y="304" width="280" height="36"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-qe-AAl">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="36"/>
@@ -275,7 +298,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXM-ee-x1Q" userLabel="Homework View Container">
-                                <rect key="frame" x="35" y="311.5" width="250" height="259.5"/>
+                                <rect key="frame" x="35" y="358" width="250" height="213"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Homework..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-jH-0Bu">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="17"/>
@@ -284,7 +307,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
-                                        <rect key="frame" x="0.0" y="17" width="250" height="242"/>
+                                        <rect key="frame" x="0.0" y="17" width="250" height="196"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
@@ -296,7 +319,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
-                                                            <rect key="frame" x="0.0" y="11" width="250" height="21"/>
+                                                            <rect key="frame" x="0.0" y="11.5" width="250" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -331,10 +354,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-oh-req" userLabel="Profile View Container">
-                                <rect key="frame" x="35" y="298.5" width="250" height="259.5"/>
+                                <rect key="frame" x="35" y="345" width="250" height="213"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="xbc-mU-GLd">
-                                        <rect key="frame" x="13" y="10" width="225" height="153"/>
+                                        <rect key="frame" x="12.5" y="10" width="225" height="153"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBu-Tf-YmP">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="20.5"/>
@@ -432,9 +455,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="En6-H8-jN4" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sQ5-fy-Z8J">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="sQ5-fy-Z8J">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.21100669928119362" green="0.42365910226318448" blue="0.11818467405078133" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -448,5 +473,11 @@
     </scenes>
     <resources>
         <image name="addImage" width="925" height="841"/>
+        <image name="adding-icon" width="25" height="18"/>
+        <image name="background1" width="640" height="960"/>
+        <image name="cancel3" width="25" height="25"/>
+        <image name="filter-icon" width="25" height="25"/>
+        <image name="header" width="697" height="304"/>
+        <image name="save3" width="25" height="25"/>
     </resources>
 </document>

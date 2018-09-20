@@ -13,8 +13,9 @@ class ListViewController: UIViewController {
     // MARK: - Outlets
 
     @IBOutlet weak var tableView: UITableView!
-    
-    // MARK: - Action Methods 
+    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
+  
+    // MARK: - Action Methods
     
     @IBAction func filterButtonPressed(_ sender: Any) {
         let controller = UIAlertController(title: "Filter By:", message: nil, preferredStyle: .actionSheet)
@@ -32,6 +33,7 @@ class ListViewController: UIViewController {
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
     }
+  
     // MARK: - Properties
     
     var students = [Student]()
@@ -40,14 +42,12 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         setupTableView()
         let student = Student(name: "Henry Cooper", age: 25, subjectStudying: "Swift", image: #imageLiteral(resourceName: "henry"))
         students.append(student)
     }
-    
-   
-    
-    
+  
     
     // MARK: - Custom Methods
     
@@ -55,7 +55,28 @@ class ListViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
     }
-    
+  
+    func getHeaderImageHeightForCurrentDevice() -> CGFloat {
+        switch UIScreen.main.nativeBounds.height {
+        case 2436: // iPhone X
+            return 175
+        default: // Every other iPhone
+            return 145
+        }
+    }
+  
+    private func setupUI() {
+      
+        // MARK: - Navigation Bar
+      
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.title = "Students"
+        // set header height constraint for different devices
+        if UIDevice().userInterfaceIdiom == .phone {
+          headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
+        }
+    }
     
     // MARK: - Segue
     
