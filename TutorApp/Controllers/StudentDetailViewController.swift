@@ -102,8 +102,8 @@ class StudentDetailViewController: UIViewController {
         // MARK: - Table View
         
         homeworkTableView.tableFooterView = UIView(frame: .zero)
-        homeworkTableView.allowsSelection = false;
-        
+//        homeworkTableView.allowsSelection = false;
+      
         // MARK: - Text Field
         
         addHomeworkTextfield.delegate = self
