@@ -26,6 +26,9 @@
 		BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F121528230001249AF /* StudentImageView.swift */; };
 		BAB9E5F42152A7A2001249AF /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Homework.swift */; };
 		BAB9E5F62152B4EC001249AF /* HomeworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */; };
+		BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF02C7F2155647000E00241 /* OnboardingViewController.swift */; };
+		BAF02C8421556E3A00E00241 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF02C8321556E3A00E00241 /* CloudKit.framework */; };
+		BAF02C8721556E8E00E00241 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF02C8621556E8E00E00241 /* CloudKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,10 @@
 		BAB9E5F121528230001249AF /* StudentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentImageView.swift; sourceTree = "<group>"; };
 		BAB9E5F32152A7A2001249AF /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
 		BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkCell.swift; sourceTree = "<group>"; };
+		BAF02C7F2155647000E00241 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		BAF02C8121556E3700E00241 /* TutorApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TutorApp.entitlements; sourceTree = "<group>"; };
+		BAF02C8321556E3A00E00241 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		BAF02C8621556E8E00E00241 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF02C8421556E3A00E00241 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +76,7 @@
 			children = (
 				BAB9E5D421517344001249AF /* TutorApp */,
 				BAB9E5D321517344001249AF /* Products */,
+				BAF02C8221556E3A00E00241 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,9 +91,11 @@
 		BAB9E5D421517344001249AF /* TutorApp */ = {
 			isa = PBXGroup;
 			children = (
+				BAF02C8121556E3700E00241 /* TutorApp.entitlements */,
 				BAB9E5EA215173A8001249AF /* Other */,
 				BAB9E5E921517377001249AF /* Views */,
 				BAB9E5E821517373001249AF /* Models */,
+				BAF02C8521556E7800E00241 /* Manager */,
 				BAB9E5E72151736F001249AF /* Controllers */,
 			);
 			path = TutorApp;
@@ -94,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				06ADB56021554B9300469760 /* AddTeacherViewController.swift */,
+				BAF02C7F2155647000E00241 /* OnboardingViewController.swift */,
 				BAB9E5D721517344001249AF /* StudentListViewController.swift */,
 				06D49AF62151C87100175B06 /* StudentDetailViewController.swift */,
 				06ADB56221555ED900469760 /* HomeworkDetailViewController.swift */,
@@ -138,6 +150,22 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		BAF02C8221556E3A00E00241 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BAF02C8321556E3A00E00241 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BAF02C8521556E7800E00241 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				BAF02C8621556E8E00E00241 /* CloudKitManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -170,6 +198,14 @@
 				TargetAttributes = {
 					BAB9E5D121517344001249AF = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -212,10 +248,12 @@
 				BAB9E5D821517344001249AF /* StudentListViewController.swift in Sources */,
 				06B8CA2F2154653700AAA655 /* TeacherListViewController.swift in Sources */,
 				BAB9E5F021518001001249AF /* AddStudentViewController.swift in Sources */,
+				BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */,
 				BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */,
 				06C86E772154846E00EFFE9E /* Teacher.swift in Sources */,
 				06C86E7521547A3400EFFE9E /* TeacherCell.swift in Sources */,
 				06ADB56121554B9300469760 /* AddTeacherViewController.swift in Sources */,
+				BAF02C8721556E8E00E00241 /* CloudKitManager.swift in Sources */,
 				06ADB56321555ED900469760 /* HomeworkDetailViewController.swift in Sources */,
 				BAB9E5EC21517424001249AF /* Student.swift in Sources */,
 				06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */,
@@ -368,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TutorApp/TutorApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				INFOPLIST_FILE = TutorApp/Other/Info.plist;
@@ -386,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TutorApp/TutorApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				INFOPLIST_FILE = TutorApp/Other/Info.plist;

@@ -16,6 +16,7 @@ class AddTeacherViewController: UIViewController {
 
     // MARK: - Properties
   
+    let userDefaults = UserDefaults.standard
     weak var delegate: AddTeacherViewControllerDelegate?
   
     // MARK : - Outlets
@@ -32,24 +33,36 @@ class AddTeacherViewController: UIViewController {
         addImageGestureRecogniser()
         setupStudentImageView()
         setupTextFields()
+        setupTeacher()
     }
+    
+    // MARK: - Custom Methods
+    
+    private func setupTeacher() {
+        CloudKitManager.createUserOfType("Teachers") { (success) in
+            if !success { print("Could not save teacher"); return }
+            self.userDefaults.set(true, forKey: "isTeacher")
+            
+            
+            CloudKitManager.getCurrentUserName(completion: { (firstName, lastName) in
+                guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
+                
+                
+                DispatchQueue.main.async {
+                    self.nameTextField.text = "\(firstName) \(lastName)"
+                }
+            })
+        }
+    }
+    
     
 
     // MARK : - Actions
   
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        guard let name = nameTextField.text else { return }
-        guard let subject = subjectTextField.text else { return }
-      
-        let teacher = Teacher(name: name, subject: subject)
-      
-        if imageView.image == #imageLiteral(resourceName: "addImage") {
-          teacher.image = UIImage(named: "default-student")
-        } else {
-          teacher.image = imageView.image
-        }
-      
-        delegate?.add(teacherViewController: self, teacher: teacher)
+        guard let subjectText = subjectTextField.text else { return }
+        guard let nameText = nameTextField.text else { return }
+        CloudKitManager.saveTeacherDetailsWith(name: nameText, subject: subjectText, image: nil)
     }
   
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
