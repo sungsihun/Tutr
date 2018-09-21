@@ -10,8 +10,8 @@ import UIKit
 
 class StudentCell: UITableViewCell {
     
-    // MARK: - Properties
-    
+    // MARK: - Outlets
+
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var studentNameLabel: UILabel!
     @IBOutlet weak var studentImageView: StudentImageView!

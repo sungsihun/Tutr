@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  StudentDetailViewController.swift
 //  TutorApp
 //
 //  Created by NICE on 2018-09-18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class StudentDetailViewController: UIViewController {
 
     // MARK: - Always Viewable Outlets
   
@@ -41,14 +41,7 @@ class DetailViewController: UIViewController {
     var cellTextfieldTag = 0
     var student: Student!
     var activeTextField = UITextField()
-  
-//    var selectedItems = [Homework]()
-//
-//    let deleteButton:UIButton = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-//
-//    let editButton:UIButton = UIButton(frame: CGRect(x: 100, y: 50, width: 100, height: 50))
 
-  
     // MARK: - Life Cycle
   
     override func viewDidLoad() {
@@ -57,9 +50,7 @@ class DetailViewController: UIViewController {
         setupUI()
         setupGestureRecogniser()
     }
-  
 
-  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -77,11 +68,6 @@ class DetailViewController: UIViewController {
         subjectLabel.text = student.subjectStudying
         
         studentImageView.image = student.image
-//        studentImageView.layer.borderWidth = 3.0
-//        studentImageView.layer.borderColor = UIColor.white.cgColor
-//        studentImageView.layer.cornerRadius = studentImageView.frame.size.height / 2
-//        
-//        self.title = student.name
     }
     
     private func toggle() {
@@ -121,25 +107,7 @@ class DetailViewController: UIViewController {
         // MARK: - Text Field
         
         addHomeworkTextfield.delegate = self
-      
-        // MARK: - Delete Button
-
-//        deleteButton.backgroundColor = UIColor.white
-//        deleteButton.setTitleColor(UIColor.lightGray, for: .normal)
-//        deleteButton.setTitleColor(#colorLiteral(red: 0.1215686275, green: 0.5294117647, blue: 0, alpha: 1), for: .selected)
-//        deleteButton.setTitle("Delete", for: .normal)
-//        deleteButton.addTarget(self, action:#selector(self.deleteButtonTapped), for: .touchUpInside)
-//        self.view.addSubview(deleteButton)
-//        deleteButton.isHidden = true
-      
-        // MARK: - Edit Button
-      
-//        editButton.backgroundColor = UIColor.white
-//        editButton.setTitleColor(UIColor.lightGray, for: .normal)
-//        editButton.setTitleColor(#colorLiteral(red: 0.1215686275, green: 0.5294117647, blue: 0, alpha: 1), for: .selected)
-//        editButton.setTitle("edit", for: .normal)
-//        editButton.addTarget(self, action:#selector(self.editButtonTapped), for: .touchUpInside)
-//        self.view.addSubview(editButton)
+    
     }
     
     private func setupGestureRecogniser() {
@@ -150,45 +118,14 @@ class DetailViewController: UIViewController {
     @objc private func handleTap() {
         activeTextField.resignFirstResponder()
     }
-    
-//    @objc func deleteButtonTapped() {
-//
-//      var selectedItems: [Homework] {
-//        return student.homeworkItems.filter { return $0.isSelected }
-//      }
-//
-//      for selectItem in selectedItems {
-//        student.homeworkItems.remove(at: selectItem.index)
-//      }
-//
-//      homeworkTableView.reloadData()
-//
-//      print(student.homeworkItems)
-//      homeworkTableView.allowsSelection = false;
-//      deleteButton.isHidden = true
-//    }
-//
-//    @objc func editButtonTapped() {
-//
-//      editButton.setTitleColor(#colorLiteral(red: 0.1215686275, green: 0.5294117647, blue: 0, alpha: 1), for: .selected)
-//
-//      if homeworkTableView.allowsMultipleSelection == true {
-//        homeworkTableView.allowsSelection = false
-//        deleteButton.isHidden = true
-//        selectedItems.removeAll()
-//        homeworkTableView.reloadData()
-//      } else {
-//        homeworkTableView.allowsMultipleSelection = true ///////
-//        deleteButton.isHidden = false
-//      }
-//    }
+
 }
 
 
 
 // MARK: - Table View Data Source
 
-extension DetailViewController: UITableViewDataSource {
+extension StudentDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return student.homeworkItems.count
@@ -199,30 +136,14 @@ extension DetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! HomeworkCell
         cell.homeworkDescLabel.text = student.homeworkItems[indexPath.row].homeworkDescription
 
-         //select/deselect the cell
-//        if student.homeworkItems[indexPath.row].isSelected {
-//          tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-//        } else {
-//          tableView.deselectRow(at: indexPath, animated: false)
-//        }
-      
         return cell
     }
 }
 
 // MARK: - Table View Delegate
 
-extension DetailViewController: UITableViewDelegate {
+extension StudentDetailViewController: UITableViewDelegate {
   
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        student.homeworkItems[indexPath.row].isSelected = true
-//        student.homeworkItems[indexPath.row].index = indexPath.row
-//    }
-//
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        student.homeworkItems[indexPath.row].isSelected = false
-//        student.homeworkItems[indexPath.row].index = -1
-//    }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
       
         if editingStyle == .delete {
@@ -238,7 +159,7 @@ extension DetailViewController: UITableViewDelegate {
 
 // MARK: - Text Field Delegate
 
-extension DetailViewController: UITextFieldDelegate {
+extension StudentDetailViewController: UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

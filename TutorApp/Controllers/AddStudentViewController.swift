@@ -20,8 +20,8 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var studentImageView: UIImageView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+    @IBOutlet weak var saveButton: UIButton!
+  
     
     
     // MARK: - Properties
@@ -56,7 +56,6 @@ class AddStudentViewController: UIViewController {
     
     
     
-    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -77,7 +76,6 @@ class AddStudentViewController: UIViewController {
     
     private func setupTextFields() {
         saveButton.isEnabled = false
-
         subjectTextField.delegate = self
         ageTextField.delegate = self
         nameTextField.delegate = self
@@ -132,8 +130,10 @@ extension AddStudentViewController: UITextFieldDelegate {
         let subject = subjectTextField.text ?? ""
         if (age.isInt()) && !(name.isEmpty || age.isEmpty || subject.isEmpty) {
             saveButton.isEnabled = true
+            saveButton.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
         } else {
             saveButton.isEnabled = false
+            saveButton.backgroundColor = UIColor.lightGray
         }
     }
 }

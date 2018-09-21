@@ -11,6 +11,4 @@ import Foundation
 struct Homework {
     
     let homeworkDescription: String
-//    var isSelected = false
-//    var index: Int
 }

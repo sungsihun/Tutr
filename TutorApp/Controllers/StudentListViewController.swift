@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StudentListViewController.swift
 //  TutorApp
 //
 //  Created by Henry Cooper on 18/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class StudentListViewController: UIViewController {
     
     // MARK: - Outlets
 
@@ -32,6 +32,10 @@ class ListViewController: UIViewController {
         controller.addAction(subjectSortAction)
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
+    }
+  
+    @IBAction func homeButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
   
     // MARK: - Properties
@@ -68,10 +72,10 @@ class ListViewController: UIViewController {
     private func setupUI() {
       
         // MARK: - Navigation Bar
-      
+  
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationItem.title = "Students"
+        self.navigationItem.title = "My Students"
         // set header height constraint for different devices
         if UIDevice().userInterfaceIdiom == .phone {
           headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
@@ -89,7 +93,7 @@ class ListViewController: UIViewController {
       
         if let index: IndexPath = tableView.indexPathForSelectedRow {
             if segue.identifier == "showDetail" {
-                let detailVC = segue.destination as! DetailViewController
+                let detailVC = segue.destination as! StudentDetailViewController
                 detailVC.student = self.students[index.row]
             }
         }
@@ -99,7 +103,7 @@ class ListViewController: UIViewController {
 
 // MARK: - Table View Delegate & Data Source
 
-extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+extension StudentListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if students.count > 0 {
@@ -147,7 +151,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - AddStudentViewControllerDelegate
 
-extension ListViewController: AddStudentViewControllerDelegate {
+extension StudentListViewController: AddStudentViewControllerDelegate {
     
     func add(studentViewController controller: AddStudentViewController, student: Student) {
         students.append(student)
