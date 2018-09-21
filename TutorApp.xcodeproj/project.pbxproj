@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06ADB56121554B9300469760 /* AddTeacherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ADB56021554B9300469760 /* AddTeacherViewController.swift */; };
 		06B8CA2F2154653700AAA655 /* TeacherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */; };
 		06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B8CA302154671800AAA655 /* HomeworkListViewController.swift */; };
 		06C86E7521547A3400EFFE9E /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C86E7421547A3400EFFE9E /* TeacherCell.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06ADB56021554B9300469760 /* AddTeacherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeacherViewController.swift; sourceTree = "<group>"; };
 		06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListViewController.swift; sourceTree = "<group>"; };
 		06B8CA302154671800AAA655 /* HomeworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeworkListViewController.swift; path = TutorApp/Controllers/HomeworkListViewController.swift; sourceTree = SOURCE_ROOT; };
 		06C86E7421547A3400EFFE9E /* TeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		BAB9E5E72151736F001249AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				06ADB56021554B9300469760 /* AddTeacherViewController.swift */,
 				BAB9E5D721517344001249AF /* StudentListViewController.swift */,
 				06D49AF62151C87100175B06 /* StudentDetailViewController.swift */,
 				BAB9E5EF21518001001249AF /* AddStudentViewController.swift */,
@@ -209,6 +212,7 @@
 				BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */,
 				06C86E772154846E00EFFE9E /* Teacher.swift in Sources */,
 				06C86E7521547A3400EFFE9E /* TeacherCell.swift in Sources */,
+				06ADB56121554B9300469760 /* AddTeacherViewController.swift in Sources */,
 				BAB9E5EC21517424001249AF /* Student.swift in Sources */,
 				06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */,
 				06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */,

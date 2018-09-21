@@ -33,11 +33,7 @@ class StudentListViewController: UIViewController {
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
     }
-  
-    @IBAction func homeButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-  
+
     // MARK: - Properties
     
     var students = [Student]()

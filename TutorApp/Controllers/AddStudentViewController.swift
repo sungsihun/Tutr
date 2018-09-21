@@ -27,7 +27,7 @@ class AddStudentViewController: UIViewController {
     // MARK: - Properties
     
     weak var delegate: AddStudentViewControllerDelegate?
-    
+    var eamilTextField: UITextField!
     
     
     
@@ -54,7 +54,29 @@ class AddStudentViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
+    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        let alertCtrl = UIAlertController(title: "Add Student", message: "Enter student's email", preferredStyle: .alert)
+      
+        // Add text field to alert controller
+        alertCtrl.addTextField { (textField) in
+          self.eamilTextField = textField
+          self.eamilTextField.autocapitalizationType = .words
+          self.eamilTextField.placeholder = "henry@cooper.com"
+        }
+      
+        // Add cancel button to alert controller
+        alertCtrl.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+      
+        // "Add" button with callback
+        alertCtrl.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
+            if let email = self.eamilTextField.text, email != "" {
+                print(email)
+            }
+        }))
+      
+        present(alertCtrl, animated: true, completion: nil)
+    }
+  
     
     // MARK: - Life Cycle
     
