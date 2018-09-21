@@ -16,7 +16,7 @@ class Student {
     var age: Int
     var subjectStudying: String
     var image: UIImage?
-    var homeworkItems = [Homework]()
+    var assignments = [Assignment]()
     
     init(name: String, age: Int, subjectStudying: String, image: UIImage? = nil) {
         let uuid = UUID()

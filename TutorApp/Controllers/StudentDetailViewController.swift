@@ -128,13 +128,13 @@ class StudentDetailViewController: UIViewController {
 extension StudentDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return student.homeworkItems.count
+        return student.assignments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! HomeworkCell
-        cell.homeworkDescLabel.text = student.homeworkItems[indexPath.row].homeworkDescription
+        let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
+        cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentDescription
 
         return cell
     }
@@ -147,7 +147,7 @@ extension StudentDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
       
         if editingStyle == .delete {
-            student.homeworkItems.remove(at: indexPath.row)
+            student.assignments.remove(at: indexPath.row)
             homeworkTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -168,8 +168,8 @@ extension StudentDetailViewController: UITextFieldDelegate {
         // Insert a new row at the top
         
         
-      let newHomeworkItem = Homework(homeworkDescription: textField.text!)
-        student.homeworkItems.insert(newHomeworkItem, at: 0)
+      let newHomeworkItem = Assignment(assignmentDescription: textField.text!)
+        student.assignments.insert(newHomeworkItem, at: 0)
         
         textField.text = ""
         let indexPath = IndexPath(row: 0, section: 0)

@@ -35,13 +35,13 @@ class HomeworkListViewController: UIViewController {
 
 extension HomeworkListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return student.homeworkItems.count
+        return student.assignments.count
     }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
-        let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! HomeworkCell
-        cell.homeworkDescLabel.text = student.homeworkItems[indexPath.row].homeworkDescription
+        let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
+        cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentDescription
       
         return cell
     }
@@ -54,7 +54,7 @@ extension HomeworkListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
       
         if editingStyle == .delete {
-          student.homeworkItems.remove(at: indexPath.row)
+          student.assignments.remove(at: indexPath.row)
           tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

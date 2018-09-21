@@ -24,8 +24,8 @@
 		BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5ED21517718001249AF /* StudentCell.swift */; };
 		BAB9E5F021518001001249AF /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5EF21518001001249AF /* AddStudentViewController.swift */; };
 		BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F121528230001249AF /* StudentImageView.swift */; };
-		BAB9E5F42152A7A2001249AF /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Homework.swift */; };
-		BAB9E5F62152B4EC001249AF /* HomeworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */; };
+		BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Assignment.swift */; };
+		BAB9E5F62152B4EC001249AF /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */; };
 		BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF02C7F2155647000E00241 /* OnboardingViewController.swift */; };
 		BAF02C8421556E3A00E00241 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF02C8321556E3A00E00241 /* CloudKit.framework */; };
 		BAF02C8721556E8E00E00241 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF02C8621556E8E00E00241 /* CloudKitManager.swift */; };
@@ -51,8 +51,8 @@
 		BAB9E5ED21517718001249AF /* StudentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		BAB9E5EF21518001001249AF /* AddStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
 		BAB9E5F121528230001249AF /* StudentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentImageView.swift; sourceTree = "<group>"; };
-		BAB9E5F32152A7A2001249AF /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
-		BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkCell.swift; sourceTree = "<group>"; };
+		BAB9E5F32152A7A2001249AF /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
+		BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
 		BAF02C7F2155647000E00241 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BAF02C8121556E3700E00241 /* TutorApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TutorApp.entitlements; sourceTree = "<group>"; };
 		BAF02C8321556E3A00E00241 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -121,7 +121,7 @@
 			children = (
 				BAB9E5EB21517424001249AF /* Student.swift */,
 				06C86E762154846E00EFFE9E /* Teacher.swift */,
-				BAB9E5F32152A7A2001249AF /* Homework.swift */,
+				BAB9E5F32152A7A2001249AF /* Assignment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 				BAB9E5D921517344001249AF /* Main.storyboard */,
 				06C86E7421547A3400EFFE9E /* TeacherCell.swift */,
 				BAB9E5ED21517718001249AF /* StudentCell.swift */,
-				BAB9E5F52152B4EC001249AF /* HomeworkCell.swift */,
+				BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */,
 				BAB9E5F121528230001249AF /* StudentImageView.swift */,
 				06CED50F21548B7C005091E7 /* TeacherImageView.swift */,
 			);
@@ -259,8 +259,8 @@
 				06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */,
 				06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */,
 				06CED51021548B7C005091E7 /* TeacherImageView.swift in Sources */,
-				BAB9E5F62152B4EC001249AF /* HomeworkCell.swift in Sources */,
-				BAB9E5F42152A7A2001249AF /* Homework.swift in Sources */,
+				BAB9E5F62152B4EC001249AF /* AssignmentCell.swift in Sources */,
+				BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */,
 				BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */,
 				BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */,
 			);
