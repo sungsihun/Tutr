@@ -53,11 +53,10 @@ class TeacherListViewController: UIViewController {
     private func setupTableView(filterBy: String) {
       tableView.separatorInset = UIEdgeInsets.zero
       tableView.tableFooterView = UIView(frame: .zero)
-      
       if filterBy == "Name" {
         self.teachers = self.teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
       } else {
-        self.teachers = self.teachers.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
+        self.teachers = self.teachers.sorted { $0.subject!.lowercased() < $1.subject!.lowercased() }
       }
       
       self.filterDefaults.set(filterBy, forKey: "filterBy")

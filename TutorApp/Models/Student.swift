@@ -8,23 +8,29 @@
 
 import Foundation
 import UIKit
-
+import CloudKit
 class Student {
     
-    var id: UUID
     var name: String
-    var age: Int
+    var record: CKRecord?
     var subjectStudying: String
     var image: UIImage?
     var assignments = [Assignment]()
     
-    init(name: String, age: Int, subjectStudying: String, image: UIImage? = nil) {
-        let uuid = UUID()
-        self.id = uuid
-        self.name = name
-        self.age = age
-        self.subjectStudying = subjectStudying
-        self.image = image
+    convenience init?(_ record: CKRecord) {
+        guard let firstName = record["firstName"],
+        let lastName = record["lastName"],
+        let subjectStudying = record["subjectStudying"] as? String else { return nil }
+        let name = "\(firstName) \(lastName)" 
+        self.init(name: name, subjectStudying: subjectStudying, record: record)
     }
+    
+    init(name: String, subjectStudying: String, record: CKRecord? = nil) {
+        self.name = name
+        self.subjectStudying = subjectStudying
+        self.record = record
+    }
+    
+    
     
 }

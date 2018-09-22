@@ -7,35 +7,51 @@
 //
 
 import UIKit
+import CloudKit
 
 class StudentListViewController: UIViewController {
     
     // MARK: - Outlets
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
-  
+    
     // MARK: - Properties
-  
+    var activeTeacher: Teacher?
     var students = [Student]()
-    let filterDefaults = UserDefaults.standard
-
+    let userDefaults = UserDefaults.standard
+    
     // MARK: - Life Cycle
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
+        
         setupUI()
-        let student1 = Student(name: "aHenry Cooper", age: 25, subjectStudying: "zSwift", image: #imageLiteral(resourceName: "henry"))
-        let student2 = Student(name: "bHenry Cooper", age: 25, subjectStudying: "ySwift", image: #imageLiteral(resourceName: "henry"))
-        let student3 = Student(name: "cHenry Cooper", age: 25, subjectStudying: "xSwift", image: #imageLiteral(resourceName: "henry"))
-        students.append(student1)
-        students.append(student2)
-        students.append(student3)
-        guard let filterDefaults = self.filterDefaults.string(forKey: "filterBy") else { return }
-        setupTableView(filterBy: filterDefaults)
+        if let filterString = userDefaults.string(forKey: "filterBy") {
+            setupTableView(filterBy: filterString)
+        }
+        
+        if activeTeacher == nil {
+            guard let data = userDefaults.object(forKey: "teacherRecord") as? Data else { return }
+            let record = NSKeyedUnarchiver.unarchiveObject(with: data) as! CKRecord
+            activeTeacher = Teacher(record)
+        }
+        
     }
-  
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        CloudKitManager.fetchAllStudentsFrom(activeTeacher!) { (returnedStudents) in
+            if let returnedStudents = returnedStudents {
+                self.students = returnedStudents
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
     // MARK: - Action Methods
     
     @IBAction func filterButtonPressed(_ sender: Any) {
@@ -52,9 +68,9 @@ class StudentListViewController: UIViewController {
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
     }
-  
+    
     // MARK: - Custom Methods
-  
+    
     func getHeaderImageHeightForCurrentDevice() -> CGFloat {
         switch UIScreen.main.nativeBounds.height {
         case 2436: // iPhone X
@@ -63,31 +79,31 @@ class StudentListViewController: UIViewController {
             return 145
         }
     }
-  
+    
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
-      
+        
         if filterBy == "Name" {
             self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
         } else {
             self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
         }
-      
-        self.filterDefaults.set(filterBy, forKey: "filterBy")
+        
+        self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
     }
-  
+    
     private func setupUI() {
-      
+        
         // MARK: - Navigation Bar
-  
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.title = "My Students"
         // set header height constraint for different devices
         if UIDevice().userInterfaceIdiom == .phone {
-          headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
+            headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
     }
     
@@ -99,7 +115,7 @@ class StudentListViewController: UIViewController {
             let controller = nav.viewControllers.first! as! AddStudentViewController
             controller.delegate = self
         }
-      
+        
         if let index: IndexPath = tableView.indexPathForSelectedRow {
             if segue.identifier == "showDetail" {
                 let detailVC = segue.destination as! StudentDetailViewController
@@ -107,7 +123,7 @@ class StudentListViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 // MARK: - Table View Delegate & Data Source
@@ -127,7 +143,7 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
         return 1
     }
     
-  
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count
     }
@@ -138,24 +154,24 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
         cell.configure(with: student)
         return cell
     }
-  
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.bounds.height * 0.10
     }
-  
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-  
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-      
+        
         if editingStyle == .delete {
             students.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-  
-  
+    
+    
 }
 
 // MARK: - AddStudentViewControllerDelegate

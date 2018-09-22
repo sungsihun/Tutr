@@ -17,7 +17,9 @@ class CloudKitManager {
     static let container = CKContainer(identifier: "iCloud.com.henry.CloudKitScratch")
     static let db = container.publicCloudDatabase
     
-    // MARK: - Creating A User
+    // MARK: - USERS
+    
+    // Creating A User
     
     static func createUserOfType(_ type: String, completion: @escaping (Bool) -> ()) {
         
@@ -29,7 +31,7 @@ class CloudKitManager {
 
             // We have user permission, so get the recordID
             
-            getCurrentUserRecordID(completion: { (recordID) in
+            getCurrentUserRecordID { (recordID) in
                 guard let recordID = recordID else { fatalError("Could not get recordID") }
                 let record = CKRecord(recordType: type)
                 let recordName = recordID.recordName
@@ -41,11 +43,11 @@ class CloudKitManager {
                 self.save([record]) { (success) in
                     completion(success)
                 }
-            })
+            }
         }
     }
     
-    // MARK: - Requesting Permission
+    //  Requesting Permission
     
     static func requestPermission(completion: @escaping (Bool) -> ()) {
         container.requestApplicationPermission(.userDiscoverability) { (status, error) in
@@ -57,7 +59,7 @@ class CloudKitManager {
         }
     }
     
-    // MARK: - Saving Records
+    //  Saving Records
     
     private static func save(_ records: [CKRecord], completionHandler: ((Bool) -> ())?) {
         let op = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
@@ -68,7 +70,7 @@ class CloudKitManager {
         db.add(op)
     }
     
-    // MARK: - Get Name
+    //  Get Name Of User
     
     static func getCurrentUserName(completion: @escaping (String?, String?) -> ()) {
         getCurrentUserRecordID { (recordID) in
@@ -88,23 +90,121 @@ class CloudKitManager {
         }
     }
     
-    // MARK: - Save Teacher Details
     
-    static func saveTeacherDetailsWith(name: String, subject: String, image: UIImage?) {
+    
+    
+    
+    
+    
+    // MARK: - TEACHERS
+    
+    
+    //  Save Teacher Details
+    
+    static func saveTeacherDetailsWith(name: String, subject: String, image: UIImage, completion: @escaping (Bool, Teacher?) -> ()) {
         getCurrentUserRecordOfType("Teachers") { (teacher) in
+            
             guard let teacher = teacher else { fatalError("No teacher")}
             teacher["subjectTeaching"] = subject as NSString
             teacher["name"] = name as NSString
-            save([teacher], completionHandler: nil)
+            
+            guard let data = UIImagePNGRepresentation(image) else { print("Could not turn image to data"); return}
+            getDataURL(from: data, completion: { (url) in
+                guard let url = url else { print("No url"); return }
+                teacher["image"] = CKAsset(fileURL: url)
+            })
+            
+            save([teacher]) { success in
+                if success {
+                    setRecordToUserDefaults(teacher)
+                    let teacher = Teacher(teacher)
+                    completion(true, teacher)
+                }
+                else { completion(false, nil) }
+            }
         }
     }
     
-    // MARK: - Get 'Users' record
+    
+    
+    // MARK: - STUDENTS
+    
+    // Fetch students
+    
+    static func fetchAllStudentsFrom(_ teacher: Teacher, completion: @escaping ([Student]?) -> ()) {
+        
+        guard let record = teacher.record else { fatalError("Teacher has no record") }
+        
+        // Get the array of the teacher's students
+        
+        guard let studentRefs = record["students"] as? Array<CKReference>  else { completion(nil); return }
+        
+        // Get the recordID of each student
+        
+        let ids = studentRefs.map{ $0.recordID }
+        
+        // Get the record of each student
+        
+        let op = CKFetchRecordsOperation(recordIDs: ids)
+        var returnStudents = [Student]()
+        
+        // Below is essentially a loop that is called for each record got
+        op.fetchRecordsCompletionBlock = { dict, error in
+            if let dict = dict {
+                for (_, record) in dict {
+                    guard let student = Student(record) else { continue }
+                    returnStudents.append(student)
+                }
+                completion(returnStudents)
+            }
+            completion(nil)
+        }
+        
+        // results is now an array of CKRecords with the students of the teacher
+        db.add(op)
+    }
+    
+    
+    
+    // MARK: - HELPERS
+    
+    // MARK: - Get url of image
+    
+    private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
+        do {
+            try data.write(to: url)
+            completion(url)
+        } catch {
+            completion(nil)
+            print(error.localizedDescription)
+        }
+    }
+    
+    // MARK: - Convert CKRecord To Data
+    
+    private static func setRecordToUserDefaults(_ record: CKRecord) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: record)
+        UserDefaults.standard.set(data, forKey: "teacherRecord")
+    }
+    
+    // MARK: - Get 'User' record from ID
     
     private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         db.fetch(withRecordID: id) { (user, error) in
             if let error = error { print(error.localizedDescription) }
             completion(user)
+        }
+    }
+    
+    // MARK: - Get teacher
+    
+    static func getTeacher(completion: @escaping (Teacher?) -> ()) {
+        getCurrentUserRecordOfType("Teachers") { (teacherRecord) in
+            guard let teacherRecord = teacherRecord else { fatalError("No teacher!") }
+            setRecordToUserDefaults(teacherRecord)
+            let teacher = Teacher(teacherRecord)
+            completion(teacher)
         }
     }
     

@@ -64,7 +64,7 @@ class StudentDetailViewController: UIViewController {
         homeworkView.isHidden = true
         
         nameLabel.text = student.name
-        ageLabel.text = String(student.age)
+//        ageLabel.text = String(student.age)
         subjectLabel.text = student.subjectStudying
         
         studentImageView.image = student.image

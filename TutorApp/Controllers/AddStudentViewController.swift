@@ -34,10 +34,12 @@ class AddStudentViewController: UIViewController {
         guard let age = Int(ageTextField.text!) else { return }
         guard let subject = subjectTextField.text else { return }
       
-        let student = Student(name: name, age: age, subjectStudying: subject)
+        let student = Student.init(name: "Henry", subjectStudying: "Whatever")
+        
+        // TODO: - FIX ABOVE
         
         if studentImageView.image == UIImage(named: "add-photo") {
-          student.image = UIImage(named: "default-student")
+          student.image = #imageLiteral(resourceName: "defaultUser")
         } else {
           student.image = studentImageView.image
         }
