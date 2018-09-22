@@ -22,32 +22,31 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
   
-    
-    
     // MARK: - Properties
     
     weak var delegate: AddStudentViewControllerDelegate?
     var eamilTextField: UITextField!
     
-    
-    
     // MARK: - Action Methods
-    
+  
     @IBAction func savePressed(_ sender: Any) {
         guard  let name = nameTextField.text else { return }
         guard let age = Int(ageTextField.text!) else { return }
         guard let subject = subjectTextField.text else { return }
+      
+        let student = Student(name: name, age: age, subjectStudying: subject)
         
-        var student = Student(name: name, age: age, subjectStudying: subject)
-        
-        if studentImageView.image == #imageLiteral(resourceName: "addImage") {
-            student.image = UIImage(named: "default-student")
+        if studentImageView.image == UIImage(named: "add-photo") {
+          student.image = UIImage(named: "default-student")
         } else {
-            student.image = studentImageView.image
+          student.image = studentImageView.image
         }
-        
+      
         delegate?.add(studentViewController: self, student: student)
-        dismiss(animated: true, completion: nil)
+      
+        if saveButton.titleLabel!.text == "Add" {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
@@ -86,9 +85,7 @@ class AddStudentViewController: UIViewController {
         setupStudentImageView()
         setupTextFields()
     }
-    
-    
-    
+  
     // MARK: - Setup
     
     private func setupStudentImageView() {

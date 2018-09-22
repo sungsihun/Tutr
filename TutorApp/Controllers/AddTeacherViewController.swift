@@ -25,16 +25,19 @@ class AddTeacherViewController: UIViewController {
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicatorView: UIView!
   
     override func viewDidLoad() {
-        super.viewDidLoad()
+          super.viewDidLoad()
       
-        addViewGestureRecogniser()
-        addImageGestureRecogniser()
-        setupStudentImageView()
-        setupTextFields()
-        setupTeacher()
-    }
+          setupActivityIndicator()
+          addViewGestureRecogniser()
+          addImageGestureRecogniser()
+          setupStudentImageView()
+          setupTextFields()
+          setupTeacher()
+      }
     
     // MARK: - Custom Methods
     
@@ -49,7 +52,9 @@ class AddTeacherViewController: UIViewController {
                 
                 
                 DispatchQueue.main.async {
-                    self.nameTextField.text = "\(firstName) \(lastName)"
+                    self.nameTextField.text = "Hello, \(firstName) \(lastName)!"
+                    self.activityIndicatorView.isHidden = true
+                    self.activityIndicator.stopAnimating()
                 }
             })
         }
@@ -83,6 +88,11 @@ class AddTeacherViewController: UIViewController {
       
         subjectTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
         nameTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
+    }
+  
+    private func setupActivityIndicator() {
+        self.activityIndicator.startAnimating()
+        self.activityIndicatorView.isHidden = false
     }
 
 }
