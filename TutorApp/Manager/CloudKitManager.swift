@@ -24,8 +24,9 @@ class CloudKitManager {
         // Get user permission
         
         requestPermission { (granted) in
-            if !granted { print("User did not provide permission"); return }
-            
+            if !granted { print("User did not provide permission");
+              return }
+
             // We have user permission, so get the recordID
             
             getCurrentUserRecordID(completion: { (recordID) in
@@ -46,7 +47,7 @@ class CloudKitManager {
     
     // MARK: - Requesting Permission
     
-    private static func requestPermission(completion: @escaping (Bool) -> ()) {
+    static func requestPermission(completion: @escaping (Bool) -> ()) {
         container.requestApplicationPermission(.userDiscoverability) { (status, error) in
             if let error = error { print(#line, error.localizedDescription) }
             if status != .granted {

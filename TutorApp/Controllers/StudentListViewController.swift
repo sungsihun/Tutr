@@ -15,17 +15,36 @@ class StudentListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
   
+    // MARK: - Properties
+  
+    var students = [Student]()
+    let filterDefaults = UserDefaults.standard
+
+    // MARK: - Life Cycle
+  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+      
+        setupUI()
+        let student1 = Student(name: "aHenry Cooper", age: 25, subjectStudying: "zSwift", image: #imageLiteral(resourceName: "henry"))
+        let student2 = Student(name: "bHenry Cooper", age: 25, subjectStudying: "ySwift", image: #imageLiteral(resourceName: "henry"))
+        let student3 = Student(name: "cHenry Cooper", age: 25, subjectStudying: "xSwift", image: #imageLiteral(resourceName: "henry"))
+        students.append(student1)
+        students.append(student2)
+        students.append(student3)
+        guard let filterDefaults = self.filterDefaults.string(forKey: "filterBy") else { return }
+        setupTableView(filterBy: filterDefaults)
+    }
+  
     // MARK: - Action Methods
     
     @IBAction func filterButtonPressed(_ sender: Any) {
         let controller = UIAlertController(title: "Filter By:", message: nil, preferredStyle: .actionSheet)
         let nameSortAction = UIAlertAction(title: "Name", style: .default) { _ in
-            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
-            self.tableView.reloadData()
+            self.setupTableView(filterBy: "Name")
         }
         let subjectSortAction = UIAlertAction(title: "Subject", style: .default) { _ in
-            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
-            self.tableView.reloadData()
+            self.setupTableView(filterBy: "Subject")
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         controller.addAction(nameSortAction)
@@ -33,28 +52,8 @@ class StudentListViewController: UIViewController {
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
     }
-
-    // MARK: - Properties
-    
-    var students = [Student]()
-    
-    // MARK: - Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        setupTableView()
-        let student = Student(name: "Henry Cooper", age: 25, subjectStudying: "Swift", image: #imageLiteral(resourceName: "henry"))
-        students.append(student)
-    }
   
-    
     // MARK: - Custom Methods
-    
-    private func setupTableView() {
-        tableView.separatorInset = UIEdgeInsets.zero
-        tableView.tableFooterView = UIView(frame: .zero)
-    }
   
     func getHeaderImageHeightForCurrentDevice() -> CGFloat {
         switch UIScreen.main.nativeBounds.height {
@@ -63,6 +62,20 @@ class StudentListViewController: UIViewController {
         default: // Every other iPhone
             return 145
         }
+    }
+  
+    private func setupTableView(filterBy: String) {
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.tableFooterView = UIView(frame: .zero)
+      
+        if filterBy == "Name" {
+            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        } else {
+            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
+        }
+      
+        self.filterDefaults.set(filterBy, forKey: "filterBy")
+        self.tableView.reloadData()
     }
   
     private func setupUI() {

@@ -17,13 +17,20 @@ class TeacherListViewController: UIViewController {
     // MARK: - Properties
   
     var teachers = [Teacher]()
+    let filterDefaults = UserDefaults.standard
+
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         setupUI()
-        let teacher = Teacher(name: "Steve Thompson", subject: "Swift", image: UIImage(named: "steve"))
-        teachers.append(teacher)
+        let teacher1 = Teacher(name: "aSteve Thompson", subject: "zSwift", image: UIImage(named: "steve"))
+        let teacher2 = Teacher(name: "bSteve Thompson", subject: "ySwift", image: UIImage(named: "steve"))
+        let teacher3 = Teacher(name: "cSteve Thompson", subject: "xSwift", image: UIImage(named: "steve"))
+        teachers.append(teacher1)
+        teachers.append(teacher2)
+        teachers.append(teacher3)
+        guard let filterDefaults = self.filterDefaults.string(forKey: "filterBy") else { return }
+        setupTableView(filterBy: filterDefaults)
     }
     
     // MARK: - Custom Methods
@@ -43,9 +50,18 @@ class TeacherListViewController: UIViewController {
   
     // MARK: - Custom Methods
   
-    private func setupTableView() {
+    private func setupTableView(filterBy: String) {
       tableView.separatorInset = UIEdgeInsets.zero
       tableView.tableFooterView = UIView(frame: .zero)
+      
+      if filterBy == "Name" {
+        self.teachers = self.teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
+      } else {
+        self.teachers = self.teachers.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
+      }
+      
+      self.filterDefaults.set(filterBy, forKey: "filterBy")
+      self.tableView.reloadData()
     }
   
     func getHeaderImageHeightForCurrentDevice() -> CGFloat {
@@ -62,12 +78,10 @@ class TeacherListViewController: UIViewController {
     @IBAction func filterTapped(_ sender: Any) {
         let controller = UIAlertController(title: "Filter By:", message: nil, preferredStyle: .actionSheet)
         let nameSortAction = UIAlertAction(title: "Name", style: .default) { _ in
-          self.teachers = self.teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
-          self.tableView.reloadData()
+          self.setupTableView(filterBy: "Name")
         }
         let subjectSortAction = UIAlertAction(title: "Subject", style: .default) { _ in
-          self.teachers = self.teachers.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
-          self.tableView.reloadData()
+          self.setupTableView(filterBy: "Subject")
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         controller.addAction(nameSortAction)

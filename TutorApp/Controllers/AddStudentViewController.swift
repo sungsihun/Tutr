@@ -30,7 +30,7 @@ class AddStudentViewController: UIViewController {
     // MARK: - Action Methods
   
     @IBAction func savePressed(_ sender: Any) {
-        guard  let name = nameTextField.text else { return }
+        guard let name = nameTextField.text else { return }
         guard let age = Int(ageTextField.text!) else { return }
         guard let subject = subjectTextField.text else { return }
       
@@ -69,6 +69,10 @@ class AddStudentViewController: UIViewController {
         // "Add" button with callback
         alertCtrl.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
             if let email = self.eamilTextField.text, email != "" {
+              self.nameTextField.text = "sihun"
+              self.ageTextField.text = "30"
+              self.subjectTextField.text = "Obj-C"
+              self.checkTextField()
                 print(email)
             }
         }))

@@ -31,6 +31,7 @@ class AddTeacherViewController: UIViewController {
     override func viewDidLoad() {
           super.viewDidLoad()
       
+          checkICloudDriveStatus()
           setupActivityIndicator()
           addViewGestureRecogniser()
           addImageGestureRecogniser()
@@ -40,15 +41,27 @@ class AddTeacherViewController: UIViewController {
       }
     
     // MARK: - Custom Methods
-    
+  
+    private func checkICloudDriveStatus() {
+        CloudKitManager.requestPermission { (success) in
+            if !success {
+                let alert = UIAlertController(title: "No iCloud account is configured", message: "Please activate your iCloud Drive", preferredStyle: .alert)
+              
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+              
+                self.present(alert, animated: true)
+            }
+        }
+    }
+  
     private func setupTeacher() {
         CloudKitManager.createUserOfType("Teachers") { (success) in
-            if !success { print("Could not save teacher"); return }
+            if !success {print("Could not save teacher"); return }
             self.userDefaults.set(true, forKey: "isTeacher")
             
             
             CloudKitManager.getCurrentUserName(completion: { (firstName, lastName) in
-                guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
+              guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
                 
                 
                 DispatchQueue.main.async {

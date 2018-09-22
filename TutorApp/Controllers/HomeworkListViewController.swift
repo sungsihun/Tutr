@@ -40,7 +40,7 @@ extension HomeworkListViewController: UITableViewDataSource {
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
-        let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
         cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentDescription
       
         return cell
