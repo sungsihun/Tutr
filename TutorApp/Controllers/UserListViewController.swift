@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class StudentListViewController: UIViewController {
+class UserListViewController: UIViewController {
     
     // MARK: - Outlets
     
@@ -17,8 +17,15 @@ class StudentListViewController: UIViewController {
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
+    
+    var userType: UserType?
+    
     var activeTeacher: Teacher?
+    var activeStudent: Student?
+    
+    var teachers = [Teacher]()
     var students = [Student]()
+    
     let userDefaults = UserDefaults.standard
     
     // MARK: - Life Cycle
@@ -26,30 +33,22 @@ class StudentListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setupUI()
-        if let filterString = userDefaults.string(forKey: "filterBy") {
-            setupTableView(filterBy: filterString)
+
+
+        if activeTeacher == nil && activeStudent == nil {
+            createUserObject()
         }
         
-        if activeTeacher == nil {
-            guard let data = userDefaults.object(forKey: "teacherRecord") as? Data else { return }
-            let record = NSKeyedUnarchiver.unarchiveObject(with: data) as! CKRecord
-            activeTeacher = Teacher(record)
+        if let filterString = userDefaults.string(forKey: "filterBy") {
+            setupTableView(filterBy: filterString)
         }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CloudKitManager.fetchAllStudentsFrom(activeTeacher!) { (returnedStudents) in
-            if let returnedStudents = returnedStudents {
-                self.students = returnedStudents
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        if let _ = activeTeacher { fetchStudents() }
     }
     
     // MARK: - Action Methods
@@ -83,15 +82,40 @@ class StudentListViewController: UIViewController {
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
-        
-        if filterBy == "Name" {
-            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
-        } else {
-            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
-        }
+//        
+//        if filterBy == "Name" {
+//            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
+//        } else {
+//            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
+//        }
         
         self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
+    }
+    
+    private func createUserObject() {
+        
+        guard let typeString = userDefaults.object(forKey: "userType") as? String else { fatalError("No userType") }
+        userType = UserType(rawValue: typeString)
+        
+        guard let data = userDefaults.object(forKey: "userRecord") as? Data else { return }
+        let record = NSKeyedUnarchiver.unarchiveObject(with: data) as! CKRecord
+        
+        switch userType! {
+        case .Students: activeStudent = Student(record)
+        case .Teachers: activeTeacher = Teacher(record)
+        }
+    }
+
+    private func fetchStudents() {
+        CloudKitManager.fetchAllStudentsFrom(activeTeacher!) { (returnedStudents) in
+            if let returnedStudents = returnedStudents {
+                self.students = returnedStudents
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     private func setupUI() {
@@ -128,7 +152,7 @@ class StudentListViewController: UIViewController {
 
 // MARK: - Table View Delegate & Data Source
 
-extension StudentListViewController: UITableViewDelegate, UITableViewDataSource {
+extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if students.count > 0 {
@@ -142,7 +166,6 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
         }
         return 1
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count
@@ -176,10 +199,13 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
 
 // MARK: - AddStudentViewControllerDelegate
 
-extension StudentListViewController: AddStudentViewControllerDelegate {
+extension UserListViewController: AddStudentViewControllerDelegate {
     
     func add(studentViewController controller: AddStudentViewController, student: Student) {
         students.append(student)
+        
+        // TODO: - Add student to teacher list in CK
+        
         tableView.reloadData()
     }
     

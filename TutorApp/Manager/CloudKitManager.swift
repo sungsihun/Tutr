@@ -13,7 +13,7 @@ import UIKit
 
 class CloudKitManager {
     
-
+    
     static let container = CKContainer(identifier: "iCloud.com.henry.CloudKitScratch")
     static let db = container.publicCloudDatabase
     
@@ -27,8 +27,8 @@ class CloudKitManager {
         
         requestPermission { (granted) in
             if !granted { print("User did not provide permission");
-              return }
-
+                return }
+            
             // We have user permission, so get the recordID
             
             getCurrentUserRecordID { (recordID) in
@@ -99,28 +99,36 @@ class CloudKitManager {
     // MARK: - TEACHERS
     
     
-    //  Save Teacher Details
+    //  Save User Details
     
-    static func saveTeacherDetailsWith(name: String, subject: String, image: UIImage, completion: @escaping (Bool, Teacher?) -> ()) {
-        getCurrentUserRecordOfType("Teachers") { (teacher) in
+    static func saveUserDetails(type: UserType, name: String, subject: String, image: UIImage, completion: @escaping (Bool, Teacher?, Student?) -> ()) {
+        getCurrentUserRecordOfType(type.rawValue) { (user) in
             
-            guard let teacher = teacher else { fatalError("No teacher")}
-            teacher["subjectTeaching"] = subject as NSString
-            teacher["name"] = name as NSString
+            guard let user = user else { fatalError("No user") }
             
+            user["name"] = name as NSString
             guard let data = UIImagePNGRepresentation(image) else { print("Could not turn image to data"); return}
-            getDataURL(from: data, completion: { (url) in
+            getDataURL(from: data){ (url) in
                 guard let url = url else { print("No url"); return }
-                teacher["image"] = CKAsset(fileURL: url)
-            })
+                user["image"] = CKAsset(fileURL: url)
+            }
             
-            save([teacher]) { success in
+            switch type {
+            case .Teachers: user["subjectTeaching"] = subject as NSString
+            case .Students: user["subjectStudying"] = subject as NSString
+            }
+            
+            save([user]) { success in
                 if success {
-                    setRecordToUserDefaults(teacher)
-                    let teacher = Teacher(teacher)
-                    completion(true, teacher)
+                    setRecordToUserDefaults(user)
+                    
+                    switch type {
+                    case .Teachers: let teacher = Teacher(user); completion(true, teacher, nil)
+                    case .Students: let student = Student(user); completion(true, nil, student)
+                    }
+                    
                 }
-                else { completion(false, nil) }
+                else { completion(false, nil, nil) }
             }
         }
     }
@@ -164,76 +172,107 @@ class CloudKitManager {
         db.add(op)
     }
     
-    
-    
-    // MARK: - HELPERS
-    
-    // MARK: - Get url of image
-    
-    private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
-        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
-        do {
-            try data.write(to: url)
-            completion(url)
-        } catch {
-            completion(nil)
-            print(error.localizedDescription)
-        }
-    }
-    
-    // MARK: - Convert CKRecord To Data
-    
-    private static func setRecordToUserDefaults(_ record: CKRecord) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: record)
-        UserDefaults.standard.set(data, forKey: "teacherRecord")
-    }
-    
-    // MARK: - Get 'User' record from ID
-    
-    private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-        db.fetch(withRecordID: id) { (user, error) in
-            if let error = error { print(error.localizedDescription) }
-            completion(user)
-        }
-    }
-    
-    // MARK: - Get teacher
-    
-    static func getTeacher(completion: @escaping (Teacher?) -> ()) {
-        getCurrentUserRecordOfType("Teachers") { (teacherRecord) in
-            guard let teacherRecord = teacherRecord else { fatalError("No teacher!") }
-            setRecordToUserDefaults(teacherRecord)
-            let teacher = Teacher(teacherRecord)
-            completion(teacher)
-        }
-    }
-    
-    // MARK - Get teacher or students record
-    
-    private static func getCurrentUserRecordOfType(_ type: String, completion: @escaping (CKRecord?) -> ()) {
+    static private func getRecordFromID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        let predicate = NSPredicate(format: "userRef = %@", id.recordName)
+        let query = CKQuery(recordType: "Students", predicate: predicate)
         
-        getCurrentUserRecordID { (recordID) in
-            guard let recordID = recordID else { fatalError("Could not get recordID") }
-            
-            // Wrapper around the recordID
-            
-            let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
-            let query = CKQuery(recordType: type, predicate: predicate)
-            
-            self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                if let error = error { print(#line, error.localizedDescription); return }
-                guard let record = records?.first else {
-                    print("No record exists")
-                    completion(nil)
-                    return
-                }
-                completion(record)
-            })
+        db.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error { print(error.localizedDescription); completion(nil) }
+            completion(records?.first)
         }
-            
     }
-       
-       
+    
+    static func getStudentFromID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
+        getRecordFromID(id) { (record) in
+            guard let record = record else { completion(nil); return }
+            let student = Student(record)
+            completion(student)
+        }
+    }
+    
+    
+    // Search for student
+    
+    static func findStudentWith(email: String, completion: @escaping (Student?) -> ()) {
+        container.discoverUserIdentity(withEmailAddress: email) { (userIdentity, error) in
+            if let error = error { print(error.localizedDescription); completion(nil) }
+            guard let userIdentity = userIdentity,
+                let recordID = userIdentity.userRecordID
+                else { completion(nil); return }
+            print(recordID.recordName)
+            getStudentFromID(recordID) { (student) in
+                completion(student)
+            }
+        }
+    }
+        
+        
+        
+        // MARK: - HELPERS
+        
+        //  Get url of image
+        
+        private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
+            let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
+            do {
+                try data.write(to: url)
+                completion(url)
+            } catch {
+                completion(nil)
+                print(error.localizedDescription)
+            }
+        }
+        
+        //  Convert CKRecord To Data
+        
+        private static func setRecordToUserDefaults(_ record: CKRecord) {
+            let data = NSKeyedArchiver.archivedData(withRootObject: record)
+            UserDefaults.standard.set(data, forKey: "userRecord")
+        }
+        
+        // Get 'User' record from ID
+        
+        private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+            db.fetch(withRecordID: id) { (user, error) in
+                if let error = error { print(error.localizedDescription) }
+                completion(user)
+            }
+        }
+        
+        //  Get teacher
+        
+        static func getTeacher(completion: @escaping (Teacher?) -> ()) {
+            getCurrentUserRecordOfType("Teachers") { (teacherRecord) in
+                guard let teacherRecord = teacherRecord else { fatalError("No teacher!") }
+                setRecordToUserDefaults(teacherRecord)
+                let teacher = Teacher(teacherRecord)
+                completion(teacher)
+            }
+        }
+        
+        // Get teacher or students record
+        
+        private static func getCurrentUserRecordOfType(_ type: String, completion: @escaping (CKRecord?) -> ()) {
+            
+            getCurrentUserRecordID { (recordID) in
+                guard let recordID = recordID else { fatalError("Could not get recordID") }
+                
+                // Wrapper around the recordID
+                
+                let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
+                let query = CKQuery(recordType: type, predicate: predicate)
+                
+                self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                    if let error = error { print(#line, error.localizedDescription); return }
+                    guard let record = records?.first else {
+                        print("No record exists")
+                        completion(nil)
+                        return
+                    }
+                    completion(record)
+                })
+            }
+        }
 }
 
 

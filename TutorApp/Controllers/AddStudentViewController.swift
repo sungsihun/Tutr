@@ -16,8 +16,8 @@ class AddStudentViewController: UIViewController {
 
     // MARK: - Outlets
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
@@ -25,30 +25,16 @@ class AddStudentViewController: UIViewController {
     // MARK: - Properties
     
     weak var delegate: AddStudentViewControllerDelegate?
-    var eamilTextField: UITextField!
+    var emailTextField: UITextField!
+    var activeStudent: Student?
     
     // MARK: - Action Methods
   
     @IBAction func savePressed(_ sender: Any) {
-        guard let name = nameTextField.text else { return }
-        guard let age = Int(ageTextField.text!) else { return }
-        guard let subject = subjectTextField.text else { return }
-      
-        let student = Student.init(name: "Henry", subjectStudying: "Whatever")
         
-        // TODO: - FIX ABOVE
-        
-        if studentImageView.image == UIImage(named: "add-photo") {
-          student.image = #imageLiteral(resourceName: "defaultUser")
-        } else {
-          student.image = studentImageView.image
-        }
-      
-        delegate?.add(studentViewController: self, student: student)
-      
-        if saveButton.titleLabel!.text == "Add" {
-            dismiss(animated: true, completion: nil)
-        }
+        guard let activeStudent = activeStudent else { fatalError() }
+        delegate?.add(studentViewController: self, student: activeStudent)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
@@ -60,25 +46,24 @@ class AddStudentViewController: UIViewController {
       
         // Add text field to alert controller
         alertCtrl.addTextField { (textField) in
-          self.eamilTextField = textField
-          self.eamilTextField.autocapitalizationType = .words
-          self.eamilTextField.placeholder = "henry@cooper.com"
+          self.emailTextField = textField
+          self.emailTextField.placeholder = "student@example.com"
         }
       
         // Add cancel button to alert controller
-        alertCtrl.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
       
         // "Add" button with callback
-        alertCtrl.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
-            if let email = self.eamilTextField.text, email != "" {
-              self.nameTextField.text = "sihun"
-              self.ageTextField.text = "30"
-              self.subjectTextField.text = "Obj-C"
-              self.checkTextField()
-                print(email)
-            }
-        }))
-      
+        let addAction = UIAlertAction(title: "Add", style: .default) { (_) in
+            self.spinner.isHidden = false
+            self.spinner.startAnimating()
+            guard let textField = alertCtrl.textFields?.first else { return }
+            self.addUserWith(email: textField.text!)
+        }
+        
+        alertCtrl.addAction(addAction)
+        alertCtrl.addAction(cancelAction)
+        
         present(alertCtrl, animated: true, completion: nil)
     }
   
@@ -86,10 +71,49 @@ class AddStudentViewController: UIViewController {
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
+        spinner.isHidden = true
         addViewGestureRecogniser()
         addImageGestureRecogniser()
         setupStudentImageView()
         setupTextFields()
+    }
+    
+    
+    
+    // MARK: - Custom Methods
+    
+    private func addUserWith(email: String) {
+        CloudKitManager.findStudentWith(email: email) { (student) in
+            guard let student = student else {
+                DispatchQueue.main.async {
+                    self.showStudentNotFound()
+                }
+                return
+            }
+            self.setFields(with: student)
+            self.activeStudent = student
+        }
+    }
+    
+    private func setFields(with student: Student) {
+        DispatchQueue.main.async {
+            self.nameTextField.text = student.name
+            self.subjectTextField.text = student.subjectStudying
+            self.studentImageView.image = student.image
+            self.checkTextField()
+            self.spinner.stopAnimating()
+            self.spinner.isHidden = true
+        }
+
+    }
+    
+    private func showStudentNotFound() {
+        let alertController = UIAlertController(title: "Error", message: "User not found", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Try Again", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.spinner.stopAnimating()
+        self.spinner.isHidden = true
+        present(alertController, animated: true, completion: nil)
     }
   
     // MARK: - Setup
@@ -102,14 +126,8 @@ class AddStudentViewController: UIViewController {
     private func setupTextFields() {
         saveButton.isEnabled = false
         subjectTextField.delegate = self
-        ageTextField.delegate = self
         nameTextField.delegate = self
-        
-        subjectTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
-        ageTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
-        nameTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
     }
-    
 
 }
 
@@ -151,9 +169,8 @@ extension AddStudentViewController: UITextFieldDelegate {
     
     @objc private func checkTextField() {
         let name = nameTextField.text ?? ""
-        let age = ageTextField.text ?? ""
         let subject = subjectTextField.text ?? ""
-        if (age.isInt()) && !(name.isEmpty || age.isEmpty || subject.isEmpty) {
+        if !(name.isEmpty || subject.isEmpty) {
             saveButton.isEnabled = true
             saveButton.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
         } else {

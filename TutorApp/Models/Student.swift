@@ -13,19 +13,19 @@ class Student {
     
     var name: String
     var record: CKRecord?
-    var subjectStudying: String
-    var image: UIImage?
+    var subjectStudying: String?
+    var image: UIImage? = #imageLiteral(resourceName: "defaultUser")
     var assignments = [Assignment]()
     
-    convenience init?(_ record: CKRecord) {
-        guard let firstName = record["firstName"],
-        let lastName = record["lastName"],
-        let subjectStudying = record["subjectStudying"] as? String else { return nil }
-        let name = "\(firstName) \(lastName)" 
+    convenience init?(_ record: CKRecord?) {
+        guard let record = record,
+            let name = record["name"] as? String,
+            let subjectStudying = record["subjectStudying"] as? String else { return nil }
+
         self.init(name: name, subjectStudying: subjectStudying, record: record)
     }
     
-    init(name: String, subjectStudying: String, record: CKRecord? = nil) {
+    init(name: String, subjectStudying: String? = nil, record: CKRecord? = nil) {
         self.name = name
         self.subjectStudying = subjectStudying
         self.record = record

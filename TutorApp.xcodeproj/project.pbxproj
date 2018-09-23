@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06ADB56121554B9300469760 /* AddTeacherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ADB56021554B9300469760 /* AddTeacherViewController.swift */; };
+		06ADB56121554B9300469760 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ADB56021554B9300469760 /* AddUserViewController.swift */; };
 		06ADB56321555ED900469760 /* HomeworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ADB56221555ED900469760 /* HomeworkDetailViewController.swift */; };
 		06B8CA2F2154653700AAA655 /* TeacherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */; };
 		06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B8CA302154671800AAA655 /* HomeworkListViewController.swift */; };
@@ -15,8 +15,9 @@
 		06C86E772154846E00EFFE9E /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C86E762154846E00EFFE9E /* Teacher.swift */; };
 		06CED51021548B7C005091E7 /* TeacherImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CED50F21548B7C005091E7 /* TeacherImageView.swift */; };
 		06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D49AF62151C87100175B06 /* StudentDetailViewController.swift */; };
+		BA10A3702157EE09007198F4 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA10A36F2157EE09007198F4 /* UserType.swift */; };
 		BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5D521517344001249AF /* AppDelegate.swift */; };
-		BAB9E5D821517344001249AF /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5D721517344001249AF /* StudentListViewController.swift */; };
+		BAB9E5D821517344001249AF /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5D721517344001249AF /* UserListViewController.swift */; };
 		BAB9E5DB21517344001249AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB9E5D921517344001249AF /* Main.storyboard */; };
 		BAB9E5DD21517345001249AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAB9E5DC21517345001249AF /* Assets.xcassets */; };
 		BAB9E5E021517345001249AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB9E5DE21517345001249AF /* LaunchScreen.storyboard */; };
@@ -32,7 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06ADB56021554B9300469760 /* AddTeacherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeacherViewController.swift; sourceTree = "<group>"; };
+		06ADB56021554B9300469760 /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		06ADB56221555ED900469760 /* HomeworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkDetailViewController.swift; sourceTree = "<group>"; };
 		06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListViewController.swift; sourceTree = "<group>"; };
 		06B8CA302154671800AAA655 /* HomeworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeworkListViewController.swift; path = TutorApp/Controllers/HomeworkListViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -40,9 +41,10 @@
 		06C86E762154846E00EFFE9E /* Teacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
 		06CED50F21548B7C005091E7 /* TeacherImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherImageView.swift; sourceTree = "<group>"; };
 		06D49AF62151C87100175B06 /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
+		BA10A36F2157EE09007198F4 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		BAB9E5D221517344001249AF /* TutorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB9E5D521517344001249AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BAB9E5D721517344001249AF /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
+		BAB9E5D721517344001249AF /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		BAB9E5DA21517344001249AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BAB9E5DC21517345001249AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAB9E5DF21517345001249AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,9 +106,9 @@
 		BAB9E5E72151736F001249AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				06ADB56021554B9300469760 /* AddTeacherViewController.swift */,
 				BAF02C7F2155647000E00241 /* OnboardingViewController.swift */,
-				BAB9E5D721517344001249AF /* StudentListViewController.swift */,
+				06ADB56021554B9300469760 /* AddUserViewController.swift */,
+				BAB9E5D721517344001249AF /* UserListViewController.swift */,
 				06D49AF62151C87100175B06 /* StudentDetailViewController.swift */,
 				06ADB56221555ED900469760 /* HomeworkDetailViewController.swift */,
 				BAB9E5EF21518001001249AF /* AddStudentViewController.swift */,
@@ -122,6 +124,7 @@
 				BAB9E5EB21517424001249AF /* Student.swift */,
 				06C86E762154846E00EFFE9E /* Teacher.swift */,
 				BAB9E5F32152A7A2001249AF /* Assignment.swift */,
+				BA10A36F2157EE09007198F4 /* UserType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,20 +248,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB9E5D821517344001249AF /* StudentListViewController.swift in Sources */,
+				BAB9E5D821517344001249AF /* UserListViewController.swift in Sources */,
 				06B8CA2F2154653700AAA655 /* TeacherListViewController.swift in Sources */,
 				BAB9E5F021518001001249AF /* AddStudentViewController.swift in Sources */,
 				BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */,
 				BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */,
 				06C86E772154846E00EFFE9E /* Teacher.swift in Sources */,
 				06C86E7521547A3400EFFE9E /* TeacherCell.swift in Sources */,
-				06ADB56121554B9300469760 /* AddTeacherViewController.swift in Sources */,
+				06ADB56121554B9300469760 /* AddUserViewController.swift in Sources */,
 				BAF02C8721556E8E00E00241 /* CloudKitManager.swift in Sources */,
 				06ADB56321555ED900469760 /* HomeworkDetailViewController.swift in Sources */,
 				BAB9E5EC21517424001249AF /* Student.swift in Sources */,
 				06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */,
 				06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */,
 				06CED51021548B7C005091E7 /* TeacherImageView.swift in Sources */,
+				BA10A3702157EE09007198F4 /* UserType.swift in Sources */,
 				BAB9E5F62152B4EC001249AF /* AssignmentCell.swift in Sources */,
 				BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */,
 				BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */,

@@ -30,4 +30,6 @@ class Teacher {
             else { return nil }
         self.init(name: name, subject: subject, image: nil, record: record)
     }
+    
+
 }

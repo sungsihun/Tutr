@@ -6,18 +6,22 @@
 //  Copyright © 2018 Henry Cooper. All rights reserved.
 //
 
+
+
 import UIKit
 
 protocol AddTeacherViewControllerDelegate: class {
-    func add(teacherViewController controller: AddTeacherViewController, teacher: Teacher)
+    func add(teacherViewController controller: AddUserViewController, teacher: Teacher)
 }
 
-class AddTeacherViewController: UIViewController {
+class AddUserViewController: UIViewController {
     
     // MARK: - Properties
     
     let userDefaults = UserDefaults.standard
+    var userType: UserType!
     var activeTeacher: Teacher?
+    var activeStudent: Student?
     weak var delegate: AddTeacherViewControllerDelegate?
     
     // MARK : - Outlets
@@ -36,9 +40,9 @@ class AddTeacherViewController: UIViewController {
         setupActivityIndicator()
         addViewGestureRecogniser()
         addImageGestureRecogniser()
-        setupStudentImageView()
+        setupImageView()
         setupTextFields()
-        setupTeacher()
+        setupUser()
         setupUI()
     }
     
@@ -61,15 +65,19 @@ class AddTeacherViewController: UIViewController {
         }
     }
     
-    private func setupTeacher() {
-        CloudKitManager.createUserOfType("Teachers") { (success) in
-            if !success {print("Could not save teacher"); return }
+    private func setupUser() {
+        guard let userType = userType else { fatalError("User must have a type")}
+        
+        CloudKitManager.createUserOfType(userType.rawValue) { (success) in
+            if !success { print("Could not save user"); return }
             
             CloudKitManager.getCurrentUserName(completion: { (firstName, lastName) in
                 guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
                 
-                self.activeTeacher = Teacher(name: "\(firstName) \(lastName)")
-                
+                switch userType {
+                case .Teachers: self.activeTeacher = Teacher(name: "\(firstName) \(lastName)")
+                case .Students: self.activeStudent = Student(name: "\(firstName) \(lastName)")
+                }
                 
                 DispatchQueue.main.async {
                     self.nameTextField.text = "Hello, \(firstName) \(lastName)!"
@@ -82,19 +90,51 @@ class AddTeacherViewController: UIViewController {
     
     
     
+    private func createTeacher() {
+        guard let subjectText = subjectTextField.text else { fatalError("Must be a subject") }
+        guard let activeTeacher = activeTeacher else { fatalError("No teacher was ever created") }
+        let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
+        
+        CloudKitManager.saveUserDetails(type: .Teachers, name: activeTeacher.name, subject: subjectText, image: image) { (success, teacher, _) in
+            if success {
+                self.activeTeacher = teacher
+                self.userDefaults.set(true, forKey: "isTeacher")
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "userCreatedSegue", sender: nil)
+                }
+                
+            }
+        }
+    }
+    
+    private func createStudent() {
+        guard let subjectText = subjectTextField.text else { fatalError("Must be a subject") }
+        guard let activeStudent = activeStudent else { fatalError("No student was ever created") }
+        let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
+        
+        CloudKitManager.saveUserDetails(type: .Students, name: activeStudent.name, subject: subjectText, image: image) { (success, nil, student) in
+            if success {
+                self.activeStudent = student
+                self.userDefaults.set(true, forKey: "isStudent")
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "userCreatedSegue", sender: nil)
+                }
+            }
+        }
+    }
+    
+    
+    
     // MARK : - Actions
     
     @objc func saveButtonTapped(_ sender: UIButton) {
-        guard let subjectText = subjectTextField.text else { return }
-        guard let activeTeacher = activeTeacher else { fatalError("No teacher was ever created") }
-        let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
-        CloudKitManager.saveTeacherDetailsWith(name: activeTeacher.name, subject: subjectText, image: image) { success, teacher in
-            if success == true {
-                print("SUCCESS")
-                self.activeTeacher = teacher
-                self.userDefaults.set(true, forKey: "isTeacher")
-                self.performSegue(withIdentifier: "teacherCreatedSegue", sender: nil)
-            }
+        guard let userType = userType else { fatalError("Must have a userType")}
+        
+        switch userType {
+        case .Students: createStudent()
+        case .Teachers: createTeacher()
         }
     }
     
@@ -109,7 +149,7 @@ class AddTeacherViewController: UIViewController {
     
     // MARK: - Setup
     
-    private func setupStudentImageView() {
+    private func setupImageView() {
         imageView.layer.borderWidth = 1.5
         imageView.layer.borderColor = UIColor.lightGray.cgColor
     }
@@ -129,10 +169,17 @@ class AddTeacherViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "teacherCreatedSegue" {
-            let studentListNav = segue.destination as! UINavigationController
-            let studentListVC = studentListNav.viewControllers.first! as! StudentListViewController
-            studentListVC.activeTeacher = activeTeacher
+        if segue.identifier == "userCreatedSegue" {
+            let userListNav = segue.destination as! UINavigationController
+            let userListVC = userListNav.viewControllers.first! as! UserListViewController
+            
+            userListVC.userType = userType
+            
+            switch userType! {
+            case .Students: userListVC.activeStudent = activeStudent
+            case .Teachers: userListVC.activeTeacher = activeTeacher
+            }
+            
         }
     }
     
@@ -150,7 +197,7 @@ class AddTeacherViewController: UIViewController {
 
 // MARK: - Image Picker and Navigation Delegate
 
-extension AddTeacherViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddUserViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     private func open(_ sourceType: UIImagePickerControllerSourceType) {
@@ -172,7 +219,7 @@ extension AddTeacherViewController: UIImagePickerControllerDelegate, UINavigatio
 
 // MARK: - Text Field
 
-extension AddTeacherViewController: UITextFieldDelegate {
+extension AddUserViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -201,7 +248,7 @@ extension AddTeacherViewController: UITextFieldDelegate {
 
 // MARK: - Gesture Recognisers
 
-extension AddTeacherViewController {
+extension AddUserViewController {
     
     private func addViewGestureRecogniser() {
         let tapGestureRecogniser = UITapGestureRecognizer()
