@@ -41,6 +41,7 @@ class CloudKitManager {
                 // Save the record
                 
                 self.save([record]) { (success) in
+                    print(record.allKeys())
                     completion(success)
                 }
             }
@@ -69,35 +70,6 @@ class CloudKitManager {
         }
         db.add(op)
     }
-    
-    //  Get Name Of User
-    
-    static func getCurrentUserName(completion: @escaping (String?, String?) -> ()) {
-        getCurrentUserRecordID { (recordID) in
-            guard let recordID = recordID else { fatalError("Could Not get recordID") }
-            container.discoverUserIdentity(withUserRecordID: recordID, completionHandler: { (userId, error) in
-                if let error = error { print(error.localizedDescription); return }
-                guard let userId = userId else { return }
-                completion(userId.nameComponents?.givenName, userId.nameComponents?.familyName)
-            })
-        }
-    }
-    
-    static func getCurrentUserRecordID(completion: @escaping (CKRecordID?) -> ()) {
-        container.fetchUserRecordID { (recordID, error) in
-            if let error = error { print(error.localizedDescription); return }
-            completion(recordID)
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    // MARK: - TEACHERS
-    
     
     //  Save User Details
     
@@ -131,6 +103,57 @@ class CloudKitManager {
                 else { completion(false, nil, nil) }
             }
         }
+    }
+    
+    //  Get Name Of User
+    
+    static func getCurrentUserName(completion: @escaping (String?, String?) -> ()) {
+        getCurrentUserRecordID { (recordID) in
+            guard let recordID = recordID else { fatalError("Could Not get recordID") }
+            container.discoverUserIdentity(withUserRecordID: recordID, completionHandler: { (userId, error) in
+                if let error = error { print(error.localizedDescription); return }
+                guard let userId = userId else { return }
+                completion(userId.nameComponents?.givenName, userId.nameComponents?.familyName)
+            })
+        }
+    }
+    
+    static func getCurrentUserRecordID(completion: @escaping (CKRecordID?) -> ()) {
+        container.fetchUserRecordID { (recordID, error) in
+            if let error = error { print(error.localizedDescription); return }
+            completion(recordID)
+        }
+    }
+    
+    
+    // MARK: - TEACHERS
+    
+    
+    //  Get teacher
+    
+    static func getTeacher(completion: @escaping (Teacher?) -> ()) {
+        getCurrentUserRecordOfType("Teachers") { (teacherRecord) in
+            guard let teacherRecord = teacherRecord else { fatalError("No teacher!") }
+            let teacher = Teacher(teacherRecord)
+            completion(teacher)
+        }
+    }
+    
+    // Add student to teacher list
+    
+    static func addStudent(_ student: Student, to teacher: Teacher) {
+        
+        // FIXME: - FINDING STUDENTS REFERENCE?
+        
+        guard let studentRecord = student.record, let teacherRecord = teacher.record else { fatalError("Missing record") }
+        
+        let referenceToAdd = CKReference(record: studentRecord, action: .none)
+        
+        if var studentsRefs = teacherRecord["students"] as? [CKReference] {
+            studentsRefs.append(referenceToAdd)
+            teacherRecord["students"] = studentsRefs as NSArray
+        }
+        
     }
     
     
@@ -205,74 +228,67 @@ class CloudKitManager {
             }
         }
     }
-        
-        
-        
-        // MARK: - HELPERS
-        
-        //  Get url of image
-        
-        private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
-            let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
-            do {
-                try data.write(to: url)
-                completion(url)
-            } catch {
-                completion(nil)
-                print(error.localizedDescription)
-            }
+    
+    
+    
+    // MARK: - HELPERS
+    
+    //  Get url of image
+    
+    private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
+        do {
+            try data.write(to: url)
+            completion(url)
+        } catch {
+            completion(nil)
+            print(error.localizedDescription)
         }
-        
-        //  Convert CKRecord To Data
-        
-        private static func setRecordToUserDefaults(_ record: CKRecord) {
-            let data = NSKeyedArchiver.archivedData(withRootObject: record)
-            UserDefaults.standard.set(data, forKey: "userRecord")
+    }
+    
+    //  Convert CKRecord To Data
+    
+    private static func setRecordToUserDefaults(_ record: CKRecord) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: record)
+        UserDefaults.standard.set(data, forKey: "userRecord")
+    }
+    
+    // Get 'User' record from ID
+    
+    private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        db.fetch(withRecordID: id) { (user, error) in
+            if let error = error { print(error.localizedDescription) }
+            completion(user)
         }
+    }
+    
+    
+    
+    // Get teacher or students record
+    
+    private static func getCurrentUserRecordOfType(_ type: String, completion: @escaping (CKRecord?) -> ()) {
         
-        // Get 'User' record from ID
-        
-        private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-            db.fetch(withRecordID: id) { (user, error) in
-                if let error = error { print(error.localizedDescription) }
-                completion(user)
-            }
-        }
-        
-        //  Get teacher
-        
-        static func getTeacher(completion: @escaping (Teacher?) -> ()) {
-            getCurrentUserRecordOfType("Teachers") { (teacherRecord) in
-                guard let teacherRecord = teacherRecord else { fatalError("No teacher!") }
-                setRecordToUserDefaults(teacherRecord)
-                let teacher = Teacher(teacherRecord)
-                completion(teacher)
-            }
-        }
-        
-        // Get teacher or students record
-        
-        private static func getCurrentUserRecordOfType(_ type: String, completion: @escaping (CKRecord?) -> ()) {
+        getCurrentUserRecordID { (recordID) in
+            guard let recordID = recordID else { fatalError("Could not get recordID") }
             
-            getCurrentUserRecordID { (recordID) in
-                guard let recordID = recordID else { fatalError("Could not get recordID") }
-                
-                // Wrapper around the recordID
-                
-                let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
-                let query = CKQuery(recordType: type, predicate: predicate)
-                
-                self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                    if let error = error { print(#line, error.localizedDescription); return }
-                    guard let record = records?.first else {
-                        print("No record exists")
-                        completion(nil)
-                        return
-                    }
-                    completion(record)
-                })
-            }
+            // Wrapper around the recordID
+            
+            let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
+            let query = CKQuery(recordType: type, predicate: predicate)
+            
+            self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error { print(#line, error.localizedDescription); return }
+                guard let record = records?.first else {
+                    print("No record exists")
+                    completion(nil)
+                    return
+                }
+                completion(record)
+            })
         }
+    }
+    
+    
 }
 
 

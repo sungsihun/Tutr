@@ -206,6 +206,8 @@ extension UserListViewController: AddStudentViewControllerDelegate {
         
         // TODO: - Add student to teacher list in CK
         
+        CloudKitManager.addStudent(student, to: activeTeacher!)
+        
         tableView.reloadData()
     }
     

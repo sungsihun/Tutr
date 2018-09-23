@@ -23,6 +23,7 @@ class AddUserViewController: UIViewController {
     var activeTeacher: Teacher?
     var activeStudent: Student?
     weak var delegate: AddTeacherViewControllerDelegate?
+
     
     // MARK : - Outlets
     
@@ -35,7 +36,6 @@ class AddUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         checkICloudDriveStatus()
         setupActivityIndicator()
         addViewGestureRecogniser()
