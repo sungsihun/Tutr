@@ -115,7 +115,7 @@ class UserListViewController: UIViewController {
                 self.students = returnedStudents
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    self.tableView.isHidden = true
+                    self.tableView.isHidden = false
                     self.spinner.stopAnimating()
                 }
             }
@@ -136,7 +136,7 @@ class UserListViewController: UIViewController {
     }
   
     private func setupSpinner() {
-      self.spinner.startAnimating()
+//      self.spinner.startAnimating()
       self.tableView.isHidden = true
     }
     
@@ -218,6 +218,8 @@ extension UserListViewController: AddStudentViewControllerDelegate {
         CloudKitManager.addStudent(student, to: activeTeacher!)
         
         tableView.reloadData()
+        self.tableView.isHidden = false
+        self.spinner.stopAnimating()
     }
     
 }

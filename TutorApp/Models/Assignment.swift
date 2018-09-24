@@ -10,7 +10,7 @@ import Foundation
 
 class Assignment {
     
-    let assignmentDescription: String
+    var assignmentDescription: String
     
     init(assignmentDescription: String) {
         self.assignmentDescription = assignmentDescription

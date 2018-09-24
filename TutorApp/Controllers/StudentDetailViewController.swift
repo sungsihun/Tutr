@@ -118,6 +118,28 @@ class StudentDetailViewController: UIViewController {
     @objc private func handleTap() {
         activeTextField.resignFirstResponder()
     }
+  
+    func setupAlert(indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: UIAlertController.Style.alert)
+      
+        let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            self.student.assignments[indexPath.row].assignmentDescription = textField.text!
+            self.homeworkTableView.reloadData()
+        }
+      
+        alert.addTextField { (textField) in
+            textField.text = self.student.assignments[indexPath.row].assignmentDescription
+        }
+      
+      
+        let dismiss = UIAlertAction(title: "Dismiss", style: .destructive) { (action:UIAlertAction!) in print("Cancel button tapped") }
+      
+        alert.addAction(dismiss)
+        alert.addAction(edit)
+      
+        self.present(alert, animated: true)
+    }
 
 }
 
@@ -150,6 +172,21 @@ extension StudentDetailViewController: UITableViewDelegate {
             student.assignments.remove(at: indexPath.row)
             homeworkTableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+  
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.student.assignments.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+      
+        let share = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+            self.setupAlert(indexPath: indexPath)
+        }
+      
+        share.backgroundColor = UIColor.blue
+      
+        return [delete, share]
     }
 }
 
