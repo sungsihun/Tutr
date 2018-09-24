@@ -44,6 +44,7 @@ class AddUserViewController: UIViewController {
         setupTextFields()
         setupUser()
         setupUI()
+        setupNotificationCenter()
     }
     
     // MARK: - Custom Methods
@@ -125,7 +126,12 @@ class AddUserViewController: UIViewController {
         }
     }
     
-    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+  
+
     
     // MARK : - Actions
     
@@ -186,7 +192,7 @@ class AddUserViewController: UIViewController {
     private func setupUI() {
         saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
     }
-    
+
 }
 
 
@@ -286,3 +292,19 @@ extension AddUserViewController {
     
 }
 
+// MARK: - Notification Center Methods
+
+extension AddUserViewController {
+  @objc func keyboardWillShow(_ notification: Notification) {
+    if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+      let keyboardHeight = keyboardFrame.cgRectValue.height
+      if self.view.frame.origin.y == 0 {
+        self.view.frame.origin.y += (keyboardHeight - subjectTextField.frame.origin.y)
+      }
+    }
+  }
+  
+  @objc func keyboardWillHide(_ notification: Notification) {
+    self.view.frame.origin.y = 0
+  }
+}
