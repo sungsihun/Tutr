@@ -34,7 +34,14 @@ class StudentListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTeacher { (success) in
-            self.fetchStudents()
+            CloudKitManager.fetchStudents() { (students) in
+                if let students = students { self.students = students }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.tableView.isHidden = false
+                    self.spinner.stopAnimating()
+                }
+            }
         }
     }
     
@@ -91,20 +98,6 @@ class StudentListViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-
-    private func fetchStudents() {
-        CloudKitManager.fetchStudents() { (returnedStudents) in
-            if let returnedStudents = returnedStudents {
-                self.students = returnedStudents
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.tableView.isHidden = false
-                    self.spinner.stopAnimating()
-                }
-            }
-        }
-    }
-    
     private func setupUI() {
         
         // MARK: - Navigation Bar
@@ -124,8 +117,8 @@ class StudentListViewController: UIViewController {
     }
   
     private func setupSpinner() {
-//      self.spinner.startAnimating()
-//      self.tableView.isHidden = true
+      self.spinner.startAnimating()
+      self.tableView.isHidden = true
     }
     
     // MARK: - Segue
@@ -154,12 +147,14 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
     func numberOfSections(in tableView: UITableView) -> Int {
         if students.count > 0 {
             tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine
         } else {
             let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             noDataLabel.text          = "Press + To Add Your First Student!"
             noDataLabel.textColor     = UIColor.black
             noDataLabel.textAlignment = .center
             tableView.backgroundView  = noDataLabel
+            tableView.separatorStyle = .none
         }
         return 1
     }

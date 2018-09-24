@@ -222,19 +222,30 @@ static func fetchStudents(completion: @escaping ([Student]?) -> ()) {
     // Get the record of each student
     
     let op = CKFetchRecordsOperation(recordIDs: ids)
+    op.qualityOfService = .userInteractive
     var returnStudents = [Student]()
     
     // Below is essentially a loop that is called for each record got
-    op.fetchRecordsCompletionBlock = { dict, error in
-        if let dict = dict {
-            for (_, record) in dict {
-                guard let student = Student(record) else { continue }
-                returnStudents.append(student)
-            }
-            completion(returnStudents)
-        }
-        completion(nil)
+    
+    op.perRecordCompletionBlock = { record, _, _ in
+        guard let student = Student(record) else { fatalError() }
+        returnStudents.append(student)
     }
+    
+    op.fetchRecordsCompletionBlock = { _, _ in
+        completion(returnStudents)
+    }
+    
+//    op.fetchRecordsCompletionBlock = { dict, error in
+//        if let dict = dict {
+//            for (_, record) in dict {
+//                guard let student = Student(record) else { continue }
+//                returnStudents.append(student)
+//            }
+//            completion(returnStudents)
+//        }
+//        completion(nil)
+//    }
     
     // results is now an array of CKRecords with the students of the teacher
     db.add(op)

@@ -27,6 +27,13 @@
 		BAB9E5F221528230001249AF /* StudentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F121528230001249AF /* StudentImageView.swift */; };
 		BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Assignment.swift */; };
 		BAB9E5F62152B4EC001249AF /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */; };
+		BADE0BE921598C8000BEC6FC /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE421598C7400BEC6FC /* Dosis-Bold.ttf */; };
+		BADE0BEA21598C8000BEC6FC /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE721598C7700BEC6FC /* Dosis-ExtraBold.ttf */; };
+		BADE0BEB21598C8000BEC6FC /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE821598C7800BEC6FC /* Dosis-ExtraLight.ttf */; };
+		BADE0BEC21598C8000BEC6FC /* Dosis-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE321598C7300BEC6FC /* Dosis-Light.ttf */; };
+		BADE0BED21598C8000BEC6FC /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE621598C7600BEC6FC /* Dosis-Medium.ttf */; };
+		BADE0BEE21598C8000BEC6FC /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE221598C7200BEC6FC /* Dosis-Regular.ttf */; };
+		BADE0BEF21598C8000BEC6FC /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE521598C7500BEC6FC /* Dosis-SemiBold.ttf */; };
 		BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF02C7F2155647000E00241 /* OnboardingViewController.swift */; };
 		BAF02C8421556E3A00E00241 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF02C8321556E3A00E00241 /* CloudKit.framework */; };
 		BAF02C8721556E8E00E00241 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF02C8621556E8E00E00241 /* CloudKitManager.swift */; };
@@ -55,6 +62,13 @@
 		BAB9E5F121528230001249AF /* StudentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentImageView.swift; sourceTree = "<group>"; };
 		BAB9E5F32152A7A2001249AF /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
+		BADE0BE221598C7200BEC6FC /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
+		BADE0BE321598C7300BEC6FC /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
+		BADE0BE421598C7400BEC6FC /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.ttf"; sourceTree = "<group>"; };
+		BADE0BE521598C7500BEC6FC /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
+		BADE0BE621598C7600BEC6FC /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
+		BADE0BE721598C7700BEC6FC /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
+		BADE0BE821598C7800BEC6FC /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
 		BAF02C7F2155647000E00241 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BAF02C8121556E3700E00241 /* TutorApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TutorApp.entitlements; sourceTree = "<group>"; };
 		BAF02C8321556E3A00E00241 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -94,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				BAF02C8121556E3700E00241 /* TutorApp.entitlements */,
+				BADE0BE121598C4400BEC6FC /* Fonts */,
 				BAB9E5EA215173A8001249AF /* Other */,
 				BAB9E5E921517377001249AF /* Views */,
 				BAB9E5E821517373001249AF /* Models */,
@@ -151,6 +166,20 @@
 				BAB9E5E121517345001249AF /* Info.plist */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		BADE0BE121598C4400BEC6FC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BADE0BE421598C7400BEC6FC /* Dosis-Bold.ttf */,
+				BADE0BE721598C7700BEC6FC /* Dosis-ExtraBold.ttf */,
+				BADE0BE821598C7800BEC6FC /* Dosis-ExtraLight.ttf */,
+				BADE0BE321598C7300BEC6FC /* Dosis-Light.ttf */,
+				BADE0BE621598C7600BEC6FC /* Dosis-Medium.ttf */,
+				BADE0BE221598C7200BEC6FC /* Dosis-Regular.ttf */,
+				BADE0BE521598C7500BEC6FC /* Dosis-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		BAF02C8221556E3A00E00241 /* Frameworks */ = {
@@ -237,7 +266,14 @@
 			files = (
 				BAB9E5E021517345001249AF /* LaunchScreen.storyboard in Resources */,
 				BAB9E5DD21517345001249AF /* Assets.xcassets in Resources */,
+				BADE0BE921598C8000BEC6FC /* Dosis-Bold.ttf in Resources */,
+				BADE0BEC21598C8000BEC6FC /* Dosis-Light.ttf in Resources */,
+				BADE0BEE21598C8000BEC6FC /* Dosis-Regular.ttf in Resources */,
+				BADE0BED21598C8000BEC6FC /* Dosis-Medium.ttf in Resources */,
+				BADE0BEA21598C8000BEC6FC /* Dosis-ExtraBold.ttf in Resources */,
 				BAB9E5DB21517344001249AF /* Main.storyboard in Resources */,
+				BADE0BEF21598C8000BEC6FC /* Dosis-SemiBold.ttf in Resources */,
+				BADE0BEB21598C8000BEC6FC /* Dosis-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

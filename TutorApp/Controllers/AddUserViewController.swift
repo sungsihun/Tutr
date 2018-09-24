@@ -92,7 +92,8 @@ class AddUserViewController: UIViewController {
         guard let subject = subjectTextField.text else { fatalError("Must be a subject") }
         let image = imageView.image
         let textFieldText = nameTextField.text!
-        let name = String(textFieldText[textFieldText.index(textFieldText.startIndex, offsetBy: 6)...])
+        let name = String(textFieldText[textFieldText.index(textFieldText.startIndex, offsetBy: 7
+            )...])
         user = User(name: name, subject: subject, image: image)
         
         CloudKitManager.saveUserDetails(user: user) { (returnedUser) in
@@ -143,6 +144,7 @@ class AddUserViewController: UIViewController {
         
         subjectTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
         nameTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
+ 
     }
     
     private func setupActivityIndicator() {
