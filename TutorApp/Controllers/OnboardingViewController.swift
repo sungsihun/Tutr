@@ -14,12 +14,12 @@ class OnboardingViewController: UIViewController {
     let userDefaults = UserDefaults.standard
     
     @IBAction func teacherButtonPressed(_ sender: Any) {
-        userType = .Teachers
+        userType = .teacher
         performSegue(withIdentifier: "createUserSegue", sender: nil)
     }
     
     @IBAction func studentButtonPressed(_ sender: Any) {
-        userType = .Students
+        userType = .student
         performSegue(withIdentifier: "createUserSegue", sender: nil)
     }
 

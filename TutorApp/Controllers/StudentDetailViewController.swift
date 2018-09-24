@@ -52,10 +52,6 @@ class StudentDetailViewController: UIViewController {
         setupNotificationCenter()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
   
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
@@ -69,8 +65,7 @@ class StudentDetailViewController: UIViewController {
         homeworkView.isHidden = true
         
         nameLabel.text = student.name
-//        ageLabel.text = String(student.age)
-        subjectLabel.text = student.subjectStudying
+        subjectLabel.text = student.subject
         
         studentImageView.image = student.image
     }
@@ -107,7 +102,6 @@ class StudentDetailViewController: UIViewController {
         // MARK: - Table View
         
         homeworkTableView.tableFooterView = UIView(frame: .zero)
-//        homeworkTableView.allowsSelection = false;
       
         // MARK: - Text Field
         
@@ -125,7 +119,7 @@ class StudentDetailViewController: UIViewController {
     }
   
     func setupAlert(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: .alert)
       
         let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField

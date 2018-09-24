@@ -21,7 +21,7 @@ class StudentCell: UITableViewCell {
 
     func configure(with student: Student) {
         studentNameLabel.text = student.name
-        subjectLabel.text = student.subjectStudying
+        subjectLabel.text = student.subject
         
         if let studentImage = student.image {
             studentImageView.image = studentImage

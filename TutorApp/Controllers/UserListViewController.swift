@@ -104,8 +104,8 @@ class UserListViewController: UIViewController {
         let record = NSKeyedUnarchiver.unarchiveObject(with: data) as! CKRecord
         
         switch userType! {
-        case .Students: activeStudent = Student(record)
-        case .Teachers: activeTeacher = Teacher(record)
+        case .student: activeStudent = Student(record)
+        case .teacher: activeTeacher = Teacher(record)
         }
     }
 
@@ -216,7 +216,6 @@ extension UserListViewController: AddStudentViewControllerDelegate {
         // TODO: - Add student to teacher list in CK
         
         CloudKitManager.addStudent(student, to: activeTeacher!)
-        
         tableView.reloadData()
         self.tableView.isHidden = false
         self.spinner.stopAnimating()

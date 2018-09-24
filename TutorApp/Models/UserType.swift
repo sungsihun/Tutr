@@ -9,6 +9,6 @@
 import Foundation
 
 public enum UserType: String {
-    case Students
-    case Teachers
+    case student = "Students"
+    case teacher = "Teachers"
 }

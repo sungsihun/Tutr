@@ -98,7 +98,7 @@ class AddStudentViewController: UIViewController {
     private func setFields(with student: Student) {
         DispatchQueue.main.async {
             self.nameTextField.text = student.name
-            self.subjectTextField.text = student.subjectStudying
+            self.subjectTextField.text = student.subject
             self.studentImageView.image = student.image
             self.checkTextField()
             self.spinner.stopAnimating()

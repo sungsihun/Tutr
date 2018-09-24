@@ -73,15 +73,15 @@ class AddUserViewController: UIViewController {
     private func setupUser() {
         guard let userType = userType else { fatalError("User must have a type")}
         
-        CloudKitManager.createUserOfType(userType.rawValue) { (success) in
+        CloudKitManager.createUserOfType(userType) { (success) in
             if !success { print("Could not save user"); return }
             
             CloudKitManager.getCurrentUserName(completion: { (firstName, lastName) in
                 guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
                 
                 switch userType {
-                case .Teachers: self.activeTeacher = Teacher(name: "\(firstName) \(lastName)")
-                case .Students: self.activeStudent = Student(name: "\(firstName) \(lastName)")
+                case .teacher: self.activeTeacher = Teacher(name: "\(firstName) \(lastName)")
+                case .student: self.activeStudent = Student(name: "\(firstName) \(lastName)")
                 }
                 
                 DispatchQueue.main.async {
@@ -100,7 +100,7 @@ class AddUserViewController: UIViewController {
         guard let activeTeacher = activeTeacher else { fatalError("No teacher was ever created") }
         let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
         
-        CloudKitManager.saveUserDetails(type: .Teachers, name: activeTeacher.name, subject: subjectText, image: image) { (success, teacher, _) in
+        CloudKitManager.saveUserDetails(type: .teacher, name: activeTeacher.name, subject: subjectText, image: image) { (success, teacher, _) in
             if success {
                 self.activeTeacher = teacher
                 self.userDefaults.set(true, forKey: "isTeacher")
@@ -118,7 +118,7 @@ class AddUserViewController: UIViewController {
         guard let activeStudent = activeStudent else { fatalError("No student was ever created") }
         let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
         
-        CloudKitManager.saveUserDetails(type: .Students, name: activeStudent.name, subject: subjectText, image: image) { (success, nil, student) in
+        CloudKitManager.saveUserDetails(type: .student, name: activeStudent.name, subject: subjectText, image: image) { (success, nil, student) in
             if success {
                 self.activeStudent = student
                 self.userDefaults.set(true, forKey: "isStudent")
@@ -143,8 +143,8 @@ class AddUserViewController: UIViewController {
         guard let userType = userType else { fatalError("Must have a userType")}
         
         switch userType {
-        case .Students: createStudent()
-        case .Teachers: createTeacher()
+        case .student: createStudent()
+        case .teacher: createTeacher()
         }
     }
     
@@ -186,8 +186,8 @@ class AddUserViewController: UIViewController {
             userListVC.userType = userType
             
             switch userType! {
-            case .Students: userListVC.activeStudent = activeStudent
-            case .Teachers: userListVC.activeTeacher = activeTeacher
+            case .student: userListVC.activeStudent = activeStudent
+            case .teacher: userListVC.activeTeacher = activeTeacher
             }
             
         }
