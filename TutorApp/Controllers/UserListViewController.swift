@@ -137,7 +137,7 @@ class UserListViewController: UIViewController {
   
     private func setupSpinner() {
 //      self.spinner.startAnimating()
-      self.tableView.isHidden = true
+//      self.tableView.isHidden = true
     }
     
     // MARK: - Segue

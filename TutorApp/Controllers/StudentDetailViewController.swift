@@ -49,11 +49,16 @@ class StudentDetailViewController: UIViewController {
         loadStudent()
         setupUI()
         setupGestureRecogniser()
+        setupNotificationCenter()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+  
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Custom Methods
@@ -140,6 +145,11 @@ class StudentDetailViewController: UIViewController {
       
         self.present(alert, animated: true)
     }
+  
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
 
 }
 
@@ -214,6 +224,7 @@ extension StudentDetailViewController: UITextFieldDelegate {
         
         homeworkTableView.reloadData()
         textField.resignFirstResponder()
+        addHomeworkTextfield.resignFirstResponder()
         return true
     }
     
@@ -222,3 +233,20 @@ extension StudentDetailViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - Notification Center Methods
+
+extension StudentDetailViewController {
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+          
+            if (self.view.frame.origin.y == 0) && ((view.frame.size.height - homeworkView.frame.origin.y) <= keyboardHeight) {
+                self.view.frame.origin.y += (keyboardHeight - homeworkView.frame.origin.y)
+            }
+        }
+    }
+  
+    @objc func keyboardWillHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
+}

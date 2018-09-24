@@ -46,6 +46,10 @@ class AddUserViewController: UIViewController {
         setupUI()
         setupNotificationCenter()
     }
+  
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     // MARK: - Custom Methods
     
@@ -298,7 +302,8 @@ extension AddUserViewController {
   @objc func keyboardWillShow(_ notification: Notification) {
     if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
       let keyboardHeight = keyboardFrame.cgRectValue.height
-      if self.view.frame.origin.y == 0 {
+
+      if (self.view.frame.origin.y == 0) && ((view.frame.size.height - subjectTextField.frame.origin.y) <= keyboardHeight) {
         self.view.frame.origin.y += (keyboardHeight - subjectTextField.frame.origin.y)
       }
     }
