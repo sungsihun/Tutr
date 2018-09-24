@@ -56,7 +56,7 @@ class TeacherListViewController: UIViewController {
       if filterBy == "Name" {
         self.teachers = self.teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
       } else {
-        self.teachers = self.teachers.sorted { $0.subject!.lowercased() < $1.subject!.lowercased() }
+        self.teachers = self.teachers.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
       }
       
       self.filterDefaults.set(filterBy, forKey: "filterBy")

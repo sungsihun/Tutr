@@ -15,24 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        let userDefaults = UserDefaults.standard
-        
-        let isTeacher = userDefaults.bool(forKey: "isTeacher")
-        let isStudent = userDefaults.bool(forKey: "isStudent")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if isTeacher {
-            let studentListNav = storyboard.instantiateViewController(withIdentifier: "studentList") as! UINavigationController
-            window?.rootViewController = studentListNav
-        } else if isStudent {
-            let teacherListNav = storyboard.instantiateViewController(withIdentifier: "teacherList") as! UINavigationController
-            window?.rootViewController = teacherListNav
-        } else {
-            let onboardingVC = storyboard.instantiateViewController(withIdentifier: "onboarding")
-            window?.rootViewController = onboardingVC
-        }
-        
+        let current = ActiveUser.shared.currentCategory
+        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: current.rawValue)
         return true
     }
 

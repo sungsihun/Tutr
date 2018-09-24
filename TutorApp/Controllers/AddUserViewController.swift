@@ -18,10 +18,10 @@ class AddUserViewController: UIViewController {
     
     // MARK: - Properties
     
+    let activeUser = ActiveUser.shared
     let userDefaults = UserDefaults.standard
-    var userType: UserType!
-    var activeTeacher: Teacher?
-    var activeStudent: Student?
+    
+    var user: User! = nil // either teacher or student
     weak var delegate: AddTeacherViewControllerDelegate?
 
     
@@ -71,21 +71,15 @@ class AddUserViewController: UIViewController {
     }
     
     private func setupUser() {
-        guard let userType = userType else { fatalError("User must have a type")}
         
-        CloudKitManager.createUserOfType(userType) { (success) in
+        CloudKitManager.createUser() { (success) in
             if !success { print("Could not save user"); return }
             
             CloudKitManager.getCurrentUserName(completion: { (firstName, lastName) in
                 guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
                 
-                switch userType {
-                case .teacher: self.activeTeacher = Teacher(name: "\(firstName) \(lastName)")
-                case .student: self.activeStudent = Student(name: "\(firstName) \(lastName)")
-                }
-                
                 DispatchQueue.main.async {
-                    self.nameTextField.text = "Hello, \(firstName) \(lastName)!"
+                    self.nameTextField.text = "Hello, \(firstName) \(lastName)"
                     self.activityIndicatorView.isHidden = true
                     self.activityIndicator.stopAnimating()
                 }
@@ -94,41 +88,24 @@ class AddUserViewController: UIViewController {
     }
     
     
-    
-    private func createTeacher() {
-        guard let subjectText = subjectTextField.text else { fatalError("Must be a subject") }
-        guard let activeTeacher = activeTeacher else { fatalError("No teacher was ever created") }
-        let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
+    private func createUser() {
+        guard let subject = subjectTextField.text else { fatalError("Must be a subject") }
+        let image = imageView.image
+        let textFieldText = nameTextField.text!
+        let name = String(textFieldText[textFieldText.index(textFieldText.startIndex, offsetBy: 6)...])
+        user = User(name: name, subject: subject, image: image)
         
-        CloudKitManager.saveUserDetails(type: .teacher, name: activeTeacher.name, subject: subjectText, image: image) { (success, teacher, _) in
-            if success {
-                self.activeTeacher = teacher
-                self.userDefaults.set(true, forKey: "isTeacher")
-                
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "userCreatedSegue", sender: nil)
-                }
-                
+        CloudKitManager.saveUserDetails(user: user) { (returnedUser) in
+            DispatchQueue.main.async {
+                self.activeUser.current = returnedUser
+                self.activeUser.save()
+                self.performSegue(withIdentifier: self.activeUser.currentCategory.segueID(), sender: self)
             }
         }
-    }
-    
-    private func createStudent() {
-        guard let subjectText = subjectTextField.text else { fatalError("Must be a subject") }
-        guard let activeStudent = activeStudent else { fatalError("No student was ever created") }
-        let image = imageView.image ?? #imageLiteral(resourceName: "defaultUser")
         
-        CloudKitManager.saveUserDetails(type: .student, name: activeStudent.name, subject: subjectText, image: image) { (success, nil, student) in
-            if success {
-                self.activeStudent = student
-                self.userDefaults.set(true, forKey: "isStudent")
-                
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "userCreatedSegue", sender: nil)
-                }
-            }
-        }
+
     }
+
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
@@ -140,12 +117,7 @@ class AddUserViewController: UIViewController {
     // MARK : - Actions
     
     @objc func saveButtonTapped(_ sender: UIButton) {
-        guard let userType = userType else { fatalError("Must have a userType")}
-        
-        switch userType {
-        case .student: createStudent()
-        case .teacher: createTeacher()
-        }
+        createUser()
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
@@ -176,21 +148,6 @@ class AddUserViewController: UIViewController {
     private func setupActivityIndicator() {
         self.activityIndicator.startAnimating()
         self.activityIndicatorView.isHidden = false
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userCreatedSegue" {
-            let userListNav = segue.destination as! UINavigationController
-            let userListVC = userListNav.viewControllers.first! as! UserListViewController
-            
-            userListVC.userType = userType
-            
-            switch userType! {
-            case .student: userListVC.activeStudent = activeStudent
-            case .teacher: userListVC.activeTeacher = activeTeacher
-            }
-            
-        }
     }
     
     private func setupUI() {

@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class UserListViewController: UIViewController {
+class StudentListViewController: UIViewController {
     
     // MARK: - Outlets
     
@@ -19,38 +19,23 @@ class UserListViewController: UIViewController {
   
     // MARK: - Properties
     
-    var userType: UserType?
     
-    var activeTeacher: Teacher?
-    var activeStudent: Student?
-    
-    var teachers = [Teacher]()
     var students = [Student]()
-    
     let userDefaults = UserDefaults.standard
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
         setupSpinner()
         setupUI()
-
-
-        if activeTeacher == nil && activeStudent == nil {
-            createUserObject()
-        }
-        
-        if let filterString = userDefaults.string(forKey: "filterBy") {
-            setupTableView(filterBy: filterString)
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _ = activeTeacher { fetchStudents() }
+        getTeacher { (success) in
+            self.fetchStudents()
+        }
     }
     
     // MARK: - Action Methods
@@ -81,6 +66,17 @@ class UserListViewController: UIViewController {
         }
     }
     
+    private func getTeacher(completion: @escaping (Bool) -> ()) {
+        if let _ = ActiveUser.shared.current as? Teacher {
+            completion(true)
+        } else {
+            CloudKitManager.getTeacher { (teacher) in
+                ActiveUser.shared.current = teacher
+                completion(true)
+            }
+        }
+    }
+    
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
@@ -95,22 +91,9 @@ class UserListViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    private func createUserObject() {
-        
-        guard let typeString = userDefaults.object(forKey: "userType") as? String else { fatalError("No userType") }
-        userType = UserType(rawValue: typeString)
-        
-        guard let data = userDefaults.object(forKey: "userRecord") as? Data else { return }
-        let record = NSKeyedUnarchiver.unarchiveObject(with: data) as! CKRecord
-        
-        switch userType! {
-        case .student: activeStudent = Student(record)
-        case .teacher: activeTeacher = Teacher(record)
-        }
-    }
 
     private func fetchStudents() {
-        CloudKitManager.fetchAllStudentsFrom(activeTeacher!) { (returnedStudents) in
+        CloudKitManager.fetchStudents() { (returnedStudents) in
             if let returnedStudents = returnedStudents {
                 self.students = returnedStudents
                 DispatchQueue.main.async {
@@ -132,6 +115,11 @@ class UserListViewController: UIViewController {
         // set header height constraint for different devices
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
+        }
+        
+    
+        if let filterString = userDefaults.string(forKey: "filterBy") {
+            setupTableView(filterBy: filterString)
         }
     }
   
@@ -161,7 +149,7 @@ class UserListViewController: UIViewController {
 
 // MARK: - Table View Delegate & Data Source
 
-extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
+extension StudentListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if students.count > 0 {
@@ -208,14 +196,16 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - AddStudentViewControllerDelegate
 
-extension UserListViewController: AddStudentViewControllerDelegate {
+extension StudentListViewController: AddStudentViewControllerDelegate {
     
     func add(studentViewController controller: AddStudentViewController, student: Student) {
         students.append(student)
         
         // TODO: - Add student to teacher list in CK
-        
-        CloudKitManager.addStudent(student, to: activeTeacher!)
+        let currentTeacher = ActiveUser.shared.current as! Teacher
+        CloudKitManager.addStudent(student, to: currentTeacher) { (teacherRecord) in
+            currentTeacher.record = teacherRecord
+        }
         tableView.reloadData()
         self.tableView.isHidden = false
         self.spinner.stopAnimating()

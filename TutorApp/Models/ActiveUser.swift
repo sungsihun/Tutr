@@ -11,25 +11,36 @@ import Foundation
 final class ActiveUser {
     
     static let shared = ActiveUser()
-    static var current: Category?
+    var current: User?
+    var currentCategory: Category = .notSet
     private static let key = "activeUser"
     
     private init() {
         if let user = UserDefaults.standard.string(forKey: ActiveUser.key) {
-            ActiveUser.current = Category(rawValue: user)
+            currentCategory = Category(rawValue: user)!
         }
     }
     
     public enum Category: String {
         case student = "Students"
         case teacher = "Teachers"
-    }
-    
-    static func save() {
-        if let current = ActiveUser.current {
-            UserDefaults.standard.set(current.rawValue, forKey: ActiveUser.key)
+        case notSet = "notSet"
+        
+        func segueID() -> String {
+            switch self {
+            case .student:
+                return "studentCreatedSegue"
+            case .teacher:
+                return "teacherCreatedSegue"
+            default: fatalError()
+            }
         }
     }
     
+    func save() {
+        UserDefaults.standard.set(currentCategory.rawValue, forKey: ActiveUser.key)
+    }
     
+   
+
 }

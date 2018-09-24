@@ -10,30 +10,13 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
-    var userType: UserType?
+    let activeUser = ActiveUser.shared
     let userDefaults = UserDefaults.standard
     
-    @IBAction func teacherButtonPressed(_ sender: Any) {
-        userType = .teacher
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        activeUser.currentCategory = [.teacher, .student][sender.tag]
         performSegue(withIdentifier: "createUserSegue", sender: nil)
     }
-    
-    @IBAction func studentButtonPressed(_ sender: Any) {
-        userType = .student
-        performSegue(withIdentifier: "createUserSegue", sender: nil)
-    }
-
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let addUserNav = segue.destination as! UINavigationController
-        let addUserVC = addUserNav.viewControllers.first! as! AddUserViewController
-        addUserVC.userType = userType
-        userDefaults.set(userType?.rawValue, forKey: "userType")
-
-    }
-    
-    
-    
     
 
 }

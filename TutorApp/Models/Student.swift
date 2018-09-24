@@ -9,14 +9,11 @@
 import Foundation
 import UIKit
 import CloudKit
+
 class Student: User {
     
     
     var assignments = [Assignment]()
-    
- 
-    
-    
     
     
 }

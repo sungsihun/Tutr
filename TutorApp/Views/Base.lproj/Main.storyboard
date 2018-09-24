@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lRL-hW-2wr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lRL-hW-2wr">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--User List View Controller-->
+        <!--Student List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="UserListViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="StudentListViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,7 +251,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="cpK-B8-7oC">
             <objects>
-                <viewController storyboardIdentifier="onboarding" id="5hk-Aw-evT" customClass="OnboardingViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="notSet" id="5hk-Aw-evT" customClass="OnboardingViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="67F-Ip-5YY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,14 +260,14 @@
                                 <rect key="frame" x="129.66666666666666" y="353" width="55" height="30"/>
                                 <state key="normal" title="Teacher"/>
                                 <connections>
-                                    <action selector="teacherButtonPressed:" destination="5hk-Aw-evT" eventType="touchUpInside" id="Cwj-mT-b9h"/>
+                                    <action selector="buttonPressed:" destination="5hk-Aw-evT" eventType="touchUpInside" id="JzO-Rv-pc1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4U-DI-VUi">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4U-DI-VUi">
                                 <rect key="frame" x="229.66666666666663" y="353" width="55" height="30"/>
                                 <state key="normal" title="Student"/>
                                 <connections>
-                                    <action selector="studentButtonPressed:" destination="5hk-Aw-evT" eventType="touchUpInside" id="wRV-jh-AAm"/>
+                                    <action selector="buttonPressed:" destination="5hk-Aw-evT" eventType="touchUpInside" id="nrY-Qb-GJ2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -459,7 +464,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rpl-kb-fWg">
             <objects>
-                <navigationController storyboardIdentifier="studentList" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Teachers" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
@@ -730,7 +735,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eEf-ha-l6c">
             <objects>
-                <navigationController storyboardIdentifier="teacherList" automaticallyAdjustsScrollViewInsets="NO" id="iGm-KU-S2o" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Students" automaticallyAdjustsScrollViewInsets="NO" id="iGm-KU-S2o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="oYs-o3-r0t">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
@@ -878,7 +883,8 @@
                         <outlet property="nameTextField" destination="0Yb-OQ-BSu" id="Pqq-HU-Lhz"/>
                         <outlet property="saveButton" destination="Yha-Yu-Yy6" id="C6u-49-108"/>
                         <outlet property="subjectTextField" destination="e5g-97-FZA" id="zwG-VC-e44"/>
-                        <segue destination="9Gh-ps-ZHZ" kind="show" identifier="userCreatedSegue" id="uga-3J-HKk"/>
+                        <segue destination="9Gh-ps-ZHZ" kind="show" identifier="teacherCreatedSegue" id="uga-3J-HKk"/>
+                        <segue destination="iGm-KU-S2o" kind="show" identifier="studentCreatedSegue" id="a16-fl-QLh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Gc-Hw-j8h" userLabel="First Responder" sceneMemberID="firstResponder"/>

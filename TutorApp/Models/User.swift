@@ -14,11 +14,11 @@ class User {
     
     var name: String
     var record: CKRecord?
-    var subject: String?
-    var image: UIImage? = #imageLiteral(resourceName: "defaultUser")
+    var subject: String
+    var image: UIImage?
     
     
-    init(name: String, subject: String? = nil, image: UIImage? = nil, record: CKRecord? = nil) {
+    init(name: String, subject: String, image: UIImage? = #imageLiteral(resourceName: "defaultUser"), record: CKRecord? = nil) {
         self.name = name
         self.subject = subject
         self.image = image
@@ -32,5 +32,7 @@ class User {
         
         self.init(name: name, subject: subject, record: record)
     }
+    
+    
     
 }
