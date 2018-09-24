@@ -15,7 +15,8 @@ class UserListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+  
     // MARK: - Properties
     
     var userType: UserType?
@@ -32,7 +33,8 @@ class UserListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
+        setupSpinner()
         setupUI()
 
 
@@ -113,6 +115,8 @@ class UserListViewController: UIViewController {
                 self.students = returnedStudents
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.tableView.isHidden = true
+                    self.spinner.stopAnimating()
                 }
             }
         }
@@ -129,6 +133,11 @@ class UserListViewController: UIViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
+    }
+  
+    private func setupSpinner() {
+      self.spinner.startAnimating()
+      self.tableView.isHidden = true
     }
     
     // MARK: - Segue

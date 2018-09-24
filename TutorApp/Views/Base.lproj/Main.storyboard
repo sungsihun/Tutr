@@ -89,16 +89,22 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="873-sh-ohs"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="em7-ZR-77z">
+                                <rect key="frame" x="189" y="350" width="37" height="37"/>
+                                <color key="color" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Joo-Er-jQE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-2" id="7OC-gU-nOb"/>
                             <constraint firstItem="RYq-Hv-uwh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="P5K-za-M30"/>
                             <constraint firstItem="RYq-Hv-uwh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rgy-Ay-cLa"/>
+                            <constraint firstItem="em7-ZR-77z" firstAttribute="centerX" secondItem="RYq-Hv-uwh" secondAttribute="centerX" id="S0q-BV-c7M"/>
                             <constraint firstItem="RYq-Hv-uwh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Sgy-sy-tHl"/>
                             <constraint firstItem="Joo-Er-jQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-2" id="b6i-1G-b7m"/>
                             <constraint firstItem="RYq-Hv-uwh" firstAttribute="top" secondItem="Joo-Er-jQE" secondAttribute="bottom" constant="10" id="bNp-eE-wug"/>
                             <constraint firstItem="Joo-Er-jQE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="2" id="beN-YN-jOO"/>
+                            <constraint firstItem="em7-ZR-77z" firstAttribute="centerY" secondItem="RYq-Hv-uwh" secondAttribute="centerY" id="juj-5M-ojH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -123,6 +129,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="headerHeightConstraint" destination="JXO-j7-4nv" id="qC4-iL-MN4"/>
+                        <outlet property="spinner" destination="em7-ZR-77z" id="sln-XN-iEk"/>
                         <outlet property="tableView" destination="RYq-Hv-uwh" id="MJZ-XQ-GBH"/>
                     </connections>
                 </viewController>
