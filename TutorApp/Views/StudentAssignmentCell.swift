@@ -12,11 +12,12 @@ class StudentAssignmentCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    var expanded: Bool = false
   
     func configure(assignment: Assignment) {
         self.titleLabel.text = assignment.assignmentTitle
-        self.descriptionLabel.text = assignment.expanded ? assignment.assignmentDescription: ""
-        if assignment.expanded {
+        self.descriptionLabel.text = self.expanded ? assignment.assignmentDescription: ""
+        if self.expanded {
             self.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
             self.titleLabel.textColor = UIColor.white
             self.descriptionLabel.textColor = UIColor.white

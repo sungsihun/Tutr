@@ -91,8 +91,8 @@ class AddUserViewController: UIViewController {
         guard let subject = subjectTextField.text else { fatalError("Must be a subject") }
         let image: UIImage!
         
-        if imageView.image == #imageLiteral(resourceName: "add-photo") {
-            image = #imageLiteral(resourceName: "defaultUser")
+        if imageView.image == UIImage(named: "add-photo-centered") {
+            image = UIImage(named: "defaultUser")
         } else {
             image = imageView.image
         }

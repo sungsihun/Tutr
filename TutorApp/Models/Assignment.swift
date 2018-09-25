@@ -12,7 +12,6 @@ class Assignment {
   
     var assignmentTitle: String
     var assignmentDescription: String
-    var expanded: Bool = false
     
     init(assignmentTitle: String, assignmentDescription: String) {
         self.assignmentTitle = assignmentTitle

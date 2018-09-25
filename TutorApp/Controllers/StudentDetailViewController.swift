@@ -160,7 +160,7 @@ extension StudentDetailViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
         cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentTitle
-
+      
         return cell
     }
 }

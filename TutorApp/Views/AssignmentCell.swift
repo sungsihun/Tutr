@@ -12,5 +12,6 @@ import Foundation
 class AssignmentCell: UITableViewCell {
     
     @IBOutlet weak var assignmentDescLabel: UILabel!
-  
+
+
 }

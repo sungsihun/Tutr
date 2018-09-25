@@ -74,8 +74,9 @@ extension HomeworkListViewController: UITableViewDelegate {
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
         let assignment = assignments[indexPath.row]
-        assignment.expanded = !assignment.expanded
+        cell.expanded = !cell.expanded
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
