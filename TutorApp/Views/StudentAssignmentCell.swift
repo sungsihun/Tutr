@@ -16,7 +16,7 @@ class StudentAssignmentCell: UITableViewCell {
   
     func configure(assignment: Assignment) {
         self.titleLabel.text = assignment.assignmentTitle
-        self.descriptionLabel.text = self.expanded ? assignment.assignmentDescription: ""
+        self.descriptionLabel.text = self.expanded ? assignment.assignmentDescription : ""
         if self.expanded {
             self.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
             self.titleLabel.textColor = UIColor.white
@@ -27,4 +27,10 @@ class StudentAssignmentCell: UITableViewCell {
             self.descriptionLabel.textColor = UIColor.darkGray
         }
     }
+  
+  func toggle() {
+    print(self.expanded)
+    expanded = !expanded
+    print(self.expanded)
+  }
 }
