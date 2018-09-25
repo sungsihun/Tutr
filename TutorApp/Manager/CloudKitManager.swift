@@ -152,11 +152,11 @@ class CloudKitManager {
 
     
     static private func getTeacherRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-        print(CFAbsoluteTimeGetCurrent())
         let op = CKFetchRecordsOperation(recordIDs: [id])
         op.queuePriority = .veryHigh
         op.qualityOfService = .userInteractive
         op.perRecordCompletionBlock = { record, _, _ in
+            print(CFAbsoluteTimeGetCurrent())
             completion(record)
         }
         db.add(op)
@@ -223,16 +223,31 @@ class CloudKitManager {
     static func addStudent(_ student: Student, to teacher: Teacher, completion: @escaping (CKRecord?) -> ()) {
         
         guard let studentRecord = student.record, let teacherRecord = teacher.record else { fatalError("Missing record") }
-        var results = [CKReference]()
-        let currentStudent = CKReference(record: studentRecord, action: .none)
-        if let studentRefs = teacherRecord["students"] as? [CKReference] {
-            results = studentRefs
-        }
-        results.append(currentStudent)
-        teacherRecord["students"] = results as NSArray
         
-        save([teacherRecord]) { (newRecord) in
-            completion(newRecord)
+        print(studentRecord.recordID.recordName)
+        print(teacherRecord.recordID.recordName)
+        
+        var studentResults = [CKReference]()
+        var teacherResults = [CKReference]()
+        
+        let currentTeacher = CKReference(record: teacherRecord, action: .none)
+        let currentStudent = CKReference(record: studentRecord, action: .none)
+        
+        if let studentRefs = teacherRecord["students"] as? [CKReference] {
+            studentResults = studentRefs
+        }
+        if let teacherRefs = studentRecord["teachers"] as? [CKReference] {
+            teacherResults = teacherRefs
+        }
+        
+        teacherResults.append(currentTeacher)
+        studentResults.append(currentStudent)
+        
+        studentRecord["teachers"] = teacherResults as NSArray
+        teacherRecord["students"] = studentResults as NSArray
+        
+        save([teacherRecord, studentRecord]) { (newTeacherRecord) in
+            completion(newTeacherRecord)
         }
     }
     
