@@ -99,7 +99,7 @@ class CloudKitManager {
             
             userRecord["name"] = user.name as NSString
             userRecord["subject"] = user.subject as NSString
-            guard let data = UIImagePNGRepresentation(user.image!) else { print("Could not turn image to data"); return }
+            guard let data = UIImageJPEGRepresentation(user.image!, 0.0) else { print("Could not turn image to data"); return }
             
             getDataURL(from: data){ (url) in
                 guard let url = url else { print("No url"); return }
@@ -279,6 +279,7 @@ class CloudKitManager {
         
         let op = CKFetchRecordsOperation(recordIDs: ids)
         op.qualityOfService = .userInteractive
+        op.queuePriority = .veryHigh
         var returnStudents = [Student]()
         
         // Below is essentially a loop that is called for each record got

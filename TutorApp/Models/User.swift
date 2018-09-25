@@ -28,9 +28,13 @@ class User {
     convenience init?(_ record: CKRecord?) {
         guard let record = record,
             let name = record["name"] as? String,
-            let subject = record["subject"] as? String else { return nil }
+            let subject = record["subject"] as? String,
+            let imageAsset = record["image"] as? CKAsset else { return nil }
         
-        self.init(name: name, subject: subject, record: record)
+        guard let data = try? Data(contentsOf: imageAsset.fileURL),
+            let image = UIImage(data: data) else { return nil }
+        
+        self.init(name: name, subject: subject, image: image, record: record)
     }
     
     

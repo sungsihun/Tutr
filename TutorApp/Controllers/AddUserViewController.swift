@@ -9,6 +9,7 @@
 
 
 import UIKit
+import AVKit
 
 protocol AddTeacherViewControllerDelegate: class {
     func add(teacherViewController controller: AddUserViewController, teacher: Teacher)
@@ -58,16 +59,12 @@ class AddUserViewController: UIViewController {
     private func checkICloudDriveStatus() {
         CloudKitManager.requestPermission { (success) in
             if !success {
-                let alert = UIAlertController(title: "No iCloud account is configured", message: "Please activate your iCloud Drive", preferredStyle: .alert)
-                
-                let settingsCloudKitURL = URL(string: "App-Prefs:root=CASTLE")
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                    UIApplication.shared.open(settingsCloudKitURL!)
-                })
-                alert.addAction(okAction)
-                
-                self.present(alert, animated: true)
+                DispatchQueue.main.async {
+                    self.setAlertWith(title: "No iCloud account configured", message: "Please activate iCloud drive") { (action) in
+                        self.openSettings()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
             }
         }
     }
@@ -157,6 +154,15 @@ class AddUserViewController: UIViewController {
     private func setupUI() {
         saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
     }
+    
+    private func openSettings() {
+        let settingsCloudKitURL = URL(string: "App-Prefs:root=CASTLE")
+        UIApplication.shared.open(settingsCloudKitURL!)
+    }
+    
+    private func openAppSettings() {
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+    }
 
 }
 
@@ -238,11 +244,28 @@ extension AddUserViewController {
     }
     
     @objc private func handleTap(_ recogniser: UITapGestureRecognizer) {
+        
         let alertController = UIAlertController(title: "Add Image", message: nil, preferredStyle: .actionSheet)
         
         let cameraAction = UIAlertAction(title: "Camera", style: .default) {_ in
-            self.open(.camera)
+            let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+            if status == AVAuthorizationStatus.denied {
+                self.setAlertWith(title: "Error", message: "Please enable access to camera") { action in
+                    self.openAppSettings()
+                }
+                
+                
+            } else if status == AVAuthorizationStatus.notDetermined {
+                AVCaptureDevice.requestAccess(for: AVMediaType.video) { (success) in
+                    if success { self.open(.camera) }
+                }
+                
+                
+            } else {
+                self.open(.camera)
+            }
         }
+        
         let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
             self.open(.photoLibrary)
         }
@@ -252,6 +275,13 @@ extension AddUserViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(cameraAction)
         alertController.addAction(galleryAction)
+        present(alertController, animated: true, completion: nil)
+    }
+ 
+    private func setAlertWith(title: String, message: String, handler: ((UIAlertAction) -> ())?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
+        alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
     
