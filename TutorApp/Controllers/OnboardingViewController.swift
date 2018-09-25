@@ -11,7 +11,6 @@ import UIKit
 class OnboardingViewController: UIViewController {
     
     let activeUser = ActiveUser.shared
-    let userDefaults = UserDefaults.standard
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         activeUser.currentCategory = [.teacher, .student][sender.tag]

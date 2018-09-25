@@ -142,6 +142,34 @@ class CloudKitManager {
         }
     }
     
+
+
+    
+    // MARK: - TEACHERS
+    
+    
+    //  Get teacher
+
+    
+    static private func getTeacherRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        print(CFAbsoluteTimeGetCurrent())
+        let op = CKFetchRecordsOperation(recordIDs: [id])
+        op.queuePriority = .veryHigh
+        op.qualityOfService = .userInteractive
+        op.perRecordCompletionBlock = { record, _, _ in
+            completion(record)
+        }
+        db.add(op)
+    }
+    
+    static func getTeacherFromID(_ id: CKRecordID, completion: @escaping (Teacher?) -> ()) {
+        getTeacherRecord(with: id) { (record) in
+            guard let record = record else { completion(nil); return }
+            let teacher = Teacher(record)
+            completion(teacher)
+        }
+    }
+    
     
     
     // Get record ID
@@ -155,21 +183,36 @@ class CloudKitManager {
     }
     
     
+    // Get teacher or students record
     
-    
-    
-    // MARK: - TEACHERS
-    
-    
-    //  Get teacher
-    
-    static func getTeacher(completion: @escaping (Teacher?) -> ()) {
-        getCurrentUserRecordOfType(ActiveUser.Category.teacher) { (teacherRecord) in
-            guard let teacherRecord = teacherRecord else { fatalError("No teacher!") }
-            let teacher = Teacher(teacherRecord)
-            completion(teacher)
+    private static func getCurrentUserRecordOfType(_ type: ActiveUser.Category, completion: @escaping (CKRecord?) -> ()) {
+        
+        getCurrentUserRecordID { (recordID) in
+            guard let recordID = recordID else { fatalError("Could not get recordID") }
+            
+            // Wrapper around the recordID
+            
+            let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
+            let query = CKQuery(recordType: type.rawValue, predicate: predicate)
+            
+            self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error { print(#line, error.localizedDescription); return }
+                guard let record = records?.first else {
+                    print("No record exists")
+                    completion(nil)
+                    return
+                }
+                completion(record)
+            })
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -192,166 +235,130 @@ class CloudKitManager {
             completion(newRecord)
         }
     }
-
-
-
-// MARK: - STUDENTS
-
-
-
-
-
-
-
-// Fetch students
-
-static func fetchStudents(completion: @escaping ([Student]?) -> ()) {
     
-    let teacher = ActiveUser.shared.current as! Teacher
     
-    guard let record = teacher.record else { fatalError("Teacher has no record") }
     
-    // Get the array of the teacher's students
     
-    guard let studentRefs = record["students"] as? Array<CKReference>  else { completion(nil); return }
     
-    // Get the recordID of each student
     
-    let ids = studentRefs.map{ $0.recordID }
+    // MARK: - STUDENTS
     
-    // Get the record of each student
     
-    let op = CKFetchRecordsOperation(recordIDs: ids)
-    op.qualityOfService = .userInteractive
-    var returnStudents = [Student]()
+    // Fetch students
     
-    // Below is essentially a loop that is called for each record got
-    
-    op.perRecordCompletionBlock = { record, _, _ in
-        guard let student = Student(record) else { fatalError() }
-        returnStudents.append(student)
+    static func fetchStudents(completion: @escaping ([Student]?) -> ()) {
+        
+        let teacher = ActiveUser.shared.current as! Teacher
+        
+        guard let record = teacher.record else { fatalError("Teacher has no record") }
+        
+        // Get the array of the teacher's students
+        
+        guard let studentRefs = record["students"] as? Array<CKReference>  else { completion(nil); return }
+        
+        // Get the recordID of each student
+        
+        let ids = studentRefs.map{ $0.recordID }
+        
+        // Get the record of each student
+        
+        let op = CKFetchRecordsOperation(recordIDs: ids)
+        op.qualityOfService = .userInteractive
+        var returnStudents = [Student]()
+        
+        // Below is essentially a loop that is called for each record got
+        
+        op.perRecordCompletionBlock = { record, _, _ in
+            guard let student = Student(record) else { fatalError() }
+            returnStudents.append(student)
+        }
+        
+        op.fetchRecordsCompletionBlock = { _, _ in
+            completion(returnStudents)
+        }
+        
+        db.add(op)
     }
     
-    op.fetchRecordsCompletionBlock = { _, _ in
-        completion(returnStudents)
+    
+    
+    
+    // MARK: - Searching for a student
+    
+    
+    // Get user record fromID
+    
+    static private func getStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        print(id.recordName)
+        let predicate = NSPredicate(format: "userRef = %@", id.recordName)
+        let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
+        
+        db.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error { print(error.localizedDescription); completion(nil) }
+            completion(records?.first)
+        }
     }
     
-//    op.fetchRecordsCompletionBlock = { dict, error in
-//        if let dict = dict {
-//            for (_, record) in dict {
-//                guard let student = Student(record) else { continue }
-//                returnStudents.append(student)
-//            }
-//            completion(returnStudents)
-//        }
-//        completion(nil)
-//    }
-    
-    // results is now an array of CKRecords with the students of the teacher
-    db.add(op)
-}
-
-
-
-
-// MARK: - Searching for a student
-
-
-// Get user record fromID
-
-static private func getStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-    let predicate = NSPredicate(format: "userRef = %@", id.recordName)
-    let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
-    
-    db.perform(query, inZoneWith: nil) { (records, error) in
-        if let error = error { print(error.localizedDescription); completion(nil) }
-        completion(records?.first)
-    }
-}
-
-static func getStudentFromID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
-    getStudentRecord(with: id) { (record) in
-        guard let record = record else { completion(nil); return }
-        let student = Student(record)
-        completion(student)
-    }
-}
-
-
-// Search for student
-
-static func findStudentWith(email: String, completion: @escaping (Student?) -> ()) {
-    container.discoverUserIdentity(withEmailAddress: email) { (userIdentity, error) in
-        if let error = error { print(error.localizedDescription); completion(nil) }
-        guard let userIdentity = userIdentity,
-            let recordID = userIdentity.userRecordID
-            else { completion(nil); return }
-        getStudentFromID(recordID) { (student) in
+    static func getStudentFromID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
+        getStudentRecord(with: id) { (record) in
+            guard let record = record else { completion(nil); return }
+            let student = Student(record)
             completion(student)
         }
     }
-}
-
-
-
-// MARK: - HELPERS
-
-//  Get url of image
-
-private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
-    let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
-    do {
-        try data.write(to: url)
-        completion(url)
-    } catch {
-        completion(nil)
-        print(error.localizedDescription)
-    }
-}
-
-//  Convert CKRecord To Data
-
-private static func setRecordToUserDefaults(_ record: CKRecord) {
-    let data = NSKeyedArchiver.archivedData(withRootObject: record)
-    UserDefaults.standard.set(data, forKey: "userRecord")
-}
-
-// Get 'User' record from ID
-
-private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-    db.fetch(withRecordID: id) { (user, error) in
-        if let error = error { print(error.localizedDescription) }
-        completion(user)
-    }
-}
-
-
-
-// Get teacher or students record
-
-private static func getCurrentUserRecordOfType(_ type: ActiveUser.Category, completion: @escaping (CKRecord?) -> ()) {
     
-    getCurrentUserRecordID { (recordID) in
-        guard let recordID = recordID else { fatalError("Could not get recordID") }
-        
-        // Wrapper around the recordID
-        
-        let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
-        let query = CKQuery(recordType: type.rawValue, predicate: predicate)
-        
-        self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-            if let error = error { print(#line, error.localizedDescription); return }
-            guard let record = records?.first else {
-                print("No record exists")
-                completion(nil)
-                return
+    
+    // Search for student
+    
+    static func findStudentWith(email: String, completion: @escaping (Student?) -> ()) {
+        container.discoverUserIdentity(withEmailAddress: email) { (userIdentity, error) in
+            if let error = error { print(error.localizedDescription); completion(nil) }
+            guard let userIdentity = userIdentity,
+                let recordID = userIdentity.userRecordID
+                else { completion(nil); return }
+            getStudentFromID(recordID) { (student) in
+                completion(student)
             }
-            completion(record)
-        })
+        }
     }
-}
+    
+    
+    
+    // MARK: - HELPERS
+    
+    //  Get url of image
+    
+    private static func getDataURL(from data: Data, completion: (URL?) -> ()) {
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(UUID()).dat")
+        do {
+            try data.write(to: url)
+            completion(url)
+        } catch {
+            completion(nil)
+            print(error.localizedDescription)
+        }
+    }
+    
+    //  Convert CKRecord To Data
+    
+    private static func setRecordToUserDefaults(_ record: CKRecord) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: record)
+        UserDefaults.standard.set(data, forKey: "userRecord")
+    }
+    
+    // Get 'User' record from ID
+    
+    private static func getUserWithID(_ id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        db.fetch(withRecordID: id) { (user, error) in
+            if let error = error { print(error.localizedDescription) }
+            completion(user)
+        }
+    }
+    
+    
+    
 
-
+    
 }
 
 

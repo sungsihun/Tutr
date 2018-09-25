@@ -77,7 +77,9 @@ class StudentListViewController: UIViewController {
         if let _ = ActiveUser.shared.current as? Teacher {
             completion(true)
         } else {
-            CloudKitManager.getTeacher { (teacher) in
+            guard let recordIDString = userDefaults.string(forKey: ActiveUser.recordID) else { fatalError() }
+            let recordID = CKRecordID(recordName: recordIDString)
+            CloudKitManager.getTeacherFromID(recordID) { (teacher) in
                 ActiveUser.shared.current = teacher
                 completion(true)
             }

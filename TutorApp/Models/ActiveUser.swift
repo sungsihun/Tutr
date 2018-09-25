@@ -14,6 +14,7 @@ final class ActiveUser {
     var current: User?
     var currentCategory: Category = .notSet
     private static let key = "activeUser"
+    static let recordID = "activeUserID"
     private init() {
         if let user = UserDefaults.standard.string(forKey: ActiveUser.key) {
             currentCategory = Category(rawValue: user)!
@@ -38,6 +39,7 @@ final class ActiveUser {
     
     func save() {
         UserDefaults.standard.set(currentCategory.rawValue, forKey: ActiveUser.key)
+        UserDefaults.standard.set(current?.record?.recordID.recordName, forKey: ActiveUser.recordID)
     }
     
    
