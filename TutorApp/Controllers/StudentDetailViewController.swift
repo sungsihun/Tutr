@@ -21,7 +21,6 @@ class StudentDetailViewController: UIViewController {
     
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var nextLessonLabel: UILabel!
-    @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     
     // MARK: - Homework Viewable Outlets

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentImageView: UIImageView {
+class RoundImageView: UIImageView {
 
     override func layoutSubviews() {
         super.layoutSubviews()

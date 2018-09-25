@@ -44,6 +44,9 @@ class AddUserViewController: UIViewController {
         setupTextFields()
         setupUser()
         setupUI()
+    }
+  
+    override func viewWillAppear(_ animated: Bool) {
         setupNotificationCenter()
     }
   
@@ -100,6 +103,7 @@ class AddUserViewController: UIViewController {
             DispatchQueue.main.async {
                 self.activeUser.current = returnedUser
                 self.activeUser.save()
+                self.activityIndicator.stopAnimating()
                 self.performSegue(withIdentifier: self.activeUser.currentCategory.segueID(), sender: self)
             }
         }
@@ -118,6 +122,7 @@ class AddUserViewController: UIViewController {
     // MARK : - Actions
     
     @objc func saveButtonTapped(_ sender: UIButton) {
+        setupActivityIndicator()
         createUser()
     }
     

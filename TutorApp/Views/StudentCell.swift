@@ -14,7 +14,7 @@ class StudentCell: UITableViewCell {
 
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var studentNameLabel: UILabel!
-    @IBOutlet weak var studentImageView: StudentImageView!
+    @IBOutlet weak var studentImageView: RoundImageView!
     
     
     // MARK: - Custom Methods
