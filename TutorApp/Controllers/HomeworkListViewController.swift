@@ -16,7 +16,6 @@ class HomeworkListViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
   // MARK: - Properties
-  
   var assignments = [Assignment]()
   
   override func viewDidLoad() {
@@ -46,8 +45,8 @@ extension HomeworkListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "studentAssignmentCell", for: indexPath) as! StudentAssignmentCell
-    
-    cell.configure(assignment: assignments[indexPath.row])
+    let assignment = assignments[indexPath.row]
+    cell.configureCellWith(assignment: assignment)
     
     return cell
   }
@@ -60,10 +59,7 @@ extension HomeworkListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
     cell.toggle()
-    tableView.beginUpdates()
-    tableView.reloadRows(at: [indexPath], with: .automatic)
-    tableView.endUpdates()
-
+    tableView.reloadData()
   }
   
   
