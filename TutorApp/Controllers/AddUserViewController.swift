@@ -23,7 +23,7 @@ class AddUserViewController: UIViewController {
     
     var user: User! = nil // either teacher or student
     weak var delegate: AddTeacherViewControllerDelegate?
-
+    
     
     // MARK : - Outlets
     
@@ -45,11 +45,11 @@ class AddUserViewController: UIViewController {
         setupUser()
         setupUI()
     }
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         setupNotificationCenter()
     }
-  
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
@@ -60,7 +60,7 @@ class AddUserViewController: UIViewController {
         CloudKitManager.requestPermission { (success) in
             if !success {
                 DispatchQueue.main.async {
-                    self.setAlertWith(title: "No iCloud account configured", message: "Please activate iCloud drive") { (action) in
+                    setAlertWith(title: "No iCloud account configured", message: "Please activate iCloud drive", from: self) { _ in
                         self.openSettings()
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -89,7 +89,13 @@ class AddUserViewController: UIViewController {
     
     private func createUser() {
         guard let subject = subjectTextField.text else { fatalError("Must be a subject") }
-        let image = imageView.image
+        let image: UIImage!
+        
+        if imageView.image == #imageLiteral(resourceName: "add-photo") {
+            image = #imageLiteral(resourceName: "defaultUser")
+        } else {
+            image = imageView.image
+        }
         let textFieldText = nameTextField.text!
         let name = String(textFieldText[textFieldText.index(textFieldText.startIndex, offsetBy: 7
             )...])
@@ -103,16 +109,16 @@ class AddUserViewController: UIViewController {
             }
         }
         
-
+        
     }
-
+    
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
-  
-
+    
+    
     
     // MARK : - Actions
     
@@ -141,9 +147,11 @@ class AddUserViewController: UIViewController {
         subjectTextField.delegate = self
         nameTextField.delegate = self
         
+        subjectTextField.autocapitalizationType = .words
+        
         subjectTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
         nameTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
- 
+        
     }
     
     private func setupActivityIndicator() {
@@ -163,7 +171,7 @@ class AddUserViewController: UIViewController {
     private func openAppSettings() {
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
     }
-
+    
 }
 
 
@@ -250,7 +258,7 @@ extension AddUserViewController {
         let cameraAction = UIAlertAction(title: "Camera", style: .default) {_ in
             let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             if status == AVAuthorizationStatus.denied {
-                self.setAlertWith(title: "Error", message: "Please enable access to camera") { action in
+                setAlertWith(title: "Error", message: "Please enable access to camera", from: self) { action in
                     self.openAppSettings()
                 }
                 
@@ -277,30 +285,25 @@ extension AddUserViewController {
         alertController.addAction(galleryAction)
         present(alertController, animated: true, completion: nil)
     }
- 
-    private func setAlertWith(title: String, message: String, handler: ((UIAlertAction) -> ())?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
+    
+    
     
 }
 
 // MARK: - Notification Center Methods
 
 extension AddUserViewController {
-  @objc func keyboardWillShow(_ notification: Notification) {
-    if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-      let keyboardHeight = keyboardFrame.cgRectValue.height
-
-      if (self.view.frame.origin.y == 0) && ((view.frame.size.height - subjectTextField.frame.origin.y) <= keyboardHeight) {
-        self.view.frame.origin.y += (keyboardHeight - subjectTextField.frame.origin.y)
-      }
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            
+            if (self.view.frame.origin.y == 0) && ((view.frame.size.height - subjectTextField.frame.origin.y) <= keyboardHeight) {
+                self.view.frame.origin.y += (keyboardHeight - subjectTextField.frame.origin.y)
+            }
+        }
     }
-  }
-  
-  @objc func keyboardWillHide(_ notification: Notification) {
-    self.view.frame.origin.y = 0
-  }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
 }

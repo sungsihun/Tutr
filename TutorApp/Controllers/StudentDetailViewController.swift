@@ -122,12 +122,12 @@ class StudentDetailViewController: UIViewController {
       
         let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
-            self.student.assignments[indexPath.row].assignmentDescription = textField.text!
+            self.student.assignments[indexPath.row].assignmentTitle = textField.text!
             self.homeworkTableView.reloadData()
         }
       
         alert.addTextField { (textField) in
-            textField.text = self.student.assignments[indexPath.row].assignmentDescription
+            textField.text = self.student.assignments[indexPath.row].assignmentTitle
         }
       
       
@@ -159,7 +159,7 @@ extension StudentDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
-        cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentDescription
+        cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentTitle
 
         return cell
     }

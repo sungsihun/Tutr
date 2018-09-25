@@ -183,8 +183,14 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            students.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let studentToDelete = students[indexPath.row]
+            CloudKitManager.deleteStudent(studentToDelete) { (success) in
+                if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
+                self.students.remove(at: indexPath.row)
+                DispatchQueue.main.async {
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
         }
     }
     
@@ -198,7 +204,6 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
     func add(studentViewController controller: AddStudentViewController, student: Student) {
         students.append(student)
         
-        // TODO: - Add student to teacher list in CK
         let currentTeacher = ActiveUser.shared.current as! Teacher
         CloudKitManager.addStudent(student, to: currentTeacher) { (teacherRecord) in
             currentTeacher.record = teacherRecord

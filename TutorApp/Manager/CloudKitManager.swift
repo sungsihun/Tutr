@@ -218,6 +218,11 @@ class CloudKitManager {
     
     
     
+    
+    
+    
+    // MARK: - STUDENTS
+    
     // Add student to teacher list
     
     static func addStudent(_ student: Student, to teacher: Teacher, completion: @escaping (CKRecord?) -> ()) {
@@ -252,13 +257,6 @@ class CloudKitManager {
     }
     
     
-    
-    
-    
-    
-    // MARK: - STUDENTS
-    
-    
     // Fetch students
     
     static func fetchStudents(completion: @escaping ([Student]?) -> ()) {
@@ -285,8 +283,9 @@ class CloudKitManager {
         // Below is essentially a loop that is called for each record got
         
         op.perRecordCompletionBlock = { record, _, _ in
-            guard let student = Student(record) else { fatalError() }
-            returnStudents.append(student)
+            if let student = Student(record) {
+                returnStudents.append(student)
+            }
         }
         
         op.fetchRecordsCompletionBlock = { _, _ in
@@ -294,6 +293,21 @@ class CloudKitManager {
         }
         
         db.add(op)
+    }
+    
+    static func deleteStudent(_ student: Student, completion: @escaping (Bool) -> ()) {
+        guard let studentRecord = student.record else { fatalError() }
+        let teacher = ActiveUser.shared.current as! Teacher
+        guard let teacherRecord = teacher.record else { fatalError("Teacher has no record") }
+        guard let studentRefs = teacherRecord["students"] as? Array<CKReference>  else { completion(false); return }
+        print(studentRecord.recordID.recordName)
+        let newStudentsRefs = studentRefs.filter { $0.recordID != studentRecord.recordID }
+        teacherRecord["students"] = newStudentsRefs as NSArray
+        save([teacherRecord]) { newRecord in
+            let teacher = Teacher(newRecord)
+            ActiveUser.shared.current = teacher
+            completion(true)
+        }
     }
     
     
