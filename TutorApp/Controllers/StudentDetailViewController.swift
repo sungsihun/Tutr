@@ -208,7 +208,7 @@ extension StudentDetailViewController: UITextFieldDelegate {
         // Insert a new row at the top
         
         
-      let newHomeworkItem = Assignment(assignmentDescription: textField.text!)
+      let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
         student.assignments.insert(newHomeworkItem, at: 0)
         
         textField.text = ""

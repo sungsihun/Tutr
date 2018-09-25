@@ -16,6 +16,9 @@
         <array key="Dosis-Regular.ttf">
             <string>Dosis-Regular</string>
         </array>
+        <array key="Dosis-SemiBold.ttf">
+            <string>Dosis-SemiBold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Student List View Controller-->
@@ -46,6 +49,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RYq-Hv-uwh">
                                 <rect key="frame" x="0.0" y="138" width="414" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentCell" rowHeight="96" id="aGd-d3-0yc" customClass="StudentCell" customModule="TutorApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="96"/>
@@ -62,16 +66,16 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="8so-8j-UKn">
-                                                    <rect key="frame" x="111.66666666666667" y="22.333333333333332" width="61.333333333333329" height="51.333333333333343"/>
+                                                    <rect key="frame" x="111.66666666666667" y="19.999999999999996" width="51.333333333333329" height="55.666666666666657"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0T-zi-CFK">
-                                                            <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="29.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="51.333333333333336" height="31.666666666666668"/>
                                                             <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="25"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-Tj-0Z7">
-                                                            <rect key="frame" x="0.0" y="30.333333333333329" width="61.333333333333336" height="21"/>
+                                                            <rect key="frame" x="0.0" y="32.666666666666664" width="51.333333333333336" height="23"/>
                                                             <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -163,32 +167,32 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98u-1y-oUO" userLabel="Underline View">
-                                <rect key="frame" x="82.666666666666671" y="342" width="248.66666666666663" height="24"/>
+                                <rect key="frame" x="82.666666666666671" y="342" width="248.66666666666663" height="26"/>
                                 <color key="backgroundColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Student Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebL-Lw-JDg">
-                                <rect key="frame" x="82.666666666666671" y="341" width="248.66666666666663" height="24"/>
+                                <rect key="frame" x="82.666666666666671" y="341" width="248.66666666666663" height="26"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qiV-gI-VXM" userLabel="Underline View">
-                                <rect key="frame" x="82.666666666666671" y="421" width="248.66666666666663" height="24"/>
+                                <rect key="frame" x="82.666666666666671" y="423.66666666666669" width="248.66666666666663" height="26"/>
                                 <color key="backgroundColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subject Of Study" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9gh-y8-g4S">
-                                <rect key="frame" x="82.666666666666671" y="420" width="248.66666666666663" height="24"/>
+                                <rect key="frame" x="82.666666666666671" y="422.66666666666669" width="248.66666666666663" height="26"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSz-Lo-blm">
-                                <rect key="frame" x="82.666666666666671" y="341" width="248.66666666666663" height="103"/>
+                                <rect key="frame" x="82.666666666666671" y="341" width="248.66666666666663" height="107.66666666666669"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="KEG-T1-cU0">
-                                        <rect key="frame" x="105.99999999999999" y="33" width="37.000000000000014" height="37"/>
+                                        <rect key="frame" x="105.99999999999999" y="35.333333333333314" width="37.000000000000014" height="37"/>
                                         <color key="color" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -199,7 +203,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAD-Gc-d61">
-                                <rect key="frame" x="82.666666666666671" y="489.66666666666674" width="248.66666666666663" height="62"/>
+                                <rect key="frame" x="82.666666666666671" y="494.66666666666674" width="248.66666666666663" height="62"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JAD-Gc-d61" secondAttribute="height" multiplier="8:2" id="6jo-8Y-zWy"/>
@@ -358,6 +362,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-9s-c6q">
                                 <rect key="frame" x="0.0" y="140" width="414" height="596"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teacherCell" rowHeight="96" id="icD-fZ-uYC" customClass="TeacherCell" customModule="TutorApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="96"/>
@@ -453,27 +458,43 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XRX-L0-9D6">
                                 <rect key="frame" x="20" y="84" width="374" height="632"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="assignmentCell" rowHeight="55" id="9tn-26-486" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="55"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="assignmentCell" rowHeight="97" id="9tn-26-486" customClass="StudentAssignmentCell" customModule="TutorApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tn-26-486" id="X7d-Ds-k3F">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="54.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="96.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWo-TT-3u0">
-                                                    <rect key="frame" x="16" y="17" width="248" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWo-TT-3u0">
+                                                    <rect key="frame" x="30" y="21" width="334" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryS-iW-3gl">
+                                                    <rect key="frame" x="166" y="50" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="mWo-TT-3u0" secondAttribute="trailing" id="CEa-Cl-u8f"/>
-                                                <constraint firstItem="mWo-TT-3u0" firstAttribute="leading" secondItem="X7d-Ds-k3F" secondAttribute="leadingMargin" id="Zd7-CT-Ko0"/>
-                                                <constraint firstItem="mWo-TT-3u0" firstAttribute="centerY" secondItem="X7d-Ds-k3F" secondAttribute="centerY" id="zXu-pS-e4c"/>
+                                                <constraint firstItem="ryS-iW-3gl" firstAttribute="leading" secondItem="mWo-TT-3u0" secondAttribute="leading" id="AIY-I5-zpR"/>
+                                                <constraint firstItem="ryS-iW-3gl" firstAttribute="top" secondItem="mWo-TT-3u0" secondAttribute="bottom" id="Fob-3j-P4Y"/>
+                                                <constraint firstItem="mWo-TT-3u0" firstAttribute="trailing" secondItem="X7d-Ds-k3F" secondAttribute="trailingMargin" constant="10" id="QG3-Qa-7Tt"/>
+                                                <constraint firstAttribute="bottom" secondItem="ryS-iW-3gl" secondAttribute="bottom" constant="10" id="Ua8-By-fCo"/>
+                                                <constraint firstItem="mWo-TT-3u0" firstAttribute="top" secondItem="X7d-Ds-k3F" secondAttribute="topMargin" constant="10" id="gpb-JT-s7b"/>
+                                                <constraint firstItem="mWo-TT-3u0" firstAttribute="leading" secondItem="X7d-Ds-k3F" secondAttribute="leadingMargin" constant="10" id="rZN-O2-wKZ"/>
+                                                <constraint firstItem="ryS-iW-3gl" firstAttribute="trailing" secondItem="mWo-TT-3u0" secondAttribute="trailing" id="vK3-aB-FnK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="ryS-iW-3gl" id="hki-yO-zzt"/>
+                                            <outlet property="titleLabel" destination="mWo-TT-3u0" id="hMu-Bc-8sf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -504,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cTl-Fi-6JE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4593.75" y="1037.323943661972"/>
+            <point key="canvasLocation" x="4592.753623188406" y="1036.9565217391305"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rpl-kb-fWg">
@@ -544,7 +565,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="242.66666666666666"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgC-BT-2CP">
-                                        <rect key="frame" x="160.66666666666666" y="50" width="93" height="44.333333333333343"/>
+                                        <rect key="frame" x="168" y="50" width="78" height="48.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="38"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -568,13 +589,13 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCW-dh-sVH" userLabel="Stack View Container">
-                                <rect key="frame" x="20" y="313.33333333333331" width="374" height="44"/>
+                                <rect key="frame" x="20" y="313.33333333333331" width="374" height="47"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-qe-AAl">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="47"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-O9-HrO">
-                                                <rect key="frame" x="0.0" y="0.0" width="186" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="47"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <state key="normal" title="PROFILE">
@@ -585,7 +606,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkj-d2-6lu">
-                                                <rect key="frame" x="188" y="0.0" width="186" height="44"/>
+                                                <rect key="frame" x="188" y="0.0" width="186" height="47"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <state key="normal" title="HOMEWORK">
@@ -608,31 +629,31 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-oh-req" userLabel="Profile View Container">
-                                <rect key="frame" x="35" y="362.33333333333326" width="344" height="363.66666666666674"/>
+                                <rect key="frame" x="35" y="365.33333333333326" width="344" height="360.66666666666674"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="xbc-mU-GLd">
-                                        <rect key="frame" x="17.333333333333343" y="9.9999999999999929" width="309.33333333333326" height="111.33333333333331"/>
+                                        <rect key="frame" x="17.333333333333343" y="9.9999999999999929" width="309.33333333333326" height="119.33333333333331"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ID-96-YkZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="68.333333333333329" height="23.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="25.333333333333332"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
                                                 <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBe-NS-g1S">
-                                                <rect key="frame" x="0.0" y="29.333333333333371" width="122.66666666666667" height="23.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="31.333333333333371" width="101.66666666666667" height="25.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Lesson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QE-HZ-ztb" userLabel="Next Lesson">
-                                                <rect key="frame" x="0.0" y="58.666666666666693" width="112" height="23.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="62.666666666666693" width="98.333333333333329" height="25.333333333333336"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
                                                 <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYV-UA-XmT" userLabel="Next Lesson Label">
-                                                <rect key="frame" x="0.0" y="88" width="122.66666666666667" height="23.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="94" width="101.66666666666667" height="25.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -648,7 +669,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXM-ee-x1Q" userLabel="Homework View Container">
-                                <rect key="frame" x="35" y="375.33333333333326" width="344" height="363.66666666666674"/>
+                                <rect key="frame" x="35" y="378.33333333333326" width="344" height="360.66666666666674"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Homework..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-jH-0Bu">
                                         <rect key="frame" x="0.0" y="0.0" width="344" height="17"/>
@@ -660,7 +681,7 @@
                                         </connections>
                                     </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
-                                        <rect key="frame" x="0.0" y="17" width="344" height="346.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="17" width="344" height="343.66666666666669"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
@@ -672,7 +693,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
-                                                            <rect key="frame" x="0.0" y="11.333333333333336" width="250" height="21"/>
+                                                            <rect key="frame" x="0.0" y="11.333333333333336" width="344" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -774,7 +795,7 @@
                 <navigationController storyboardIdentifier="Students" automaticallyAdjustsScrollViewInsets="NO" id="iGm-KU-S2o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="oYs-o3-r0t">
-                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">

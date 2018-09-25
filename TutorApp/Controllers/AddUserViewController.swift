@@ -103,7 +103,6 @@ class AddUserViewController: UIViewController {
             DispatchQueue.main.async {
                 self.activeUser.current = returnedUser
                 self.activeUser.save()
-                self.activityIndicator.stopAnimating()
                 self.performSegue(withIdentifier: self.activeUser.currentCategory.segueID(), sender: self)
             }
         }
@@ -122,7 +121,6 @@ class AddUserViewController: UIViewController {
     // MARK : - Actions
     
     @objc func saveButtonTapped(_ sender: UIButton) {
-        setupActivityIndicator()
         createUser()
     }
     
