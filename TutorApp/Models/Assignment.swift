@@ -9,10 +9,18 @@
 import Foundation
 
 class Assignment {
-    
+  
+    var assignmentTitle: String
     var assignmentDescription: String
+    var expanded: Bool = false
     
-    init(assignmentDescription: String) {
+    init(assignmentTitle: String, assignmentDescription: String) {
+        self.assignmentTitle = assignmentTitle
         self.assignmentDescription = assignmentDescription
+    }
+  
+    init(assignmentTitle: String) {
+      self.assignmentTitle = assignmentTitle
+      self.assignmentDescription = ""
     }
 }
