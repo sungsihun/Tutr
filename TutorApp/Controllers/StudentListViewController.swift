@@ -16,7 +16,7 @@ class StudentListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-  
+    
     // MARK: - Properties
     
     
@@ -29,10 +29,6 @@ class StudentListViewController: UIViewController {
         super.viewDidLoad()
         setupSpinner()
         setupUI()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getTeacher { (success) in
             CloudKitManager.fetchStudents() { (students) in
                 DispatchQueue.main.async {
@@ -43,6 +39,10 @@ class StudentListViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     // MARK: - Action Methods
@@ -89,12 +89,12 @@ class StudentListViewController: UIViewController {
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
-//        
-//        if filterBy == "Name" {
-//            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
-//        } else {
-//            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
-//        }
+        //
+        //        if filterBy == "Name" {
+        //            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        //        } else {
+        //            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
+        //        }
         
         self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
@@ -112,18 +112,20 @@ class StudentListViewController: UIViewController {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
         
-    
+        
         if let filterString = userDefaults.string(forKey: "filterBy") {
             setupTableView(filterBy: filterString)
         }
     }
-  
+    
     private func setupSpinner() {
-      self.spinner.startAnimating()
-      self.tableView.isHidden = true
+        self.spinner.startAnimating()
+        self.tableView.isHidden = true
     }
     
     // MARK: - Segue
+    
+    var indexPathForSelectedRow: IndexPath? = nil
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addStudent" {
@@ -132,7 +134,8 @@ class StudentListViewController: UIViewController {
             controller.delegate = self
         }
         
-        if let index: IndexPath = tableView.indexPathForSelectedRow {
+        if let index = tableView.indexPathForSelectedRow {
+            
             if segue.identifier == "showDetail" {
                 let detailVC = segue.destination as! StudentDetailViewController
                 detailVC.student = self.students[index.row]
@@ -202,20 +205,24 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
 extension StudentListViewController: AddStudentViewControllerDelegate {
     
     func add(studentViewController controller: AddStudentViewController, student: Student) {
-        students.append(student)
-        
         let currentTeacher = ActiveUser.shared.current as! Teacher
         CloudKitManager.addStudent(student, to: currentTeacher) { (records) in
             guard let records = records else { fatalError() }
             for record in records {
                 if record.recordType == "Teachers" {
                     currentTeacher.record = record
+                } else if record.recordType == "Students" {
+                    guard let newStudent = Student(record) else { fatalError() }
+                    self.students.append(newStudent)
                 }
             }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.tableView.isHidden = false
+                self.spinner.stopAnimating()
+            }
         }
-        tableView.reloadData()
-        self.tableView.isHidden = false
-        self.spinner.stopAnimating()
+        
     }
     
 }

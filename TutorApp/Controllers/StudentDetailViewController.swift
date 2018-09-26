@@ -57,9 +57,7 @@ class StudentDetailViewController: UIViewController {
         setupNotificationCenter()
     }
   
- 
-  
-    override func viewWillDisappear(_ animated: Bool) {
+     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
   
@@ -146,7 +144,7 @@ class StudentDetailViewController: UIViewController {
             textField.text = self.student.assignments[indexPath.row].assignmentDescription
         }
       
-        let dismiss = UIAlertAction(title: "Dismiss", style: .destructive) { (action:UIAlertAction!) in print("Cancel button tapped") }
+        let dismiss = UIAlertAction(title: "Dismiss", style: .destructive)
       
         alert.addAction(dismiss)
         alert.addAction(edit)
@@ -166,7 +164,6 @@ class StudentDetailViewController: UIViewController {
             if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
                 addAssignmentVC.delegate = self
                 addAssignmentVC.modalPresentationStyle = .overFullScreen
-//                self.navigationController?.isNavigationBarHidden = true
             }
         }
     }
@@ -184,7 +181,7 @@ extension StudentDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
       
         let assignment = student.assignments[indexPath.row]
         cell.configureCellWith(assignment: assignment)
@@ -204,14 +201,7 @@ extension StudentDetailViewController: UITableViewDelegate {
             assignmentsTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//      
-//        if editingStyle == .delete {
-//            student.assignments.remove(at: indexPath.row)
-//            homeworkTableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-  
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.student.assignments.remove(at: indexPath.row)
@@ -309,11 +299,7 @@ extension StudentDetailViewController: AddAssignmentControllerDelegate {
         assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
         CloudKitManager.add(assignment: newAssignment, from: teacher, to: student) { (records) in
             guard let records = records else { fatalError() }
-            for record in records {
-                if record.recordType == "Students" {
-                    self.student.record = record
-                }
-            }
+            self.student.record = records.filter { $0.recordType == "Students" }.first!
             DispatchQueue.main.async {
                 self.assignmentsTableView.reloadData()
             }

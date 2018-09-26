@@ -9,7 +9,7 @@
 
 import UIKit
 
-class HomeworkListViewController: UIViewController {
+class AssignmentListViewController: UIViewController {
   
     // MARK: - Outlets
   
@@ -36,7 +36,7 @@ class HomeworkListViewController: UIViewController {
 
 // MARK: - Table View Data Source
 
-extension HomeworkListViewController: UITableViewDataSource {
+extension AssignmentListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assignments.count
     }
@@ -55,7 +55,7 @@ extension HomeworkListViewController: UITableViewDataSource {
 
 // MARK: - Table View Delegate
 
-extension HomeworkListViewController: UITableViewDelegate {
+extension AssignmentListViewController: UITableViewDelegate {
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
