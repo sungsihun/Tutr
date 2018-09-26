@@ -29,7 +29,6 @@ class StudentDetailViewController: UIViewController {
     
     @IBOutlet weak var homeworkView: UIView!
     @IBOutlet weak var assignmentsTableView: UITableView!
-    @IBOutlet weak var addHomeworkTextfield: UITextField!
     
     // MARK: - Action Methods
     
@@ -53,7 +52,6 @@ class StudentDetailViewController: UIViewController {
         super.viewDidLoad()
         loadStudent()
         setupUI()
-        setupGestureRecogniser()
         setupNotificationCenter()
     }
   
@@ -75,7 +73,6 @@ class StudentDetailViewController: UIViewController {
     }
     
     private func toggle() {
-        handleTap()
         
         studentDetailsButton.isSelected = !studentDetailsButton.isSelected
         studentHomeworkButton.isSelected = !studentHomeworkButton.isSelected
@@ -105,21 +102,11 @@ class StudentDetailViewController: UIViewController {
         // MARK: - Table View
         
         assignmentsTableView.tableFooterView = UIView(frame: .zero)
-      
-        // MARK: - Text Field
         
-        addHomeworkTextfield.delegate = self
     
     }
     
-    private func setupGestureRecogniser() {
-        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        view.addGestureRecognizer(tapGestureRecogniser)
-    }
-    
-    @objc private func handleTap() {
-        activeTextField.resignFirstResponder()
-    }
+
   
     func setupAlert(indexPath: IndexPath) {
         let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: .alert)
@@ -218,7 +205,8 @@ extension StudentDetailViewController: UITableViewDelegate {
         return [delete, edit]
     }
   
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
         cell.toggle()
         tableView.reloadData()
     }
@@ -247,7 +235,6 @@ extension StudentDetailViewController: UITextFieldDelegate {
         
         assignmentsTableView.reloadData()
         textField.resignFirstResponder()
-        addHomeworkTextfield.resignFirstResponder()
         return true
     }
     

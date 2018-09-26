@@ -453,7 +453,7 @@
                 <navigationController storyboardIdentifier="Teachers" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
-                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -510,13 +510,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCW-dh-sVH" userLabel="Stack View Container">
                                 <rect key="frame" x="20" y="313.33333333333331" width="374" height="36.666666666666686"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-qe-AAl">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-qe-AAl">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="36.666666666666664"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-O9-HrO">
-                                                <rect key="frame" x="0.0" y="0.0" width="186" height="36.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="36.666666666666664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="24"/>
+                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="PROFILE">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -525,10 +526,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkj-d2-6lu">
-                                                <rect key="frame" x="188" y="0.0" width="186" height="36.666666666666664"/>
+                                                <rect key="frame" x="187.66666666666663" y="0.0" width="186.33333333333337" height="36.666666666666664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="24"/>
-                                                <state key="normal" title="ASSIGNMENT">
+                                                <state key="normal" title="ASSIGNMENTS">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -666,15 +667,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXM-ee-x1Q" userLabel="Homework View Container">
                                 <rect key="frame" x="35" y="368" width="344" height="358"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Homework..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-jH-0Bu">
-                                        <rect key="frame" x="0.0" y="0.0" width="344" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="fPk-rI-zmh" id="Ykq-56-93i"/>
-                                        </connections>
-                                    </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
                                         <rect key="frame" x="0.0" y="17" width="344" height="341"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -745,13 +737,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5Bu-3V-bJQ" secondAttribute="trailing" constant="10" id="C6N-D5-hRW"/>
-                                    <constraint firstItem="pam-Ir-R1K" firstAttribute="top" secondItem="Yu7-jH-0Bu" secondAttribute="bottom" id="C7P-Ly-PGm"/>
                                     <constraint firstItem="pam-Ir-R1K" firstAttribute="leading" secondItem="kXM-ee-x1Q" secondAttribute="leading" id="Jzs-PN-7Yo"/>
                                     <constraint firstAttribute="bottom" secondItem="pam-Ir-R1K" secondAttribute="bottom" id="M0f-sb-c8z"/>
                                     <constraint firstAttribute="bottom" secondItem="5Bu-3V-bJQ" secondAttribute="bottom" constant="20" id="MEQ-LC-IPb"/>
-                                    <constraint firstAttribute="trailing" secondItem="Yu7-jH-0Bu" secondAttribute="trailing" id="R81-ns-CLU"/>
-                                    <constraint firstItem="Yu7-jH-0Bu" firstAttribute="leading" secondItem="kXM-ee-x1Q" secondAttribute="leading" id="TNj-f7-LKe"/>
-                                    <constraint firstItem="Yu7-jH-0Bu" firstAttribute="top" secondItem="kXM-ee-x1Q" secondAttribute="top" id="WLz-7j-6o6"/>
+                                    <constraint firstItem="pam-Ir-R1K" firstAttribute="top" secondItem="kXM-ee-x1Q" secondAttribute="top" constant="17" id="XhZ-aI-CM6"/>
                                     <constraint firstAttribute="trailing" secondItem="pam-Ir-R1K" secondAttribute="trailing" id="wU3-qc-eAn"/>
                                 </constraints>
                             </view>
@@ -784,7 +773,6 @@
                         <viewLayoutGuide key="safeArea" id="k0h-gJ-Q4b"/>
                     </view>
                     <connections>
-                        <outlet property="addHomeworkTextfield" destination="Yu7-jH-0Bu" id="Faa-xy-Z2K"/>
                         <outlet property="assignmentsTableView" destination="pam-Ir-R1K" id="mKr-KX-p43"/>
                         <outlet property="emailLabel" destination="PYV-UA-XmT" id="O9t-Wx-JaW"/>
                         <outlet property="fullNameLabel" destination="aso-17-loi" id="aDc-Cg-EcP"/>
