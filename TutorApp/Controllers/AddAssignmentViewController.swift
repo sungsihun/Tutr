@@ -156,4 +156,13 @@ extension AddAssignmentViewController: UITextViewDelegate {
             textView.textColor = UIColor.lightGray
         }
     }
+  
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+      
+        // dismiss keyboard when done button tapped
+        if (text == "\n") {
+            textView.resignFirstResponder()
+        }
+        return true
+    }
 }
