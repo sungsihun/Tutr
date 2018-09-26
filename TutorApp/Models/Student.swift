@@ -14,6 +14,5 @@ class Student: User {
     
     
     var assignments = [Assignment]()
-    
-    
+
 }

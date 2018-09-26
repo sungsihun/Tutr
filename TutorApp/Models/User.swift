@@ -18,7 +18,7 @@ class User {
     var image: UIImage?
     
     
-    init(name: String, subject: String, image: UIImage? = #imageLiteral(resourceName: "defaultUser"), record: CKRecord? = nil) {
+    init(name: String, subject: String, image: UIImage? = UIImage(named: "defaultUser"), record: CKRecord? = nil) {
         self.name = name
         self.subject = subject
         self.image = image

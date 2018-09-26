@@ -47,11 +47,6 @@ class CloudKitManager {
         }
     }
     
-    
-    
-    
-    
-    
     //  Requesting Permission
     
     static func requestPermission(completion: @escaping (Bool) -> ()) {
@@ -64,12 +59,6 @@ class CloudKitManager {
         }
     }
     
-    
-    
-    
-    
-    
-    
     //  Saving Records
     
     private static func save(_ records: [CKRecord], completionHandler: ((CKRecord?) -> ())?) {
@@ -80,11 +69,6 @@ class CloudKitManager {
         }
         db.add(op)
     }
-    
-    
-    
-    
-    
     
     //  Save User Details
     
@@ -106,6 +90,8 @@ class CloudKitManager {
                 userRecord["image"] = CKAsset(fileURL: url)
             }
             
+
+            
             
             save([userRecord]) { savedUserRecord in
                 guard let savedUserRecord = savedUserRecord else { fatalError("Could not save") }
@@ -123,10 +109,6 @@ class CloudKitManager {
             }
         }
     }
-    
-    
-    
-    
     
     
     //  Get Name Of User
@@ -150,7 +132,6 @@ class CloudKitManager {
     
     //  Get teacher
 
-    
     static private func getTeacherRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         let op = CKFetchRecordsOperation(recordIDs: [id])
         op.queuePriority = .veryHigh
@@ -170,10 +151,7 @@ class CloudKitManager {
         }
     }
     
-    
-    
     // Get record ID
-    
     
     static func getCurrentUserRecordID(completion: @escaping (CKRecordID?) -> ()) {
         container.fetchUserRecordID { (recordID, error) in
@@ -181,44 +159,7 @@ class CloudKitManager {
             completion(recordID)
         }
     }
-    
-    
-    // Get teacher or students record
-    
-    private static func getCurrentUserRecordOfType(_ type: ActiveUser.Category, completion: @escaping (CKRecord?) -> ()) {
-        
-        getCurrentUserRecordID { (recordID) in
-            guard let recordID = recordID else { fatalError("Could not get recordID") }
-            
-            // Wrapper around the recordID
-            
-            let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
-            let query = CKQuery(recordType: type.rawValue, predicate: predicate)
-            
-            self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                if let error = error { print(#line, error.localizedDescription); return }
-                guard let record = records?.first else {
-                    print("No record exists")
-                    completion(nil)
-                    return
-                }
-                completion(record)
-            })
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     // MARK: - STUDENTS
@@ -255,7 +196,6 @@ class CloudKitManager {
             completion(newTeacherRecord)
         }
     }
-    
     
     // Fetch students
     
@@ -353,6 +293,10 @@ class CloudKitManager {
     }
     
     
+    // MARK: - Assignments
+    
+    
+    
     
     // MARK: - HELPERS
     
@@ -382,6 +326,30 @@ class CloudKitManager {
         db.fetch(withRecordID: id) { (user, error) in
             if let error = error { print(error.localizedDescription) }
             completion(user)
+        }
+    }
+    
+    // Get teacher or students record
+    
+    private static func getCurrentUserRecordOfType(_ type: ActiveUser.Category, completion: @escaping (CKRecord?) -> ()) {
+        
+        getCurrentUserRecordID { (recordID) in
+            guard let recordID = recordID else { fatalError("Could not get recordID") }
+            
+            // Wrapper around the recordID
+            
+            let predicate = NSPredicate(format: "userRef = %@", recordID.recordName)
+            let query = CKQuery(recordType: type.rawValue, predicate: predicate)
+            
+            self.db.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error { print(#line, error.localizedDescription); return }
+                guard let record = records?.first else {
+                    print("No record exists")
+                    completion(nil)
+                    return
+                }
+                completion(record)
+            })
         }
     }
     
