@@ -28,14 +28,9 @@ class AddAssignmentViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextFields()
       
-      
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
-      
-        UIView.animate(withDuration: 2.0) {
-            self.view.layoutIfNeeded()
-        }
+        setupTextField()
+        setupTextView()
     }
   
     override func viewDidLayoutSubviews() {
@@ -80,14 +75,20 @@ class AddAssignmentViewController: UIViewController {
   
     // MARK: - Custom Methods
   
-    private func setupTextFields() {
+    private func setupTextField() {
         addButton.isEnabled = false
         addButton.backgroundColor = UIColor.lightGray
       
+        // set text field placeholder color
+        titleTextField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
       
         titleTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
-//        descriptionTextView.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
-      
+    }
+  
+    private func setupTextView() {
+        descriptionTextView.text = "Description"
+        descriptionTextView.textColor = UIColor.lightGray
+        descriptionTextView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
     }
 }
 
@@ -104,7 +105,7 @@ extension AddAssignmentViewController: UITextFieldDelegate {
         let title = titleTextField.text ?? ""
         let description = descriptionTextView.text ?? ""
       
-        if !(title.isEmpty || description.isEmpty) {
+        if !(title.isEmpty || description.isEmpty) && !(descriptionTextView.text == "Description") {
             addButton.isEnabled = true
             addButton.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
         } else {
@@ -129,5 +130,38 @@ extension AddAssignmentViewController {
   
     @objc func keyboardWillHide(_ notification: Notification) {
         self.view.frame.origin.y = 0
+    }
+}
+
+// MARK: - Text View Delegate
+
+extension AddAssignmentViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        checkTextField()
+    }
+  
+    // text view placeholder
+  
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
+        }
+    }
+  
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Description"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+  
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+      
+        // dismiss keyboard when done button tapped
+        if (text == "\n") {
+            textView.resignFirstResponder()
+        }
+        return true
     }
 }

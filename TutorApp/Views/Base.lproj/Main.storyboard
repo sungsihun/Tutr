@@ -675,34 +675,45 @@
                                             <outlet property="delegate" destination="fPk-rI-zmh" id="Ykq-56-93i"/>
                                         </connections>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
                                         <rect key="frame" x="0.0" y="17" width="344" height="341"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeworkCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="344" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="homeworkCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1" width="344" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4j-xC-sPD" id="S2C-YE-c3s">
                                                     <rect key="frame" x="0.0" y="0.0" width="344" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
-                                                            <rect key="frame" x="0.0" y="11.333333333333336" width="344" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="10" y="5" width="54" height="3.3333333333333339"/>
+                                                            <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="25"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
+                                                            <rect key="frame" x="10" y="13.333333333333334" width="324" height="25.333333333333329"/>
+                                                            <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="dNY-YP-vBc" firstAttribute="centerY" secondItem="S2C-YE-c3s" secondAttribute="centerY" id="7C9-Kb-bqw"/>
-                                                        <constraint firstItem="dNY-YP-vBc" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" id="S1A-sG-ubW"/>
-                                                        <constraint firstAttribute="trailing" secondItem="dNY-YP-vBc" secondAttribute="trailing" id="f2D-Y1-G7U"/>
+                                                        <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="7eZ-uj-tBr"/>
+                                                        <constraint firstItem="dNY-YP-vBc" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="He5-Fr-rai"/>
+                                                        <constraint firstItem="dNY-YP-vBc" firstAttribute="top" secondItem="S2C-YE-c3s" secondAttribute="top" constant="5" id="JnS-8M-tfM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="45o-cw-sIG" secondAttribute="bottom" constant="5" id="Up9-eV-2o3"/>
+                                                        <constraint firstItem="45o-cw-sIG" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="mGm-Zp-q9M"/>
+                                                        <constraint firstAttribute="trailing" secondItem="45o-cw-sIG" secondAttribute="trailing" constant="10" id="pKt-sw-0mU"/>
+                                                        <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="sbl-37-ZXL"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="assignmentDescLabel" destination="dNY-YP-vBc" id="iHW-JX-DA8"/>
+                                                    <outlet property="descriptionLabel" destination="45o-cw-sIG" id="a0p-HU-xc6"/>
+                                                    <outlet property="titleLabel" destination="dNY-YP-vBc" id="peF-A2-peb"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -789,7 +800,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WYp-8O-4uX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3739" y="-592"/>
+            <point key="canvasLocation" x="3737.68115942029" y="-592.66304347826087"/>
         </scene>
         <!--Add Assignment View Controller-->
         <scene sceneID="oV6-3b-Zkh">
@@ -840,7 +851,7 @@
                                             <constraint firstAttribute="width" secondItem="1KZ-aY-Wru" secondAttribute="height" multiplier="1:1" id="B7C-h0-ANs"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaW-6D-Cvs">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaW-6D-Cvs">
                                         <rect key="frame" x="14.666666666666657" y="92.000000000000028" width="260.66666666666674" height="26"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -850,12 +861,15 @@
                                             <outlet property="delegate" destination="EgX-TY-p5Q" id="sKo-xK-VXQ"/>
                                         </connections>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-mf-83l">
+                                    <textView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-mf-83l">
                                         <rect key="frame" x="14.666666666666657" y="133.00000000000003" width="260.66666666666674" height="78"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="EgX-TY-p5Q" id="hqV-I0-XXp"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -967,29 +981,30 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="studentAssignmentCell" rowHeight="44" id="oPS-Vf-H01" customClass="StudentAssignmentCell" customModule="TutorApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="331.33333333333326" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oPS-Vf-H01" id="Q4C-1g-rpP">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oPS-Vf-H01" id="Q4C-1g-rpP">
                                             <rect key="frame" x="0.0" y="0.0" width="331.33333333333326" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLX-ec-esc">
-                                                    <rect key="frame" x="7" y="20" width="64.666666666666671" height="38"/>
+                                                    <rect key="frame" x="10" y="10" width="64.666666666666671" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="30"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qz-tu-ByS">
-                                                    <rect key="frame" x="7" y="63.666666666666671" width="45.333333333333336" height="28"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qz-tu-ByS">
+                                                    <rect key="frame" x="10" y="15.000000000000002" width="311.33333333333331" height="18.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="3qz-tu-ByS" firstAttribute="top" secondItem="OLX-ec-esc" secondAttribute="bottom" constant="5.6666666666667851" id="5VU-yc-pmB"/>
-                                                <constraint firstItem="3qz-tu-ByS" firstAttribute="leading" secondItem="Q4C-1g-rpP" secondAttribute="leading" constant="7" id="E6l-06-rhq"/>
-                                                <constraint firstItem="OLX-ec-esc" firstAttribute="top" secondItem="Q4C-1g-rpP" secondAttribute="top" constant="19.999999999999886" id="IcL-Yb-ZN0"/>
-                                                <constraint firstAttribute="bottom" secondItem="3qz-tu-ByS" secondAttribute="bottom" constant="20.666666666666671" id="PDp-7p-TlJ"/>
-                                                <constraint firstItem="OLX-ec-esc" firstAttribute="leading" secondItem="Q4C-1g-rpP" secondAttribute="leading" constant="7" id="Z0N-XB-nth"/>
+                                                <constraint firstItem="3qz-tu-ByS" firstAttribute="top" secondItem="OLX-ec-esc" secondAttribute="bottom" constant="5" id="5VU-yc-pmB"/>
+                                                <constraint firstItem="3qz-tu-ByS" firstAttribute="leading" secondItem="Q4C-1g-rpP" secondAttribute="leading" constant="10" id="E6l-06-rhq"/>
+                                                <constraint firstItem="OLX-ec-esc" firstAttribute="top" secondItem="Q4C-1g-rpP" secondAttribute="top" constant="10" id="IcL-Yb-ZN0"/>
+                                                <constraint firstAttribute="bottom" secondItem="3qz-tu-ByS" secondAttribute="bottom" constant="10" id="PDp-7p-TlJ"/>
+                                                <constraint firstItem="OLX-ec-esc" firstAttribute="leading" secondItem="Q4C-1g-rpP" secondAttribute="leading" constant="10" id="Z0N-XB-nth"/>
+                                                <constraint firstAttribute="trailing" secondItem="3qz-tu-ByS" secondAttribute="trailing" constant="10" id="zHh-fd-A9M"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

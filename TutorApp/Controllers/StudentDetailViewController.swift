@@ -56,12 +56,13 @@ class StudentDetailViewController: UIViewController {
         setupGestureRecogniser()
         setupNotificationCenter()
     }
-
+  
+ 
   
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
-    
+  
     // MARK: - Custom Methods
 
     private func loadStudent() {
@@ -92,7 +93,6 @@ class StudentDetailViewController: UIViewController {
     private func setupUI() {
         
         // MARK: - Navigation Bar
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
       
@@ -130,12 +130,21 @@ class StudentDetailViewController: UIViewController {
             let textField = alert.textFields![0] as UITextField
             self.student.assignments[indexPath.row].assignmentTitle = textField.text!
             self.assignmentsTableView.reloadData()
+            let titleTextField = alert.textFields![0] as UITextField
+            let descriptionTextField = alert.textFields![1] as UITextField
+          
+            self.student.assignments[indexPath.row].assignmentTitle = titleTextField.text!
+            self.student.assignments[indexPath.row].assignmentDescription = descriptionTextField.text!
+          
+            self.assignmentsTableView.reloadData()
         }
       
         alert.addTextField { (textField) in
             textField.text = self.student.assignments[indexPath.row].assignmentTitle
         }
-      
+        alert.addTextField { (textField) in
+            textField.text = self.student.assignments[indexPath.row].assignmentDescription
+        }
       
         let dismiss = UIAlertAction(title: "Dismiss", style: .destructive) { (action:UIAlertAction!) in print("Cancel button tapped") }
       
@@ -155,9 +164,9 @@ class StudentDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addAssignmentSegue" {
             if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
-                self.navigationItem.leftBarButtonItem?.isEnabled = false
                 addAssignmentVC.delegate = self
                 addAssignmentVC.modalPresentationStyle = .overFullScreen
+//                self.navigationController?.isNavigationBarHidden = true
             }
         }
     }
@@ -176,7 +185,9 @@ extension StudentDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
-        cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentTitle
+      
+        let assignment = student.assignments[indexPath.row]
+        cell.configureCellWith(assignment: assignment)
       
         return cell
     }
@@ -193,6 +204,13 @@ extension StudentDetailViewController: UITableViewDelegate {
             assignmentsTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//      
+//        if editingStyle == .delete {
+//            student.assignments.remove(at: indexPath.row)
+//            homeworkTableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
   
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
@@ -200,13 +218,18 @@ extension StudentDetailViewController: UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
       
-        let share = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             self.setupAlert(indexPath: indexPath)
         }
       
-        share.backgroundColor = UIColor.blue
+        edit.backgroundColor = UIColor.blue
       
-        return [delete, share]
+        return [delete, edit]
+    }
+  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
+        cell.toggle()
+        tableView.reloadData()
     }
 }
 
