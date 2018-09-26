@@ -675,27 +675,27 @@
                                             <outlet property="delegate" destination="fPk-rI-zmh" id="Ykq-56-93i"/>
                                         </connections>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
                                         <rect key="frame" x="0.0" y="17" width="344" height="341"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeworkCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="344" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="homeworkCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1" width="344" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4j-xC-sPD" id="S2C-YE-c3s">
                                                     <rect key="frame" x="0.0" y="0.0" width="344" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
-                                                            <rect key="frame" x="10" y="5" width="54" height="4.3333333333333321"/>
+                                                            <rect key="frame" x="10" y="5" width="54" height="3.3333333333333339"/>
                                                             <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="25"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
-                                                            <rect key="frame" x="10" y="14.333333333333334" width="41" height="24.333333333333329"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
+                                                            <rect key="frame" x="10" y="13.333333333333334" width="324" height="25.333333333333329"/>
                                                             <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -707,6 +707,7 @@
                                                         <constraint firstItem="dNY-YP-vBc" firstAttribute="top" secondItem="S2C-YE-c3s" secondAttribute="top" constant="5" id="JnS-8M-tfM"/>
                                                         <constraint firstAttribute="bottom" secondItem="45o-cw-sIG" secondAttribute="bottom" constant="5" id="Up9-eV-2o3"/>
                                                         <constraint firstItem="45o-cw-sIG" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="mGm-Zp-q9M"/>
+                                                        <constraint firstAttribute="trailing" secondItem="45o-cw-sIG" secondAttribute="trailing" constant="10" id="pKt-sw-0mU"/>
                                                         <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="sbl-37-ZXL"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -903,6 +904,7 @@
                             <outletCollection property="gestureRecognizers" destination="WF5-tl-5D2" appends="YES" id="w0i-zc-zhi"/>
                         </connections>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="addButton" destination="9fH-a1-6xf" id="kPV-Ol-UY3"/>
                         <outlet property="descriptionTextView" destination="ufg-mf-83l" id="5bx-CN-mUX"/>
@@ -989,8 +991,8 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qz-tu-ByS">
-                                                    <rect key="frame" x="10.000000000000004" y="15" width="45.333333333333343" height="18.666666666666671"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qz-tu-ByS">
+                                                    <rect key="frame" x="10" y="15.000000000000002" width="311.33333333333331" height="18.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1002,6 +1004,7 @@
                                                 <constraint firstItem="OLX-ec-esc" firstAttribute="top" secondItem="Q4C-1g-rpP" secondAttribute="top" constant="10" id="IcL-Yb-ZN0"/>
                                                 <constraint firstAttribute="bottom" secondItem="3qz-tu-ByS" secondAttribute="bottom" constant="10" id="PDp-7p-TlJ"/>
                                                 <constraint firstItem="OLX-ec-esc" firstAttribute="leading" secondItem="Q4C-1g-rpP" secondAttribute="leading" constant="10" id="Z0N-XB-nth"/>
+                                                <constraint firstAttribute="trailing" secondItem="3qz-tu-ByS" secondAttribute="trailing" constant="10" id="zHh-fd-A9M"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

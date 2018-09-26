@@ -21,7 +21,7 @@ class HomeworkListViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        let assignment = Assignment(assignmentTitle: "My title", assignmentDescription: "Desc")
+        let assignment = Assignment(assignmentTitle: "My title", assignmentDescription: "loooooooooooooooong descriptionnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
         let assignment2 = Assignment(assignmentTitle: "Another", assignmentDescription: "Again")
         assignments.append(assignment2)
         assignments.append(assignment)
@@ -49,6 +49,8 @@ extension HomeworkListViewController: UITableViewDataSource {
       
         return cell
     }
+  
+
 }
 
 // MARK: - Table View Delegate
