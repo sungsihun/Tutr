@@ -56,13 +56,10 @@ extension HomeworkListViewController: UITableViewDataSource {
 
 extension HomeworkListViewController: UITableViewDelegate {
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
-    cell.toggle()
-    tableView.reloadData()
-  }
-  
-  
-  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
+        cell.toggle()
+        tableView.reloadData()
+    }
 }
 

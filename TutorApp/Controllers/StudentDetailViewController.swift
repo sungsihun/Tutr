@@ -20,9 +20,11 @@ class StudentDetailViewController: UIViewController {
     // MARK: - Details Viewable Outlets
     
     @IBOutlet weak var profileView: UIView!
-    @IBOutlet weak var nextLessonLabel: UILabel!
+    @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
-    
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+  
     // MARK: - Homework Viewable Outlets
     
     @IBOutlet weak var homeworkView: UIView!
@@ -65,7 +67,7 @@ class StudentDetailViewController: UIViewController {
         
         nameLabel.text = student.name
         subjectLabel.text = student.subject
-        
+        fullNameLabel.text = student.name
         studentImageView.image = student.image
     }
     
