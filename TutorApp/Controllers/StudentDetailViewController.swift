@@ -150,12 +150,13 @@ class StudentDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
   
-
-
+    //MARK: - Segue
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addAssignmentSegue" {
             if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
-              addAssignmentVC.delegate = self
+                self.navigationItem.leftBarButtonItem?.isEnabled = false
+                addAssignmentVC.delegate = self
                 addAssignmentVC.modalPresentationStyle = .overFullScreen
             }
         }
@@ -223,7 +224,6 @@ extension StudentDetailViewController: UITextFieldDelegate {
         
         // Insert a new row at the top
         
-        
         let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
         student.assignments.insert(newHomeworkItem, at: 0)
         
@@ -260,6 +260,7 @@ extension StudentDetailViewController {
     }
 }
 
+// MARK: - AddAssignmentController Delegate Methods
 
 extension StudentDetailViewController: AddAssignmentControllerDelegate {
   
@@ -276,5 +277,12 @@ extension StudentDetailViewController: AddAssignmentControllerDelegate {
                 subview.removeFromSuperview()
             }
         }
+    }
+  
+    func addAssignment(newAssignment: Assignment) {
+        student.assignments.insert(newAssignment, at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        homeworkTableView.insertRows(at: [indexPath], with: .automatic)
+        homeworkTableView.reloadData()
     }
 }

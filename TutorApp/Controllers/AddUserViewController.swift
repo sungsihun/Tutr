@@ -20,11 +20,9 @@ class AddUserViewController: UIViewController {
     // MARK: - Properties
     
     let activeUser = ActiveUser.shared
-    
     var user: User! = nil // either teacher or student
     weak var delegate: AddTeacherViewControllerDelegate?
-    
-    
+  
     // MARK : - Outlets
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -85,8 +83,7 @@ class AddUserViewController: UIViewController {
             })
         }
     }
-    
-    
+  
     private func createUser() {
         guard let subject = subjectTextField.text else { fatalError("Must be a subject") }
         let image: UIImage!
@@ -108,18 +105,13 @@ class AddUserViewController: UIViewController {
                 self.performSegue(withIdentifier: self.activeUser.currentCategory.segueID(), sender: self)
             }
         }
-        
-        
     }
-    
-    
+  
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
-    
-    
-    
+  
     // MARK : - Actions
     
     @objc func saveButtonTapped(_ sender: UIButton) {
@@ -129,12 +121,7 @@ class AddUserViewController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
-    
-    
-    
+  
     // MARK: - Setup
     
     private func setupImageView() {
@@ -151,7 +138,6 @@ class AddUserViewController: UIViewController {
         
         subjectTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
         nameTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
-        
     }
     
     private func setupActivityIndicator() {
@@ -174,12 +160,6 @@ class AddUserViewController: UIViewController {
     
 }
 
-
-
-
-
-
-
 // MARK: - Image Picker and Navigation Delegate
 
 extension AddUserViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -199,7 +179,6 @@ extension AddUserViewController: UIImagePickerControllerDelegate, UINavigationCo
         imageView.image = image
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 // MARK: - Text Field
@@ -223,13 +202,6 @@ extension AddUserViewController: UITextFieldDelegate {
         }
     }
 }
-
-
-
-
-
-
-
 
 // MARK: - Gesture Recognisers
 
@@ -285,9 +257,6 @@ extension AddUserViewController {
         alertController.addAction(galleryAction)
         present(alertController, animated: true, completion: nil)
     }
-    
-    
-    
 }
 
 // MARK: - Notification Center Methods

@@ -479,13 +479,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIv-qu-aaF" userLabel="Background View Container">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="246.66666666666666"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="242.66666666666666"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background5" translatesAutoresizingMaskIntoConstraints="NO" id="PfE-hw-t3u">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="246.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="242.66666666666666"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgC-BT-2CP">
-                                        <rect key="frame" x="154.66666666666666" y="43.666666666666664" width="104.66666666666666" height="64.666666666666686"/>
+                                        <rect key="frame" x="154.66666666666666" y="40.000000000000007" width="104.66666666666666" height="64.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="51"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -501,22 +501,22 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uzj-fl-NRd" customClass="RoundImageView" customModule="TutorApp" customModuleProvider="target">
-                                <rect key="frame" x="128.33333333333331" y="141" width="157.33333333333331" height="157.33333333333337"/>
+                                <rect key="frame" x="128.33333333333331" y="136" width="157.33333333333331" height="157.33333333333337"/>
                                 <color key="backgroundColor" red="0.0020097530459999998" green="1" blue="0.14423110259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uzj-fl-NRd" secondAttribute="height" multiplier="1:1" id="gfu-3W-s5A"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCW-dh-sVH" userLabel="Stack View Container">
-                                <rect key="frame" x="20" y="318.33333333333331" width="374" height="47"/>
+                                <rect key="frame" x="20" y="313.33333333333331" width="374" height="36.666666666666686"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-qe-AAl">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="47"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="36.666666666666664"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-O9-HrO">
-                                                <rect key="frame" x="0.0" y="0.0" width="186" height="47"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="36.666666666666664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="24"/>
                                                 <state key="normal" title="PROFILE">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -525,9 +525,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkj-d2-6lu">
-                                                <rect key="frame" x="188" y="0.0" width="186" height="47"/>
+                                                <rect key="frame" x="188" y="0.0" width="186" height="36.666666666666664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="24"/>
                                                 <state key="normal" title="ASSIGNMENT">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -548,71 +548,123 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-oh-req" userLabel="Profile View Container">
-                                <rect key="frame" x="35" y="370.33333333333326" width="344" height="355.66666666666674"/>
+                                <rect key="frame" x="35" y="355" width="344" height="371"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xbc-mU-GLd">
-                                        <rect key="frame" x="17.333333333333343" y="10" width="309.33333333333326" height="307.66666666666669"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r02-bW-bEV" userLabel="Underline View Container">
+                                        <rect key="frame" x="17.333333333333343" y="5" width="309.33333333333326" height="259.66666666666669"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="xbc-mU-GLd">
+                                        <rect key="frame" x="17.333333333333343" y="5" width="309.33333333333326" height="259.66666666666669"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZx-0N-xaM">
-                                                <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="25.333333333333332"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FullName Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aso-17-loi">
-                                                <rect key="frame" x="0.0" y="40.333333333333371" width="104.33333333333333" height="25.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ID-96-YkZ">
-                                                <rect key="frame" x="0.0" y="80.666666666666686" width="61.333333333333336" height="25.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBe-NS-g1S">
-                                                <rect key="frame" x="0.0" y="120.99999999999999" width="91.666666666666671" height="25.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QE-HZ-ztb" userLabel="Next Lesson">
-                                                <rect key="frame" x="0.0" y="161.33333333333331" width="45.666666666666664" height="25.333333333333343"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYV-UA-XmT" userLabel="Next Lesson Label">
-                                                <rect key="frame" x="0.0" y="201.66666666666669" width="79" height="25.333333333333343"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyk-01-bHV" userLabel="Next Lesson">
-                                                <rect key="frame" x="0.0" y="242.00000000000006" width="52" height="25.333333333333314"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-5C-zne">
-                                                <rect key="frame" x="0.0" y="282.33333333333331" width="84.666666666666671" height="25.333333333333314"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="egc-gM-DPG">
+                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="64.333333333333329"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZx-0N-xaM">
+                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="32.333333333333336"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
+                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FullName Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aso-17-loi">
+                                                        <rect key="frame" x="0.0" y="32.333333333333314" width="309.33333333333331" height="32"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-Dj-z16">
+                                                <rect key="frame" x="0.0" y="65.333333333333314" width="309.33333333333331" height="64"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ID-96-YkZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="32"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
+                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBe-NS-g1S">
+                                                        <rect key="frame" x="0.0" y="32" width="309.33333333333331" height="32"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-kz-Eus">
+                                                <rect key="frame" x="0.0" y="130.33333333333331" width="309.33333333333331" height="64.333333333333314"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QE-HZ-ztb" userLabel="Next Lesson">
+                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="32.333333333333336"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
+                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYV-UA-XmT" userLabel="Next Lesson Label">
+                                                        <rect key="frame" x="0.0" y="32.333333333333314" width="309.33333333333331" height="32"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="zoJ-BA-qwe">
+                                                <rect key="frame" x="0.0" y="195.66666666666663" width="309.33333333333331" height="64"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyk-01-bHV" userLabel="Next Lesson">
+                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="32"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
+                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-5C-zne">
+                                                        <rect key="frame" x="0.0" y="32" width="309.33333333333331" height="32"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="0ID-96-YkZ" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="6eQ-TD-Kii"/>
+                                            <constraint firstItem="PYV-UA-XmT" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="BKa-tB-wXa"/>
+                                            <constraint firstItem="yyk-01-bHV" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="Q0g-D8-TOt"/>
+                                            <constraint firstItem="aso-17-loi" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="R3G-Dj-4Hh"/>
+                                            <constraint firstItem="Rvd-5C-zne" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="TBP-4Y-eag"/>
+                                            <constraint firstItem="UBe-NS-g1S" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="hLN-vi-fTF"/>
+                                            <constraint firstItem="pZx-0N-xaM" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="rHR-GE-E0T"/>
+                                            <constraint firstItem="6QE-HZ-ztb" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="uOe-2v-bXM"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="r02-bW-bEV" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="6zK-4G-ycc"/>
+                                    <constraint firstItem="r02-bW-bEV" firstAttribute="centerY" secondItem="xbc-mU-GLd" secondAttribute="centerY" id="JXN-TT-wpk"/>
                                     <constraint firstItem="xbc-mU-GLd" firstAttribute="centerX" secondItem="2Po-oh-req" secondAttribute="centerX" id="Tgj-5R-D0n"/>
                                     <constraint firstItem="xbc-mU-GLd" firstAttribute="width" secondItem="2Po-oh-req" secondAttribute="width" multiplier="0.9" id="VRq-kF-CFl"/>
-                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="top" secondItem="2Po-oh-req" secondAttribute="top" constant="10" id="WDL-4E-eLZ"/>
+                                    <constraint firstItem="r02-bW-bEV" firstAttribute="height" secondItem="xbc-mU-GLd" secondAttribute="height" id="bzm-dF-8Qa"/>
+                                    <constraint firstItem="r02-bW-bEV" firstAttribute="centerX" secondItem="xbc-mU-GLd" secondAttribute="centerX" id="nqb-5o-A3i"/>
+                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="height" secondItem="2Po-oh-req" secondAttribute="height" multiplier="0.7" id="x5L-CN-tAc"/>
+                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="top" secondItem="2Po-oh-req" secondAttribute="top" constant="5" id="zb4-OR-YX2"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXM-ee-x1Q" userLabel="Homework View Container">
-                                <rect key="frame" x="35" y="383.33333333333326" width="344" height="342.66666666666674"/>
+                                <rect key="frame" x="35" y="368" width="344" height="358"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Homework..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-jH-0Bu">
                                         <rect key="frame" x="0.0" y="0.0" width="344" height="17"/>
@@ -624,8 +676,9 @@
                                         </connections>
                                     </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
-                                        <rect key="frame" x="0.0" y="17" width="344" height="325.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="17" width="344" height="341"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeworkCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
@@ -659,12 +712,14 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-3V-bJQ">
-                                        <rect key="frame" x="263" y="262.00000000000006" width="49.666666666666686" height="49.666666666666686"/>
+                                        <rect key="frame" x="272" y="276" width="62" height="62"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Bu-3V-bJQ" secondAttribute="height" multiplier="1:1" id="VGI-kp-cJA"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="add-1"/>
+                                        <state key="normal" title="Button" image="add-desc-selected">
+                                            <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="0"/>
@@ -678,11 +733,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="5Bu-3V-bJQ" secondAttribute="trailing" multiplier="1.1" id="C6N-D5-hRW"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Bu-3V-bJQ" secondAttribute="trailing" constant="10" id="C6N-D5-hRW"/>
                                     <constraint firstItem="pam-Ir-R1K" firstAttribute="top" secondItem="Yu7-jH-0Bu" secondAttribute="bottom" id="C7P-Ly-PGm"/>
                                     <constraint firstItem="pam-Ir-R1K" firstAttribute="leading" secondItem="kXM-ee-x1Q" secondAttribute="leading" id="Jzs-PN-7Yo"/>
                                     <constraint firstAttribute="bottom" secondItem="pam-Ir-R1K" secondAttribute="bottom" id="M0f-sb-c8z"/>
-                                    <constraint firstAttribute="bottom" secondItem="5Bu-3V-bJQ" secondAttribute="bottom" multiplier="1.1" id="MEQ-LC-IPb"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Bu-3V-bJQ" secondAttribute="bottom" constant="20" id="MEQ-LC-IPb"/>
                                     <constraint firstAttribute="trailing" secondItem="Yu7-jH-0Bu" secondAttribute="trailing" id="R81-ns-CLU"/>
                                     <constraint firstItem="Yu7-jH-0Bu" firstAttribute="leading" secondItem="kXM-ee-x1Q" secondAttribute="leading" id="TNj-f7-LKe"/>
                                     <constraint firstItem="Yu7-jH-0Bu" firstAttribute="top" secondItem="kXM-ee-x1Q" secondAttribute="top" id="WLz-7j-6o6"/>
@@ -692,8 +747,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5Bu-3V-bJQ" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.12" id="1nl-1V-aPt"/>
+                            <constraint firstItem="5Bu-3V-bJQ" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.15" id="1nl-1V-aPt"/>
                             <constraint firstItem="k0h-gJ-Q4b" firstAttribute="trailing" secondItem="kXM-ee-x1Q" secondAttribute="trailing" constant="35" id="76G-Ua-x7K"/>
+                            <constraint firstItem="CCW-dh-sVH" firstAttribute="height" secondItem="SBJ-tF-3dc" secondAttribute="height" multiplier="0.05" id="Er3-Wi-ORc"/>
                             <constraint firstItem="CCW-dh-sVH" firstAttribute="top" secondItem="uzj-fl-NRd" secondAttribute="bottom" constant="20" id="F2b-vg-L5J"/>
                             <constraint firstItem="zIv-qu-aaF" firstAttribute="leading" secondItem="k0h-gJ-Q4b" secondAttribute="leading" id="GAo-GN-Fs0"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.38" id="GD8-ug-iZS"/>
@@ -790,47 +846,66 @@
                                         <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="EgX-TY-p5Q" id="sKo-xK-VXQ"/>
+                                        </connections>
                                     </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-mf-83l">
+                                        <rect key="frame" x="14.666666666666657" y="133.00000000000003" width="260.66666666666674" height="78"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="VHg-Rc-yY8" secondAttribute="trailing" id="5Ic-xs-omE"/>
+                                    <constraint firstItem="ufg-mf-83l" firstAttribute="top" secondItem="jaW-6D-Cvs" secondAttribute="bottom" constant="15" id="Bde-QG-Pj7"/>
                                     <constraint firstAttribute="bottom" secondItem="VHg-Rc-yY8" secondAttribute="bottom" id="E0G-aS-kiM"/>
                                     <constraint firstItem="jaW-6D-Cvs" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="JJ2-cQ-iuF"/>
                                     <constraint firstItem="jaW-6D-Cvs" firstAttribute="width" secondItem="Nbn-gx-vBh" secondAttribute="width" multiplier="0.9" id="K0Z-S8-t7d"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="Lxm-cc-5yR"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="height" secondItem="Nbn-gx-vBh" secondAttribute="height" multiplier="0.25" id="Sji-Jz-bEx"/>
+                                    <constraint firstItem="ufg-mf-83l" firstAttribute="width" secondItem="jaW-6D-Cvs" secondAttribute="width" id="j2o-9M-5DF"/>
+                                    <constraint firstItem="ufg-mf-83l" firstAttribute="height" secondItem="jaW-6D-Cvs" secondAttribute="height" multiplier="3" id="keA-8V-ec8"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="top" secondItem="Nbn-gx-vBh" secondAttribute="top" constant="10" id="lF9-hG-bY2"/>
                                     <constraint firstItem="VHg-Rc-yY8" firstAttribute="leading" secondItem="Nbn-gx-vBh" secondAttribute="leading" id="qTJ-So-gaZ"/>
                                     <constraint firstItem="VHg-Rc-yY8" firstAttribute="height" secondItem="Nbn-gx-vBh" secondAttribute="height" multiplier="0.18" id="qaU-g1-8HA"/>
+                                    <constraint firstItem="ufg-mf-83l" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="vfs-zC-qG3"/>
                                     <constraint firstItem="jaW-6D-Cvs" firstAttribute="top" secondItem="1KZ-aY-Wru" secondAttribute="bottom" multiplier="1.1" id="zcy-nJ-VuZ"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="phR-iN-S8z">
-                                <rect key="frame" x="76.666666666666657" y="350.66666666666669" width="260.66666666666674" height="88.333333333333314"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Nbn-gx-vBh" firstAttribute="width" secondItem="wcn-eC-oy1" secondAttribute="width" multiplier="0.7" id="1BF-K1-aki"/>
-                            <constraint firstItem="phR-iN-S8z" firstAttribute="top" secondItem="jaW-6D-Cvs" secondAttribute="bottom" multiplier="1.1" id="9dG-Pl-cgk"/>
                             <constraint firstItem="Nbn-gx-vBh" firstAttribute="centerX" secondItem="wcn-eC-oy1" secondAttribute="centerX" id="ILg-Nc-KYf"/>
-                            <constraint firstItem="phR-iN-S8z" firstAttribute="width" secondItem="Nbn-gx-vBh" secondAttribute="width" multiplier="0.9" id="WiP-cK-DIB"/>
-                            <constraint firstItem="phR-iN-S8z" firstAttribute="centerX" secondItem="wcn-eC-oy1" secondAttribute="centerX" id="iEw-0B-3wI"/>
                             <constraint firstItem="Nbn-gx-vBh" firstAttribute="centerY" secondItem="wcn-eC-oy1" secondAttribute="centerY" id="pX5-sc-ktX"/>
-                            <constraint firstItem="phR-iN-S8z" firstAttribute="height" secondItem="Nbn-gx-vBh" secondAttribute="height" multiplier="0.3" id="sYk-ZU-ZPp"/>
                             <constraint firstItem="Nbn-gx-vBh" firstAttribute="height" secondItem="wcn-eC-oy1" secondAttribute="height" multiplier="0.4" id="wED-fe-REc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rz1-0y-UKf"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WF5-tl-5D2" appends="YES" id="w0i-zc-zhi"/>
+                        </connections>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <connections>
+                        <outlet property="addButton" destination="9fH-a1-6xf" id="kPV-Ol-UY3"/>
+                        <outlet property="descriptionTextView" destination="ufg-mf-83l" id="5bx-CN-mUX"/>
+                        <outlet property="popupView" destination="Nbn-gx-vBh" id="ur0-3W-3hZ"/>
+                        <outlet property="titleTextField" destination="jaW-6D-Cvs" id="nnu-3f-yg6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGO-vS-vni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WF5-tl-5D2">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="EgX-TY-p5Q" id="yrN-EB-Pwb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4593" y="-593"/>
+            <point key="canvasLocation" x="4592.753623188406" y="-593.47826086956525"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dwE-AR-MKy">
@@ -858,7 +933,7 @@
                 <navigationController storyboardIdentifier="Students" automaticallyAdjustsScrollViewInsets="NO" id="iGm-KU-S2o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="oYs-o3-r0t">
-                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -1115,7 +1190,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add-1" width="437" height="437"/>
         <image name="add-desc-selected" width="663" height="663"/>
         <image name="add-people" width="50" height="50"/>
         <image name="add-photo-centered" width="925" height="841"/>

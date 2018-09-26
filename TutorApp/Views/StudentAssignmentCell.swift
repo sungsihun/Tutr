@@ -32,5 +32,4 @@ class StudentAssignmentCell: UITableViewCell {
     isExpanded = !isExpanded
   }
   
-  
 }
