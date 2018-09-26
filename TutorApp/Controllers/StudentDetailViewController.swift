@@ -28,7 +28,7 @@ class StudentDetailViewController: UIViewController {
     // MARK: - Homework Viewable Outlets
     
     @IBOutlet weak var homeworkView: UIView!
-    @IBOutlet weak var homeworkTableView: UITableView!
+    @IBOutlet weak var assignmentsTableView: UITableView!
     @IBOutlet weak var addHomeworkTextfield: UITextField!
     
     // MARK: - Action Methods
@@ -106,7 +106,7 @@ class StudentDetailViewController: UIViewController {
         
         // MARK: - Table View
         
-        homeworkTableView.tableFooterView = UIView(frame: .zero)
+        assignmentsTableView.tableFooterView = UIView(frame: .zero)
       
         // MARK: - Text Field
         
@@ -129,7 +129,7 @@ class StudentDetailViewController: UIViewController {
         let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             self.student.assignments[indexPath.row].assignmentTitle = textField.text!
-            self.homeworkTableView.reloadData()
+            self.assignmentsTableView.reloadData()
         }
       
         alert.addTextField { (textField) in
@@ -190,7 +190,7 @@ extension StudentDetailViewController: UITableViewDelegate {
       
         if editingStyle == .delete {
             student.assignments.remove(at: indexPath.row)
-            homeworkTableView.deleteRows(at: [indexPath], with: .fade)
+            assignmentsTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
   
@@ -229,9 +229,9 @@ extension StudentDetailViewController: UITextFieldDelegate {
         
         textField.text = ""
         let indexPath = IndexPath(row: 0, section: 0)
-        homeworkTableView.insertRows(at: [indexPath], with: .automatic)
+        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
         
-        homeworkTableView.reloadData()
+        assignmentsTableView.reloadData()
         textField.resignFirstResponder()
         addHomeworkTextfield.resignFirstResponder()
         return true
@@ -281,8 +281,19 @@ extension StudentDetailViewController: AddAssignmentControllerDelegate {
   
     func addAssignment(newAssignment: Assignment) {
         student.assignments.insert(newAssignment, at: 0)
+        let teacher = ActiveUser.shared.current as! Teacher
         let indexPath = IndexPath(row: 0, section: 0)
-        homeworkTableView.insertRows(at: [indexPath], with: .automatic)
-        homeworkTableView.reloadData()
+        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
+        CloudKitManager.add(assignment: newAssignment, from: teacher, to: student) { (records) in
+            guard let records = records else { fatalError() }
+            for record in records {
+                if record.recordType == "Students" {
+                    self.student.record = record
+                }
+            }
+            DispatchQueue.main.async {
+                self.assignmentsTableView.reloadData()
+            }
+        }
     }
 }

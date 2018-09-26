@@ -774,9 +774,9 @@
                     </view>
                     <connections>
                         <outlet property="addHomeworkTextfield" destination="Yu7-jH-0Bu" id="Faa-xy-Z2K"/>
+                        <outlet property="assignmentsTableView" destination="pam-Ir-R1K" id="mKr-KX-p43"/>
                         <outlet property="emailLabel" destination="PYV-UA-XmT" id="O9t-Wx-JaW"/>
                         <outlet property="fullNameLabel" destination="aso-17-loi" id="aDc-Cg-EcP"/>
-                        <outlet property="homeworkTableView" destination="pam-Ir-R1K" id="BAA-i4-pX6"/>
                         <outlet property="homeworkView" destination="kXM-ee-x1Q" id="3Rq-0g-jhO"/>
                         <outlet property="nameLabel" destination="UgC-BT-2CP" id="V3J-Oq-NbU"/>
                         <outlet property="phoneLabel" destination="Rvd-5C-zne" id="6BU-Nx-5ry"/>

@@ -39,9 +39,9 @@ class CloudKitManager {
                 
                 // Save the record
                 
-                self.save([record]) { (newRecord) in
-                    if newRecord != nil { completion(true) }
-                    else { completion(false) }
+                self.save([record]) { (records) in
+                    guard let userRecord = records?.first else { completion(false); return }
+                    completion(true)
                 }
             }
         }
@@ -61,11 +61,11 @@ class CloudKitManager {
     
     //  Saving Records
     
-    private static func save(_ records: [CKRecord], completionHandler: ((CKRecord?) -> ())?) {
+    private static func save(_ records: [CKRecord], completionHandler: (([CKRecord]?) -> ())?) {
         let op = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
         op.modifyRecordsCompletionBlock = { records, _, error in
             if let error = error { print(#line, error.localizedDescription); completionHandler?(nil) }
-            completionHandler?(records?.first)
+            completionHandler?(records)
         }
         db.add(op)
     }
@@ -93,8 +93,8 @@ class CloudKitManager {
 
             
             
-            save([userRecord]) { savedUserRecord in
-                guard let savedUserRecord = savedUserRecord else { fatalError("Could not save") }
+            save([userRecord]) { savedUserRecords in
+                guard let savedUserRecords = savedUserRecords, let savedUserRecord = savedUserRecords.first else { fatalError("Could not save") }
                 setRecordToUserDefaults(savedUserRecord)
                 let returnedUser: User!
                 
@@ -166,12 +166,9 @@ class CloudKitManager {
     
     // Add student to teacher list
     
-    static func addStudent(_ student: Student, to teacher: Teacher, completion: @escaping (CKRecord?) -> ()) {
+    static func addStudent(_ student: Student, to teacher: Teacher, completion: @escaping ([CKRecord]?) -> ()) {
         
         guard let studentRecord = student.record, let teacherRecord = teacher.record else { fatalError("Missing record") }
-        
-        print(studentRecord.recordID.recordName)
-        print(teacherRecord.recordID.recordName)
         
         var studentResults = [CKReference]()
         var teacherResults = [CKReference]()
@@ -192,8 +189,8 @@ class CloudKitManager {
         studentRecord["teachers"] = teacherResults as NSArray
         teacherRecord["students"] = studentResults as NSArray
         
-        save([teacherRecord, studentRecord]) { (newTeacherRecord) in
-            completion(newTeacherRecord)
+        save([teacherRecord, studentRecord]) { (records) in
+            completion(records)
         }
     }
     
@@ -243,7 +240,8 @@ class CloudKitManager {
         print(studentRecord.recordID.recordName)
         let newStudentsRefs = studentRefs.filter { $0.recordID != studentRecord.recordID }
         teacherRecord["students"] = newStudentsRefs as NSArray
-        save([teacherRecord]) { newRecord in
+        save([teacherRecord]) { records in
+            guard let newRecord = records?.first else { completion(false); return }
             let teacher = Teacher(newRecord)
             ActiveUser.shared.current = teacher
             completion(true)
@@ -295,7 +293,39 @@ class CloudKitManager {
     
     // MARK: - Assignments
     
-    
+    static func add(assignment: Assignment, from teacher: Teacher, to student: Student, completion: @escaping ([CKRecord]?) -> ()) {
+        
+        var tempAssignments = [CKReference]()
+        
+        guard let studentRecord = student.record,
+            let teacherRecord = teacher.record else {
+                fatalError("Teacher or student is missing a record")
+        }
+        
+        if let assignmentsRefs = studentRecord["assignments"] as? [CKReference] {
+            tempAssignments = assignmentsRefs
+        }
+        
+        let newAssignmentRecord = CKRecord(recordType: "Assignments")
+        newAssignmentRecord["title"] = assignment.assignmentTitle as NSString
+        newAssignmentRecord["description"] = assignment.assignmentDescription as NSString
+        let currentTeacher = CKReference(record: teacherRecord, action: .none)
+        newAssignmentRecord["teacherRef"] = currentTeacher
+        let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .deleteSelf)
+        
+        tempAssignments.append(newAssignmentRef)
+        
+        studentRecord["assignments"] = tempAssignments as NSArray
+        
+  
+        save([studentRecord, newAssignmentRecord]) { (records) in
+            completion(records)
+        }
+        
+        
+        
+        
+    }
     
     
     // MARK: - HELPERS

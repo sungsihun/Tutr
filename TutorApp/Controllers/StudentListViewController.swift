@@ -35,8 +35,8 @@ class StudentListViewController: UIViewController {
         super.viewWillAppear(animated)
         getTeacher { (success) in
             CloudKitManager.fetchStudents() { (students) in
-                if let students = students { self.students = students }
                 DispatchQueue.main.async {
+                    if let students = students { self.students = students }
                     self.tableView.reloadData()
                     self.tableView.isHidden = false
                     self.spinner.stopAnimating()
@@ -205,8 +205,13 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
         students.append(student)
         
         let currentTeacher = ActiveUser.shared.current as! Teacher
-        CloudKitManager.addStudent(student, to: currentTeacher) { (teacherRecord) in
-            currentTeacher.record = teacherRecord
+        CloudKitManager.addStudent(student, to: currentTeacher) { (records) in
+            guard let records = records else { fatalError() }
+            for record in records {
+                if record.recordType == "Teachers" {
+                    currentTeacher.record = record
+                }
+            }
         }
         tableView.reloadData()
         self.tableView.isHidden = false

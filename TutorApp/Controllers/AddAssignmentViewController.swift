@@ -18,7 +18,6 @@ class AddAssignmentViewController: UIViewController {
     // MARK: - Properties
   
     weak var delegate: AddAssignmentControllerDelegate?
-    var assignment: Assignment!
   
     // MARK: - Outlets
 
@@ -61,8 +60,8 @@ class AddAssignmentViewController: UIViewController {
     @IBAction func addTapped(_ sender: UIButton) {
         let title = titleTextField.text
         let description = descriptionTextView.text
-        assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!)
-        delegate!.addAssignment(newAssignment: assignment)
+        let assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!)
+        delegate?.addAssignment(newAssignment: assignment)
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
