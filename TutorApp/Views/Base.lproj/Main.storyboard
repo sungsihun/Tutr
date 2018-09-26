@@ -453,7 +453,7 @@
                 <navigationController storyboardIdentifier="Teachers" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
-                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -840,7 +840,7 @@
                                             <constraint firstAttribute="width" secondItem="1KZ-aY-Wru" secondAttribute="height" multiplier="1:1" id="B7C-h0-ANs"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaW-6D-Cvs">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaW-6D-Cvs">
                                         <rect key="frame" x="14.666666666666657" y="92.000000000000028" width="260.66666666666674" height="26"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -850,12 +850,15 @@
                                             <outlet property="delegate" destination="EgX-TY-p5Q" id="sKo-xK-VXQ"/>
                                         </connections>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-mf-83l">
+                                    <textView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-mf-83l">
                                         <rect key="frame" x="14.666666666666657" y="133.00000000000003" width="260.66666666666674" height="78"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="EgX-TY-p5Q" id="hqV-I0-XXp"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
