@@ -35,7 +35,11 @@ class StudentDetailViewController: UIViewController {
     
     @IBAction func studentDetailsPressed(_ sender: Any) { toggle() }
     @IBAction func studentHomeworkPressed(_ sender: Any) { toggle() }
-    
+  
+    @IBAction func addAssignmentPressed(_ sender: UIButton) {
+        setupBlurredBackgroundView()
+    }
+  
     // MARK: - Properties
   
     var addCellCount = 1
@@ -145,7 +149,17 @@ class StudentDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
+  
 
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addAssignmentSegue" {
+            if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
+              addAssignmentVC.delegate = self
+                addAssignmentVC.modalPresentationStyle = .overFullScreen
+            }
+        }
+    }
 }
 
 
@@ -210,7 +224,7 @@ extension StudentDetailViewController: UITextFieldDelegate {
         // Insert a new row at the top
         
         
-      let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
+        let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
         student.assignments.insert(newHomeworkItem, at: 0)
         
         textField.text = ""
@@ -243,5 +257,24 @@ extension StudentDetailViewController {
   
     @objc func keyboardWillHide(_ notification: Notification) {
         self.view.frame.origin.y = 0
+    }
+}
+
+
+extension StudentDetailViewController: AddAssignmentControllerDelegate {
+  
+    func setupBlurredBackgroundView() {
+        let blurredBackgroundView = UIVisualEffectView()
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .dark)
+        view.addSubview(blurredBackgroundView)
+    }
+  
+    func removeBlurredBackgroundView() {
+        for subview in view.subviews {
+            if subview.isKind(of: UIVisualEffectView.self) {
+                subview.removeFromSuperview()
+            }
+        }
     }
 }

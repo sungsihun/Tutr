@@ -14,6 +14,7 @@
 		06C86E7521547A3400EFFE9E /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C86E7421547A3400EFFE9E /* TeacherCell.swift */; };
 		06C86E772154846E00EFFE9E /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C86E762154846E00EFFE9E /* Teacher.swift */; };
 		06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D49AF62151C87100175B06 /* StudentDetailViewController.swift */; };
+		06E67E4E215B0E5400A12A9F /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */; };
 		BA2B6B5E215AC822008D34A7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B6B5D215AC822008D34A7 /* Helpers.swift */; };
 		BAB02D4921593DAA00C3F384 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB02D4821593DAA00C3F384 /* User.swift */; };
 		BAB02D4B21593F7D00C3F384 /* ActiveUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB02D4A21593F7D00C3F384 /* ActiveUser.swift */; };
@@ -48,6 +49,7 @@
 		06C86E7421547A3400EFFE9E /* TeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
 		06C86E762154846E00EFFE9E /* Teacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
 		06D49AF62151C87100175B06 /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
+		06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		BA2B6B5D215AC822008D34A7 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAB02D4821593DAA00C3F384 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAB02D4A21593F7D00C3F384 /* ActiveUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUser.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				06ADB56021554B9300469760 /* AddUserViewController.swift */,
 				BAB9E5D721517344001249AF /* StudentListViewController.swift */,
 				06D49AF62151C87100175B06 /* StudentDetailViewController.swift */,
+				06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */,
 				BAB9E5EF21518001001249AF /* AddStudentViewController.swift */,
 				06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */,
 				06B8CA302154671800AAA655 /* HomeworkListViewController.swift */,
@@ -306,6 +309,7 @@
 				BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */,
 				BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */,
 				BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */,
+				06E67E4E215B0E5400A12A9F /* AddAssignmentViewController.swift in Sources */,
 				BAB02D4921593DAA00C3F384 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
