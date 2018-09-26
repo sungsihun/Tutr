@@ -176,7 +176,9 @@ extension StudentDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! AssignmentCell
-        cell.assignmentDescLabel.text = student.assignments[indexPath.row].assignmentTitle
+      
+        let assignment = student.assignments[indexPath.row]
+        cell.configureCellWith(assignment: assignment)
       
         return cell
     }
@@ -207,6 +209,11 @@ extension StudentDetailViewController: UITableViewDelegate {
         share.backgroundColor = UIColor.blue
       
         return [delete, share]
+    }
+  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
+        cell.toggle()
+        tableView.reloadData()
     }
 }
 

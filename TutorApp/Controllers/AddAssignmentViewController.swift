@@ -106,7 +106,7 @@ extension AddAssignmentViewController: UITextFieldDelegate {
         let title = titleTextField.text ?? ""
         let description = descriptionTextView.text ?? ""
       
-        if !(title.isEmpty || description.isEmpty) {
+        if !(title.isEmpty || description.isEmpty) && !(descriptionTextView.text == "Description") {
             addButton.isEnabled = true
             addButton.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
         } else {

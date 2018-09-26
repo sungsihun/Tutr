@@ -11,45 +11,44 @@ import UIKit
 
 class HomeworkListViewController: UIViewController {
   
-  // MARK: - Outlets
+    // MARK: - Outlets
   
-  @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
   
-  // MARK: - Properties
-  var assignments = [Assignment]()
+    // MARK: - Properties
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    let assignment = Assignment(assignmentTitle: "My title", assignmentDescription: "Desc")
-    let assignment2 = Assignment(assignmentTitle: "Another", assignmentDescription: "Again")
-    assignments.append(assignment2)
-    assignments.append(assignment)
-    
-  }
+    var assignments = [Assignment]()
   
-  // MARK: - Actions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let assignment = Assignment(assignmentTitle: "My title", assignmentDescription: "Desc")
+        let assignment2 = Assignment(assignmentTitle: "Another", assignmentDescription: "Again")
+        assignments.append(assignment2)
+        assignments.append(assignment)
+    }
   
-  @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-    dismiss(animated: true, completion: nil)
-  }
+    // MARK: - Actions
   
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - Table View Data Source
 
 extension HomeworkListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return assignments.count
-  }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return assignments.count
+    }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    let cell = tableView.dequeueReusableCell(withIdentifier: "studentAssignmentCell", for: indexPath) as! StudentAssignmentCell
-    let assignment = assignments[indexPath.row]
-    cell.configureCellWith(assignment: assignment)
-    
-    return cell
-  }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+        let cell = tableView.dequeueReusableCell(withIdentifier: "studentAssignmentCell", for: indexPath) as! StudentAssignmentCell
+        let assignment = assignments[indexPath.row]
+        cell.configureCellWith(assignment: assignment)
+      
+        return cell
+    }
 }
 
 // MARK: - Table View Delegate
