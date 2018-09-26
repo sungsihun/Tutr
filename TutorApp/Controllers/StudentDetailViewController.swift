@@ -164,6 +164,7 @@ class StudentDetailViewController: UIViewController {
             if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
                 addAssignmentVC.delegate = self
                 addAssignmentVC.modalPresentationStyle = .overFullScreen
+                self.navigationController?.isNavigationBarHidden = true
             }
         }
     }
@@ -290,6 +291,7 @@ extension StudentDetailViewController: AddAssignmentControllerDelegate {
                 subview.removeFromSuperview()
             }
         }
+        self.navigationController?.isNavigationBarHidden = false
     }
   
     func addAssignment(newAssignment: Assignment) {

@@ -154,11 +154,12 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
             tableView.backgroundView = nil
             tableView.separatorStyle = .singleLine
         } else {
-            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text          = "Press + To Add Your First Student!"
-            noDataLabel.textColor     = UIColor.black
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height))
+            noDataLabel.text = "Press + To Add Your First Student!"
+            noDataLabel.font = UIFont(name: "Dosis", size: 17)
+            noDataLabel.textColor = UIColor.black
             noDataLabel.textAlignment = .center
-            tableView.backgroundView  = noDataLabel
+            tableView.backgroundView = noDataLabel
             tableView.separatorStyle = .none
         }
         return 1
@@ -208,14 +209,10 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
         let currentTeacher = ActiveUser.shared.current as! Teacher
         CloudKitManager.addStudent(student, to: currentTeacher) { (records) in
             guard let records = records else { fatalError() }
-            for record in records {
-                if record.recordType == "Teachers" {
-                    currentTeacher.record = record
-                } else if record.recordType == "Students" {
-                    guard let newStudent = Student(record) else { fatalError() }
-                    self.students.append(newStudent)
-                }
-            }
+            currentTeacher.record = records.filter() {$0.recordType == "Teachers" }.first!
+            let newStudentRecord = records.filter() { $0.recordType == "Students" }.first!
+            guard let newStudent = Student(newStudentRecord) else { fatalError() }
+            self.students.append(newStudent)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.tableView.isHidden = false
