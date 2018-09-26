@@ -127,15 +127,21 @@ class StudentDetailViewController: UIViewController {
         let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: .alert)
       
         let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
-            let textField = alert.textFields![0] as UITextField
-            self.student.assignments[indexPath.row].assignmentTitle = textField.text!
+            let titleTextField = alert.textFields![0] as UITextField
+            let descriptionTextField = alert.textFields![1] as UITextField
+          
+            self.student.assignments[indexPath.row].assignmentTitle = titleTextField.text!
+            self.student.assignments[indexPath.row].assignmentDescription = descriptionTextField.text!
+          
             self.homeworkTableView.reloadData()
         }
       
         alert.addTextField { (textField) in
             textField.text = self.student.assignments[indexPath.row].assignmentTitle
         }
-      
+        alert.addTextField { (textField) in
+            textField.text = self.student.assignments[indexPath.row].assignmentDescription
+        }
       
         let dismiss = UIAlertAction(title: "Dismiss", style: .destructive) { (action:UIAlertAction!) in print("Cancel button tapped") }
       
