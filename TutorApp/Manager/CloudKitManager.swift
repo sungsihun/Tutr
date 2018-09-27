@@ -110,7 +110,6 @@ class CloudKitManager {
         }
     }
     
-    
     //  Get Name Of User
     
     static func getCurrentUserName(completion: @escaping (String?, String?) -> ()) {
@@ -128,9 +127,6 @@ class CloudKitManager {
 
     
     // MARK: - TEACHERS
-    
-    
-    //  Get teacher
 
     static private func getTeacherRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         let op = CKFetchRecordsOperation(recordIDs: [id])
@@ -150,8 +146,6 @@ class CloudKitManager {
             completion(teacher)
         }
     }
-    
-    // Get record ID
     
     static func getCurrentUserRecordID(completion: @escaping (CKRecordID?) -> ()) {
         container.fetchUserRecordID { (recordID, error) in
@@ -232,6 +226,8 @@ class CloudKitManager {
         db.add(op)
     }
     
+    // Delete student
+    
     static func deleteStudent(_ student: Student, completion: @escaping (Bool) -> ()) {
         guard let studentRecord = student.record else { fatalError() }
         let teacher = ActiveUser.shared.current as! Teacher
@@ -249,12 +245,10 @@ class CloudKitManager {
     }
     
     
-    
-    
     // MARK: - Searching for a student
     
     
-    // Get user record fromID
+    // Get student record fromID
     
     static private func getStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         print(id.recordName)
@@ -291,6 +285,9 @@ class CloudKitManager {
     }
     
     
+    
+    
+    
     // MARK: - Assignments
     
     static func add(assignment: Assignment, from teacher: Teacher, to student: Student, completion: @escaping ([CKRecord]?) -> ()) {
@@ -323,9 +320,8 @@ class CloudKitManager {
         }
     }
     
-
-    static func getAssignmentsFrom(_ record: CKRecord?, completion: @escaping ([Assignment]) -> ()) {
-        guard let record = record else { fatalError("No record") }
+    static func getAssignmentsFrom(_ studentRecord: CKRecord?, completion: @escaping ([Assignment]) -> ()) {
+        guard let record = studentRecord else { fatalError("No record") }
         guard let assignmentsRefs = record["assignments"] as? [CKReference] else { return }
         
         let ids = assignmentsRefs.map() { $0.recordID }
@@ -350,14 +346,18 @@ class CloudKitManager {
     private static func getAssignmentsFrom(_ records: [CKRecord]) -> [Assignment] {
         var assignments = [Assignment]()
         for record in records {
-            guard let title = record["title"] as? String else { fatalError("Assignment missing title") }
-            guard let description = record["description"] as? String else { fatalError("Assignment missing description") }
-            let newAssignment = Assignment(assignmentTitle: title, assignmentDescription: description)
+
+            guard let newAssignment = Assignment(record) else { fatalError() }
             assignments.append(newAssignment)
         }
         return assignments
         
     }
+    
+    
+    
+    
+    
     
     
     // MARK: - HELPERS

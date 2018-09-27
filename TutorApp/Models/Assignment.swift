@@ -13,9 +13,21 @@ class Assignment {
   
     var assignmentTitle: String
     var assignmentDescription: String
+    var record: CKRecord?
+    var teacherRef: CKReference
     
-    init(assignmentTitle: String, assignmentDescription: String) {
+    init(assignmentTitle: String, assignmentDescription: String, teacherRef: CKReference) {
         self.assignmentTitle = assignmentTitle
         self.assignmentDescription = assignmentDescription
+        self.teacherRef = teacherRef
+    }
+    
+    convenience init?(_ record: CKRecord) {
+        guard let title = record["title"] as? String else { fatalError("Assignment missing title") }
+        guard let description = record["description"] as? String else { fatalError("Assignment missing description") }
+        guard let teacherRef = record["teacherRef"] as? CKReference else { fatalError() }
+        self.init(assignmentTitle: title, assignmentDescription: description, teacherRef: teacherRef)
+        self.record = record
+
     }
 }
