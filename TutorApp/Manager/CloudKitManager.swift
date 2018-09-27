@@ -40,7 +40,7 @@ class CloudKitManager {
                 // Save the record
                 
                 self.save([record]) { (records) in
-                    guard let userRecord = records?.first else { completion(false); return }
+                    guard (records?.first) != nil else { completion(false); return }
                     completion(true)
                 }
             }
@@ -220,7 +220,7 @@ class CloudKitManager {
         // Below is essentially a loop that is called for each record got
         
         op.perRecordCompletionBlock = { record, _, _ in
-            if let student = Student(record) {
+            if let student = Student(with: record) {
                 returnStudents.append(student)
             }
         }
@@ -270,7 +270,7 @@ class CloudKitManager {
     static func getStudentFromID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
         getStudentRecord(with: id) { (record) in
             guard let record = record else { completion(nil); return }
-            let student = Student(record)
+            let student = Student(with: record)
             completion(student)
         }
     }
@@ -321,9 +321,41 @@ class CloudKitManager {
         save([studentRecord, newAssignmentRecord]) { (records) in
             completion(records)
         }
+    }
+    
+
+    static func getAssignmentsFrom(_ record: CKRecord?, completion: @escaping ([Assignment]) -> ()) {
+        guard let record = record else { fatalError("No record") }
+        guard let assignmentsRefs = record["assignments"] as? [CKReference] else { return }
+        
+        let ids = assignmentsRefs.map() { $0.recordID }
+        var assignmentRecords = [CKRecord]()
+        
+        let op = CKFetchRecordsOperation(recordIDs: ids)
         
         
+        op.perRecordCompletionBlock = { record, _, error in
+            if let error = error { print(error.localizedDescription); return }
+            guard let record = record else { print("Could not unwrap record"); return }
+            assignmentRecords.append(record)
+        }
         
+        op.fetchRecordsCompletionBlock = { _, error in
+            if let error = error { print(error.localizedDescription); return}
+            completion(getAssignmentsFrom(assignmentRecords))
+        }
+        db.add(op)
+    }
+    
+    private static func getAssignmentsFrom(_ records: [CKRecord]) -> [Assignment] {
+        var assignments = [Assignment]()
+        for record in records {
+            guard let title = record["title"] as? String else { fatalError("Assignment missing title") }
+            guard let description = record["description"] as? String else { fatalError("Assignment missing description") }
+            let newAssignment = Assignment(assignmentTitle: title, assignmentDescription: description)
+            assignments.append(newAssignment)
+        }
+        return assignments
         
     }
     

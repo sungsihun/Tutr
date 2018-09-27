@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 
 class Assignment {
   
@@ -16,10 +17,5 @@ class Assignment {
     init(assignmentTitle: String, assignmentDescription: String) {
         self.assignmentTitle = assignmentTitle
         self.assignmentDescription = assignmentDescription
-    }
-  
-    init(assignmentTitle: String) {
-      self.assignmentTitle = assignmentTitle
-      self.assignmentDescription = ""
     }
 }
