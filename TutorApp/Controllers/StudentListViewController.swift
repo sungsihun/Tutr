@@ -22,6 +22,7 @@ class StudentListViewController: UIViewController {
     
     var students = [Student]()
     let userDefaults = UserDefaults.standard
+    var selectedIndexRow: Int?
     
     // MARK: - Life Cycle
     
@@ -33,9 +34,6 @@ class StudentListViewController: UIViewController {
             CloudKitManager.fetchStudents() { (students) in
                 DispatchQueue.main.async {
                     if let students = students { self.students = students }
-                    self.tableView.reloadData()
-                    self.tableView.isHidden = false
-                    self.spinner.stopAnimating()
                 }
             }
         }
@@ -43,6 +41,11 @@ class StudentListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(stopSpinner), name: .assignmentsChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Action Methods
@@ -83,6 +86,14 @@ class StudentListViewController: UIViewController {
                 ActiveUser.shared.current = teacher
                 completion(true)
             }
+        }
+    }
+    
+    @objc private func stopSpinner() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.spinner.stopAnimating()
         }
     }
     
@@ -139,6 +150,8 @@ class StudentListViewController: UIViewController {
             if segue.identifier == "showDetail" {
                 let detailVC = segue.destination as! StudentDetailViewController
                 detailVC.student = self.students[index.row]
+                selectedIndexRow = index.row
+                detailVC.delegate = self
             }
         }
     }
@@ -215,12 +228,18 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
             self.students.append(newStudent)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.tableView.isHidden = false
-                self.spinner.stopAnimating()
             }
         }
         
     }
     
+}
+
+extension StudentListViewController: StudentDetailViewControllerDelegate {
+    func studentDetailViewController(_ controller: StudentDetailViewController, didUpdate record: CKRecord) {
+        guard let selectedIndexRow = selectedIndexRow else { fatalError() }
+        guard let newStudent = Student(with: record) else { fatalError() }
+        students[selectedIndexRow] = newStudent
+    }
 }
 
