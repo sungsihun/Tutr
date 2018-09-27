@@ -211,7 +211,7 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
             guard let records = records else { fatalError() }
             currentTeacher.record = records.filter() {$0.recordType == "Teachers" }.first!
             let newStudentRecord = records.filter() { $0.recordType == "Students" }.first!
-            guard let newStudent = Student(newStudentRecord) else { fatalError() }
+            guard let newStudent = Student(with: newStudentRecord) else { fatalError() }
             self.students.append(newStudent)
             DispatchQueue.main.async {
                 self.tableView.reloadData()

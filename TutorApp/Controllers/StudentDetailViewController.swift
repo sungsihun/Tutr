@@ -41,12 +41,10 @@ class StudentDetailViewController: UIViewController {
   
     // MARK: - Properties
   
-    var addCellCount = 1
-    var cellTextfieldTag = 0
     var student: Student!
     var activeTextField = UITextField()
     var indexPathForEditRow: IndexPath!
-  
+
     // MARK: - Life Cycle
   
     override func viewDidLoad() {
@@ -71,6 +69,10 @@ class StudentDetailViewController: UIViewController {
         subjectLabel.text = student.subject
         fullNameLabel.text = student.name
         studentImageView.image = student.image
+    }
+    
+    private func loadStudentAssignments() {
+        
     }
     
     private func toggle() {
@@ -148,14 +150,13 @@ extension StudentDetailViewController: UITableViewDataSource {
             tableView.backgroundView = nil
             tableView.separatorStyle = .singleLine
         } else {
-            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height))
-          
+            let noDataLabel = UILabel()
             let attributedString = NSMutableAttributedString(string: "Press  ")
             let addDescImageAttachment = NSTextAttachment()
             addDescImageAttachment.image = UIImage(named: "add-desc-selected")
             addDescImageAttachment.bounds = CGRect(x: 0, y: -5, width: 20, height: 20)
             attributedString.append(NSAttributedString(attachment: addDescImageAttachment))
-            attributedString.append(NSAttributedString(string: "  To Add Assignment!"))
+            attributedString.append(NSAttributedString(string: "  To Add A New Assignment!"))
             noDataLabel.attributedText = attributedString
           
             noDataLabel.font = UIFont(name: "Dosis", size: 17)
@@ -243,6 +244,7 @@ extension StudentDetailViewController: UITextFieldDelegate {
         activeTextField = textField
     }
 }
+
 
 // MARK: - Notification Center Methods
 

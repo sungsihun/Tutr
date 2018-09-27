@@ -14,5 +14,12 @@ class Student: User {
     
     
     var assignments = [Assignment]()
-
+    
+    convenience init?(with studentRecord: CKRecord?) {
+        self.init(studentRecord)
+        CloudKitManager.getAssignmentsFrom(studentRecord) { (assignments) in
+            self.assignments = assignments
+        }
+    }
+    
 }
