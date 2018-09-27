@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 protocol EditAssignmentControllerDelegate: class {
     func removeBlurredBackgroundView()
@@ -77,7 +78,9 @@ class EditAssignmentViewController: UIViewController {
     @IBAction func editTapped(_ sender: UIButton) {
         let title = titleTextField.text
         let description = descriptionTextView.text
-        let assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!)
+        let activeTeacher = ActiveUser.shared.current as! Teacher
+        let teacherRef = CKReference(record: activeTeacher.record!, action: .none)
+        let assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!, teacherRef: teacherRef)
         delegate?.editAssignment(editedAssignment: assignment)
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()

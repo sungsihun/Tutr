@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 protocol AddAssignmentControllerDelegate: class {
     func removeBlurredBackgroundView()
@@ -18,6 +19,7 @@ class AddAssignmentViewController: UIViewController {
     // MARK: - Properties
   
     weak var delegate: AddAssignmentControllerDelegate?
+    let activeTeacher = ActiveUser.shared.current as! Teacher
   
     // MARK: - Outlets
 
@@ -55,7 +57,8 @@ class AddAssignmentViewController: UIViewController {
     @IBAction func addTapped(_ sender: UIButton) {
         let title = titleTextField.text
         let description = descriptionTextView.text
-        let assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!)
+        let reference = CKReference(record: activeTeacher.record!, action: .none)
+        let assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!, teacherRef: reference)
         delegate?.addAssignment(newAssignment: assignment)
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()

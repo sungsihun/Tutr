@@ -12,14 +12,22 @@ import CloudKit
 
 class Student: User {
     
-    
     var assignments = [Assignment]()
+    var teacherAssignmentsDict = [String:Array<Assignment>]()
     
     convenience init?(with studentRecord: CKRecord?) {
         self.init(studentRecord)
         CloudKitManager.getAssignmentsFrom(studentRecord) { (assignments) in
             self.assignments = assignments
         }
+    }
+    
+    func filterAssignments(by teacher: Teacher)  {
+        guard let teacherRecord = teacher.record, self.assignments.count > 0 else { return }
+        let teacherReference = CKReference(record: teacherRecord, action: .none)
+        let filteredAssignments = self.assignments.filter { $0.teacherRef == teacherReference }
+        let teacherRecordName = teacherRecord.recordID.recordName
+        teacherAssignmentsDict[teacherRecordName] = filteredAssignments
     }
     
 }

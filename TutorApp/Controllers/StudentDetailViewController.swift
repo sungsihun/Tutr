@@ -44,6 +44,8 @@ class StudentDetailViewController: UIViewController {
     var student: Student!
     var activeTextField = UITextField()
     var indexPathForEditRow: IndexPath!
+    var correctAssignments = [Assignment]()
+
 
     // MARK: - Life Cycle
   
@@ -52,6 +54,7 @@ class StudentDetailViewController: UIViewController {
         loadStudent()
         setupUI()
         setupNotificationCenter()
+        loadStudentAssignments()
     }
   
      override func viewWillDisappear(_ animated: Bool) {
@@ -72,7 +75,12 @@ class StudentDetailViewController: UIViewController {
     }
     
     private func loadStudentAssignments() {
-        
+        let activeTeacher = ActiveUser.shared.current as! Teacher
+        guard let recordName = activeTeacher.record?.recordID.recordName else { fatalError() }
+        student.filterAssignments(by: activeTeacher)
+        let assignmentsDict = student.teacherAssignmentsDict
+        correctAssignments = assignmentsDict[recordName] ?? [Assignment]()
+        assignmentsTableView.reloadData()
     }
     
     private func toggle() {
@@ -105,6 +113,39 @@ class StudentDetailViewController: UIViewController {
         // MARK: - Table View
         
         assignmentsTableView.tableFooterView = UIView(frame: .zero)
+    }
+    
+
+  
+    func setupAlert(indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: .alert)
+      
+        let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            self.correctAssignments[indexPath.row].assignmentTitle = textField.text!
+            self.assignmentsTableView.reloadData()
+            let titleTextField = alert.textFields![0] as UITextField
+            let descriptionTextField = alert.textFields![1] as UITextField
+          
+            self.correctAssignments[indexPath.row].assignmentTitle = titleTextField.text!
+            self.correctAssignments[indexPath.row].assignmentDescription = descriptionTextField.text!
+          
+            self.assignmentsTableView.reloadData()
+        }
+      
+        alert.addTextField { (textField) in
+            textField.text = self.correctAssignments[indexPath.row].assignmentTitle
+        }
+        alert.addTextField { (textField) in
+            textField.text = self.correctAssignments[indexPath.row].assignmentDescription
+        }
+      
+        let dismiss = UIAlertAction(title: "Dismiss", style: .destructive)
+      
+        alert.addAction(dismiss)
+        alert.addAction(edit)
+      
+        self.present(alert, animated: true)
     }
   
     private func setupNotificationCenter() {
@@ -146,7 +187,7 @@ class StudentDetailViewController: UIViewController {
 
 extension StudentDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if student.assignments.count > 0 {
+        if correctAssignments.count > 0 {
             tableView.backgroundView = nil
             tableView.separatorStyle = .singleLine
         } else {
@@ -169,14 +210,14 @@ extension StudentDetailViewController: UITableViewDataSource {
     }
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return student.assignments.count
+        return correctAssignments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
       
-        let assignment = student.assignments[indexPath.row]
+        let assignment = correctAssignments[indexPath.row]
         cell.configureCellWith(assignment: assignment)
       
         return cell
@@ -190,14 +231,14 @@ extension StudentDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
       
         if editingStyle == .delete {
-            student.assignments.remove(at: indexPath.row)
+            correctAssignments.remove(at: indexPath.row)
             assignmentsTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.student.assignments.remove(at: indexPath.row)
+            self.correctAssignments.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
       
@@ -218,33 +259,6 @@ extension StudentDetailViewController: UITableViewDelegate {
         tableView.reloadData()
     }
 }
-
-// MARK: - Text Field Delegate
-
-extension StudentDetailViewController: UITextFieldDelegate {
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
-        // Insert a new row at the top
-        
-        let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
-        student.assignments.insert(newHomeworkItem, at: 0)
-        
-        textField.text = ""
-        let indexPath = IndexPath(row: 0, section: 0)
-        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
-        
-        assignmentsTableView.reloadData()
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-    }
-}
-
 
 // MARK: - Notification Center Methods
 
@@ -278,7 +292,7 @@ extension StudentDetailViewController: AddAssignmentControllerDelegate {
     }
   
     func addAssignment(newAssignment: Assignment) {
-        student.assignments.insert(newAssignment, at: 0)
+        correctAssignments.insert(newAssignment, at: 0)
         let teacher = ActiveUser.shared.current as! Teacher
         let indexPath = IndexPath(row: 0, section: 0)
         assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
