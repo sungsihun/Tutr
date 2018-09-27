@@ -219,33 +219,6 @@ extension StudentDetailViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Text Field Delegate
-
-extension StudentDetailViewController: UITextFieldDelegate {
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
-        // Insert a new row at the top
-        
-        let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
-        student.assignments.insert(newHomeworkItem, at: 0)
-        
-        textField.text = ""
-        let indexPath = IndexPath(row: 0, section: 0)
-        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
-        
-        assignmentsTableView.reloadData()
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-    }
-}
-
-
 // MARK: - Notification Center Methods
 
 extension StudentDetailViewController {

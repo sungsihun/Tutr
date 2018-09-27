@@ -154,8 +154,15 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
             tableView.backgroundView = nil
             tableView.separatorStyle = .singleLine
         } else {
-            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height))
-            noDataLabel.text = "Press + To Add Your First Student!"
+            let noDataLabel = UILabel()
+            let attributedString = NSMutableAttributedString(string: "Press  ")
+            let addDescImageAttachment = NSTextAttachment()
+            addDescImageAttachment.image = UIImage(named: "add-people")
+            addDescImageAttachment.bounds = CGRect(x: 0, y: -5, width: 22, height: 22)
+            attributedString.append(NSAttributedString(attachment: addDescImageAttachment))
+            attributedString.append(NSAttributedString(string: "  To Add Your First Student!"))
+            noDataLabel.attributedText = attributedString
+          
             noDataLabel.font = UIFont(name: "Dosis", size: 17)
             noDataLabel.textColor = UIColor.black
             noDataLabel.textAlignment = .center
