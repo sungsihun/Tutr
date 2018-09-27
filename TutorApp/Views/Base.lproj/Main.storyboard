@@ -453,7 +453,7 @@
                 <navigationController storyboardIdentifier="Teachers" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
-                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -850,7 +850,7 @@
                                         </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-mf-83l">
-                                        <rect key="frame" x="14.666666666666657" y="133.00000000000003" width="260.66666666666674" height="78"/>
+                                        <rect key="frame" x="14.666666666666657" y="133.00000000000003" width="260.66666666666674" height="93.666666666666657"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
@@ -863,6 +863,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="VHg-Rc-yY8" secondAttribute="trailing" id="5Ic-xs-omE"/>
+                                    <constraint firstItem="VHg-Rc-yY8" firstAttribute="top" secondItem="ufg-mf-83l" secondAttribute="bottom" constant="15" id="6qh-Ss-lLt"/>
                                     <constraint firstItem="ufg-mf-83l" firstAttribute="top" secondItem="jaW-6D-Cvs" secondAttribute="bottom" constant="15" id="Bde-QG-Pj7"/>
                                     <constraint firstAttribute="bottom" secondItem="VHg-Rc-yY8" secondAttribute="bottom" id="E0G-aS-kiM"/>
                                     <constraint firstItem="jaW-6D-Cvs" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="JJ2-cQ-iuF"/>
@@ -870,7 +871,6 @@
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="Lxm-cc-5yR"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="height" secondItem="Nbn-gx-vBh" secondAttribute="height" multiplier="0.25" id="Sji-Jz-bEx"/>
                                     <constraint firstItem="ufg-mf-83l" firstAttribute="width" secondItem="jaW-6D-Cvs" secondAttribute="width" id="j2o-9M-5DF"/>
-                                    <constraint firstItem="ufg-mf-83l" firstAttribute="height" secondItem="jaW-6D-Cvs" secondAttribute="height" multiplier="3" id="keA-8V-ec8"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="top" secondItem="Nbn-gx-vBh" secondAttribute="top" constant="10" id="lF9-hG-bY2"/>
                                     <constraint firstItem="VHg-Rc-yY8" firstAttribute="leading" secondItem="Nbn-gx-vBh" secondAttribute="leading" id="qTJ-So-gaZ"/>
                                     <constraint firstItem="VHg-Rc-yY8" firstAttribute="height" secondItem="Nbn-gx-vBh" secondAttribute="height" multiplier="0.18" id="qaU-g1-8HA"/>

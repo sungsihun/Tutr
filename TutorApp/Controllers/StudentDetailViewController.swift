@@ -162,7 +162,30 @@ class StudentDetailViewController: UIViewController {
 // MARK: - Table View Data Source
 
 extension StudentDetailViewController: UITableViewDataSource {
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if student.assignments.count > 0 {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine
+        } else {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height))
+          
+            let attributedString = NSMutableAttributedString(string: "Press  ")
+            let addDescImageAttachment = NSTextAttachment()
+            addDescImageAttachment.image = UIImage(named: "add-desc-selected")
+            addDescImageAttachment.bounds = CGRect(x: 0, y: -5, width: 20, height: 20)
+            attributedString.append(NSAttributedString(attachment: addDescImageAttachment))
+            attributedString.append(NSAttributedString(string: "  To Add Assignment!"))
+            noDataLabel.attributedText = attributedString
+          
+            noDataLabel.font = UIFont(name: "Dosis", size: 17)
+            noDataLabel.textColor = UIColor.black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .none
+        }
+        return 1
+    }
+  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return student.assignments.count
     }
