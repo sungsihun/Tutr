@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06074EBB215D3CF2001D8B50 /* EditAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06074EBA215D3CF2001D8B50 /* EditAssignmentViewController.swift */; };
 		06ADB56121554B9300469760 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ADB56021554B9300469760 /* AddUserViewController.swift */; };
 		06B8CA2F2154653700AAA655 /* TeacherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */; };
 		06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B8CA302154671800AAA655 /* HomeworkListViewController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06074EBA215D3CF2001D8B50 /* EditAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAssignmentViewController.swift; sourceTree = "<group>"; };
 		06ADB56021554B9300469760 /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListViewController.swift; sourceTree = "<group>"; };
 		06B8CA302154671800AAA655 /* HomeworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeworkListViewController.swift; path = TutorApp/Controllers/HomeworkListViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -130,6 +132,7 @@
 				BAB9E5D721517344001249AF /* StudentListViewController.swift */,
 				06D49AF62151C87100175B06 /* StudentDetailViewController.swift */,
 				06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */,
+				06074EBA215D3CF2001D8B50 /* EditAssignmentViewController.swift */,
 				BAB9E5EF21518001001249AF /* AddStudentViewController.swift */,
 				06B8CA2E2154653700AAA655 /* TeacherListViewController.swift */,
 				06B8CA302154671800AAA655 /* HomeworkListViewController.swift */,
@@ -307,6 +310,7 @@
 				06B8CA312154671800AAA655 /* HomeworkListViewController.swift in Sources */,
 				BAB9E5F62152B4EC001249AF /* AssignmentCell.swift in Sources */,
 				BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */,
+				06074EBB215D3CF2001D8B50 /* EditAssignmentViewController.swift in Sources */,
 				BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */,
 				BAB9E5EE21517718001249AF /* StudentCell.swift in Sources */,
 				06E67E4E215B0E5400A12A9F /* AddAssignmentViewController.swift in Sources */,

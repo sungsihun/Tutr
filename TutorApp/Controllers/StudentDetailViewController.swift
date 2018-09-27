@@ -45,7 +45,8 @@ class StudentDetailViewController: UIViewController {
     var cellTextfieldTag = 0
     var student: Student!
     var activeTextField = UITextField()
-
+    var indexPathForEditRow: IndexPath!
+  
     // MARK: - Life Cycle
   
     override func viewDidLoad() {
@@ -102,46 +103,18 @@ class StudentDetailViewController: UIViewController {
         // MARK: - Table View
         
         assignmentsTableView.tableFooterView = UIView(frame: .zero)
-        
-    
-    }
-    
-
-  
-    func setupAlert(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: .alert)
-      
-        let edit = UIAlertAction(title: "Edit", style: .default) { (alertAction) in
-            let textField = alert.textFields![0] as UITextField
-            self.student.assignments[indexPath.row].assignmentTitle = textField.text!
-            self.assignmentsTableView.reloadData()
-            let titleTextField = alert.textFields![0] as UITextField
-            let descriptionTextField = alert.textFields![1] as UITextField
-          
-            self.student.assignments[indexPath.row].assignmentTitle = titleTextField.text!
-            self.student.assignments[indexPath.row].assignmentDescription = descriptionTextField.text!
-          
-            self.assignmentsTableView.reloadData()
-        }
-      
-        alert.addTextField { (textField) in
-            textField.text = self.student.assignments[indexPath.row].assignmentTitle
-        }
-        alert.addTextField { (textField) in
-            textField.text = self.student.assignments[indexPath.row].assignmentDescription
-        }
-      
-        let dismiss = UIAlertAction(title: "Dismiss", style: .destructive)
-      
-        alert.addAction(dismiss)
-        alert.addAction(edit)
-      
-        self.present(alert, animated: true)
     }
   
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+  
+    private func setupBlurredBackgroundView() {
+      let blurredBackgroundView = UIVisualEffectView()
+      blurredBackgroundView.frame = view.frame
+      blurredBackgroundView.effect = UIBlurEffect(style: .dark)
+      view.addSubview(blurredBackgroundView)
     }
   
     //MARK: - Segue
@@ -154,10 +127,18 @@ class StudentDetailViewController: UIViewController {
                 self.navigationController?.isNavigationBarHidden = true
             }
         }
+      
+        if segue.identifier == "editAssignmentSegue" {
+            if let editAssignmentVC = segue.destination as? EditAssignmentViewController {
+                editAssignmentVC.delegate = self
+                let currentAssignment = student.assignments[indexPathForEditRow.row]
+                editAssignmentVC.assignment = currentAssignment
+                editAssignmentVC.modalPresentationStyle = .overFullScreen
+                self.navigationController?.isNavigationBarHidden = true
+            }
+        }
     }
 }
-
-
 
 // MARK: - Table View Data Source
 
@@ -220,7 +201,9 @@ extension StudentDetailViewController: UITableViewDelegate {
         }
       
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            self.setupAlert(indexPath: indexPath)
+            self.indexPathForEditRow = indexPath
+            self.setupBlurredBackgroundView()
+            self.performSegue(withIdentifier: "editAssignmentSegue", sender: nil)
         }
       
         edit.backgroundColor = UIColor.blue
@@ -235,10 +218,6 @@ extension StudentDetailViewController: UITableViewDelegate {
     }
 }
 
-
-
-
-
 // MARK: - Text Field Delegate
 
 extension StudentDetailViewController: UITextFieldDelegate {
@@ -246,7 +225,6 @@ extension StudentDetailViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
-        
         // Insert a new row at the top
         
         let newHomeworkItem = Assignment(assignmentTitle: textField.text!)
@@ -287,14 +265,7 @@ extension StudentDetailViewController {
 // MARK: - AddAssignmentController Delegate Methods
 
 extension StudentDetailViewController: AddAssignmentControllerDelegate {
-  
-    func setupBlurredBackgroundView() {
-        let blurredBackgroundView = UIVisualEffectView()
-        blurredBackgroundView.frame = view.frame
-        blurredBackgroundView.effect = UIBlurEffect(style: .dark)
-        view.addSubview(blurredBackgroundView)
-    }
-  
+
     func removeBlurredBackgroundView() {
         for subview in view.subviews {
             if subview.isKind(of: UIVisualEffectView.self) {
@@ -317,4 +288,28 @@ extension StudentDetailViewController: AddAssignmentControllerDelegate {
             }
         }
     }
+  
+}
+
+// MARK: - EditAssignmentController Delegate Methods
+
+extension StudentDetailViewController: EditAssignmentControllerDelegate {
+  
+    func editAssignment(editedAssignment: Assignment) {
+        student.assignments[self.indexPathForEditRow.row] = editedAssignment
+        assignmentsTableView.reloadData()
+      
+//        student.assignments.insert(editedAssignment, at: 0)
+//        let teacher = ActiveUser.shared.current as! Teacher
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
+//        CloudKitManager.add(assignment: editedAssignment, from: teacher, to: student) { (records) in
+//            guard let records = records else { fatalError() }
+//            self.student.record = records.filter { $0.recordType == "Students" }.first!
+//            DispatchQueue.main.async {
+//                self.assignmentsTableView.reloadData()
+//            }
+//        }
+    }
+  
 }
