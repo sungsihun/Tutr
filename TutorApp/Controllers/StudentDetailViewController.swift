@@ -88,9 +88,7 @@ class StudentDetailViewController: UIViewController {
         student.filterAssignments(by: activeTeacher)
         let assignmentsDict = student.teacherAssignmentsDict
         correctAssignments = assignmentsDict[recordName] ?? [Assignment]()
-//        DispatchQueue.main.async {
-//            self.assignmentsTableView.reloadData()
-//        }
+
     }
     
     private func toggle() {
