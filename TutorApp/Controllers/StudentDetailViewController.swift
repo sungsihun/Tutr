@@ -231,9 +231,18 @@ class StudentDetailViewController: UIViewController {
         self.performSegue(withIdentifier: "editAssignmentSegue", sender: nil)
       }
       
+      let complete = UITableViewRowAction(style: .normal, title: "Complete") { (action, indexPath) in
+        if self.student.assignments[indexPath.row].isComplete {
+          tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        } else {
+          tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }
+        self.student.assignments[indexPath.row].isComplete = !self.student.assignments[indexPath.row].isComplete
+      }
+      
       edit.backgroundColor = UIColor.blue
       
-      return [delete, edit]
+      return [delete, edit, complete]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

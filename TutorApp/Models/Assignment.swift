@@ -15,6 +15,7 @@ class Assignment {
     var assignmentDescription: String
     var record: CKRecord?
     var teacherRef: CKReference
+    var isComplete = false
     
     init(assignmentTitle: String, assignmentDescription: String, teacherRef: CKReference) {
         self.assignmentTitle = assignmentTitle
