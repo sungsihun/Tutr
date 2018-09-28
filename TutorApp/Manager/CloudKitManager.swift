@@ -269,6 +269,20 @@ class CloudKitManager {
         }
     }
     
+    // Get student record fromID
+    
+    static private func getLatestStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        print(id.recordName)
+        let ref = CKReference(recordID: id, action: .none)
+        let predicate = NSPredicate(format: "recordID == %@", ref)
+        let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
+        
+        db.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error { print(error.localizedDescription); completion(nil) }
+            completion(records?.first)
+        }
+    }
+    
     
     // Search for student
     
@@ -299,25 +313,32 @@ class CloudKitManager {
                 fatalError("Teacher or student is missing a record")
         }
         
-        if let assignmentsRefs = studentRecord["assignments"] as? [CKReference] {
-            tempAssignments = assignmentsRefs
+        getLatestStudentRecord(with: studentRecord.recordID) { (newStudentRecord) in
+            
+            guard let newStudentRecord = newStudentRecord else { fatalError() }
+            
+            if let assignmentsRefs = newStudentRecord["assignments"] as? [CKReference] {
+                tempAssignments = assignmentsRefs
+            }
+            
+            let newAssignmentRecord = CKRecord(recordType: "Assignments")
+            newAssignmentRecord["title"] = assignment.assignmentTitle as NSString
+            newAssignmentRecord["description"] = assignment.assignmentDescription as NSString
+            let currentTeacher = CKReference(record: teacherRecord, action: .none)
+            newAssignmentRecord["teacherRef"] = currentTeacher
+            let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .deleteSelf)
+            
+            tempAssignments.append(newAssignmentRef)
+            
+            newStudentRecord["assignments"] = tempAssignments as NSArray
+            
+            
+            save([newStudentRecord, newAssignmentRecord]) { (records) in
+                completion(records)
+            }
         }
         
-        let newAssignmentRecord = CKRecord(recordType: "Assignments")
-        newAssignmentRecord["title"] = assignment.assignmentTitle as NSString
-        newAssignmentRecord["description"] = assignment.assignmentDescription as NSString
-        let currentTeacher = CKReference(record: teacherRecord, action: .none)
-        newAssignmentRecord["teacherRef"] = currentTeacher
-        let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .deleteSelf)
-        
-        tempAssignments.append(newAssignmentRef)
-        
-        studentRecord["assignments"] = tempAssignments as NSArray
-        
-  
-        save([studentRecord, newAssignmentRecord]) { (records) in
-            completion(records)
-        }
+   
     }
     
     static func getAssignmentsFrom(_ studentRecord: CKRecord?, completion: @escaping ([Assignment]) -> ()) {
