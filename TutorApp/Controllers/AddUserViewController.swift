@@ -231,23 +231,25 @@ extension AddUserViewController {
             let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             if status == AVAuthorizationStatus.denied {
                 setAlertWith(title: "Error", message: "Please enable access to camera", from: self) { action in
-                    self.openAppSettings()
+                    DispatchQueue.main.async {
+                        self.openAppSettings()
+                    }
                 }
                 
                 
             } else if status == AVAuthorizationStatus.notDetermined {
                 AVCaptureDevice.requestAccess(for: AVMediaType.video) { (success) in
-                    if success { self.open(.camera) }
+                    if success { self.openProgram(.camera) }
                 }
                 
                 
             } else {
-                self.open(.camera)
+                self.openProgram(.camera)
             }
         }
         
         let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
-            self.open(.photoLibrary)
+            self.openProgram(.photoLibrary)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -256,6 +258,12 @@ extension AddUserViewController {
         alertController.addAction(cameraAction)
         alertController.addAction(galleryAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    private func openProgram(_ type: UIImagePickerControllerSourceType) {
+        DispatchQueue.main.async {
+            self.open(type)
+        }
     }
 }
 

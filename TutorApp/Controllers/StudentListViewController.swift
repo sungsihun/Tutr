@@ -30,15 +30,8 @@ class StudentListViewController: UIViewController {
         super.viewDidLoad()
         setupSpinner()
         setupUI()
-        getTeacher { (success) in
-            CloudKitManager.fetchStudents() { (students) in
-                DispatchQueue.main.async {
-                    if let students = students { self.students = students }
-                    self.tableView.reloadData()
-                    self.stopSpinner()
-                }
-            }
-        }
+        getTeacher()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,15 +71,27 @@ class StudentListViewController: UIViewController {
         }
     }
     
-    private func getTeacher(completion: @escaping (Bool) -> ()) {
+    private func getTeacher() {
+        getCurrentTeacher {
+            CloudKitManager.fetchStudents() { (students) in
+                DispatchQueue.main.async {
+                    if let students = students { self.students = students }
+                    self.tableView.reloadData()
+                    self.stopSpinner()
+                }
+            }
+        }
+    }
+    
+    private func getCurrentTeacher(completion: @escaping () -> ()) {
         if let _ = ActiveUser.shared.current as? Teacher {
-            completion(true)
+            completion()
         } else {
             guard let recordIDString = userDefaults.string(forKey: ActiveUser.recordID) else { fatalError() }
             let recordID = CKRecordID(recordName: recordIDString)
-            CloudKitManager.getTeacherFromID(recordID) { (teacher) in
+            CloudKitManager.getTeacherFromRecordID(recordID) { (teacher) in
                 ActiveUser.shared.current = teacher
-                completion(true)
+                completion()
             }
         }
     }
