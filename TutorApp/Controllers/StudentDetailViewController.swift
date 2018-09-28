@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import CloudKit
+
+
+protocol StudentDetailViewControllerDelegate: class {
+  func studentDetailViewController(_ controller: StudentDetailViewController, didUpdate record: CKRecord)
+}
 
 class StudentDetailViewController: UIViewController {
   
@@ -24,7 +30,7 @@ class StudentDetailViewController: UIViewController {
   // MARK: - Action Methods
   
   @IBAction func addAssignmentPressed(_ sender: UIButton) {
-      setupBlurredBackgroundView()
+    setupBlurredBackgroundView()
   }
   
   // MARK: - Properties
@@ -34,22 +40,23 @@ class StudentDetailViewController: UIViewController {
   var indexPathForEditRow: IndexPath!
   var correctAssignments = [Assignment]()
   let noDataLabel = UILabel()
-
+  weak var delegate: StudentDetailViewControllerDelegate?
+  
   // MARK: - Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     loadStudent()
     setupUI()
     loadStudentAssignments()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
-      NotificationCenter.default.removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
-
+  
   
   // MARK: - Custom Methods
   
@@ -136,7 +143,7 @@ class StudentDetailViewController: UIViewController {
     noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor).isActive = true
     noDataLabel.centerXAnchor.constraint(equalTo: assignmentsTableView.centerXAnchor).isActive = true
     
-
+    
   }
   
   func updateTextForEmptyTableView() {
@@ -152,12 +159,12 @@ class StudentDetailViewController: UIViewController {
   //MARK: - Segue
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+    
     if segue.identifier == "addAssignmentSegue" {
       if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
         addAssignmentVC.delegate = self
         self.navigationController?.isNavigationBarHidden = true
-
+        
         addAssignmentVC.modalPresentationStyle = .overFullScreen
       }
     }
@@ -167,134 +174,145 @@ class StudentDetailViewController: UIViewController {
         editAssignmentVC.delegate = self
         let currentAssignment = student.assignments[indexPathForEditRow.row]
         editAssignmentVC.assignment = currentAssignment
-        self.navigationController?.isNavigationBarHidden = true
-
         editAssignmentVC.modalPresentationStyle = .overFullScreen
+        self.navigationController?.isNavigationBarHidden = true
       }
     }
   }
 }
-
-// MARK: - Table View Data Source
-
-extension StudentDetailViewController: UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    updateTextForEmptyTableView()
-    return 1
-  }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return correctAssignments.count
-  }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  
+  extension StudentDetailViewController: UITableViewDataSource {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
+    func numberOfSections(in tableView: UITableView) -> Int {
+      updateTextForEmptyTableView()
+      return 1
+    }
     
-    let assignment = correctAssignments[indexPath.row]
-    cell.configureCellWith(assignment: assignment)
-    setTextForEmptyTableView()
-    return cell
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return correctAssignments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+      let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
+      
+      let assignment = correctAssignments[indexPath.row]
+      cell.configureCellWith(assignment: assignment)
+      setTextForEmptyTableView()
+      return cell
+    }
   }
-}
-
-
-
-
-// MARK: - Table View Delegate
-
-extension StudentDetailViewController: UITableViewDelegate {
   
-//  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//
-//    if editingStyle == .delete {
-//      correctAssignments.remove(at: indexPath.row)
-//      assignmentsTableView.deleteRows(at: [indexPath], with: .fade)
-//    }
-//  }
-//
-  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-    let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-      self.correctAssignments.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+  
+  
+  
+  
+  // MARK: - Table View Delegate
+  
+  extension StudentDetailViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+      let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let assignmentToDelete = self.correctAssignments[indexPath.row]
+        self.deleteAssignment(assignmentToDelete) {
+          self.correctAssignments.remove(at: indexPath.row)
+          DispatchQueue.main.async {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+          }
+        }
+        
+      }
+      
+      let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+        self.indexPathForEditRow = indexPath
+        self.setupBlurredBackgroundView()
+        self.performSegue(withIdentifier: "editAssignmentSegue", sender: nil)
+      }
+      
+      edit.backgroundColor = UIColor.blue
+      
+      return [delete, edit]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
+      cell.toggle()
       tableView.reloadData()
     }
-    
-    let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-      self.indexPathForEditRow = indexPath
-      self.setupBlurredBackgroundView()
-      self.performSegue(withIdentifier: "editAssignmentSegue", sender: nil)
-    }
-    
-    edit.backgroundColor = UIColor.blue
-    
-    return [delete, edit]
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
-    cell.toggle()
-    tableView.reloadData()
-  }
+  // MARK: - Delete Assignment
   
-  
-}
-
-// MARK: - AddAssignmentController Delegate Methods
-
-extension StudentDetailViewController: AddAssignmentControllerDelegate {
-  
-  func removeBlurredBackgroundView() {
-    for subview in view.subviews {
-      if subview.isKind(of: UIVisualEffectView.self) {
-        subview.removeFromSuperview()
-      }
-    }
-    self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  func addAssignment(newAssignment: Assignment) {
-    correctAssignments.insert(newAssignment, at: 0)
-    let teacher = ActiveUser.shared.current as! Teacher
-    let indexPath = IndexPath(row: 0, section: 0)
-    assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
-    CloudKitManager.add(assignment: newAssignment, from: teacher, to: student) { (records) in
-      guard let records = records else { fatalError() }
-      self.student.record = records.filter { $0.recordType == "Students" }.first!
-      DispatchQueue.main.async {
-        self.assignmentsTableView.reloadData()
+  extension StudentDetailViewController {
+    
+    private func deleteAssignment(_ assignment: Assignment, completion: @escaping () -> ()) {
+      CloudKitManager.deleteAssignment(assignment, from: student) { (newStudentRecord) in
+        guard let newStudentRecord = newStudentRecord else { fatalError() }
+        self.student.record = newStudentRecord
+        self.delegate?.studentDetailViewController(self, didUpdate: self.student.record!)
+        completion()
       }
     }
   }
   
-}
-
-// MARK: - EditAssignmentController Delegate Methods
-
-extension StudentDetailViewController: EditAssignmentControllerDelegate {
   
-  func editAssignment(editedAssignment: Assignment) {
-    student.assignments[self.indexPathForEditRow.row] = editedAssignment
-    assignmentsTableView.reloadData()
+  // MARK: - AddAssignmentController Delegate Methods
+  
+  extension StudentDetailViewController: AddAssignmentControllerDelegate {
     
-    //        student.assignments.insert(editedAssignment, at: 0)
-    //        let teacher = ActiveUser.shared.current as! Teacher
-    //        let indexPath = IndexPath(row: 0, section: 0)
-    //        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
-    //        CloudKitManager.add(assignment: editedAssignment, from: teacher, to: student) { (records) in
-    //            guard let records = records else { fatalError() }
-    //            self.student.record = records.filter { $0.recordType == "Students" }.first!
-    //            DispatchQueue.main.async {
-    //                self.assignmentsTableView.reloadData()
-    //            }
-    //        }
+    func removeBlurredBackgroundView() {
+      for subview in view.subviews {
+        if subview.isKind(of: UIVisualEffectView.self) {
+          subview.removeFromSuperview()
+        }
+      }
+      self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    func addAssignment(newAssignment: Assignment) {
+      correctAssignments.insert(newAssignment, at: 0)
+      let teacher = ActiveUser.shared.current as! Teacher
+      let indexPath = IndexPath(row: 0, section: 0)
+      assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
+      CloudKitManager.add(assignment: newAssignment, from: teacher, to: student) { (records) in
+        guard let records = records else { fatalError() }
+        self.student.record = records.filter { $0.recordType == "Students" }.first!
+        self.delegate?.studentDetailViewController(self, didUpdate: self.student.record!)
+        DispatchQueue.main.async {
+          self.assignmentsTableView.reloadData()
+        }
+      }
+    }
   }
   
-}
-
-
-extension StudentDetailViewController: UIScrollViewDelegate {
+  // MARK: - EditAssignmentController Delegate Methods
+  
+  extension StudentDetailViewController: EditAssignmentControllerDelegate {
+    
+    func editAssignment(editedAssignment: Assignment) {
+      student.assignments[self.indexPathForEditRow.row] = editedAssignment
+      assignmentsTableView.reloadData()
+      
+      //        student.assignments.insert(editedAssignment, at: 0)
+      //        let teacher = ActiveUser.shared.current as! Teacher
+      //        let indexPath = IndexPath(row: 0, section: 0)
+      //        assignmentsTableView.insertRows(at: [indexPath], with: .automatic)
+      //        CloudKitManager.add(assignment: editedAssignment, from: teacher, to: student) { (records) in
+      //            guard let records = records else { fatalError() }
+      //            self.student.record = records.filter { $0.recordType == "Students" }.first!
+      //            DispatchQueue.main.async {
+      //                self.assignmentsTableView.reloadData()
+      //            }
+      //        }
+    }
+    
+  }
+  
+  
+  extension StudentDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        setTextForEmptyTableView()
+      setTextForEmptyTableView()
     }
 }

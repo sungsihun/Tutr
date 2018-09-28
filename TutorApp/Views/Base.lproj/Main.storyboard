@@ -629,7 +629,7 @@
                         <outlet property="backgroundView" destination="zIv-qu-aaF" id="ZT5-O1-4my"/>
                         <outlet property="nameLabel" destination="UgC-BT-2CP" id="V3J-Oq-NbU"/>
                         <outlet property="studentImageView" destination="uzj-fl-NRd" id="POb-F1-S8l"/>
-                        <outlet property="subjectLabel" destination="nEK-JI-fSB" id="56l-EP-PaA"/>
+                        <outlet property="subjectLabel" destination="nEK-JI-fSB" id="Gfj-zn-ism"/>
                         <segue destination="DA1-oF-Mup" kind="presentation" identifier="editAssignmentSegue" id="jm6-6R-g1x"/>
                     </connections>
                 </viewController>

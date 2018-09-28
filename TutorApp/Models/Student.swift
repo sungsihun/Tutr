@@ -10,15 +10,22 @@ import Foundation
 import UIKit
 import CloudKit
 
+
 class Student: User {
     
-    var assignments = [Assignment]()
+    var assignments = [Assignment]() {
+        didSet {
+            let center = NotificationCenter.default
+            center.post(name: .assignmentsChanged, object: nil)
+        }
+    }
     var teacherAssignmentsDict = [String:Array<Assignment>]()
     
     convenience init?(with studentRecord: CKRecord?) {
         self.init(studentRecord)
         CloudKitManager.getAssignmentsFrom(studentRecord) { (assignments) in
             self.assignments = assignments
+            print("Assignments set")
         }
     }
     
@@ -27,7 +34,7 @@ class Student: User {
         let teacherReference = CKReference(record: teacherRecord, action: .none)
         let filteredAssignments = self.assignments.filter { $0.teacherRef == teacherReference }
         let teacherRecordName = teacherRecord.recordID.recordName
-        teacherAssignmentsDict[teacherRecordName] = filteredAssignments
+        teacherAssignmentsDict[teacherRecordName] = filteredAssignments.reversed()
     }
     
 }

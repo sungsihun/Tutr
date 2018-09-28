@@ -30,7 +30,7 @@ class CloudKitManager {
             
             // We have user permission, so get the recordID
             
-            getCurrentUserRecordID { (recordID) in
+            getCurrentUserID { (recordID) in
                 guard let recordID = recordID else { fatalError("Could not get recordID") }
                 let record = CKRecord(recordType: ActiveUser.shared.currentCategory.rawValue)
                 let recordName = recordID.recordName
@@ -113,7 +113,7 @@ class CloudKitManager {
     //  Get Name Of User
     
     static func getCurrentUserName(completion: @escaping (String?, String?) -> ()) {
-        getCurrentUserRecordID { (recordID) in
+        getCurrentUserID { (recordID) in
             guard let recordID = recordID else { fatalError("Could Not get recordID") }
             container.discoverUserIdentity(withUserRecordID: recordID, completionHandler: { (userId, error) in
                 if let error = error { print(error.localizedDescription); return }
@@ -128,7 +128,7 @@ class CloudKitManager {
     
     // MARK: - TEACHERS
 
-    static private func getTeacherRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+    private static func getUserRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         let op = CKFetchRecordsOperation(recordIDs: [id])
         op.queuePriority = .veryHigh
         op.qualityOfService = .userInteractive
@@ -139,15 +139,15 @@ class CloudKitManager {
         db.add(op)
     }
     
-    static func getTeacherFromID(_ id: CKRecordID, completion: @escaping (Teacher?) -> ()) {
-        getTeacherRecord(with: id) { (record) in
+    static func getTeacherFromRecordID(_ id: CKRecordID, completion: @escaping (Teacher?) -> ()) {
+        getUserRecord(with: id) { (record) in
             guard let record = record else { completion(nil); return }
             let teacher = Teacher(record)
             completion(teacher)
         }
     }
     
-    static func getCurrentUserRecordID(completion: @escaping (CKRecordID?) -> ()) {
+    static func getCurrentUserID(completion: @escaping (CKRecordID?) -> ()) {
         container.fetchUserRecordID { (recordID, error) in
             if let error = error { print(error.localizedDescription); return }
             completion(recordID)
@@ -245,14 +245,50 @@ class CloudKitManager {
     }
     
     
-    // MARK: - Searching for a student
+    // MARK: - Fetch students
+    
+    static func fetchTeachers(completion: @escaping ([Teacher]?) -> ()) {
+        
+        let student = ActiveUser.shared.current as! Student
+        
+        guard let record = student.record else { fatalError("Student has no record") }
+        
+        // Get the array of the teacher's students
+        
+        guard let teacherRefs = record["teachers"] as? Array<CKReference>  else { completion(nil); return }
+        
+        // Get the recordID of each student
+        
+        let ids = teacherRefs.map{ $0.recordID }
+        
+        // Get the record of each student
+        
+        let op = CKFetchRecordsOperation(recordIDs: ids)
+        op.qualityOfService = .userInteractive
+        op.queuePriority = .veryHigh
+        var returnTeachers = [Teacher]()
+        
+        // Below is essentially a loop that is called for each record got
+        
+        op.perRecordCompletionBlock = { record, _, _ in
+            if let teacher = Teacher(record) {
+                returnTeachers.append(teacher)
+            }
+        }
+        
+        op.fetchRecordsCompletionBlock = { _, _ in
+            completion(returnTeachers)
+        }
+        
+        db.add(op)
+    }
     
     
     // Get student record fromID
     
-    static private func getStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-        print(id.recordName)
-        let predicate = NSPredicate(format: "userRef = %@", id.recordName)
+    static private func getStudentRecord(with userID: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        print(userID.recordName)
+        let predicate = NSPredicate(format: "userRef = %@", userID.recordName)
         let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
         
         db.perform(query, inZoneWith: nil) { (records, error) in
@@ -261,11 +297,33 @@ class CloudKitManager {
         }
     }
     
-    static func getStudentFromID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
+    static func getStudentFromUserID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
         getStudentRecord(with: id) { (record) in
             guard let record = record else { completion(nil); return }
             let student = Student(with: record)
             completion(student)
+        }
+    }
+    
+    static func getStudentFromRecordID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
+        getUserRecord(with: id) { (record) in
+            guard let record = record else { completion(nil); return }
+            let student = Student(record)
+            completion(student)
+        }
+    }
+    
+    // Get student record fromID
+    
+    static private func getLatestStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        print(id.recordName)
+        let ref = CKReference(recordID: id, action: .none)
+        let predicate = NSPredicate(format: "recordID == %@", ref)
+        let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
+        
+        db.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error { print(error.localizedDescription); completion(nil) }
+            completion(records?.first)
         }
     }
     
@@ -278,7 +336,7 @@ class CloudKitManager {
             guard let userIdentity = userIdentity,
                 let recordID = userIdentity.userRecordID
                 else { completion(nil); return }
-            getStudentFromID(recordID) { (student) in
+            getStudentFromUserID(recordID) { (student) in
                 completion(student)
             }
         }
@@ -299,25 +357,34 @@ class CloudKitManager {
                 fatalError("Teacher or student is missing a record")
         }
         
-        if let assignmentsRefs = studentRecord["assignments"] as? [CKReference] {
-            tempAssignments = assignmentsRefs
+        getLatestStudentRecord(with: studentRecord.recordID) { (newStudentRecord) in
+            
+            guard let newStudentRecord = newStudentRecord else { fatalError() }
+            
+            if let assignmentsRefs = newStudentRecord["assignments"] as? [CKReference] {
+                tempAssignments = assignmentsRefs
+            }
+            
+            let newAssignmentRecord = CKRecord(recordType: "Assignments")
+            newAssignmentRecord["title"] = assignment.assignmentTitle as NSString
+            newAssignmentRecord["description"] = assignment.assignmentDescription as NSString
+            let currentTeacher = CKReference(record: teacherRecord, action: .none)
+            newAssignmentRecord["teacherRef"] = currentTeacher
+            let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .none)
+            
+            
+            
+            tempAssignments.append(newAssignmentRef)
+            
+            newStudentRecord["assignments"] = tempAssignments as NSArray
+            
+            
+            save([newStudentRecord, newAssignmentRecord]) { (records) in
+                completion(records)
+            }
         }
         
-        let newAssignmentRecord = CKRecord(recordType: "Assignments")
-        newAssignmentRecord["title"] = assignment.assignmentTitle as NSString
-        newAssignmentRecord["description"] = assignment.assignmentDescription as NSString
-        let currentTeacher = CKReference(record: teacherRecord, action: .none)
-        newAssignmentRecord["teacherRef"] = currentTeacher
-        let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .deleteSelf)
-        
-        tempAssignments.append(newAssignmentRef)
-        
-        studentRecord["assignments"] = tempAssignments as NSArray
-        
-  
-        save([studentRecord, newAssignmentRecord]) { (records) in
-            completion(records)
-        }
+   
     }
     
     static func getAssignmentsFrom(_ studentRecord: CKRecord?, completion: @escaping ([Assignment]) -> ()) {
@@ -354,7 +421,21 @@ class CloudKitManager {
         
     }
     
+    static func deleteAssignment(_ assignment: Assignment, from student: Student, completion: @escaping (CKRecord?) -> ()) {
     
+        guard let assignmentRecord = assignment.record, let studentRecord = student.record else { return }
+        let recordID = assignmentRecord.recordID
+        db.delete(withRecordID: recordID) { (_, error) in
+            if let error = error { print(error.localizedDescription) }
+            guard let assignmentsRefs = studentRecord["assignments"] as? [CKReference] else { fatalError() }
+            let newAssignmentRefs = assignmentsRefs.filter { $0.recordID != recordID }
+            studentRecord["assignments"] = newAssignmentRefs
+            save([studentRecord]) { (records) in
+                guard let records = records else { fatalError() }
+                completion(records.first)
+            }
+        }
+    }
     
     
     
@@ -395,7 +476,7 @@ class CloudKitManager {
     
     private static func getCurrentUserRecordOfType(_ type: ActiveUser.Category, completion: @escaping (CKRecord?) -> ()) {
         
-        getCurrentUserRecordID { (recordID) in
+        getCurrentUserID { (recordID) in
             guard let recordID = recordID else { fatalError("Could not get recordID") }
             
             // Wrapper around the recordID
