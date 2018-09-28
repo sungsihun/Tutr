@@ -236,6 +236,7 @@ class StudentDetailViewController: UIViewController {
       return [delete, edit]
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
       cell.toggle()
