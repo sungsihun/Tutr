@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Dosis-Bold.ttf">
-            <string>Dosis-Bold</string>
-        </array>
         <array key="Dosis-Regular.ttf">
             <string>Dosis-Regular</string>
         </array>
@@ -453,7 +450,7 @@
                 <navigationController storyboardIdentifier="Teachers" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
-                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -479,21 +476,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIv-qu-aaF" userLabel="Background View Container">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="246.66666666666666"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="242.66666666666666"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background5" translatesAutoresizingMaskIntoConstraints="NO" id="PfE-hw-t3u">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="246.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="242.66666666666666"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgC-BT-2CP">
-                                        <rect key="frame" x="154.66666666666666" y="43.666666666666664" width="104.66666666666666" height="64.666666666666686"/>
+                                        <rect key="frame" x="154.66666666666666" y="40.000000000000007" width="104.66666666666666" height="64.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="51"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEK-JI-fSB">
+                                        <rect key="frame" x="181.33333333333334" y="98" width="51.333333333333343" height="31.666666666666657"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="PfE-hw-t3u" firstAttribute="top" secondItem="zIv-qu-aaF" secondAttribute="top" id="DHq-cP-Qrj"/>
+                                    <constraint firstItem="nEK-JI-fSB" firstAttribute="centerX" secondItem="zIv-qu-aaF" secondAttribute="centerX" id="Mfr-L5-ddj"/>
                                     <constraint firstAttribute="bottom" secondItem="PfE-hw-t3u" secondAttribute="bottom" id="Zn7-DV-Rtu"/>
                                     <constraint firstAttribute="trailing" secondItem="PfE-hw-t3u" secondAttribute="trailing" id="erG-Bw-Y4J"/>
                                     <constraint firstItem="UgC-BT-2CP" firstAttribute="centerX" secondItem="zIv-qu-aaF" secondAttribute="centerX" id="lVh-Sr-snq"/>
@@ -501,289 +505,118 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uzj-fl-NRd" customClass="RoundImageView" customModule="TutorApp" customModuleProvider="target">
-                                <rect key="frame" x="128.33333333333331" y="141" width="157.33333333333331" height="157.33333333333337"/>
+                                <rect key="frame" x="128.33333333333331" y="136" width="157.33333333333331" height="157.33333333333337"/>
                                 <color key="backgroundColor" red="0.0020097530459999998" green="1" blue="0.14423110259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uzj-fl-NRd" secondAttribute="height" multiplier="1:1" id="gfu-3W-s5A"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCW-dh-sVH" userLabel="Stack View Container">
-                                <rect key="frame" x="20" y="318.33333333333331" width="374" height="36.666666666666686"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="O4K-qe-AAl">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="36.666666666666664"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-O9-HrO">
-                                                <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="36.666666666666664"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="24"/>
-                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="PROFILE">
-                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="studentDetailsPressed:" destination="fPk-rI-zmh" eventType="touchUpInside" id="VmA-Yg-2nH"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkj-d2-6lu">
-                                                <rect key="frame" x="187.66666666666663" y="0.0" width="186.33333333333337" height="36.666666666666664"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="24"/>
-                                                <state key="normal" title="ASSIGNMENTS">
-                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="studentHomeworkPressed:" destination="fPk-rI-zmh" eventType="touchUpInside" id="OOt-oq-QEz"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="O4K-qe-AAl" firstAttribute="centerY" secondItem="CCW-dh-sVH" secondAttribute="centerY" id="H2L-JP-Q8n"/>
-                                    <constraint firstItem="O4K-qe-AAl" firstAttribute="height" secondItem="CCW-dh-sVH" secondAttribute="height" id="S2h-92-PJQ"/>
-                                    <constraint firstItem="O4K-qe-AAl" firstAttribute="centerX" secondItem="CCW-dh-sVH" secondAttribute="centerX" id="VPL-kI-mYK"/>
-                                    <constraint firstItem="O4K-qe-AAl" firstAttribute="width" secondItem="CCW-dh-sVH" secondAttribute="width" id="o8h-hL-t6c"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-oh-req" userLabel="Profile View Container">
-                                <rect key="frame" x="35" y="360" width="344" height="366"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r02-bW-bEV" userLabel="Underline View Container">
-                                        <rect key="frame" x="17.333333333333343" y="5" width="309.33333333333326" height="256.33333333333331"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="xbc-mU-GLd">
-                                        <rect key="frame" x="17.333333333333343" y="5" width="309.33333333333326" height="256.33333333333331"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="egc-gM-DPG">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="63.333333333333336"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZx-0N-xaM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="31.666666666666668"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FullName Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aso-17-loi">
-                                                        <rect key="frame" x="0.0" y="31.666666666666686" width="309.33333333333331" height="31.666666666666671"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-Dj-z16">
-                                                <rect key="frame" x="0.0" y="64.333333333333314" width="309.33333333333331" height="63.333333333333343"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ID-96-YkZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="31.666666666666668"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBe-NS-g1S">
-                                                        <rect key="frame" x="0.0" y="31.666666666666686" width="309.33333333333331" height="31.666666666666671"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-kz-Eus">
-                                                <rect key="frame" x="0.0" y="128.66666666666669" width="309.33333333333331" height="63.333333333333343"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QE-HZ-ztb" userLabel="Next Lesson">
-                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="31.666666666666668"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYV-UA-XmT" userLabel="Next Lesson Label">
-                                                        <rect key="frame" x="0.0" y="31.666666666666686" width="309.33333333333331" height="31.666666666666671"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="zoJ-BA-qwe">
-                                                <rect key="frame" x="0.0" y="193" width="309.33333333333331" height="63.333333333333314"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyk-01-bHV" userLabel="Next Lesson">
-                                                        <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="31.666666666666668"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                        <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-5C-zne">
-                                                        <rect key="frame" x="0.0" y="31.666666666666629" width="309.33333333333331" height="31.666666666666671"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="0ID-96-YkZ" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="6eQ-TD-Kii"/>
-                                            <constraint firstItem="PYV-UA-XmT" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="BKa-tB-wXa"/>
-                                            <constraint firstItem="yyk-01-bHV" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="Q0g-D8-TOt"/>
-                                            <constraint firstItem="aso-17-loi" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="R3G-Dj-4Hh"/>
-                                            <constraint firstItem="Rvd-5C-zne" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="TBP-4Y-eag"/>
-                                            <constraint firstItem="UBe-NS-g1S" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="hLN-vi-fTF"/>
-                                            <constraint firstItem="pZx-0N-xaM" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="rHR-GE-E0T"/>
-                                            <constraint firstItem="6QE-HZ-ztb" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="uOe-2v-bXM"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
+                                <rect key="frame" x="20.666666666666657" y="349.33333333333326" width="372.66666666666674" height="376.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="r02-bW-bEV" firstAttribute="width" secondItem="xbc-mU-GLd" secondAttribute="width" id="6zK-4G-ycc"/>
-                                    <constraint firstItem="r02-bW-bEV" firstAttribute="centerY" secondItem="xbc-mU-GLd" secondAttribute="centerY" id="JXN-TT-wpk"/>
-                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="centerX" secondItem="2Po-oh-req" secondAttribute="centerX" id="Tgj-5R-D0n"/>
-                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="width" secondItem="2Po-oh-req" secondAttribute="width" multiplier="0.9" id="VRq-kF-CFl"/>
-                                    <constraint firstItem="r02-bW-bEV" firstAttribute="height" secondItem="xbc-mU-GLd" secondAttribute="height" id="bzm-dF-8Qa"/>
-                                    <constraint firstItem="r02-bW-bEV" firstAttribute="centerX" secondItem="xbc-mU-GLd" secondAttribute="centerX" id="nqb-5o-A3i"/>
-                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="height" secondItem="2Po-oh-req" secondAttribute="height" multiplier="0.7" id="x5L-CN-tAc"/>
-                                    <constraint firstItem="xbc-mU-GLd" firstAttribute="top" secondItem="2Po-oh-req" secondAttribute="top" constant="5" id="zb4-OR-YX2"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXM-ee-x1Q" userLabel="Homework View Container">
-                                <rect key="frame" x="35" y="373" width="344" height="353"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pam-Ir-R1K">
-                                        <rect key="frame" x="0.0" y="17" width="344" height="336"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="assignmentCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="344" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4j-xC-sPD" id="S2C-YE-c3s">
-                                                    <rect key="frame" x="0.0" y="0.0" width="344" height="43.666666666666664"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
-                                                            <rect key="frame" x="10" y="5" width="54" height="3.3333333333333339"/>
-                                                            <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="25"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
-                                                            <rect key="frame" x="10" y="13.333333333333334" width="324" height="25.333333333333329"/>
-                                                            <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="7eZ-uj-tBr"/>
-                                                        <constraint firstItem="dNY-YP-vBc" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="He5-Fr-rai"/>
-                                                        <constraint firstItem="dNY-YP-vBc" firstAttribute="top" secondItem="S2C-YE-c3s" secondAttribute="top" constant="5" id="JnS-8M-tfM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="45o-cw-sIG" secondAttribute="bottom" constant="5" id="Up9-eV-2o3"/>
-                                                        <constraint firstItem="45o-cw-sIG" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="mGm-Zp-q9M"/>
-                                                        <constraint firstAttribute="trailing" secondItem="45o-cw-sIG" secondAttribute="trailing" constant="10" id="pKt-sw-0mU"/>
-                                                        <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="sbl-37-ZXL"/>
-                                                    </constraints>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="descriptionLabel" destination="45o-cw-sIG" id="a0p-HU-xc6"/>
-                                                    <outlet property="titleLabel" destination="dNY-YP-vBc" id="peF-A2-peb"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="fPk-rI-zmh" id="LEo-va-Kka"/>
-                                            <outlet property="delegate" destination="fPk-rI-zmh" id="ZMa-mv-m83"/>
-                                        </connections>
-                                    </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-3V-bJQ">
-                                        <rect key="frame" x="272" y="271" width="62" height="62"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="5Bu-3V-bJQ" secondAttribute="height" multiplier="1:1" id="VGI-kp-cJA"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="add-desc-selected">
-                                            <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="assignmentCell" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="372.66666666666674" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4j-xC-sPD" id="S2C-YE-c3s">
+                                            <rect key="frame" x="0.0" y="0.0" width="372.66666666666674" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
+                                                    <rect key="frame" x="10" y="5" width="54" height="3.3333333333333339"/>
+                                                    <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="25"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
+                                                    <rect key="frame" x="10" y="13.333333333333334" width="352.66666666666669" height="25.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="7eZ-uj-tBr"/>
+                                                <constraint firstItem="dNY-YP-vBc" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="He5-Fr-rai"/>
+                                                <constraint firstItem="dNY-YP-vBc" firstAttribute="top" secondItem="S2C-YE-c3s" secondAttribute="top" constant="5" id="JnS-8M-tfM"/>
+                                                <constraint firstAttribute="bottom" secondItem="45o-cw-sIG" secondAttribute="bottom" constant="5" id="Up9-eV-2o3"/>
+                                                <constraint firstItem="45o-cw-sIG" firstAttribute="leading" secondItem="S2C-YE-c3s" secondAttribute="leading" constant="10" id="mGm-Zp-q9M"/>
+                                                <constraint firstAttribute="trailing" secondItem="45o-cw-sIG" secondAttribute="trailing" constant="10" id="pKt-sw-0mU"/>
+                                                <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="sbl-37-ZXL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="0"/>
+                                                <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="addAssignmentPressed:" destination="fPk-rI-zmh" eventType="touchUpInside" id="Vzw-R8-TGE"/>
-                                            <segue destination="EgX-TY-p5Q" kind="presentation" identifier="addAssignmentSegue" id="KAL-1Q-w69"/>
+                                            <outlet property="descriptionLabel" destination="45o-cw-sIG" id="a0p-HU-xc6"/>
+                                            <outlet property="titleLabel" destination="dNY-YP-vBc" id="peF-A2-peb"/>
                                         </connections>
-                                    </button>
-                                </subviews>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="fPk-rI-zmh" id="LEo-va-Kka"/>
+                                    <outlet property="delegate" destination="fPk-rI-zmh" id="ZMa-mv-m83"/>
+                                </connections>
+                            </tableView>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-3V-bJQ">
+                                <rect key="frame" x="317.33333333333331" y="650" width="56" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="5Bu-3V-bJQ" secondAttribute="trailing" constant="10" id="C6N-D5-hRW"/>
-                                    <constraint firstItem="pam-Ir-R1K" firstAttribute="leading" secondItem="kXM-ee-x1Q" secondAttribute="leading" id="Jzs-PN-7Yo"/>
-                                    <constraint firstAttribute="bottom" secondItem="pam-Ir-R1K" secondAttribute="bottom" id="M0f-sb-c8z"/>
-                                    <constraint firstAttribute="bottom" secondItem="5Bu-3V-bJQ" secondAttribute="bottom" constant="20" id="MEQ-LC-IPb"/>
-                                    <constraint firstItem="pam-Ir-R1K" firstAttribute="top" secondItem="kXM-ee-x1Q" secondAttribute="top" constant="17" id="XhZ-aI-CM6"/>
-                                    <constraint firstAttribute="trailing" secondItem="pam-Ir-R1K" secondAttribute="trailing" id="wU3-qc-eAn"/>
+                                    <constraint firstAttribute="width" secondItem="5Bu-3V-bJQ" secondAttribute="height" multiplier="1:1" id="VGI-kp-cJA"/>
                                 </constraints>
-                            </view>
+                                <state key="normal" title="Button" image="add-desc-selected">
+                                    <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addAssignmentPressed:" destination="fPk-rI-zmh" eventType="touchUpInside" id="Vzw-R8-TGE"/>
+                                    <segue destination="EgX-TY-p5Q" kind="presentation" identifier="addAssignmentSegue" id="KAL-1Q-w69"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASSIGNMENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ8-ZW-myO">
+                                <rect key="frame" x="128.66666666666666" y="303.33333333333331" width="156.99999999999997" height="36"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="28"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5Bu-3V-bJQ" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.15" id="1nl-1V-aPt"/>
-                            <constraint firstItem="k0h-gJ-Q4b" firstAttribute="trailing" secondItem="kXM-ee-x1Q" secondAttribute="trailing" constant="35" id="76G-Ua-x7K"/>
-                            <constraint firstItem="CCW-dh-sVH" firstAttribute="height" secondItem="SBJ-tF-3dc" secondAttribute="height" multiplier="0.05" id="Er3-Wi-ORc"/>
-                            <constraint firstItem="CCW-dh-sVH" firstAttribute="top" secondItem="uzj-fl-NRd" secondAttribute="bottom" constant="20" id="F2b-vg-L5J"/>
+                            <constraint firstItem="5Bu-3V-bJQ" firstAttribute="bottom" secondItem="pam-Ir-R1K" secondAttribute="bottom" constant="-20" id="5W9-Ei-hDg"/>
                             <constraint firstItem="zIv-qu-aaF" firstAttribute="leading" secondItem="k0h-gJ-Q4b" secondAttribute="leading" id="GAo-GN-Fs0"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.38" id="GD8-ug-iZS"/>
+                            <constraint firstItem="pam-Ir-R1K" firstAttribute="centerX" secondItem="SBJ-tF-3dc" secondAttribute="centerX" id="LJu-5l-XvG"/>
+                            <constraint firstItem="uzj-fl-NRd" firstAttribute="top" secondItem="nEK-JI-fSB" secondAttribute="bottom" multiplier="1.05" id="LU3-Vb-8c1"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="centerX" secondItem="SBJ-tF-3dc" secondAttribute="centerX" id="N51-gQ-eiV"/>
-                            <constraint firstItem="kXM-ee-x1Q" firstAttribute="top" secondItem="CCW-dh-sVH" secondAttribute="bottom" constant="18" id="NhX-ss-cbH"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="top" secondItem="k0h-gJ-Q4b" secondAttribute="top" constant="20" id="Pe2-et-1fq"/>
-                            <constraint firstItem="k0h-gJ-Q4b" firstAttribute="bottom" secondItem="kXM-ee-x1Q" secondAttribute="bottom" constant="10" id="V7N-8I-tvx"/>
-                            <constraint firstItem="CCW-dh-sVH" firstAttribute="leading" secondItem="k0h-gJ-Q4b" secondAttribute="leading" constant="20" id="VNI-gM-SLs"/>
                             <constraint firstItem="zIv-qu-aaF" firstAttribute="top" secondItem="SBJ-tF-3dc" secondAttribute="top" id="YBO-sd-kMN"/>
-                            <constraint firstItem="k0h-gJ-Q4b" firstAttribute="trailing" secondItem="CCW-dh-sVH" secondAttribute="trailing" constant="20" id="Z8f-id-LDr"/>
-                            <constraint firstItem="CCW-dh-sVH" firstAttribute="centerX" secondItem="SBJ-tF-3dc" secondAttribute="centerX" id="ZDF-ek-wPf"/>
+                            <constraint firstItem="pam-Ir-R1K" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.9" id="aof-pe-QjM"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="top" secondItem="UgC-BT-2CP" secondAttribute="bottom" multiplier="1.3" id="cYc-It-4mi"/>
                             <constraint firstItem="zIv-qu-aaF" firstAttribute="baseline" secondItem="uzj-fl-NRd" secondAttribute="bottom" multiplier="0.8" constant="8" symbolType="layoutAnchor" id="d7z-CV-alD"/>
-                            <constraint firstItem="k0h-gJ-Q4b" firstAttribute="bottom" secondItem="2Po-oh-req" secondAttribute="bottom" constant="10" id="gG7-w3-ikw"/>
+                            <constraint firstItem="5Bu-3V-bJQ" firstAttribute="trailing" secondItem="pam-Ir-R1K" secondAttribute="trailing" constant="-20" id="eh0-NO-omX"/>
                             <constraint firstItem="k0h-gJ-Q4b" firstAttribute="trailing" secondItem="zIv-qu-aaF" secondAttribute="trailing" id="lV4-nc-NuE"/>
-                            <constraint firstItem="2Po-oh-req" firstAttribute="top" secondItem="CCW-dh-sVH" secondAttribute="bottom" constant="5" id="mmh-Ik-3TY"/>
-                            <constraint firstItem="kXM-ee-x1Q" firstAttribute="leading" secondItem="k0h-gJ-Q4b" secondAttribute="leading" constant="35" id="qaJ-XT-ZdL"/>
-                            <constraint firstItem="k0h-gJ-Q4b" firstAttribute="trailing" secondItem="2Po-oh-req" secondAttribute="trailing" constant="35" id="tAr-5h-tfA"/>
-                            <constraint firstItem="2Po-oh-req" firstAttribute="leading" secondItem="k0h-gJ-Q4b" secondAttribute="leading" constant="35" id="xak-2i-4T9"/>
+                            <constraint firstItem="5Bu-3V-bJQ" firstAttribute="width" secondItem="pam-Ir-R1K" secondAttribute="width" multiplier="0.15" id="mhg-HA-x2P"/>
+                            <constraint firstItem="pam-Ir-R1K" firstAttribute="top" secondItem="lZ8-ZW-myO" secondAttribute="bottom" constant="10" id="nhX-EC-J1C"/>
+                            <constraint firstItem="lZ8-ZW-myO" firstAttribute="top" secondItem="uzj-fl-NRd" secondAttribute="bottom" constant="10" id="pwu-Q8-P1y"/>
+                            <constraint firstItem="lZ8-ZW-myO" firstAttribute="centerX" secondItem="SBJ-tF-3dc" secondAttribute="centerX" id="tAh-d0-N01"/>
+                            <constraint firstItem="k0h-gJ-Q4b" firstAttribute="bottom" secondItem="pam-Ir-R1K" secondAttribute="bottom" constant="10" id="vcg-zl-FvW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="k0h-gJ-Q4b"/>
                     </view>
                     <connections>
                         <outlet property="assignmentsTableView" destination="pam-Ir-R1K" id="mKr-KX-p43"/>
-                        <outlet property="emailLabel" destination="PYV-UA-XmT" id="O9t-Wx-JaW"/>
-                        <outlet property="fullNameLabel" destination="aso-17-loi" id="aDc-Cg-EcP"/>
-                        <outlet property="homeworkView" destination="kXM-ee-x1Q" id="3Rq-0g-jhO"/>
                         <outlet property="nameLabel" destination="UgC-BT-2CP" id="V3J-Oq-NbU"/>
-                        <outlet property="phoneLabel" destination="Rvd-5C-zne" id="6BU-Nx-5ry"/>
-                        <outlet property="profileView" destination="2Po-oh-req" id="wYe-ij-ciN"/>
-                        <outlet property="studentDetailsButton" destination="lgm-O9-HrO" id="b1a-LN-9gp"/>
-                        <outlet property="studentHomeworkButton" destination="fkj-d2-6lu" id="pRi-G7-7Er"/>
                         <outlet property="studentImageView" destination="uzj-fl-NRd" id="POb-F1-S8l"/>
-                        <outlet property="subjectLabel" destination="UBe-NS-g1S" id="p0F-VZ-SIR"/>
+                        <outlet property="subjectLabel" destination="nEK-JI-fSB" id="Gfj-zn-ism"/>
                         <segue destination="DA1-oF-Mup" kind="presentation" identifier="editAssignmentSegue" id="jm6-6R-g1x"/>
                     </connections>
                 </viewController>
