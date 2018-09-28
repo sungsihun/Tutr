@@ -185,18 +185,16 @@ extension StudentDetailViewController: UITableViewDataSource {
 
 extension StudentDetailViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            correctAssignments.remove(at: indexPath.row)
-            assignmentsTableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.correctAssignments.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let assignmentToDelete = self.correctAssignments[indexPath.row]
+            self.deleteAssignment(assignmentToDelete) {
+                self.correctAssignments.remove(at: indexPath.row)
+                DispatchQueue.main.async {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
@@ -215,6 +213,21 @@ extension StudentDetailViewController: UITableViewDelegate {
         cell.toggle()
         tableView.reloadData()
     }
+}
+
+// MARK: - Delete Assignment
+
+extension StudentDetailViewController {
+    
+    private func deleteAssignment(_ assignment: Assignment, completion: @escaping () -> ()) {
+        CloudKitManager.deleteAssignment(assignment, from: student) { (newStudentRecord) in
+            guard let newStudentRecord = newStudentRecord else { fatalError() }
+            self.student.record = newStudentRecord
+            self.delegate?.studentDetailViewController(self, didUpdate: self.student.record!)
+            completion()
+        }
+    }
+    
 }
 
 

@@ -326,7 +326,9 @@ class CloudKitManager {
             newAssignmentRecord["description"] = assignment.assignmentDescription as NSString
             let currentTeacher = CKReference(record: teacherRecord, action: .none)
             newAssignmentRecord["teacherRef"] = currentTeacher
-            let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .deleteSelf)
+            let newAssignmentRef = CKReference(record: newAssignmentRecord, action: .none)
+            
+            
             
             tempAssignments.append(newAssignmentRef)
             
@@ -375,7 +377,21 @@ class CloudKitManager {
         
     }
     
+    static func deleteAssignment(_ assignment: Assignment, from student: Student, completion: @escaping (CKRecord?) -> ()) {
     
+        guard let assignmentRecord = assignment.record, let studentRecord = student.record else { return }
+        let recordID = assignmentRecord.recordID
+        db.delete(withRecordID: recordID) { (_, error) in
+            if let error = error { print(error.localizedDescription) }
+            guard let assignmentsRefs = studentRecord["assignments"] as? [CKReference] else { fatalError() }
+            let newAssignmentRefs = assignmentsRefs.filter { $0.recordID != recordID }
+            studentRecord["assignments"] = newAssignmentRefs
+            save([studentRecord]) { (records) in
+                guard let records = records else { fatalError() }
+                completion(records.first)
+            }
+        }
+    }
     
     
     
