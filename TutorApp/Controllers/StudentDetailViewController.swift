@@ -14,26 +14,12 @@ class StudentDetailViewController: UIViewController {
   
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var studentDetailsButton: UIButton!
-    @IBOutlet weak var studentHomeworkButton: UIButton!
-    
-    // MARK: - Details Viewable Outlets
-    
-    @IBOutlet weak var profileView: UIView!
-    @IBOutlet weak var fullNameLabel: UILabel!
-    @IBOutlet weak var subjectLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
   
     // MARK: - Homework Viewable Outlets
     
-    @IBOutlet weak var homeworkView: UIView!
     @IBOutlet weak var assignmentsTableView: UITableView!
-    
+  
     // MARK: - Action Methods
-    
-    @IBAction func studentDetailsPressed(_ sender: Any) { toggle() }
-    @IBAction func studentHomeworkPressed(_ sender: Any) { toggle() }
   
     @IBAction func addAssignmentPressed(_ sender: UIButton) {
         setupBlurredBackgroundView()
@@ -46,14 +32,12 @@ class StudentDetailViewController: UIViewController {
     var indexPathForEditRow: IndexPath!
     var correctAssignments = [Assignment]()
 
-
     // MARK: - Life Cycle
   
     override func viewDidLoad() {
         super.viewDidLoad()
         loadStudent()
         setupUI()
-        setupNotificationCenter()
         loadStudentAssignments()
     }
   
@@ -64,13 +48,7 @@ class StudentDetailViewController: UIViewController {
     // MARK: - Custom Methods
 
     private func loadStudent() {
-    
-        profileView.isHidden = false
-        homeworkView.isHidden = true
-        
         nameLabel.text = student.name
-        subjectLabel.text = student.subject
-        fullNameLabel.text = student.name
         studentImageView.image = student.image
     }
     
@@ -83,32 +61,11 @@ class StudentDetailViewController: UIViewController {
         assignmentsTableView.reloadData()
     }
     
-    private func toggle() {
-        
-        studentDetailsButton.isSelected = !studentDetailsButton.isSelected
-        studentHomeworkButton.isSelected = !studentHomeworkButton.isSelected
-        
-        studentDetailsButton.isUserInteractionEnabled = !studentDetailsButton.isSelected
-        studentHomeworkButton.isUserInteractionEnabled = !studentHomeworkButton.isSelected
-        
-        profileView.isHidden = !profileView.isHidden
-        homeworkView.isHidden = !homeworkView.isHidden
-
-    }
-    
     private func setupUI() {
         
         // MARK: - Navigation Bar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-      
-        // MARK: - Buttons
-        
-        studentDetailsButton.setTitleColor(UIColor.black, for: .selected)
-        studentDetailsButton.setTitleColor(UIColor.black, for: .disabled)
-        studentHomeworkButton.setTitleColor(UIColor.black, for: .disabled)
-        studentHomeworkButton.setTitleColor(UIColor.black, for: .selected)
-        studentDetailsButton.isSelected = true
         
         // MARK: - Table View
         
@@ -116,7 +73,6 @@ class StudentDetailViewController: UIViewController {
     }
     
 
-  
     func setupAlert(indexPath: IndexPath) {
         let alert = UIAlertController(title: "Edit", message: "Please edit", preferredStyle: .alert)
       
@@ -148,16 +104,11 @@ class StudentDetailViewController: UIViewController {
         self.present(alert, animated: true)
     }
   
-    private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-    }
-  
     private func setupBlurredBackgroundView() {
-      let blurredBackgroundView = UIVisualEffectView()
-      blurredBackgroundView.frame = view.frame
-      blurredBackgroundView.effect = UIBlurEffect(style: .dark)
-      view.addSubview(blurredBackgroundView)
+        let blurredBackgroundView = UIVisualEffectView()
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .dark)
+        view.addSubview(blurredBackgroundView)
     }
   
     //MARK: - Segue
@@ -191,6 +142,7 @@ extension StudentDetailViewController: UITableViewDataSource {
             tableView.backgroundView = nil
             tableView.separatorStyle = .singleLine
         } else {
+            // text for empty table view
             let noDataLabel = UILabel()
             let attributedString = NSMutableAttributedString(string: "Press  ")
             let addDescImageAttachment = NSTextAttachment()
@@ -257,24 +209,6 @@ extension StudentDetailViewController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
         cell.toggle()
         tableView.reloadData()
-    }
-}
-
-// MARK: - Notification Center Methods
-
-extension StudentDetailViewController {
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
-          
-            if (self.view.frame.origin.y == 0) && ((view.frame.size.height - homeworkView.frame.origin.y) <= keyboardHeight) {
-                self.view.frame.origin.y += (keyboardHeight - homeworkView.frame.origin.y)
-            }
-        }
-    }
-  
-    @objc func keyboardWillHide(_ notification: Notification) {
-        self.view.frame.origin.y = 0
     }
 }
 
