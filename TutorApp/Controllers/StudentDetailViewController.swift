@@ -14,6 +14,7 @@ class StudentDetailViewController: UIViewController {
   
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var subjectLabel: UILabel!
   
     // MARK: - Homework Viewable Outlets
     
@@ -49,6 +50,7 @@ class StudentDetailViewController: UIViewController {
 
     private func loadStudent() {
         nameLabel.text = student.name
+        subjectLabel.text = student.subject
         studentImageView.image = student.image
     }
     

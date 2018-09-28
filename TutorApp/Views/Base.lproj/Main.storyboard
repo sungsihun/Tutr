@@ -487,10 +487,17 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEK-JI-fSB">
+                                        <rect key="frame" x="181.33333333333334" y="98" width="51.333333333333343" height="31.666666666666657"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="PfE-hw-t3u" firstAttribute="top" secondItem="zIv-qu-aaF" secondAttribute="top" id="DHq-cP-Qrj"/>
+                                    <constraint firstItem="nEK-JI-fSB" firstAttribute="centerX" secondItem="zIv-qu-aaF" secondAttribute="centerX" id="Mfr-L5-ddj"/>
                                     <constraint firstAttribute="bottom" secondItem="PfE-hw-t3u" secondAttribute="bottom" id="Zn7-DV-Rtu"/>
                                     <constraint firstAttribute="trailing" secondItem="PfE-hw-t3u" secondAttribute="trailing" id="erG-Bw-Y4J"/>
                                     <constraint firstItem="UgC-BT-2CP" firstAttribute="centerX" secondItem="zIv-qu-aaF" secondAttribute="centerX" id="lVh-Sr-snq"/>
@@ -524,7 +531,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
-                                                    <rect key="frame" x="10" y="13.333333333333334" width="324" height="25.333333333333329"/>
+                                                    <rect key="frame" x="10" y="13.333333333333334" width="352.66666666666669" height="25.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -540,6 +547,11 @@
                                                 <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" constant="5" id="sbl-37-ZXL"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="45o-cw-sIG" id="a0p-HU-xc6"/>
                                             <outlet property="titleLabel" destination="dNY-YP-vBc" id="peF-A2-peb"/>
@@ -583,6 +595,7 @@
                             <constraint firstItem="zIv-qu-aaF" firstAttribute="leading" secondItem="k0h-gJ-Q4b" secondAttribute="leading" id="GAo-GN-Fs0"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="width" secondItem="SBJ-tF-3dc" secondAttribute="width" multiplier="0.38" id="GD8-ug-iZS"/>
                             <constraint firstItem="pam-Ir-R1K" firstAttribute="centerX" secondItem="SBJ-tF-3dc" secondAttribute="centerX" id="LJu-5l-XvG"/>
+                            <constraint firstItem="uzj-fl-NRd" firstAttribute="top" secondItem="nEK-JI-fSB" secondAttribute="bottom" multiplier="1.05" id="LU3-Vb-8c1"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="centerX" secondItem="SBJ-tF-3dc" secondAttribute="centerX" id="N51-gQ-eiV"/>
                             <constraint firstItem="uzj-fl-NRd" firstAttribute="top" secondItem="k0h-gJ-Q4b" secondAttribute="top" constant="20" id="Pe2-et-1fq"/>
                             <constraint firstItem="zIv-qu-aaF" firstAttribute="top" secondItem="SBJ-tF-3dc" secondAttribute="top" id="YBO-sd-kMN"/>
@@ -603,6 +616,7 @@
                         <outlet property="assignmentsTableView" destination="pam-Ir-R1K" id="mKr-KX-p43"/>
                         <outlet property="nameLabel" destination="UgC-BT-2CP" id="V3J-Oq-NbU"/>
                         <outlet property="studentImageView" destination="uzj-fl-NRd" id="POb-F1-S8l"/>
+                        <outlet property="subjectLabel" destination="nEK-JI-fSB" id="56l-EP-PaA"/>
                         <segue destination="DA1-oF-Mup" kind="presentation" identifier="editAssignmentSegue" id="jm6-6R-g1x"/>
                     </connections>
                 </viewController>
