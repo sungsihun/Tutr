@@ -14,6 +14,7 @@ class TeacherListViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: - Properties
     
@@ -24,6 +25,7 @@ class TeacherListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupSpinner()
         getStudent()
     }
     
@@ -32,11 +34,9 @@ class TeacherListViewController: UIViewController {
     private func getStudent() {
         getCurrentStudent {
             CloudKitManager.fetchTeachers { (teachers) in
-                if let teachers = teachers {
-                    self.teachers = teachers
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                if let teachers = teachers { self.teachers = teachers }
+                DispatchQueue.main.async {
+                    self.stopSpinner()
                 }
             }
         }
@@ -142,7 +142,21 @@ extension TeacherListViewController {
         
     }
     
-
+    private func setupSpinner() {
+        self.spinner.startAnimating()
+        self.spinner.hidesWhenStopped = true
+        self.tableView.isHidden = true
+    }
+    
+    private func stopSpinner() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.spinner.stopAnimating()
+        }
+    }
+    
+    
     
     
     private func setupTableView(filterBy: String) {

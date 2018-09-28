@@ -138,6 +138,7 @@ class StudentListViewController: UIViewController {
     
     private func setupSpinner() {
         self.spinner.startAnimating()
+        self.spinner.hidesWhenStopped = true
         self.tableView.isHidden = true
     }
     
