@@ -280,6 +280,8 @@ class StudentDetailViewController: UIViewController {
       CloudKitManager.add(assignment: newAssignment, from: teacher, to: student) { (records) in
         guard let records = records else { fatalError() }
         self.student.record = records.filter { $0.recordType == "Students" }.first!
+        let newAssignmentRecord = records.filter { $0.recordType == "Assignments" }.first!
+        self.correctAssignments[0].record = newAssignmentRecord
         self.delegate?.studentDetailViewController(self, didUpdate: self.student.record!)
         DispatchQueue.main.async {
           self.assignmentsTableView.reloadData()
