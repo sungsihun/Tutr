@@ -34,6 +34,8 @@ class StudentListViewController: UIViewController {
             CloudKitManager.fetchStudents() { (students) in
                 DispatchQueue.main.async {
                     if let students = students { self.students = students }
+                    self.tableView.reloadData()
+                    self.stopSpinner()
                 }
             }
         }
