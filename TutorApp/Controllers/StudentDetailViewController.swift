@@ -49,13 +49,8 @@ class StudentDetailViewController: UIViewController {
     
     loadStudent()
     setupUI()
+    setTextForEmptyTableView()
     loadStudentAssignments()
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-//    self.edgesForExtendedLayout = .all
-    navigationController?.navigationBar.barStyle = .blackTranslucent
-
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -145,11 +140,8 @@ class StudentDetailViewController: UIViewController {
     noDataLabel.textAlignment = .center
     assignmentsTableView.addSubview(noDataLabel)
     noDataLabel.translatesAutoresizingMaskIntoConstraints = false
-//    noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor).isActive = true
-//    noDataLabel.centerXAnchor.constraint(equalTo: assignmentsTableView.centerXAnchor).isActive = true
-    
-    noDataLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    noDataLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+    noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor, constant: assignmentsTableView.frame.size.height/8).isActive = true
+    noDataLabel.centerXAnchor.constraint(equalTo: assignmentsTableView.centerXAnchor).isActive = true
     
   }
   
