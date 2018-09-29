@@ -554,15 +554,15 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="assignmentCell" rowHeight="90" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="assignmentCell" rowHeight="90" id="c4j-xC-sPD" customClass="AssignmentCell" customModule="TutorApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="325" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4j-xC-sPD" id="S2C-YE-c3s">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45o-cw-sIG">
-                                                    <rect key="frame" x="37" y="54.666666666666664" width="296" height="25.333333333333336"/>
+                                                    <rect key="frame" x="62" y="54.666666666666664" width="331.33333333333331" height="25.333333333333336"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -570,26 +570,37 @@
                                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-YP-vBc">
-                                                    <rect key="frame" x="37" y="9.9999999999999964" width="296" height="44.666666666666657"/>
+                                                    <rect key="frame" x="62" y="9.9999999999999964" width="331.33333333333331" height="44.666666666666657"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="23"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="box-uncheked" translatesAutoresizingMaskIntoConstraints="NO" id="YAT-uc-8YM">
+                                                    <rect key="frame" x="27" y="20" width="25" height="25"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="YAT-uc-8YM" secondAttribute="height" multiplier="1:1" id="Xok-aK-uMM"/>
+                                                        <constraint firstAttribute="height" constant="25" id="qbF-Jj-etL"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="YAT-uc-8YM" firstAttribute="centerY" secondItem="dNY-YP-vBc" secondAttribute="centerY" id="Gzl-SP-eFT"/>
                                                 <constraint firstItem="dNY-YP-vBc" firstAttribute="width" secondItem="S2C-YE-c3s" secondAttribute="width" multiplier="0.8" id="P4J-F6-ol0"/>
                                                 <constraint firstItem="dNY-YP-vBc" firstAttribute="top" secondItem="S2C-YE-c3s" secondAttribute="top" constant="10" id="RHl-4W-nyj"/>
                                                 <constraint firstItem="45o-cw-sIG" firstAttribute="width" secondItem="S2C-YE-c3s" secondAttribute="width" multiplier="0.8" id="bHN-Ar-xeN"/>
-                                                <constraint firstItem="45o-cw-sIG" firstAttribute="centerX" secondItem="S2C-YE-c3s" secondAttribute="centerX" id="lxC-Mj-avj"/>
+                                                <constraint firstItem="45o-cw-sIG" firstAttribute="centerX" secondItem="S2C-YE-c3s" secondAttribute="centerX" multiplier="1.1" id="lxC-Mj-avj"/>
                                                 <constraint firstAttribute="bottom" secondItem="45o-cw-sIG" secondAttribute="bottom" constant="10" id="ogn-BC-UEB"/>
-                                                <constraint firstItem="dNY-YP-vBc" firstAttribute="centerX" secondItem="S2C-YE-c3s" secondAttribute="centerX" id="wEC-zP-5ln"/>
+                                                <constraint firstItem="dNY-YP-vBc" firstAttribute="leading" secondItem="YAT-uc-8YM" secondAttribute="trailing" constant="10" id="tGl-aE-HWh"/>
+                                                <constraint firstItem="dNY-YP-vBc" firstAttribute="centerX" secondItem="S2C-YE-c3s" secondAttribute="centerX" multiplier="1.1" id="wEC-zP-5ln"/>
                                                 <constraint firstItem="45o-cw-sIG" firstAttribute="top" secondItem="dNY-YP-vBc" secondAttribute="bottom" id="yFt-ZT-9XR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="checkboxImageView" destination="YAT-uc-8YM" id="d8Z-xc-mvV"/>
                                             <outlet property="descriptionLabel" destination="45o-cw-sIG" id="a0p-HU-xc6"/>
                                             <outlet property="titleLabel" destination="dNY-YP-vBc" id="peF-A2-peb"/>
                                         </connections>
@@ -903,7 +914,7 @@
                 <navigationController storyboardIdentifier="Students" automaticallyAdjustsScrollViewInsets="NO" id="iGm-KU-S2o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="oYs-o3-r0t">
-                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -1165,6 +1176,7 @@
         <image name="add-people" width="50" height="50"/>
         <image name="add-photo-centered" width="925" height="841"/>
         <image name="background5" width="1242" height="2208"/>
+        <image name="box-uncheked" width="1455" height="1455"/>
         <image name="defaultUser" width="100" height="100"/>
         <image name="filter" width="40" height="40"/>
         <image name="header" width="697" height="304"/>

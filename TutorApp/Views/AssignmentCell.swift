@@ -15,6 +15,7 @@ class AssignmentCell: UITableViewCell {
   
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var checkboxImageView: UIImageView!
   
     // MARK: - Properties
   
@@ -36,18 +37,15 @@ class AssignmentCell: UITableViewCell {
         }
       
       if assignment.isComplete {
-        self.accessoryType = .checkmark
-        
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
         attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         titleLabel.attributedText = attributeString
+        checkboxImageView.image = UIImage(named: "box-checked")
       } else {
-        self.accessoryType = .none
-        
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
         attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 0, range: NSMakeRange(0, attributeString.length))
-        
         titleLabel.attributedText = attributeString
+        checkboxImageView.image = UIImage(named: "box-uncheked")
       }
     }
   
