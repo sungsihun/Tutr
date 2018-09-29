@@ -46,6 +46,9 @@ class TeacherListViewController: UIViewController {
             CloudKitManager.fetchTeachers { (teachers) in
                 if let teachers = teachers { self.teachers = teachers }
                 DispatchQueue.main.async {
+                    if let filterDefaults = self.userDefaults.string(forKey: "filterBy") {
+                        self.setupTableView(filterBy: filterDefaults)
+                    }
                     self.stopSpinner()
                 }
             }
@@ -158,9 +161,7 @@ extension TeacherListViewController {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
         
-        if let filterDefaults = self.userDefaults.string(forKey: "filterBy") {
-            setupTableView(filterBy: filterDefaults)
-        }
+
         
     }
     
@@ -184,6 +185,9 @@ extension TeacherListViewController {
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        
+        
         if filterBy == "Name" {
             self.teachers = self.teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
         } else {
