@@ -15,6 +15,7 @@ class TeacherCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var teacherImageView: RoundImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
   
     // MARK: - Custom Methods
     

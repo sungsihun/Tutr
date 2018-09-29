@@ -15,13 +15,14 @@ class TeacherListViewController: UIViewController {
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
+  
     // MARK: - Properties
     
     var teachers = [Teacher]()
     let userDefaults = UserDefaults.standard
     var selectedTeacher: Teacher?
-    
+    var indexPathForSelectedRow: IndexPath!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -127,11 +128,12 @@ extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexPathForSelectedRow = indexPath
         let selectedTeacher = teachers[indexPath.row]
         self.selectedTeacher = selectedTeacher
         let currentStudent = ActiveUser.shared.current as! Student
         guard let currentStudentRecord = currentStudent.record else { fatalError("No student record") }
-        self.spinner.startAnimating()
+        self.startSpinnerInCell()
         CloudKitManager.getLatestStudentRecord(with: currentStudentRecord.recordID) { (newStudentRecord) in
             guard let newStudentRecord = newStudentRecord else { fatalError("Could not get newStudentRecord") }
             ActiveUser.shared.current = Student(with: newStudentRecord)
@@ -178,6 +180,18 @@ extension TeacherListViewController {
             self.spinner.stopAnimating()
         }
     }
+  
+    private func startSpinnerInCell() {
+      let selectedCell = tableView.cellForRow(at: indexPathForSelectedRow) as! TeacherCell
+      selectedCell.spinner.startAnimating()
+      selectedCell.spinner.isHidden = false
+    }
+  
+    private func stopSpinnerInCell() {
+        let selectedCell = self.tableView.cellForRow(at: self.indexPathForSelectedRow) as! TeacherCell
+        selectedCell.spinner.stopAnimating()
+        selectedCell.spinner.isHidden = true
+    }
     
     
     
@@ -216,7 +230,7 @@ extension TeacherListViewController {
     @objc private func performSegueChecker() {
         if selectedTeacher == nil { return }
         DispatchQueue.main.async {
-            self.spinner.stopAnimating()
+            self.stopSpinnerInCell()
             self.performSegue(withIdentifier: "showAssignments", sender: self)
         }
     }
