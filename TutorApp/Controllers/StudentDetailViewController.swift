@@ -201,6 +201,7 @@ class StudentDetailViewController: UIViewController {
       let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
       
       let assignment = correctAssignments[indexPath.row]
+      
       cell.configureCellWith(assignment: assignment)
       updateTableView()
       return cell
@@ -243,6 +244,19 @@ class StudentDetailViewController: UIViewController {
       let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
       cell.toggle()
       tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+      let complete = UIContextualAction(style: .normal, title:  "Complete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        
+        self.correctAssignments[indexPath.row].isComplete = !self.correctAssignments[indexPath.row].isComplete
+        self.assignmentsTableView.reloadData()
+        success(true)
+      })
+      
+      complete.backgroundColor = UIColor.blue
+      let configuration = UISwipeActionsConfiguration(actions: [complete])
+      return configuration
     }
   }
   
