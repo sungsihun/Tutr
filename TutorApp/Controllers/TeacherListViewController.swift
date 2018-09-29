@@ -29,6 +29,16 @@ class TeacherListViewController: UIViewController {
         getStudent()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(performSegueChecker), name: .assignmentsChanged, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Fetching student
     
     private func getStudent() {
@@ -116,9 +126,18 @@ extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedTeacher = teachers[indexPath.row]
         self.selectedTeacher = selectedTeacher
-        performSegue(withIdentifier: "showAssignments", sender: self)
+        let currentStudent = ActiveUser.shared.current as! Student
+        guard let currentStudentRecord = currentStudent.record else { fatalError("No student record") }
+        self.spinner.startAnimating()
+        CloudKitManager.getLatestStudentRecord(with: currentStudentRecord.recordID) { (newStudentRecord) in
+            guard let newStudentRecord = newStudentRecord else { fatalError("Could not get newStudentRecord") }
+            ActiveUser.shared.current = Student(with: newStudentRecord)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+
     
 }
 
@@ -190,18 +209,25 @@ extension TeacherListViewController {
     
     // MARK: - Segue
     
+    @objc private func performSegueChecker() {
+        if selectedTeacher == nil { return }
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.performSegue(withIdentifier: "showAssignments", sender: self)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAssignments" {
             let nav = segue.destination as! UINavigationController
             let assignmentsVC = nav.viewControllers.first! as! AssignmentListViewController
+            guard let selectedTeacher = self.selectedTeacher, let teacherRecord = selectedTeacher.record else { fatalError("Somehow no teacher selected") }
             let currentStudent = ActiveUser.shared.current as! Student
-            guard let selectedTeacher = selectedTeacher, let teacherRecord = selectedTeacher.record else { fatalError("Somehow no teacher selected") }
             currentStudent.filterAssignments(by: selectedTeacher)
             assignmentsVC.assignments = currentStudent.teacherAssignmentsDict[teacherRecord.recordID.recordName]
-
         }
+        
     }
-    
 }
 
 
