@@ -405,7 +405,6 @@
                                             <outlet property="nameLabel" destination="mcY-V2-Ht8" id="yXt-p0-lVT"/>
                                             <outlet property="subjectLabel" destination="FGf-ap-jZh" id="ZHK-FM-9pX"/>
                                             <outlet property="teacherImageView" destination="hfr-Qy-uYz" id="NjT-Jw-Su9"/>
-                                            <segue destination="AhI-uu-zxs" kind="show" identifier="showAssignments" id="ozg-9h-Air"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -445,6 +444,7 @@
                         <outlet property="headerHeightConstraint" destination="u7N-4M-zU1" id="giU-Zh-yHe"/>
                         <outlet property="spinner" destination="l1l-QH-4Gn" id="gHK-45-k0C"/>
                         <outlet property="tableView" destination="T1V-9s-c6q" id="eke-YH-QtT"/>
+                        <segue destination="AhI-uu-zxs" kind="show" identifier="showAssignments" id="thq-e8-2Zy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbA-i7-w4y" userLabel="First Responder" sceneMemberID="firstResponder"/>

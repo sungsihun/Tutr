@@ -116,6 +116,7 @@ extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedTeacher = teachers[indexPath.row]
         self.selectedTeacher = selectedTeacher
+        performSegue(withIdentifier: "showAssignments", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
