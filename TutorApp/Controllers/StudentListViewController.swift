@@ -76,6 +76,9 @@ class StudentListViewController: UIViewController {
             CloudKitManager.fetchStudents() { (students) in
                 DispatchQueue.main.async {
                     if let students = students { self.students = students }
+                    if let filterString = self.userDefaults.string(forKey: "filterBy") {
+                        self.setupTableView(filterBy: filterString)
+                    }
                     self.tableView.reloadData()
                     self.stopSpinner()
                 }
@@ -107,12 +110,12 @@ class StudentListViewController: UIViewController {
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
-        //
-        //        if filterBy == "Name" {
-        //            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
-        //        } else {
-        //            self.students = self.students.sorted { $0.subjectStudying.lowercased() < $1.subjectStudying.lowercased() }
-        //        }
+        
+                if filterBy == "Name" {
+                    self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
+                } else {
+                    self.students = self.students.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
+                }
         
         self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
@@ -129,11 +132,7 @@ class StudentListViewController: UIViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
-        
-        
-        if let filterString = userDefaults.string(forKey: "filterBy") {
-            setupTableView(filterBy: filterString)
-        }
+    
     }
     
     private func setupSpinner() {
