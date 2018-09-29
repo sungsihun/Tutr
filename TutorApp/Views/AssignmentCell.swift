@@ -24,7 +24,6 @@ class AssignmentCell: UITableViewCell {
   
     func configureCellWith(assignment: Assignment) {
       
-        titleLabel.text = assignment.assignmentTitle
         descriptionLabel.text = self.isExpanded ? assignment.assignmentDescription : ""
         if isExpanded {
             self.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
@@ -35,6 +34,21 @@ class AssignmentCell: UITableViewCell {
             titleLabel.textColor = UIColor.darkGray
             descriptionLabel.textColor = UIColor.darkGray
         }
+      
+      if assignment.isComplete {
+        self.accessoryType = .checkmark
+        
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
+        attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        titleLabel.attributedText = attributeString
+      } else {
+        self.accessoryType = .none
+        
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
+        attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 0, range: NSMakeRange(0, attributeString.length))
+        
+        titleLabel.attributedText = attributeString
+      }
     }
   
     func toggle() {

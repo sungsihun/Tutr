@@ -49,13 +49,13 @@ class StudentDetailViewController: UIViewController {
     
     loadStudent()
     setupUI()
+    setTextForEmptyTableView()
     loadStudentAssignments()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self)
   }
-  
   
   
   // MARK: - Custom Methods
@@ -140,19 +140,21 @@ class StudentDetailViewController: UIViewController {
     noDataLabel.textAlignment = .center
     assignmentsTableView.addSubview(noDataLabel)
     noDataLabel.translatesAutoresizingMaskIntoConstraints = false
-    noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor).isActive = true
+    noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor, constant: assignmentsTableView.frame.size.height/8).isActive = true
     noDataLabel.centerXAnchor.constraint(equalTo: assignmentsTableView.centerXAnchor).isActive = true
-    
     
   }
   
-  func updateTextForEmptyTableView() {
+  func updateTableView() {
     if correctAssignments.count > 0 {
       assignmentsTableView.backgroundView = nil
       assignmentsTableView.separatorStyle = .singleLine
       noDataLabel.isHidden = true
+      assignmentsTableView.isScrollEnabled = true
     } else {
+      // For Empty Table View
       noDataLabel.isHidden = false
+      assignmentsTableView.isScrollEnabled = false
     }
   }
   
@@ -163,16 +165,16 @@ class StudentDetailViewController: UIViewController {
     if segue.identifier == "addAssignmentSegue" {
       if let addAssignmentVC = segue.destination as? AddAssignmentViewController {
         addAssignmentVC.delegate = self
-        self.navigationController?.isNavigationBarHidden = true
-        
         addAssignmentVC.modalPresentationStyle = .overFullScreen
+        self.navigationController?.isNavigationBarHidden = true
+
       }
     }
     
     if segue.identifier == "editAssignmentSegue" {
       if let editAssignmentVC = segue.destination as? EditAssignmentViewController {
         editAssignmentVC.delegate = self
-        let currentAssignment = student.assignments[indexPathForEditRow.row]
+        let currentAssignment = correctAssignments[indexPathForEditRow.row]
         editAssignmentVC.assignment = currentAssignment
         editAssignmentVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.isNavigationBarHidden = true
@@ -186,7 +188,7 @@ class StudentDetailViewController: UIViewController {
   extension StudentDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-      updateTextForEmptyTableView()
+      updateTableView()
       return 1
     }
     
@@ -199,8 +201,9 @@ class StudentDetailViewController: UIViewController {
       let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
       
       let assignment = correctAssignments[indexPath.row]
+      
       cell.configureCellWith(assignment: assignment)
-      setTextForEmptyTableView()
+      updateTableView()
       return cell
     }
   }
@@ -241,6 +244,19 @@ class StudentDetailViewController: UIViewController {
       let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
       cell.toggle()
       tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+      let complete = UIContextualAction(style: .normal, title:  "Complete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        
+        self.correctAssignments[indexPath.row].isComplete = !self.correctAssignments[indexPath.row].isComplete
+        self.assignmentsTableView.reloadData()
+        success(true)
+      })
+      
+      complete.backgroundColor = UIColor.blue
+      let configuration = UISwipeActionsConfiguration(actions: [complete])
+      return configuration
     }
   }
   
@@ -295,7 +311,7 @@ class StudentDetailViewController: UIViewController {
   extension StudentDetailViewController: EditAssignmentControllerDelegate {
     
     func editAssignment(editedAssignment: Assignment) {
-      student.assignments[self.indexPathForEditRow.row] = editedAssignment
+      correctAssignments[self.indexPathForEditRow.row] = editedAssignment
       assignmentsTableView.reloadData()
       
       //        student.assignments.insert(editedAssignment, at: 0)
@@ -316,6 +332,6 @@ class StudentDetailViewController: UIViewController {
   
   extension StudentDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-      setTextForEmptyTableView()
+      updateTableView()
     }
 }
