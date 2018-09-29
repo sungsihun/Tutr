@@ -308,14 +308,14 @@ class CloudKitManager {
     static func getStudentFromRecordID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
         getUserRecord(with: id) { (record) in
             guard let record = record else { completion(nil); return }
-            let student = Student(record)
+            let student = Student(with: record)
             completion(student)
         }
     }
     
     // Get student record fromID
     
-    static private func getLatestStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+    static func getLatestStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         print(id.recordName)
         let ref = CKReference(recordID: id, action: .none)
         let predicate = NSPredicate(format: "recordID == %@", ref)

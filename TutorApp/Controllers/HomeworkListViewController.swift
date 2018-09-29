@@ -10,22 +10,22 @@
 import UIKit
 
 class AssignmentListViewController: UIViewController {
-  
+    
     // MARK: - Outlets
-  
+    
     @IBOutlet weak var tableView: UITableView!
-  
+    
     // MARK: - Properties
-  
-    var assignments = [Assignment]()
-  
+    
+    var assignments: [Assignment]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-  
+    
     // MARK: - Actions
-  
+    
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -37,23 +37,23 @@ extension AssignmentListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assignments.count
     }
-  
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentAssignmentCell", for: indexPath) as! StudentAssignmentCell
         let assignment = assignments[indexPath.row]
         cell.configureCellWith(assignment: assignment)
-      
+        
         return cell
     }
-  
-
+    
+    
 }
 
 // MARK: - Table View Delegate
 
 extension AssignmentListViewController: UITableViewDelegate {
-  
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
         cell.toggle()

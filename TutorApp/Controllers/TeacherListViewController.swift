@@ -20,7 +20,7 @@ class TeacherListViewController: UIViewController {
     
     var teachers = [Teacher]()
     let userDefaults = UserDefaults.standard
-    
+    var selectedTeacher: Teacher?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +114,8 @@ extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedTeacher = teachers[indexPath.row]
+        self.selectedTeacher = selectedTeacher
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -182,3 +184,25 @@ extension TeacherListViewController {
     }
     
 }
+
+extension TeacherListViewController {
+    
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAssignments" {
+            let nav = segue.destination as! UINavigationController
+            let assignmentsVC = nav.viewControllers.first! as! AssignmentListViewController
+            let currentStudent = ActiveUser.shared.current as! Student
+            guard let selectedTeacher = selectedTeacher, let teacherRecord = selectedTeacher.record else { fatalError("Somehow no teacher selected") }
+            currentStudent.filterAssignments(by: selectedTeacher)
+            assignmentsVC.assignments = currentStudent.teacherAssignmentsDict[teacherRecord.recordID.recordName]
+
+        }
+    }
+    
+}
+
+
+
+
