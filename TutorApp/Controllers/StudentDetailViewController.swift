@@ -146,13 +146,16 @@ class StudentDetailViewController: UIViewController {
     
   }
   
-  func updateTextForEmptyTableView() {
+  func updateForEmptyTableView() {
     if correctAssignments.count > 0 {
       assignmentsTableView.backgroundView = nil
       assignmentsTableView.separatorStyle = .singleLine
       noDataLabel.isHidden = true
+      assignmentsTableView.isScrollEnabled = true
     } else {
+      // For Empty Table View
       noDataLabel.isHidden = false
+      assignmentsTableView.isScrollEnabled = false
     }
   }
   
@@ -186,7 +189,7 @@ class StudentDetailViewController: UIViewController {
   extension StudentDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-      updateTextForEmptyTableView()
+      updateForEmptyTableView()
       return 1
     }
     
