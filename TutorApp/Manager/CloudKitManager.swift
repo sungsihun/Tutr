@@ -321,11 +321,17 @@ class CloudKitManager {
         let predicate = NSPredicate(format: "recordID == %@", ref)
         let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
         
-        db.perform(query, inZoneWith: nil) { (records, error) in
-            if let error = error { print(error.localizedDescription); completion(nil) }
-            completion(records?.first)
+        let queryOp = CKQueryOperation(query: query)
+        queryOp.queuePriority = .veryHigh
+        queryOp.qualityOfService = .userInteractive
+        
+        queryOp.recordFetchedBlock = { record in
+            completion(record)
         }
+        db.add(queryOp)
     }
+    
+    
     
     
     // Search for student
