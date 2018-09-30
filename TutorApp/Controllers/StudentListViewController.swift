@@ -250,7 +250,8 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
 }
 
 extension StudentListViewController: StudentDetailViewControllerDelegate {
-    func studentDetailViewController(_ controller: StudentDetailViewController, didUpdate record: CKRecord) {
+    func studentDetailViewController(_ controller: StudentDetailViewController, didUpdate record: CKRecord?) {
+        guard let record = record else { fatalError() }
         guard let selectedIndexRow = selectedIndexRow else { fatalError() }
         guard let newStudent = Student(with: record) else { fatalError() }
         students[selectedIndexRow] = newStudent

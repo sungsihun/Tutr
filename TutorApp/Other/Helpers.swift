@@ -15,3 +15,7 @@ func setAlertWith(title: String, message: String, from view: UIViewController, h
     alertController.addAction(okAction)
     view.present(alertController, animated: true, completion: nil)
 }
+
+extension Int {
+    var boolValue: Bool { return self != 0 }
+}
