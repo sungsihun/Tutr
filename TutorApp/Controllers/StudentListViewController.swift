@@ -212,16 +212,28 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+      
         if editingStyle == .delete {
-            let studentToDelete = students[indexPath.row]
+          
+          let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to remove \(students[indexPath.row].name)?", preferredStyle: .alert)
+          
+          let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            let studentToDelete = self.students[indexPath.row]
             CloudKitManager.deleteStudent(studentToDelete) { (success) in
-                if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
-                self.students.remove(at: indexPath.row)
-                DispatchQueue.main.async {
-                    self.tableView.deleteRows(at: [indexPath], with: .fade)
-                }
+              if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
+              self.students.remove(at: indexPath.row)
+              DispatchQueue.main.async {
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+              }
             }
+          }
+          
+          let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+          
+          deleteAlert.addAction(delete)
+          deleteAlert.addAction(cancel)
+          
+          present(deleteAlert, animated: true, completion: nil)
         }
     }
     

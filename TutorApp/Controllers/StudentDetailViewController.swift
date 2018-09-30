@@ -218,14 +218,25 @@ class StudentDetailViewController: UIViewController {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
       let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-        let assignmentToDelete = self.correctAssignments[indexPath.row]
-        self.deleteAssignment(assignmentToDelete) {
-          self.correctAssignments.remove(at: indexPath.row)
-          DispatchQueue.main.async {
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        let deleteAlert = UIAlertController(title: "Delete Assignment", message: "Are you sure you want to delete?", preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+          let assignmentToDelete = self.correctAssignments[indexPath.row]
+          self.deleteAssignment(assignmentToDelete) {
+            self.correctAssignments.remove(at: indexPath.row)
+            DispatchQueue.main.async {
+              tableView.deleteRows(at: [indexPath], with: .fade)
+            }
           }
         }
         
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        deleteAlert.addAction(delete)
+        deleteAlert.addAction(cancel)
+        
+        self.present(deleteAlert, animated: true, completion: nil)
       }
       
       let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
