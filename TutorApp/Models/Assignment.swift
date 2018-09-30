@@ -16,6 +16,7 @@ class Assignment {
     var record: CKRecord?
     var teacherRef: CKReference
     var isComplete = false
+    var createdAt: Date?
     
     init(assignmentTitle: String, assignmentDescription: String, teacherRef: CKReference) {
         self.assignmentTitle = assignmentTitle
@@ -29,6 +30,7 @@ class Assignment {
         guard let teacherRef = record["teacherRef"] as? CKReference else { fatalError() }
         guard let isComplete = record["isComplete"] as? Int else { fatalError() }
         self.init(assignmentTitle: title, assignmentDescription: description, teacherRef: teacherRef)
+        self.createdAt = record.creationDate
         self.isComplete = isComplete.boolValue
         self.record = record
 
