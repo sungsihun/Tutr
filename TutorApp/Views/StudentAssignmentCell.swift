@@ -26,6 +26,16 @@ class StudentAssignmentCell: UITableViewCell {
       titleLabel.textColor = UIColor.darkGray
       descriptionLabel.textColor = UIColor.darkGray
     }
+    
+    if assignment.isComplete {
+      let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
+      attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+      titleLabel.attributedText = attributeString
+    } else {
+      let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
+      attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 0, range: NSMakeRange(0, attributeString.length))
+      titleLabel.attributedText = attributeString
+    }
   }
   
   func toggle() {
