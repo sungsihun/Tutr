@@ -95,9 +95,18 @@ extension AssignmentListViewController: UITableViewDataSource {
 extension AssignmentListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
-        cell.toggle()
-        tableView.reloadData()
+      let currentCell = tableView.cellForRow(at: indexPath) as! StudentAssignmentCell
+      
+      for cell in tableView.visibleCells {
+        if let cell = cell as? StudentAssignmentCell {
+          if cell != currentCell {
+            cell.isExpanded = false
+          }
+        }
+      }
+      
+      currentCell.toggle()
+      tableView.reloadData()
     }
 }
 

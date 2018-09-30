@@ -252,8 +252,17 @@ class StudentDetailViewController: UIViewController {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
-      cell.toggle()
+      let currentCell = tableView.cellForRow(at: indexPath) as! AssignmentCell
+
+      for cell in tableView.visibleCells {
+        if let cell = cell as? AssignmentCell {
+          if cell != currentCell {
+            cell.isExpanded = false
+          }
+        }
+      }
+      
+      currentCell.toggle()
       tableView.reloadData()
     }
     
