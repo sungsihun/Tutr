@@ -87,12 +87,11 @@ class StudentListViewController: UIViewController {
     }
     
     private func getCurrentTeacher(completion: @escaping () -> ()) {
-            guard let recordIDString = userDefaults.string(forKey: ActiveUser.recordID) else { fatalError() }
-            let recordID = CKRecordID(recordName: recordIDString)
-            CloudKitManager.getTeacherFromRecordID(recordID) { (teacher) in
-                ActiveUser.shared.current = teacher
-                completion()
-            }
+        guard let recordIDString = userDefaults.string(forKey: ActiveUser.recordID) else { fatalError() }
+        let recordID = CKRecordID(recordName: recordIDString)
+        CloudKitManager.getTeacherFromRecordID(recordID) { (teacher) in
+            ActiveUser.shared.current = teacher
+            completion()
         }
     }
     
@@ -108,11 +107,11 @@ class StudentListViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
         
-                if filterBy == "Name" {
-                    self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
-                } else {
-                    self.students = self.students.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
-                }
+        if filterBy == "Name" {
+            self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        } else {
+            self.students = self.students.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
+        }
         
         self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
@@ -129,7 +128,7 @@ class StudentListViewController: UIViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
-    
+        
     }
     
     private func setupSpinner() {
@@ -179,7 +178,7 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
             attributedString.append(NSAttributedString(attachment: addDescImageAttachment))
             attributedString.append(NSAttributedString(string: "  To Add Your First Student!"))
             noDataLabel.attributedText = attributedString
-          
+            
             noDataLabel.font = UIFont(name: "Dosis", size: 17)
             noDataLabel.textColor = UIColor.black
             noDataLabel.textAlignment = .center
@@ -209,28 +208,28 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-      
+        
         if editingStyle == .delete {
-          
-          let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to remove \(students[indexPath.row].name)?", preferredStyle: .alert)
-          
-          let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-            let studentToDelete = self.students[indexPath.row]
-            CloudKitManager.deleteStudent(studentToDelete) { (success) in
-              if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
-              self.students.remove(at: indexPath.row)
-              DispatchQueue.main.async {
-                self.tableView.deleteRows(at: [indexPath], with: .fade)
-              }
+            
+            let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to remove \(students[indexPath.row].name)?", preferredStyle: .alert)
+            
+            let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+                let studentToDelete = self.students[indexPath.row]
+                CloudKitManager.deleteStudent(studentToDelete) { (success) in
+                    if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
+                    self.students.remove(at: indexPath.row)
+                    DispatchQueue.main.async {
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
             }
-          }
-          
-          let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-          
-          deleteAlert.addAction(delete)
-          deleteAlert.addAction(cancel)
-          
-          present(deleteAlert, animated: true, completion: nil)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            deleteAlert.addAction(delete)
+            deleteAlert.addAction(cancel)
+            
+            present(deleteAlert, animated: true, completion: nil)
         }
     }
     
