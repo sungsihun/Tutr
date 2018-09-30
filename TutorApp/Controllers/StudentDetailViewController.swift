@@ -346,8 +346,6 @@ extension StudentDetailViewController: EditAssignmentControllerDelegate {
         CloudKitManager.updateAssignment(editedAssignment, for: student) { (records) in
             guard let records = records else { fatalError() }
             self.student.record = records.filter { $0.recordType == "Students" }.first!
-//            let newAssignmentRecord = records.filter { $0.recordType == "Assignments" }.first!
-//            self.correctAssignments[self.indexPathForEditRow.row].record = newAssignmentRecord
             self.delegate?.studentDetailViewController(self, didUpdate: self.student.record)
         }
     }

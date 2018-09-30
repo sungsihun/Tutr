@@ -45,7 +45,7 @@ class AssignmentListViewController: UIViewController {
         guard let recordIDString = userDefaults.string(forKey: ActiveUser.recordID) else { fatalError() }
         let recordID = CKRecordID(recordName: recordIDString)
         
-        CloudKitManager.getLatestStudentRecord(with: recordID) { (record) in
+        CloudKitManager.getUserRecord(with: recordID) { (record) in
             guard let updatedStudent = Student(with: record) else { fatalError() }
             self.currentStudent = updatedStudent
         }

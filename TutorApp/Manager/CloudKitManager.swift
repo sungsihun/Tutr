@@ -16,11 +16,14 @@ class CloudKitManager {
     static let container = CKContainer(identifier: "iCloud.com.henry.CloudKitScratch")
     static let db = container.publicCloudDatabase
     
+    
+    
+    
     // MARK: - USERS
     
     // Creating A User
     
-    static func createUser(completion: @escaping (Bool) -> ()) {
+    static func createCKUser(completion: @escaping (Bool) -> ()) {
         
         // Get user permission
         
@@ -30,7 +33,7 @@ class CloudKitManager {
             
             // We have user permission, so get the recordID
             
-            getCurrentUserID { (recordID) in
+            getCKUserID { (recordID) in
                 guard let recordID = recordID else { fatalError("Could not get recordID") }
                 let record = CKRecord(recordType: ActiveUser.shared.currentCategory.rawValue)
                 let recordName = recordID.recordName
@@ -112,8 +115,8 @@ class CloudKitManager {
     
     //  Get Name Of User
     
-    static func getCurrentUserName(completion: @escaping (String?, String?) -> ()) {
-        getCurrentUserID { (recordID) in
+    static func getCKUserName(completion: @escaping (String?, String?) -> ()) {
+        getCKUserID { (recordID) in
             guard let recordID = recordID else { fatalError("Could Not get recordID") }
             container.discoverUserIdentity(withUserRecordID: recordID, completionHandler: { (userId, error) in
                 if let error = error { print(error.localizedDescription); return }
@@ -123,12 +126,19 @@ class CloudKitManager {
         }
     }
     
+    // Get current userID
     
+    static func getCKUserID(completion: @escaping (CKRecordID?) -> ()) {
+        container.fetchUserRecordID { (recordID, error) in
+            if let error = error { print(error.localizedDescription); return }
+            completion(recordID)
+        }
+    }
     
     
     // MARK: - TEACHERS
     
-    private static func getUserRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+     static func getUserRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         let op = CKFetchRecordsOperation(recordIDs: [id])
         op.queuePriority = .veryHigh
         op.qualityOfService = .userInteractive
@@ -147,11 +157,42 @@ class CloudKitManager {
         }
     }
     
-    static func getCurrentUserID(completion: @escaping (CKRecordID?) -> ()) {
-        container.fetchUserRecordID { (recordID, error) in
-            if let error = error { print(error.localizedDescription); return }
-            completion(recordID)
+    // Fetch teachers
+    
+    static func fetchTeachers(completion: @escaping ([Teacher]?) -> ()) {
+        
+        let student = ActiveUser.shared.current as! Student
+        
+        guard let record = student.record else { fatalError("Student has no record") }
+        
+        // Get the array of the teacher's students
+        
+        guard let teacherRefs = record["teachers"] as? Array<CKReference>  else { completion(nil); return }
+        
+        // Get the recordID of each student
+        
+        let ids = teacherRefs.map{ $0.recordID }
+        
+        // Get the record of each student
+        
+        let op = CKFetchRecordsOperation(recordIDs: ids)
+        op.qualityOfService = .userInteractive
+        op.queuePriority = .veryHigh
+        var returnTeachers = [Teacher]()
+        
+        // Below is essentially a loop that is called for each record got
+        
+        op.perRecordCompletionBlock = { record, _, _ in
+            if let teacher = Teacher(record) {
+                returnTeachers.append(teacher)
+            }
         }
+        
+        op.fetchRecordsCompletionBlock = { _, _ in
+            completion(returnTeachers)
+        }
+        
+        db.add(op)
     }
     
     
@@ -232,72 +273,36 @@ class CloudKitManager {
         guard let studentRecord = student.record else { fatalError() }
         let teacher = ActiveUser.shared.current as! Teacher
         guard let teacherRecord = teacher.record else { fatalError("Teacher has no record") }
-        guard let studentRefs = teacherRecord["students"] as? Array<CKReference>  else { completion(false); return }
-        print(studentRecord.recordID.recordName)
+        
+        guard let studentRefs = teacherRecord["students"] as? [CKReference], let teacherRefs = studentRecord["teachers"] as? [CKReference]  else { completion(false); return }
+        
+        let newTeachersRefs = teacherRefs.filter { $0.recordID != teacherRecord.recordID }
         let newStudentsRefs = studentRefs.filter { $0.recordID != studentRecord.recordID }
+        
+        studentRecord["teachers"] = newTeachersRefs as NSArray
         teacherRecord["students"] = newStudentsRefs as NSArray
-        save([teacherRecord]) { records in
-            guard let newRecord = records?.first else { completion(false); return }
-            let teacher = Teacher(newRecord)
+        
+        save([teacherRecord, studentRecord]) { records in
+            guard let records = records else { return }
+            let teacherRecord = records.filter { $0.recordType == "Teachers" }.first!
+            let teacher = Teacher(teacherRecord)
             ActiveUser.shared.current = teacher
             completion(true)
         }
     }
     
+    // Get student record from CKID
     
-    // MARK: - Fetch students
-    
-    static func fetchTeachers(completion: @escaping ([Teacher]?) -> ()) {
-        
-        let student = ActiveUser.shared.current as! Student
-        
-        guard let record = student.record else { fatalError("Student has no record") }
-        
-        // Get the array of the teacher's students
-        
-        guard let teacherRefs = record["teachers"] as? Array<CKReference>  else { completion(nil); return }
-        
-        // Get the recordID of each student
-        
-        let ids = teacherRefs.map{ $0.recordID }
-        
-        // Get the record of each student
-        
-        let op = CKFetchRecordsOperation(recordIDs: ids)
-        op.qualityOfService = .userInteractive
-        op.queuePriority = .veryHigh
-        var returnTeachers = [Teacher]()
-        
-        // Below is essentially a loop that is called for each record got
-        
-        op.perRecordCompletionBlock = { record, _, _ in
-            if let teacher = Teacher(record) {
-                returnTeachers.append(teacher)
-            }
-        }
-        
-        op.fetchRecordsCompletionBlock = { _, _ in
-            completion(returnTeachers)
-        }
-        
-        db.add(op)
-    }
-    
-    
-    // Get student record fromID
-    
-    static private func getStudentRecord(with userID: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-        print(userID.recordName)
-        let predicate = NSPredicate(format: "userRef = %@", userID.recordName)
+    static private func getStudentRecord(with ckUserID: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+        let predicate = NSPredicate(format: "userRef = %@", ckUserID.recordName)
         let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
-        
         db.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error { print(error.localizedDescription); completion(nil) }
             completion(records?.first)
         }
     }
     
-    static func getStudentFromUserID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
+    static func getStudentFromCKUserID(_ id: CKRecordID, completion: @escaping (Student?) -> ()) {
         getStudentRecord(with: id) { (record) in
             guard let record = record else { completion(nil); return }
             let student = Student(with: record)
@@ -313,27 +318,6 @@ class CloudKitManager {
         }
     }
     
-    // Get student record fromID
-    
-    static func getLatestStudentRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
-        print(id.recordName)
-        let ref = CKReference(recordID: id, action: .none)
-        let predicate = NSPredicate(format: "recordID == %@", ref)
-        let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
-        
-        let queryOp = CKQueryOperation(query: query)
-        queryOp.queuePriority = .veryHigh
-        queryOp.qualityOfService = .userInteractive
-        
-        queryOp.recordFetchedBlock = { record in
-            completion(record)
-        }
-        db.add(queryOp)
-    }
-    
-    
-    
-    
     // Search for student
     
     static func findStudentWith(email: String, completion: @escaping (Student?) -> ()) {
@@ -342,14 +326,11 @@ class CloudKitManager {
             guard let userIdentity = userIdentity,
                 let recordID = userIdentity.userRecordID
                 else { completion(nil); return }
-            getStudentFromUserID(recordID) { (student) in
+            getStudentFromCKUserID(recordID) { (student) in
                 completion(student)
             }
         }
     }
-    
-    
-    
     
     
     // MARK: - Assignments
@@ -363,7 +344,7 @@ class CloudKitManager {
                 fatalError("Teacher or student is missing a record")
         }
         
-        getLatestStudentRecord(with: studentRecord.recordID) { (newStudentRecord) in
+        CloudKitManager.getUserRecord(with: studentRecord.recordID) { (newStudentRecord) in
             
             guard let newStudentRecord = newStudentRecord else { fatalError() }
             
@@ -500,7 +481,7 @@ class CloudKitManager {
     
     private static func getCurrentUserRecordOfType(_ type: ActiveUser.Category, completion: @escaping (CKRecord?) -> ()) {
         
-        getCurrentUserID { (recordID) in
+        getCKUserID { (recordID) in
             guard let recordID = recordID else { fatalError("Could not get recordID") }
             
             // Wrapper around the recordID

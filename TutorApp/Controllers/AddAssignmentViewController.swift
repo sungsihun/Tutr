@@ -27,6 +27,8 @@ class AddAssignmentViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var addButton: UIButton!
+    
+    // MARK: - Life Cycle
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +124,7 @@ extension AddAssignmentViewController: UITextFieldDelegate {
 // MARK: - Notification Centre Methods
 
 extension AddAssignmentViewController {
+    
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
@@ -140,11 +143,10 @@ extension AddAssignmentViewController {
 // MARK: - Text View Delegate
 
 extension AddAssignmentViewController: UITextViewDelegate {
+    
     func textViewDidChange(_ textView: UITextView) {
         checkTextField()
     }
-  
-    // text view placeholder
   
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {

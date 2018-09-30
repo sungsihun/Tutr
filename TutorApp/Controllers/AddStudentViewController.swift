@@ -31,7 +31,6 @@ class AddStudentViewController: UIViewController {
     // MARK: - Action Methods
   
     @IBAction func savePressed(_ sender: Any) {
-        
         guard let activeStudent = activeStudent else { fatalError() }
         delegate?.add(studentViewController: self, student: activeStudent)
         dismiss(animated: true, completion: nil)
@@ -72,8 +71,6 @@ class AddStudentViewController: UIViewController {
     
     override func viewDidLoad() {
         spinner.isHidden = true
-        addViewGestureRecogniser()
-        addImageGestureRecogniser()
         setupStudentImageView()
         setupTextFields()
     }
@@ -131,33 +128,6 @@ class AddStudentViewController: UIViewController {
 
 }
 
-
-
-
-
-
-// MARK: - Image Picker and Navigation Delegate
-
-extension AddStudentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    
-    private func open(_ sourceType: UIImagePickerControllerSourceType) {
-        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = sourceType
-            present(imagePicker, animated: true, completion: nil)
-        }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        studentImageView.image = image
-        dismiss(animated: true, completion: nil)
-    }
-    
-}
-
 // MARK: - Text Field
 
 extension AddStudentViewController: UITextFieldDelegate {
@@ -178,48 +148,6 @@ extension AddStudentViewController: UITextFieldDelegate {
             saveButton.backgroundColor = UIColor.lightGray
         }
     }
-}
-
-// MARK: - Gesture Recognisers
-
-extension AddStudentViewController {
-    
-    private func addViewGestureRecogniser() {
-        let tapGestureRecogniser = UITapGestureRecognizer()
-        view.addGestureRecognizer(tapGestureRecogniser)
-        tapGestureRecogniser.addTarget(self, action: #selector(handleViewRecogniserTap(_:)))
-    }
-    
-    private func addImageGestureRecogniser() {
-        let tapRecogniser = UITapGestureRecognizer()
-        studentImageView.addGestureRecognizer(tapRecogniser)
-        tapRecogniser.addTarget(self, action: #selector(handleTap(_:)))
-    }
-    
-    @objc private func handleViewRecogniserTap(_ recogniser: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-    
-    @objc private func handleTap(_ recogniser: UITapGestureRecognizer) {
-        let alertController = UIAlertController(title: "Add Image", message: nil, preferredStyle: .actionSheet)
-        
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) {_ in
-            self.open(.camera)
-        }
-        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
-            self.open(.photoLibrary)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(cameraAction)
-        alertController.addAction(galleryAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    
 }
 
 extension String {

@@ -22,7 +22,7 @@ class AddUserViewController: UIViewController {
     let activeUser = ActiveUser.shared
     var user: User! = nil // either teacher or student
     weak var delegate: AddTeacherViewControllerDelegate?
-  
+    
     // MARK : - Outlets
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -31,6 +31,8 @@ class AddUserViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityIndicatorView: UIView!
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,27 +54,14 @@ class AddUserViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Custom Methods
-    
-    private func checkICloudDriveStatus() {
-        CloudKitManager.requestPermission { (success) in
-            if !success {
-                DispatchQueue.main.async {
-                    setAlertWith(title: "No iCloud account configured", message: "Please activate iCloud drive", from: self) { _ in
-                        self.openSettings()
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                }
-            }
-        }
-    }
+    // MARK: - Setup
     
     private func setupUser() {
         
-        CloudKitManager.createUser() { (success) in
+        CloudKitManager.createCKUser() { (success) in
             if !success { print("Could not save user"); return }
             
-            CloudKitManager.getCurrentUserName(completion: { (firstName, lastName) in
+            CloudKitManager.getCKUserName(completion: { (firstName, lastName) in
                 guard let firstName = firstName, let lastName = lastName else { self.nameTextField.text = "John Doe"; return}
                 
                 DispatchQueue.main.async {
@@ -83,7 +72,7 @@ class AddUserViewController: UIViewController {
             })
         }
     }
-  
+    
     private func createUser() {
         guard let subject = subjectTextField.text else { fatalError("Must be a subject") }
         let image: UIImage!
@@ -106,23 +95,6 @@ class AddUserViewController: UIViewController {
             }
         }
     }
-  
-    private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-    }
-  
-    // MARK : - Actions
-    
-    @objc func saveButtonTapped(_ sender: UIButton) {
-        createUser()
-    }
-    
-    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-  
-    // MARK: - Setup
     
     private func setupImageView() {
         imageView.layer.borderWidth = 1.5
@@ -149,6 +121,32 @@ class AddUserViewController: UIViewController {
         saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
     }
     
+    // MARK: - Custom Methods
+    
+    private func checkICloudDriveStatus() {
+        CloudKitManager.requestPermission { (success) in
+            if !success {
+                DispatchQueue.main.async {
+                    setAlertWith(title: "No iCloud account configured", message: "Please activate iCloud drive", from: self) { _ in
+                        self.openSettings()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    private func openProgram(_ type: UIImagePickerControllerSourceType) {
+        DispatchQueue.main.async {
+            self.open(type)
+        }
+    }
+    
     private func openSettings() {
         let settingsCloudKitURL = URL(string: "App-Prefs:root=CASTLE")
         UIApplication.shared.open(settingsCloudKitURL!)
@@ -158,12 +156,26 @@ class AddUserViewController: UIViewController {
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
     }
     
+    
+    // MARK : - Actions
+    
+    @objc func saveButtonTapped(_ sender: UIButton) {
+        createUser()
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
+
+
+
+
 
 // MARK: - Image Picker and Navigation Delegate
 
 extension AddUserViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     
     private func open(_ sourceType: UIImagePickerControllerSourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
@@ -260,12 +272,9 @@ extension AddUserViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func openProgram(_ type: UIImagePickerControllerSourceType) {
-        DispatchQueue.main.async {
-            self.open(type)
-        }
-    }
 }
+
+
 
 // MARK: - Notification Center Methods
 
@@ -279,7 +288,6 @@ extension AddUserViewController {
             }
         }
     }
-    
     @objc func keyboardWillHide(_ notification: Notification) {
         self.view.frame.origin.y = 0
     }
