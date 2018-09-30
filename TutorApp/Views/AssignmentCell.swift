@@ -25,7 +25,10 @@ class AssignmentCell: UITableViewCell {
   
     func configureCellWith(assignment: Assignment) {
       
+        let titleText = assignment.assignmentTitle
+
         descriptionLabel.text = self.isExpanded ? assignment.assignmentDescription : ""
+      
         if isExpanded {
             self.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
             titleLabel.textColor = UIColor.white
@@ -36,13 +39,23 @@ class AssignmentCell: UITableViewCell {
             descriptionLabel.textColor = UIColor.darkGray
         }
       
+      var creationDateText: String?
+      if let creationDate = assignment.createdAt {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        creationDateText = dateFormatter.string(from: creationDate)
+      }
+      
+      print(creationDateText)
+
+      
       if assignment.isComplete {
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: titleText)
         attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         titleLabel.attributedText = attributeString
         checkboxImageView.image = UIImage(named: "box-checked")
       } else {
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: assignment.assignmentTitle)
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: titleText)
         attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 0, range: NSMakeRange(0, attributeString.length))
         titleLabel.attributedText = attributeString
         checkboxImageView.image = UIImage(named: "box-uncheked")

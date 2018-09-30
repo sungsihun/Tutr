@@ -15,8 +15,9 @@ class TeacherListViewController: UIViewController {
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var refreshButton: UIButton!
   
-    // MARK: - Properties
+  // MARK: - Properties
     
     var teachers = [Teacher]()
     let userDefaults = UserDefaults.standard
@@ -72,7 +73,13 @@ class TeacherListViewController: UIViewController {
     
     
     // MARK: - Action
-    
+  
+  @IBAction func refreshTapped(_ sender: UIButton) {
+    setupSpinner()
+    getStudent()
+  }
+  
+  
     @IBAction func filterTapped(_ sender: Any) {
         let controller = UIAlertController(title: "Filter By:", message: nil, preferredStyle: .actionSheet)
         let nameSortAction = UIAlertAction(title: "Name", style: .default) { _ in
@@ -162,7 +169,6 @@ extension TeacherListViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
-        
 
         
     }
@@ -171,6 +177,7 @@ extension TeacherListViewController {
         self.spinner.startAnimating()
         self.spinner.hidesWhenStopped = true
         self.tableView.isHidden = true
+        refreshButton.isHidden = true
     }
     
     private func stopSpinner() {
@@ -178,6 +185,12 @@ extension TeacherListViewController {
             self.tableView.reloadData()
             self.tableView.isHidden = false
             self.spinner.stopAnimating()
+          
+          if self.teachers.count == 0 {
+            self.refreshButton.isHidden = false
+          } else {
+            self.refreshButton.isHidden = true
+          }
         }
     }
   

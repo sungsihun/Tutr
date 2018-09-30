@@ -81,6 +81,7 @@ class AddAssignmentViewController: UIViewController {
     private func setupTextField() {
         addButton.isEnabled = false
         addButton.backgroundColor = UIColor.lightGray
+        titleTextField.autocapitalizationType = .sentences
       
         // set text field placeholder color
         titleTextField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])

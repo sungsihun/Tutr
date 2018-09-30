@@ -80,8 +80,10 @@ class EditAssignmentViewController: UIViewController {
         let description = descriptionTextView.text
         let activeTeacher = ActiveUser.shared.current as! Teacher
         let teacherRef = CKReference(record: activeTeacher.record!, action: .none)
-        let assignment = Assignment(assignmentTitle: title!, assignmentDescription: description!, teacherRef: teacherRef)
-        delegate?.editAssignment(editedAssignment: assignment)
+        guard let record = assignment.record else { fatalError("Assignment has no record") }
+        let newAssignment = Assignment(assignmentTitle: title!, assignmentDescription: description!, teacherRef: teacherRef)
+        newAssignment.record = record
+        delegate?.editAssignment(editedAssignment: newAssignment)
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
