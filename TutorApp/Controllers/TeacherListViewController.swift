@@ -243,6 +243,7 @@ extension TeacherListViewController {
             let currentStudent = ActiveUser.shared.current as! Student
             currentStudent.filterAssignments(by: selectedTeacher)
             assignmentsVC.assignments = currentStudent.teacherAssignmentsDict[teacherRecord.recordID.recordName]
+            assignmentsVC.selectedTeacher = self.selectedTeacher
         }
         
     }

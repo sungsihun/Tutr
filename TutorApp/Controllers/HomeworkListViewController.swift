@@ -8,6 +8,8 @@
 //
 
 import UIKit
+import CloudKit
+
 
 class AssignmentListViewController: UIViewController {
   
@@ -18,11 +20,36 @@ class AssignmentListViewController: UIViewController {
   // MARK: - Properties
   
   var assignments: [Assignment]?
+  var selectedTeacher: Teacher?
+  let refreshControl = UIRefreshControl()
+  let userDefaults = UserDefaults.standard
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    refreshControl.tintColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
+    tableView.refreshControl = refreshControl
+    refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
   }
+  
+  @objc private func handleRefreshControl() {
+    
+    guard let recordIDString = userDefaults.string(forKey: ActiveUser.recordID) else { fatalError() }
+    let recordID = CKRecordID(recordName: recordIDString)
+    
+    CloudKitManager.getLatestStudentRecord(with: recordID) { (recordId) in
+      CloudKitManager.getAssignmentsFrom(recordId, completion: { (assignmnets) in
+        self.assignments = assignmnets.reversed()
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+          self.refreshControl.endRefreshing()
+        }
+      })
+    }
+  }
+
+
   
   // MARK: - Actions
   
