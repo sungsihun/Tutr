@@ -22,6 +22,10 @@ class TeacherListViewController: UIViewController {
     let userDefaults = UserDefaults.standard
     var selectedTeacher: Teacher?
     var indexPathForSelectedRow: IndexPath!
+    
+    
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,8 @@ class TeacherListViewController: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
     
     // MARK: - Fetching student
     
@@ -90,9 +96,10 @@ class TeacherListViewController: UIViewController {
     
 }
 
-// MARK: - Table View Delegate & Data Source
 
 extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Table View Delegate & Data Source
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if teachers.count > 0 {
@@ -122,7 +129,6 @@ extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.bounds.height * 0.10
     }
@@ -134,27 +140,23 @@ extension TeacherListViewController: UITableViewDelegate, UITableViewDataSource 
         let currentStudent = ActiveUser.shared.current as! Student
         guard let currentStudentRecord = currentStudent.record else { fatalError("No student record") }
         self.startSpinnerInCell()
-        CloudKitManager.getLatestStudentRecord(with: currentStudentRecord.recordID) { (newStudentRecord) in
-            guard let newStudentRecord = newStudentRecord else { fatalError("Could not get newStudentRecord") }
+        CloudKitManager.getUserRecord(with: currentStudentRecord.recordID) { (newStudentRecord) in
+            guard let newStudentRecord = newStudentRecord else { fatalError("Could not get a new student record") }
             ActiveUser.shared.current = Student(with: newStudentRecord)
         }
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-
     
 }
 
 
-// MARK: - UI
+
 
 extension TeacherListViewController {
     
+    // MARK: - UI
+    
     private func setupUI() {
-        
-        // MARK: - Navigation Bar
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.title = "My Teachers"
@@ -162,10 +164,9 @@ extension TeacherListViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
-        
-
-        
     }
+    
+    // MARK: - Spinner
     
     private func setupSpinner() {
         self.spinner.startAnimating()
@@ -193,26 +194,21 @@ extension TeacherListViewController {
         selectedCell.spinner.isHidden = true
     }
     
-    
-    
+    // MARK: - Other
     
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: .zero)
-        
-        
-        
         if filterBy == "Name" {
-            self.teachers = self.teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
+            teachers = teachers.sorted { $0.name.lowercased() < $1.name.lowercased() }
         } else {
-            self.teachers = self.teachers.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
+            teachers = teachers.sorted { $0.subject.lowercased() < $1.subject.lowercased() }
         }
-        
         self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
     }
     
-    func getHeaderImageHeightForCurrentDevice() -> CGFloat {
+    private func getHeaderImageHeightForCurrentDevice() -> CGFloat {
         switch UIScreen.main.nativeBounds.height {
         case 2436: // iPhone X
             return 175
@@ -239,13 +235,12 @@ extension TeacherListViewController {
         if segue.identifier == "showAssignments" {
             let nav = segue.destination as! UINavigationController
             let assignmentsVC = nav.viewControllers.first! as! AssignmentListViewController
-            guard let selectedTeacher = self.selectedTeacher, let teacherRecord = selectedTeacher.record else { fatalError("Somehow no teacher selected") }
+            guard let selectedTeacher = self.selectedTeacher, let teacherRecord = selectedTeacher.record else{ fatalError("Somehow no teacher selected") }
             let currentStudent = ActiveUser.shared.current as! Student
             currentStudent.filterAssignments(by: selectedTeacher)
             assignmentsVC.assignments = currentStudent.teacherAssignmentsDict[teacherRecord.recordID.recordName]
-            assignmentsVC.selectedTeacher = self.selectedTeacher
+            assignmentsVC.selectedTeacher = selectedTeacher
         }
-        
     }
 }
 

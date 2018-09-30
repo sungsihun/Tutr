@@ -15,66 +15,66 @@ protocol EditAssignmentControllerDelegate: class {
 }
 
 class EditAssignmentViewController: UIViewController {
-
+    
     // MARK: - Properties
-  
+    
     weak var delegate: EditAssignmentControllerDelegate?
     var assignment: Assignment!
-  
+    
     // MARK: - Outlets
-  
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var editButton: UIButton!
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupTextField()
         setupTextView()
     }
-  
+    
     override func viewDidLayoutSubviews() {
         view.backgroundColor = UIColor.clear
     }
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         setupNotificationCenter()
     }
-  
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
-  
+    
     // MARK: - Custom Methods
-  
+    
     private func setupTextField() {
         titleTextField.text = assignment?.assignmentTitle
     }
-  
+    
     private func setupTextView() {
-      
+        
         // line up with title text field
         descriptionTextView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
-
+        
         descriptionTextView.text = assignment?.assignmentDescription
     }
-
+    
     // MARK: - Notification Centre
-  
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
-  
+    
     // MARK: - Actions
-  
+    
     @IBAction func dismissTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
-  
+    
     @IBAction func editTapped(_ sender: UIButton) {
         let title = titleTextField.text
         let description = descriptionTextView.text
@@ -87,17 +87,20 @@ class EditAssignmentViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
-  
+    
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         self.view.frame.origin.y = 0
         self.view.endEditing(true)
     }
 }
 
+
+
+
 // MARK: - Text Field Delegate
 
 extension EditAssignmentViewController: UITextFieldDelegate {
-  
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -108,30 +111,28 @@ extension EditAssignmentViewController: UITextFieldDelegate {
 
 extension EditAssignmentViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
-      if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-          let keyboardHeight = keyboardFrame.cgRectValue.height
-        
-          if (self.view.frame.origin.y == 0) && (popupView.frame.origin.y <= keyboardHeight) {
-              self.view.frame.origin.y -= (keyboardHeight - popupView.frame.origin.y + 8)
-          }
-      }
-  }
-  
-  @objc func keyboardWillHide(_ notification: Notification) {
-      self.view.frame.origin.y = 0
-  }
+        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            
+            if (self.view.frame.origin.y == 0) && (popupView.frame.origin.y <= keyboardHeight) {
+                self.view.frame.origin.y -= (keyboardHeight - popupView.frame.origin.y + 8)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
 }
 
 // MARK: - Text View Delegate
 
 extension EditAssignmentViewController: UITextViewDelegate {
-  
-  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     
-      // dismiss keyboard when done button tapped
-      if (text == "\n") {
-          textView.resignFirstResponder()
-      }
-      return true
-   }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+        }
+        return true
+    }
 }
