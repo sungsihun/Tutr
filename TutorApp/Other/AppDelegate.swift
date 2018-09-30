@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        RunLoop.current.run(until: NSDate(timeIntervalSinceNow:1) as Date)
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let current = ActiveUser.shared.currentCategory
         window?.rootViewController = storyboard.instantiateViewController(withIdentifier: current.rawValue)
