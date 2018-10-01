@@ -16,6 +16,7 @@ class AssignmentCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var checkboxImageView: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
   
     // MARK: - Properties
   
@@ -24,7 +25,7 @@ class AssignmentCell: UITableViewCell {
     // MARK: - Methods
   
     func configureCellWith(assignment: Assignment) {
-      
+        spinner.isHidden = true
         let titleText = assignment.assignmentTitle
 
         descriptionLabel.text = self.isExpanded ? assignment.assignmentDescription : ""

@@ -16,6 +16,8 @@ class AssignmentListViewController: UIViewController {
   // MARK: - Outlets
   
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var refreshImageView: UIImageView!
+  @IBOutlet weak var refreshLabel: UILabel!
   
   // MARK: - Properties
   
@@ -81,6 +83,8 @@ extension AssignmentListViewController: UITableViewDataSource {
     if count > 0 {
       tableView.backgroundView = nil
       tableView.separatorStyle = .singleLine
+      refreshImageView.isHidden = true
+      refreshLabel.isHidden = true
     } else {
       let noDataLabel = UILabel()
       noDataLabel.text = "No assignments! Your teacher can create assignments on their device."
@@ -90,6 +94,8 @@ extension AssignmentListViewController: UITableViewDataSource {
       noDataLabel.numberOfLines = 0
       tableView.backgroundView = noDataLabel
       tableView.separatorStyle = .none
+      refreshImageView.isHidden = false
+      refreshLabel.isHidden = false
     }
     return 1
   }

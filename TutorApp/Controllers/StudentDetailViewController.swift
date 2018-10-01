@@ -201,7 +201,6 @@ extension StudentDetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell", for: indexPath) as! AssignmentCell
         
         let assignment = correctAssignments[indexPath.row]
-        
         cell.configureCellWith(assignment: assignment)
         updateTableView()
         return cell
@@ -223,10 +222,14 @@ extension StudentDetailViewController: UITableViewDelegate {
         let deleteAlert = UIAlertController(title: "Delete Assignment", message: "Are you sure you want to delete?", preferredStyle: .alert)
         
         let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+          let cell = tableView.cellForRow(at: indexPath) as! AssignmentCell
+          cell.spinner.isHidden = false
+          cell.spinner.startAnimating()
           let assignmentToDelete = self.correctAssignments[indexPath.row]
           self.deleteAssignment(assignmentToDelete) {
             self.correctAssignments.remove(at: indexPath.row)
             DispatchQueue.main.async {
+              cell.spinner.stopAnimating()
               tableView.deleteRows(at: [indexPath], with: .fade)
             }
           }
