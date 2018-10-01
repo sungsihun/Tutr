@@ -38,17 +38,7 @@ class AssignmentCell: UITableViewCell {
             titleLabel.textColor = UIColor.darkGray
             descriptionLabel.textColor = UIColor.darkGray
         }
-      
-      var creationDateText: String?
-      if let creationDate = assignment.createdAt {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        creationDateText = dateFormatter.string(from: creationDate)
-      }
-      
-      print(creationDateText)
 
-      
       if assignment.isComplete {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: titleText)
         attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))

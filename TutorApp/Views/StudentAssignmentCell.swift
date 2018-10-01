@@ -17,6 +17,8 @@ class StudentAssignmentCell: UITableViewCell {
   
   func configureCellWith(assignment: Assignment) {
     
+    titleLabel.adjustsFontSizeToFitWidth = true
+    
     let titleText = assignment.assignmentTitle
     
     var creationDateText: String?
@@ -55,5 +57,4 @@ class StudentAssignmentCell: UITableViewCell {
   func toggle() {
     isExpanded = !isExpanded
   }
-  
 }
