@@ -274,21 +274,58 @@ class CloudKitManager {
         let teacher = ActiveUser.shared.current as! Teacher
         guard let teacherRecord = teacher.record else { fatalError("Teacher has no record") }
         
-        guard let studentRefs = teacherRecord["students"] as? [CKReference], let teacherRefs = studentRecord["teachers"] as? [CKReference]  else { completion(false); return }
+        guard let studentRefs = teacherRecord["students"] as? [CKReference], let teacherRefs = studentRecord["teachers"] as? [CKReference] else { completion(false); return }
         
         let newTeachersRefs = teacherRefs.filter { $0.recordID != teacherRecord.recordID }
         let newStudentsRefs = studentRefs.filter { $0.recordID != studentRecord.recordID }
         
         studentRecord["teachers"] = newTeachersRefs as NSArray
         teacherRecord["students"] = newStudentsRefs as NSArray
+ 
+        guard let assignmentRefs = studentRecord["assignments"] as? [CKReference] else {
+            saveToNewTeacher(with: studentRecord, teacherRecord: teacherRecord) { completion(true) }
+            return
+        }
         
+        deleteAssignmentRefs(assignmentRefs, from: teacherRecord) { (deletedRecordID) in
+            guard let deletedRecordID = deletedRecordID else {
+                saveToNewTeacher(with: studentRecord, teacherRecord: teacherRecord) { completion(true) }
+                return
+            }
+            let newAssignmentsRefs = assignmentRefs.filter { $0.recordID != deletedRecordID }
+            studentRecord["assignments"] = newAssignmentsRefs as NSArray
+            saveToNewTeacher(with: studentRecord, teacherRecord: teacherRecord) { completion(true) }
+        }
+        
+        
+    }
+    
+    private static func saveToNewTeacher(with studentRecord: CKRecord, teacherRecord: CKRecord, completion: @escaping () -> ()) {
         save([teacherRecord, studentRecord]) { records in
             guard let records = records else { return }
             let teacherRecord = records.filter { $0.recordType == "Teachers" }.first!
             let teacher = Teacher(teacherRecord)
             ActiveUser.shared.current = teacher
-            completion(true)
+            completion()
         }
+    }
+    
+    private static func deleteAssignmentRefs(_ assignmentRefs: [CKReference], from record: CKRecord, completion: @escaping (CKRecordID?) -> ()) {
+        var returnID: CKRecordID?
+        for ref in assignmentRefs {
+            db.fetch(withRecordID: ref.recordID) { (assignmentRecord, error) in
+                if let error = error { print(#line, error.localizedDescription) }
+                guard let assignmentRecord = assignmentRecord, let teacherRef = assignmentRecord["teacherRef"] as? CKReference else { fatalError() }
+                if teacherRef.recordID.recordName == record.recordID.recordName {
+                    print("\(teacherRef.recordID.recordName), \(record.recordID.recordName)")
+                    db.delete(withRecordID: ref.recordID) { (id, error) in
+                        if let error = error { print(#line, error.localizedDescription) }
+                        returnID = id
+                    }
+                }
+            }
+        }
+        completion(returnID)
     }
     
     // Get student record from CKID

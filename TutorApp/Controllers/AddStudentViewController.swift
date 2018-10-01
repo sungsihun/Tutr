@@ -85,7 +85,7 @@ class AddStudentViewController: UIViewController {
             guard let student = student else {
                 DispatchQueue.main.async {
                     setAlertWith(title: "Error", message: "User Not Found", from: self) { _ in
-
+                        self.stopSpinner()
                     }
                 }
                 return
@@ -94,8 +94,7 @@ class AddStudentViewController: UIViewController {
             guard dupes.isEmpty else {
                 DispatchQueue.main.async {
                     setAlertWith(title: "Error", message: "You have already added this student", from: self) { _ in
-                        self.spinner.stopAnimating()
-                        self.spinner.isHidden = true
+                        self.stopSpinner()
                     }
                 }
                 return
@@ -117,12 +116,9 @@ class AddStudentViewController: UIViewController {
 
     }
     
-    private func showStudentNotFound() {
-        let alertController = UIAlertController(title: "Error", message: "User not found", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Try Again", style: .default, handler: nil)
-        alertController.addAction(okAction)
-
-        present(alertController, animated: true, completion: nil)
+    private func stopSpinner() {
+        spinner.stopAnimating()
+        spinner.isHidden = true
     }
   
     // MARK: - Setup

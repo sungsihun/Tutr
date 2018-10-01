@@ -246,7 +246,7 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
         let currentTeacher = ActiveUser.shared.current as! Teacher
         CloudKitManager.addStudent(student, to: currentTeacher) { (records) in
             guard let records = records else { fatalError() }
-            currentTeacher.record = records.filter() {$0.recordType == "Teachers" }.first!
+            currentTeacher.record = records.filter() { $0.recordType == "Teachers" }.first!
             let newStudentRecord = records.filter() { $0.recordType == "Students" }.first!
             guard let newStudent = Student(with: newStudentRecord) else { fatalError() }
             self.students.append(newStudent)
