@@ -105,7 +105,6 @@ class StudentListViewController: UIViewController {
     
     private func setupTableView(filterBy: String) {
         tableView.separatorInset = UIEdgeInsets.zero
-        tableView.tableFooterView = UIView(frame: .zero)
         
         if filterBy == "Name" {
             self.students = self.students.sorted { $0.name.lowercased() < $1.name.lowercased() }
@@ -120,7 +119,6 @@ class StudentListViewController: UIViewController {
     private func setupUI() {
         
         // MARK: - Navigation Bar
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.title = "My Students"
@@ -128,6 +126,9 @@ class StudentListViewController: UIViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
+        
+        tableView.tableFooterView = UIView(frame: .zero)
+
         
     }
     
@@ -146,6 +147,7 @@ class StudentListViewController: UIViewController {
             let nav = segue.destination as! UINavigationController
             let controller = nav.viewControllers.first! as! AddStudentViewController
             controller.delegate = self
+            controller.currentStudents = students
         }
         
         if let index = tableView.indexPathForSelectedRow {

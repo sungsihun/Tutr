@@ -120,6 +120,13 @@ extension EditAssignmentViewController: UITextFieldDelegate {
       editButton.backgroundColor = UIColor.lightGray
     }
   }
+  
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentLength = textField.text?.count ?? 0
+        let newLength = currentLength + string.count - range.length
+        print(range.length)
+        return newLength < 25
+    }
 }
 
 // MARK: - Notification Centre Methods
@@ -154,4 +161,5 @@ extension EditAssignmentViewController: UITextViewDelegate {
   func textViewDidChange(_ textView: UITextView) {
     checkTextField()
   }
+
 }

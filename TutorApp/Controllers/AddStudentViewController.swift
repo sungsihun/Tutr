@@ -27,6 +27,7 @@ class AddStudentViewController: UIViewController {
     weak var delegate: AddStudentViewControllerDelegate?
     var emailTextField: UITextField!
     var activeStudent: Student?
+    var currentStudents = [Student]()
     
     // MARK: - Action Methods
   
@@ -83,7 +84,19 @@ class AddStudentViewController: UIViewController {
         CloudKitManager.findStudentWith(email: email) { (student) in
             guard let student = student else {
                 DispatchQueue.main.async {
-                    self.showStudentNotFound()
+                    setAlertWith(title: "Error", message: "User Not Found", from: self) { _ in
+
+                    }
+                }
+                return
+            }
+            let dupes = self.currentStudents.filter { $0.record?.recordID == student.record?.recordID }
+            guard dupes.isEmpty else {
+                DispatchQueue.main.async {
+                    setAlertWith(title: "Error", message: "You have already added this student", from: self) { _ in
+                        self.spinner.stopAnimating()
+                        self.spinner.isHidden = true
+                    }
                 }
                 return
             }
@@ -108,8 +121,7 @@ class AddStudentViewController: UIViewController {
         let alertController = UIAlertController(title: "Error", message: "User not found", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Try Again", style: .default, handler: nil)
         alertController.addAction(okAction)
-        self.spinner.stopAnimating()
-        self.spinner.isHidden = true
+
         present(alertController, animated: true, completion: nil)
     }
   

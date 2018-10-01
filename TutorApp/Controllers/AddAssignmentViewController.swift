@@ -15,47 +15,47 @@ protocol AddAssignmentControllerDelegate: class {
 }
 
 class AddAssignmentViewController: UIViewController {
-
+    
     // MARK: - Properties
-  
+    
     weak var delegate: AddAssignmentControllerDelegate?
     let activeTeacher = ActiveUser.shared.current as! Teacher
-  
+    
     // MARK: - Outlets
-
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var addButton: UIButton!
     
     // MARK: - Life Cycle
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         setupTextField()
         setupTextView()
     }
-  
+    
     override func viewDidLayoutSubviews() {
         view.backgroundColor = UIColor.clear
     }
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         setupNotificationCenter()
     }
-  
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
-  
+    
     // MARK: - Actions
-  
+    
     @IBAction func dismissTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
-  
+    
     @IBAction func addTapped(_ sender: UIButton) {
         let title = titleTextField.text
         let description = descriptionTextView.text
@@ -65,32 +65,32 @@ class AddAssignmentViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
-  
+    
     @IBAction func backgroundTapped(_ sender: Any) {
         self.view.frame.origin.y = 0
         self.view.endEditing(true)
     }
-  
+    
     // MARK: - Notification Centre
-  
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
-  
+    
     // MARK: - Custom Methods
-  
+    
     private func setupTextField() {
         addButton.isEnabled = false
         addButton.backgroundColor = UIColor.lightGray
         titleTextField.autocapitalizationType = .sentences
-      
+        titleTextField.delegate = self
         // set text field placeholder color
         titleTextField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
-      
+        
         titleTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
     }
-  
+    
     private func setupTextView() {
         descriptionTextView.text = "Description"
         descriptionTextView.textColor = UIColor.lightGray
@@ -101,16 +101,16 @@ class AddAssignmentViewController: UIViewController {
 // MARK: - Text Field Delegate
 
 extension AddAssignmentViewController: UITextFieldDelegate {
-  
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-  
+    
     @objc private func checkTextField() {
         let title = titleTextField.text ?? ""
         let description = descriptionTextView.text ?? ""
-      
+        
         if !(title.isEmpty || description.isEmpty) && !(descriptionTextView.text == "Description") {
             addButton.isEnabled = true
             addButton.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
@@ -128,13 +128,13 @@ extension AddAssignmentViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-          
+            
             if (self.view.frame.origin.y == 0) && (popupView.frame.origin.y <= keyboardHeight) {
                 self.view.frame.origin.y -= (keyboardHeight - popupView.frame.origin.y + 8)
             }
         }
     }
-  
+    
     @objc func keyboardWillHide(_ notification: Notification) {
         self.view.frame.origin.y = 0
     }
@@ -147,27 +147,34 @@ extension AddAssignmentViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         checkTextField()
     }
-  
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
         }
     }
-  
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Description"
             textView.textColor = UIColor.lightGray
         }
     }
-  
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-      
+        
         // dismiss keyboard when done button tapped
         if (text == "\n") {
             textView.resignFirstResponder()
         }
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentLength = textField.text?.count ?? 0
+        let newLength = currentLength + string.count - range.length
+        print(range.length)
+        return newLength < 25
     }
 }
