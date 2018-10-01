@@ -93,8 +93,8 @@ class AddStudentViewController: UIViewController {
             let dupes = self.currentStudents.filter { $0.record?.recordID == student.record?.recordID }
             guard dupes.isEmpty else {
                 DispatchQueue.main.async {
+                    self.stopSpinner()
                     setAlertWith(title: "Error", message: "You have already added this student", from: self) { _ in
-                        self.stopSpinner()
                     }
                 }
                 return

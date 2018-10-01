@@ -219,8 +219,8 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
             
             let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
                 let studentToDelete = self.students[indexPath.row]
-                self.spinner.startAnimating()
                 tableView.isUserInteractionEnabled = false
+                self.spinner.startAnimating()
                 CloudKitManager.deleteStudent(studentToDelete) { (success) in
                     if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
                     self.students.remove(at: indexPath.row)
