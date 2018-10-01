@@ -13,7 +13,7 @@ protocol AddStudentViewControllerDelegate: class {
 }
 
 class AddStudentViewController: UIViewController {
-
+    
     // MARK: - Outlets
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -21,7 +21,7 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
-  
+    
     // MARK: - Properties
     
     weak var delegate: AddStudentViewControllerDelegate?
@@ -30,7 +30,7 @@ class AddStudentViewController: UIViewController {
     var currentStudents = [Student]()
     
     // MARK: - Action Methods
-  
+    
     @IBAction func savePressed(_ sender: Any) {
         guard let activeStudent = activeStudent else { fatalError() }
         delegate?.add(studentViewController: self, student: activeStudent)
@@ -43,16 +43,17 @@ class AddStudentViewController: UIViewController {
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         let alertCtrl = UIAlertController(title: "Add Student", message: "Enter student's email", preferredStyle: .alert)
-      
+        
         // Add text field to alert controller
         alertCtrl.addTextField { (textField) in
-          self.emailTextField = textField
-          self.emailTextField.placeholder = "student@example.com"
+            self.emailTextField = textField
+            self.emailTextField.returnKeyType = .done
+            self.emailTextField.placeholder = "student@example.com"
         }
-      
+        
         // Add cancel button to alert controller
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-      
+        
         // "Add" button with callback
         let addAction = UIAlertAction(title: "Add", style: .default) { (_) in
             self.spinner.isHidden = false
@@ -66,7 +67,7 @@ class AddStudentViewController: UIViewController {
         
         present(alertCtrl, animated: true, completion: nil)
     }
-  
+    
     
     // MARK: - Life Cycle
     
@@ -113,14 +114,14 @@ class AddStudentViewController: UIViewController {
             self.spinner.stopAnimating()
             self.spinner.isHidden = true
         }
-
+        
     }
     
     private func stopSpinner() {
         spinner.stopAnimating()
         spinner.isHidden = true
     }
-  
+    
     // MARK: - Setup
     
     private func setupStudentImageView() {
@@ -133,7 +134,7 @@ class AddStudentViewController: UIViewController {
         subjectTextField.delegate = self
         nameTextField.delegate = self
     }
-
+    
 }
 
 // MARK: - Text Field
