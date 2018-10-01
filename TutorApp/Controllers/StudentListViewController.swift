@@ -66,6 +66,8 @@ class StudentListViewController: UIViewController {
         switch UIScreen.main.nativeBounds.height {
         case 2436: // iPhone X
             return 175
+        case 2688: // iPhone Xs Max
+            return 175
         default: // Every other iPhone
             return 145
         }
@@ -217,11 +219,15 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
             
             let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
                 let studentToDelete = self.students[indexPath.row]
+                self.spinner.startAnimating()
+                tableView.isUserInteractionEnabled = false
                 CloudKitManager.deleteStudent(studentToDelete) { (success) in
                     if !success { setAlertWith(title: "Error", message: "Could not delete student", from: self, handler: nil); return }
                     self.students.remove(at: indexPath.row)
                     DispatchQueue.main.async {
                         self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.spinner.stopAnimating()
+                        tableView.isUserInteractionEnabled = true
                     }
                 }
             }

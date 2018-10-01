@@ -59,6 +59,8 @@ class EditAssignmentViewController: UIViewController {
         descriptionTextView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
         
         descriptionTextView.text = assignment?.assignmentDescription
+      
+        titleTextField.addTarget(self, action: #selector(checkTextField), for: UIControlEvents.editingChanged)
     }
     
     // MARK: - Notification Centre
@@ -105,7 +107,20 @@ extension EditAssignmentViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+  
+  @objc private func checkTextField() {
+    let title = titleTextField.text ?? ""
+    let description = descriptionTextView.text ?? ""
     
+    if !(title.isEmpty || description.isEmpty) && !(descriptionTextView.text == "Description") {
+      editButton.isEnabled = true
+      editButton.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
+    } else {
+      editButton.isEnabled = false
+      editButton.backgroundColor = UIColor.lightGray
+    }
+  }
+  
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentLength = textField.text?.count ?? 0
         let newLength = currentLength + string.count - range.length
@@ -142,5 +157,9 @@ extension EditAssignmentViewController: UITextViewDelegate {
         }
         return true
     }
-    
+  
+  func textViewDidChange(_ textView: UITextView) {
+    checkTextField()
+  }
+
 }
