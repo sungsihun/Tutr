@@ -224,6 +224,8 @@ extension TeacherListViewController {
         switch UIScreen.main.nativeBounds.height {
         case 2436: // iPhone X
             return 175
+        case 2688: // iPhone Xs Max
+            return 175
         default: // Every other iPhone
             return 145
         }
