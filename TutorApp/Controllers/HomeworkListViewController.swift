@@ -36,6 +36,7 @@ class AssignmentListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.tableFooterView = UIView()
     }
     
     @objc private func handleRefreshControl() {

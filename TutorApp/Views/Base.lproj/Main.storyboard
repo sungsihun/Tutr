@@ -385,7 +385,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hfr-Qy-uYz" customClass="RoundImageView" customModule="TutorApp" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hfr-Qy-uYz" customClass="RoundImageView" customModule="TutorApp" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="8" width="76.666666666666671" height="76.666666666666671"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.034920876080000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
@@ -604,7 +604,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uzj-fl-NRd" customClass="RoundImageView" customModule="TutorApp" customModuleProvider="target">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uzj-fl-NRd" customClass="RoundImageView" customModule="TutorApp" customModuleProvider="target">
                                         <rect key="frame" x="155.33333333333334" y="125" width="103.33333333333334" height="103.33333333333331"/>
                                         <color key="backgroundColor" red="0.0020097530459999998" green="1" blue="0.14423110259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
