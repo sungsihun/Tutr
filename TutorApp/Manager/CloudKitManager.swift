@@ -97,7 +97,7 @@ class CloudKitManager {
             
             
             save([userRecord]) { savedUserRecords in
-                guard let savedUserRecords = savedUserRecords, let savedUserRecord = savedUserRecords.first else { fatalError("Could not save") }
+                guard let savedUserRecords = savedUserRecords, let savedUserRecord = savedUserRecords.first else { print("Could not save"); return }
                 setRecordToUserDefaults(savedUserRecord)
                 let returnedUser: User!
                 
