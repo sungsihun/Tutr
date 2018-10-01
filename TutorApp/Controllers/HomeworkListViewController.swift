@@ -75,6 +75,25 @@ class AssignmentListViewController: UIViewController {
 // MARK: - Table View Data Source
 
 extension AssignmentListViewController: UITableViewDataSource {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    let count = assignments?.count ?? 0
+    if count > 0 {
+      tableView.backgroundView = nil
+      tableView.separatorStyle = .singleLine
+    } else {
+      let noDataLabel = UILabel()
+      noDataLabel.text = "No assignments! Your teacher can create assignments on their device."
+      noDataLabel.font = UIFont(name: "Dosis", size: 17)
+      noDataLabel.textColor = UIColor.black
+      noDataLabel.textAlignment = .center
+      noDataLabel.numberOfLines = 0
+      tableView.backgroundView = noDataLabel
+      tableView.separatorStyle = .none
+    }
+    return 1
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return assignments?.count ?? 0
   }
