@@ -84,8 +84,8 @@ class AddStudentViewController: UIViewController {
         CloudKitManager.findStudentWith(email: email) { (student) in
             guard let student = student else {
                 DispatchQueue.main.async {
+                    self.stopSpinner()
                     setAlertWith(title: "Error", message: "User Not Found", from: self) { _ in
-                        self.stopSpinner()
                     }
                 }
                 return

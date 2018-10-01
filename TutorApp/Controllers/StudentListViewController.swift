@@ -249,6 +249,8 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
 extension StudentListViewController: AddStudentViewControllerDelegate {
     
     func add(studentViewController controller: AddStudentViewController, student: Student) {
+        spinner.startAnimating()
+        tableView.isUserInteractionEnabled = false
         let currentTeacher = ActiveUser.shared.current as! Teacher
         CloudKitManager.addStudent(student, to: currentTeacher) { (records) in
             guard let records = records else { fatalError() }
@@ -258,6 +260,8 @@ extension StudentListViewController: AddStudentViewControllerDelegate {
             self.students.append(newStudent)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.spinner.stopAnimating()
+                self.tableView.isUserInteractionEnabled = true
             }
         }
         
