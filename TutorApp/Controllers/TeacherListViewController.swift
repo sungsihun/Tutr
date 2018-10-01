@@ -167,6 +167,7 @@ extension TeacherListViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             headerHeightConstraint.constant = getHeaderImageHeightForCurrentDevice()
         }
+        tableView.tableFooterView = UIView()
 
     }
     

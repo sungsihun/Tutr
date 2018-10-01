@@ -138,7 +138,7 @@ class CloudKitManager {
     
     // MARK: - TEACHERS
     
-     static func getUserRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+    static func getUserRecord(with id: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         let op = CKFetchRecordsOperation(recordIDs: [id])
         op.queuePriority = .veryHigh
         op.qualityOfService = .userInteractive
@@ -293,7 +293,7 @@ class CloudKitManager {
     
     // Get student record from CKID
     
-    static private func getStudentRecord(with ckUserID: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
+    private static func getStudentRecord(with ckUserID: CKRecordID, completion: @escaping (CKRecord?) -> ()) {
         let predicate = NSPredicate(format: "userRef = %@", ckUserID.recordName)
         let query = CKQuery(recordType: ActiveUser.Category.student.rawValue, predicate: predicate)
         db.perform(query, inZoneWith: nil) { (records, error) in

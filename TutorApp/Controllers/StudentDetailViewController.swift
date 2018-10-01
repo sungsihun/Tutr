@@ -140,7 +140,7 @@ class StudentDetailViewController: UIViewController {
         noDataLabel.textAlignment = .center
         assignmentsTableView.addSubview(noDataLabel)
         noDataLabel.translatesAutoresizingMaskIntoConstraints = false
-        noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor, constant: assignmentsTableView.frame.size.height/8).isActive = true
+        noDataLabel.centerYAnchor.constraint(equalTo: assignmentsTableView.centerYAnchor).isActive = true
         noDataLabel.centerXAnchor.constraint(equalTo: assignmentsTableView.centerXAnchor).isActive = true
         
     }
