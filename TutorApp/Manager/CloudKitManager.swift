@@ -170,7 +170,7 @@ class CloudKitManager {
         guard let teacherRefs = record["teachers"] as? Array<CKReference>  else { completion(nil); return }
         
         // Get the recordID of each student
-        
+        ;
         let ids = teacherRefs.map{ $0.recordID }
         
         // Get the record of each student
