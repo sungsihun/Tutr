@@ -21,7 +21,7 @@
         <!--Student List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="StudentListViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="studentList" id="BYZ-38-t0r" customClass="StudentListViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,16 +63,16 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="8so-8j-UKn">
-                                                    <rect key="frame" x="111.66666666666667" y="19.999999999999996" width="51.333333333333329" height="55.666666666666657"/>
+                                                    <rect key="frame" x="111.66666666666667" y="22.333333333333332" width="61.333333333333329" height="51.333333333333343"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0T-zi-CFK">
-                                                            <rect key="frame" x="0.0" y="0.0" width="51.333333333333336" height="31.666666666666668"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="29.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="25"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-Tj-0Z7">
-                                                            <rect key="frame" x="0.0" y="32.666666666666664" width="51.333333333333336" height="23"/>
+                                                            <rect key="frame" x="0.0" y="30.333333333333329" width="61.333333333333336" height="21"/>
                                                             <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -152,7 +152,7 @@
         <!--Add Student View Controller-->
         <scene sceneID="c4S-2f-R8b">
             <objects>
-                <viewController id="4E4-3g-vRh" customClass="AddStudentViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addStudent" id="4E4-3g-vRh" customClass="AddStudentViewController" customModule="TutorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFill" id="K7h-l3-Yv4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

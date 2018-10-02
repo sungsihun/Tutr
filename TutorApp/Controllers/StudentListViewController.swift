@@ -9,6 +9,8 @@
 import UIKit
 import CloudKit
 
+var didLaunchFromShortcuts: Bool! = false
+
 class StudentListViewController: UIViewController {
     
     // MARK: - Outlets
@@ -28,10 +30,15 @@ class StudentListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setShortcutItem()
         setupSpinner()
         setupUI()
         getTeacher()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        checkForShortcuts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +68,15 @@ class StudentListViewController: UIViewController {
     }
     
     // MARK: - Custom Methods
+    
+    private func setShortcutItem() {
+        let application = UIApplication.shared
+        application.shortcutItems = ShortcutManager.setShortcutItem()
+    }
+    
+    private func checkForShortcuts() {
+        if didLaunchFromShortcuts { performSegue(withIdentifier: "addStudent", sender: self) }
+    }
     
     func getHeaderImageHeightForCurrentDevice() -> CGFloat {
         switch UIScreen.main.nativeBounds.height {
@@ -150,17 +166,20 @@ class StudentListViewController: UIViewController {
             let controller = nav.viewControllers.first! as! AddStudentViewController
             controller.delegate = self
             controller.currentStudents = students
-        }
-        
-        if let index = tableView.indexPathForSelectedRow {
-            
-            if segue.identifier == "showDetail" {
-                let detailVC = segue.destination as! StudentDetailViewController
-                detailVC.student = self.students[index.row]
-                selectedIndexRow = index.row
-                detailVC.delegate = self
+            didLaunchFromShortcuts = false
+        } else {
+            if let index = tableView.indexPathForSelectedRow {
+                
+                if segue.identifier == "showDetail" {
+                    let detailVC = segue.destination as! StudentDetailViewController
+                    detailVC.student = self.students[index.row]
+                    selectedIndexRow = index.row
+                    detailVC.delegate = self
+                }
             }
         }
+        
+
     }
     
 }

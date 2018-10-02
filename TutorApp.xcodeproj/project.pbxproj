@@ -17,6 +17,7 @@
 		06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D49AF62151C87100175B06 /* StudentDetailViewController.swift */; };
 		06E67E4E215B0E5400A12A9F /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */; };
 		BA2B6B5E215AC822008D34A7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B6B5D215AC822008D34A7 /* Helpers.swift */; };
+		BA65652B2163ECFA004CCC81 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA65652A2163ECFA004CCC81 /* ShortcutManager.swift */; };
 		BAB02D4921593DAA00C3F384 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB02D4821593DAA00C3F384 /* User.swift */; };
 		BAB02D4B21593F7D00C3F384 /* ActiveUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB02D4A21593F7D00C3F384 /* ActiveUser.swift */; };
 		BAB9E5D621517344001249AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5D521517344001249AF /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 		06D49AF62151C87100175B06 /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		BA2B6B5D215AC822008D34A7 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		BA65652A2163ECFA004CCC81 /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		BAB02D4821593DAA00C3F384 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAB02D4A21593F7D00C3F384 /* ActiveUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUser.swift; sourceTree = "<group>"; };
 		BAB9E5D221517344001249AF /* TutorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				BAF02C8621556E8E00E00241 /* CloudKitManager.swift */,
+				BA65652A2163ECFA004CCC81 /* ShortcutManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				06C31F18215A8FC500C4B697 /* StudentAssignmentCell.swift in Sources */,
 				BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */,
 				BAB02D4B21593F7D00C3F384 /* ActiveUser.swift in Sources */,
+				BA65652B2163ECFA004CCC81 /* ShortcutManager.swift in Sources */,
 				BAB9E5F221528230001249AF /* RoundImageView.swift in Sources */,
 				06C86E772154846E00EFFE9E /* Teacher.swift in Sources */,
 				06C86E7521547A3400EFFE9E /* TeacherCell.swift in Sources */,

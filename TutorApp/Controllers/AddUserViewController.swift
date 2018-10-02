@@ -56,6 +56,8 @@ class AddUserViewController: UIViewController {
     
     // MARK: - Setup
     
+
+    
     private func setupUser() {
         
         CloudKitManager.createCKUser() { (success) in
