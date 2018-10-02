@@ -9,11 +9,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Dosis-Light.ttf">
-            <string>Dosis-Light</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -23,17 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tutr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nK-4L-E2B">
-                                <rect key="frame" x="114" y="270.5" width="147" height="126.5"/>
-                                <fontDescription key="fontDescription" name="Dosis-Light" family="Dosis" pointSize="100"/>
-                                <color key="textColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="nar-VF-7O1">
+                                <rect key="frame" x="159.5" y="305.5" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nar-VF-7O1" secondAttribute="height" multiplier="1:1" id="XBP-R6-sFm"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="4nK-4L-E2B" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="44U-Gn-pEQ"/>
-                            <constraint firstItem="4nK-4L-E2B" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qA5-lo-IaL"/>
+                            <constraint firstItem="nar-VF-7O1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5Kr-Ua-v4Q"/>
+                            <constraint firstItem="nar-VF-7O1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="M5B-OS-8Yg"/>
+                            <constraint firstItem="nar-VF-7O1" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.15" id="ckt-wL-Wp4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -43,4 +39,7 @@
             <point key="canvasLocation" x="-626" y="357"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Launchscreen" width="423" height="426"/>
+    </resources>
 </document>
