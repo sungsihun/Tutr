@@ -307,9 +307,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To Tutr! " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtI-Ke-dhS">
+                                <rect key="frame" x="73.333333333333343" y="171" width="267.66666666666663" height="51"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you a teacher or a student?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="st4-Uw-1G9">
+                                <rect key="frame" x="54" y="227" width="306" height="33"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.21100669929999999" green="0.42365910229999998" blue="0.1181846741" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="st4-Uw-1G9" firstAttribute="top" secondItem="MtI-Ke-dhS" secondAttribute="bottom" constant="5" id="5P4-be-GYd"/>
                             <constraint firstItem="Z7r-pq-YJI" firstAttribute="centerX" secondItem="67F-Ip-5YY" secondAttribute="centerX" constant="-80" id="GFh-Dc-lu0"/>
                             <constraint firstItem="dIz-ds-8Hk" firstAttribute="centerX" secondItem="Z7r-pq-YJI" secondAttribute="centerX" id="JCX-5a-ak4"/>
                             <constraint firstItem="KY0-oc-9cz" firstAttribute="centerX" secondItem="H4U-DI-VUi" secondAttribute="centerX" id="L8n-iX-lcc"/>
@@ -318,8 +331,11 @@
                             <constraint firstItem="KY0-oc-9cz" firstAttribute="centerY" secondItem="dIz-ds-8Hk" secondAttribute="centerY" id="WHo-oy-oTp"/>
                             <constraint firstItem="H4U-DI-VUi" firstAttribute="centerX" secondItem="67F-Ip-5YY" secondAttribute="centerX" constant="80" id="brM-SX-2yZ"/>
                             <constraint firstItem="Z7r-pq-YJI" firstAttribute="width" secondItem="67F-Ip-5YY" secondAttribute="width" multiplier="0.2" id="jV6-t8-hNu"/>
+                            <constraint firstItem="Z7r-pq-YJI" firstAttribute="top" secondItem="MtI-Ke-dhS" secondAttribute="bottom" multiplier="1.5" id="llN-At-lrI"/>
                             <constraint firstItem="dIz-ds-8Hk" firstAttribute="top" secondItem="Z7r-pq-YJI" secondAttribute="bottom" constant="10" id="mbd-t8-jcK"/>
+                            <constraint firstItem="MtI-Ke-dhS" firstAttribute="centerX" secondItem="67F-Ip-5YY" secondAttribute="centerX" id="nsb-aV-xFu"/>
                             <constraint firstItem="Z7r-pq-YJI" firstAttribute="centerY" secondItem="67F-Ip-5YY" secondAttribute="centerY" id="wTO-Lv-YSC"/>
+                            <constraint firstItem="st4-Uw-1G9" firstAttribute="centerX" secondItem="67F-Ip-5YY" secondAttribute="centerX" id="ycg-4A-RM2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="T0N-h5-Plu"/>
                     </view>
