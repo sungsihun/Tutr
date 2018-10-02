@@ -596,7 +596,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Bu-3V-bJQ" secondAttribute="height" multiplier="1:1" id="d2M-o5-6vZ"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="add-desc-selected">
+                                <state key="normal" title="Button" image="Launchscreen">
                                     <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -688,6 +688,7 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="assignmentsLabel" destination="lZ8-ZW-myO" id="KHJ-GX-ehw"/>
                         <outlet property="assignmentsTableView" destination="pam-Ir-R1K" id="mKr-KX-p43"/>
                         <outlet property="backgroundView" destination="zIv-qu-aaF" id="ZT5-O1-4my"/>
                         <outlet property="nameLabel" destination="UgC-BT-2CP" id="V3J-Oq-NbU"/>
@@ -743,8 +744,8 @@
                                             <constraint firstItem="9fH-a1-6xf" firstAttribute="height" secondItem="VHg-Rc-yY8" secondAttribute="height" id="gdE-RB-8yG"/>
                                         </constraints>
                                     </stackView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-desc-selected" translatesAutoresizingMaskIntoConstraints="NO" id="1KZ-aY-Wru">
-                                        <rect key="frame" x="108.33333333333334" y="10" width="73.333333333333343" height="73.666666666666671"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="1KZ-aY-Wru">
+                                        <rect key="frame" x="98.333333333333343" y="10" width="73.333333333333343" height="73.666666666666671"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="1KZ-aY-Wru" secondAttribute="height" multiplier="1:1" id="B7C-h0-ANs"/>
                                         </constraints>
@@ -778,7 +779,7 @@
                                     <constraint firstAttribute="bottom" secondItem="VHg-Rc-yY8" secondAttribute="bottom" id="E0G-aS-kiM"/>
                                     <constraint firstItem="jaW-6D-Cvs" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="JJ2-cQ-iuF"/>
                                     <constraint firstItem="jaW-6D-Cvs" firstAttribute="width" secondItem="Nbn-gx-vBh" secondAttribute="width" multiplier="0.9" id="K0Z-S8-t7d"/>
-                                    <constraint firstItem="1KZ-aY-Wru" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" id="Lxm-cc-5yR"/>
+                                    <constraint firstItem="1KZ-aY-Wru" firstAttribute="centerX" secondItem="Nbn-gx-vBh" secondAttribute="centerX" constant="-10" id="Lxm-cc-5yR"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="height" secondItem="Nbn-gx-vBh" secondAttribute="height" multiplier="0.25" id="Sji-Jz-bEx"/>
                                     <constraint firstItem="ufg-mf-83l" firstAttribute="width" secondItem="jaW-6D-Cvs" secondAttribute="width" id="j2o-9M-5DF"/>
                                     <constraint firstItem="1KZ-aY-Wru" firstAttribute="top" secondItem="Nbn-gx-vBh" secondAttribute="top" constant="10" id="lF9-hG-bY2"/>
@@ -1245,7 +1246,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add-desc-selected" width="663" height="663"/>
+        <image name="Launchscreen" width="423" height="426"/>
         <image name="add-people" width="50" height="50"/>
         <image name="add-photo-centered" width="925" height="841"/>
         <image name="background5" width="1242" height="2208"/>
