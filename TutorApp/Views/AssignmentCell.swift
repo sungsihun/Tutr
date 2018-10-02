@@ -34,10 +34,12 @@ class AssignmentCell: UITableViewCell {
             self.backgroundColor = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
             titleLabel.textColor = UIColor.white
             descriptionLabel.textColor = UIColor.white
+            spinner.color = UIColor.white
         } else {
             self.backgroundColor = UIColor.white
             titleLabel.textColor = UIColor.darkGray
             descriptionLabel.textColor = UIColor.darkGray
+            spinner.color = #colorLiteral(red: 0.1067340448, green: 0.4299619794, blue: 0.02381768264, alpha: 1)
         }
 
       if assignment.isComplete {
