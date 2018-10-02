@@ -480,7 +480,7 @@
                 <navigationController storyboardIdentifier="Teachers" automaticallyAdjustsScrollViewInsets="NO" id="9Gh-ps-ZHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="CsO-8x-DiW">
-                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -941,7 +941,7 @@
                 <navigationController storyboardIdentifier="Students" automaticallyAdjustsScrollViewInsets="NO" id="iGm-KU-S2o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="oYs-o3-r0t">
-                        <rect key="frame" x="0.0" y="20" width="414" height="101"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
@@ -1023,13 +1023,13 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pull down to refresh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTE-fK-lRD">
-                                <rect key="frame" x="146" y="201.33333333333334" width="122.33333333333331" height="20.333333333333343"/>
+                                <rect key="frame" x="146" y="619.66666666666663" width="122.33333333333331" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="16"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pull-down" translatesAutoresizingMaskIntoConstraints="NO" id="40d-Hl-ZGJ">
-                                <rect key="frame" x="186.33333333333334" y="160" width="41.333333333333343" height="41.333333333333343"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pull-down2" translatesAutoresizingMaskIntoConstraints="NO" id="40d-Hl-ZGJ">
+                                <rect key="frame" x="186.33333333333334" y="578.33333333333337" width="41.333333333333343" height="41.333333333333371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="40d-Hl-ZGJ" secondAttribute="height" multiplier="1:1" id="YvY-eI-WV1"/>
@@ -1041,12 +1041,12 @@
                             <constraint firstItem="4jq-qu-zV5" firstAttribute="centerX" secondItem="iKR-a0-Ve9" secondAttribute="centerX" id="1Ai-9s-Do2"/>
                             <constraint firstItem="40d-Hl-ZGJ" firstAttribute="width" secondItem="iKR-a0-Ve9" secondAttribute="width" multiplier="0.1" id="3HE-EP-Dg1"/>
                             <constraint firstItem="4jq-qu-zV5" firstAttribute="width" secondItem="iKR-a0-Ve9" secondAttribute="width" multiplier="0.9" id="3x5-58-QJz"/>
-                            <constraint firstItem="40d-Hl-ZGJ" firstAttribute="top" secondItem="LtB-MU-3uf" secondAttribute="top" multiplier="2.5" id="C3E-ON-gsN"/>
+                            <constraint firstItem="eTE-fK-lRD" firstAttribute="top" secondItem="40d-Hl-ZGJ" secondAttribute="bottom" id="7nI-WJ-lAx"/>
                             <constraint firstItem="4jq-qu-zV5" firstAttribute="centerY" secondItem="iKR-a0-Ve9" secondAttribute="centerY" multiplier="1.1" id="N9l-mR-Ib1"/>
+                            <constraint firstItem="LtB-MU-3uf" firstAttribute="bottom" secondItem="eTE-fK-lRD" secondAttribute="bottom" multiplier="1.15" id="O8m-Io-FfH"/>
                             <constraint firstItem="eTE-fK-lRD" firstAttribute="centerX" secondItem="iKR-a0-Ve9" secondAttribute="centerX" id="Zmp-mk-szl"/>
                             <constraint firstItem="4jq-qu-zV5" firstAttribute="height" secondItem="iKR-a0-Ve9" secondAttribute="height" multiplier="0.8" id="cM4-q0-Gg5"/>
                             <constraint firstItem="40d-Hl-ZGJ" firstAttribute="centerX" secondItem="iKR-a0-Ve9" secondAttribute="centerX" id="fV4-Gg-4JZ"/>
-                            <constraint firstItem="eTE-fK-lRD" firstAttribute="top" secondItem="40d-Hl-ZGJ" secondAttribute="bottom" id="qg3-zC-G1O"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LtB-MU-3uf"/>
                     </view>
@@ -1238,7 +1238,7 @@
         <image name="filter" width="40" height="40"/>
         <image name="header" width="697" height="304"/>
         <image name="home" width="50" height="50"/>
-        <image name="pull-down" width="319" height="324"/>
+        <image name="pull-down2" width="64" height="117"/>
         <image name="refresh" width="512" height="512"/>
         <image name="student-white" width="511" height="511"/>
         <image name="teacher-white" width="506" height="480"/>
