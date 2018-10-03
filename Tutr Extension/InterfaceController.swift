@@ -14,8 +14,8 @@ import WatchConnectivity
 class InterfaceController: WKInterfaceController {
 
     @IBOutlet weak var table: WKInterfaceTable!
-    var students = [String]()
-    let sharedStudents = StudentNames.sharedInstance
+    var studentDict = [String:[String]]()
+    let sharedStudents = WatchStudents.sharedInstance
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -26,7 +26,7 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        students = sharedStudents.students
+        studentDict = sharedStudents.studentDict
         loadStudents()
     }
     
@@ -36,12 +36,18 @@ class InterfaceController: WKInterfaceController {
     }
     
     private func loadStudents() {
-        table.setNumberOfRows(students.count, withRowType: "NameRow")
-        for i in 0..<students.count {
+        table.setNumberOfRows(studentDict.count, withRowType: "NameRow")
+        for i in 0..<studentDict.count {
             if let row = table.rowController(at: i) as? NameRow {
-                row.nameLabel.setText(students[i])
+                let currentKey = Array(studentDict.keys)[i]
+                row.nameLabel.setText(currentKey)
             }
         }
+    }
+    
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        let currentStudent = Array(studentDict.keys)[rowIndex]
+        self.pushController(withName: "AssignmentsViewController", context: studentDict[currentStudent])
     }
     
 }

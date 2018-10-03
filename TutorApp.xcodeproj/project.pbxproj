@@ -16,13 +16,14 @@
 		06C86E772154846E00EFFE9E /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C86E762154846E00EFFE9E /* Teacher.swift */; };
 		06D49AF72151C87100175B06 /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D49AF62151C87100175B06 /* StudentDetailViewController.swift */; };
 		06E67E4E215B0E5400A12A9F /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */; };
+		BA181FB2216547F500286BCE /* AssignmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA181FB1216547F500286BCE /* AssignmentRow.swift */; };
+		BA181FB421654DD200286BCE /* AssignmentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA181FB321654DD200286BCE /* AssignmentsController.swift */; };
 		BA2B6B5E215AC822008D34A7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B6B5D215AC822008D34A7 /* Helpers.swift */; };
 		BA5BBDBE2164EF6E000A153E /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA5BBDBC2164EF6E000A153E /* Interface.storyboard */; };
 		BA5BBDC02164EF6F000A153E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5BBDBF2164EF6F000A153E /* Assets.xcassets */; };
 		BA5BBDC72164EF6F000A153E /* Tutr Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BA5BBDC62164EF6F000A153E /* Tutr Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BA5BBDD72164EF6F000A153E /* Tutr.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BA5BBDBA2164EF6E000A153E /* Tutr.app */; };
 		BA5BBDE92164F0E0000A153E /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5BBDE42164F0AA000A153E /* InterfaceController.swift */; };
-		BA5BBDEA2164F0E0000A153E /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5BBDE52164F0AA000A153E /* NotificationController.swift */; };
 		BA5BBDEB2164F0E0000A153E /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5BBDE72164F0AA000A153E /* ExtensionDelegate.swift */; };
 		BA65652B2163ECFA004CCC81 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA65652A2163ECFA004CCC81 /* ShortcutManager.swift */; };
 		BAB02D4921593DAA00C3F384 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB02D4821593DAA00C3F384 /* User.swift */; };
@@ -39,7 +40,7 @@
 		BAB9E5F42152A7A2001249AF /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Assignment.swift */; };
 		BAB9E5F62152B4EC001249AF /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */; };
 		BAC379772164FFB8000556AC /* NameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47C4752164FEAD00CC7E0E /* NameRow.swift */; };
-		BAC3797921650677000556AC /* StudentNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3797821650677000556AC /* StudentNames.swift */; };
+		BAC3797921650677000556AC /* WatchStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3797821650677000556AC /* WatchStudents.swift */; };
 		BADE0BE921598C8000BEC6FC /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE421598C7400BEC6FC /* Dosis-Bold.ttf */; };
 		BADE0BEA21598C8000BEC6FC /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE721598C7700BEC6FC /* Dosis-ExtraBold.ttf */; };
 		BADE0BEB21598C8000BEC6FC /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BADE0BE821598C7800BEC6FC /* Dosis-ExtraLight.ttf */; };
@@ -105,6 +106,8 @@
 		06C86E762154846E00EFFE9E /* Teacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
 		06D49AF62151C87100175B06 /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
+		BA181FB1216547F500286BCE /* AssignmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentRow.swift; sourceTree = "<group>"; };
+		BA181FB321654DD200286BCE /* AssignmentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsController.swift; sourceTree = "<group>"; };
 		BA2B6B5D215AC822008D34A7 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BA47C4752164FEAD00CC7E0E /* NameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRow.swift; sourceTree = "<group>"; };
 		BA5BBDBA2164EF6E000A153E /* Tutr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +117,6 @@
 		BA5BBDC62164EF6F000A153E /* Tutr Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Tutr Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5BBDE32164F0AA000A153E /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		BA5BBDE42164F0AA000A153E /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		BA5BBDE52164F0AA000A153E /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		BA5BBDE62164F0AA000A153E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA5BBDE72164F0AA000A153E /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		BA5BBDE82164F0AA000A153E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,7 +136,7 @@
 		BAB9E5F121528230001249AF /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		BAB9E5F32152A7A2001249AF /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		BAB9E5F52152B4EC001249AF /* AssignmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
-		BAC3797821650677000556AC /* StudentNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNames.swift; sourceTree = "<group>"; };
+		BAC3797821650677000556AC /* WatchStudents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStudents.swift; sourceTree = "<group>"; };
 		BADE0BE221598C7200BEC6FC /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
 		BADE0BE321598C7300BEC6FC /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
 		BADE0BE421598C7400BEC6FC /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.ttf"; sourceTree = "<group>"; };
@@ -183,12 +185,13 @@
 			children = (
 				BA5BBDE32164F0AA000A153E /* PushNotificationPayload.apns */,
 				BA5BBDE42164F0AA000A153E /* InterfaceController.swift */,
-				BA5BBDE52164F0AA000A153E /* NotificationController.swift */,
 				BA5BBDE62164F0AA000A153E /* Assets.xcassets */,
 				BA5BBDE72164F0AA000A153E /* ExtensionDelegate.swift */,
-				BAC3797821650677000556AC /* StudentNames.swift */,
+				BAC3797821650677000556AC /* WatchStudents.swift */,
 				BA5BBDE82164F0AA000A153E /* Info.plist */,
 				BA47C4752164FEAD00CC7E0E /* NameRow.swift */,
+				BA181FB1216547F500286BCE /* AssignmentRow.swift */,
+				BA181FB321654DD200286BCE /* AssignmentsController.swift */,
 			);
 			path = "Tutr Extension";
 			sourceTree = "<group>";
@@ -460,9 +463,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5BBDE92164F0E0000A153E /* InterfaceController.swift in Sources */,
+				BA181FB2216547F500286BCE /* AssignmentRow.swift in Sources */,
+				BA181FB421654DD200286BCE /* AssignmentsController.swift in Sources */,
 				BAC379772164FFB8000556AC /* NameRow.swift in Sources */,
-				BAC3797921650677000556AC /* StudentNames.swift in Sources */,
-				BA5BBDEA2164F0E0000A153E /* NotificationController.swift in Sources */,
+				BAC3797921650677000556AC /* WatchStudents.swift in Sources */,
 				BA5BBDEB2164F0E0000A153E /* ExtensionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,7 +559,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.henry.TutorApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
@@ -575,7 +579,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.henry.TutorApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;

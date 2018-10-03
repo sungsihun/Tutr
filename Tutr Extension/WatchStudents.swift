@@ -8,11 +8,11 @@
 
 import Foundation
 
-class StudentNames {
+class WatchStudents {
     
-    static let sharedInstance = StudentNames()
+    static let sharedInstance = WatchStudents()
     
-    var students = [String]()
+    var studentDict = [String:[String]]()
     
     
 }

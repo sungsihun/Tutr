@@ -63,10 +63,12 @@ extension ExtensionDelegate: WCSessionDelegate {
         }
     }
     
+    
+    
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        guard let students = applicationContext["students"] as? [String] else { fatalError() }
-        let sharedStudents = StudentNames.sharedInstance
-        sharedStudents.students = students
+        guard let students = applicationContext["studentDict"] as? [String:[String]] else { fatalError() }
+        let sharedStudents = WatchStudents.sharedInstance
+        sharedStudents.studentDict = students
         DispatchQueue.main.async {
             WKInterfaceController.reloadRootPageControllers(withNames: ["StudentListController"], contexts: nil, orientation: .vertical, pageIndex: 0)
         }

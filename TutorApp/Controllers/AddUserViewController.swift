@@ -162,7 +162,7 @@ class AddUserViewController: UIViewController {
     // MARK : - Actions
     
     @objc func saveButtonTapped(_ sender: UIButton) {
-        subjectTextField.resignFirstResponder
+        subjectTextField.resignFirstResponder()
         setupActivityIndicator()
         createUser()
     }

@@ -23,11 +23,7 @@ class StudentListViewController: UIViewController {
     // MARK: - Properties
     
     
-    var students: [Student] = [] {
-        didSet {
-           sendStudentsToWatch()
-        }
-    }
+    var students: [Student] = []
     let userDefaults = UserDefaults.standard
     var selectedIndexRow: Int?
     
@@ -49,6 +45,7 @@ class StudentListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(stopSpinner), name: .assignmentsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sendStudentsToWatch), name: .assignmentsChanged, object: nil)
     }
     
     deinit {
@@ -139,16 +136,18 @@ class StudentListViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    private func sendStudentsToWatch() {
+    @objc private func sendStudentsToWatch() {
         if WCSession.isSupported() {
-            var names = [String]()
+            var studentDict = [String:[String]]()
             for student in students {
-                names.append(student.name)
+                student.filterAssignments(by: ActiveUser.shared.current as! Teacher)
+                let assignmentNames = student.assignments.map { $0.assignmentTitle }
+                studentDict[student.name] = assignmentNames
             }
             let session = WCSession.default
             if session.isWatchAppInstalled {
                 do {
-                    let dict = ["students":names]
+                    let dict = ["studentDict":studentDict]
                     try session.updateApplicationContext(dict)
                 } catch {
                     print(error)
