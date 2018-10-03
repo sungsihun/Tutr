@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import WatchConnectivity
 
 var didLaunchFromShortcuts: Bool! = false
 
@@ -22,7 +23,11 @@ class StudentListViewController: UIViewController {
     // MARK: - Properties
     
     
-    var students = [Student]()
+    var students: [Student] = [] {
+        didSet {
+           sendStudentsToWatch()
+        }
+    }
     let userDefaults = UserDefaults.standard
     var selectedIndexRow: Int?
     
@@ -132,6 +137,24 @@ class StudentListViewController: UIViewController {
         
         self.userDefaults.set(filterBy, forKey: "filterBy")
         self.tableView.reloadData()
+    }
+    
+    private func sendStudentsToWatch() {
+        if WCSession.isSupported() {
+            var names = [String]()
+            for student in students {
+                names.append(student.name)
+            }
+            let session = WCSession.default
+            if session.isWatchAppInstalled {
+                do {
+                    let dict = ["students":names]
+                    try session.updateApplicationContext(dict)
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
     
     private func setupUI() {
