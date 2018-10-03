@@ -18,6 +18,9 @@
 		06E67E4E215B0E5400A12A9F /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */; };
 		BA181FB2216547F500286BCE /* AssignmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA181FB1216547F500286BCE /* AssignmentRow.swift */; };
 		BA181FB421654DD200286BCE /* AssignmentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA181FB321654DD200286BCE /* AssignmentsController.swift */; };
+		BA181FB921655FEA00286BCE /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB9E5F32152A7A2001249AF /* Assignment.swift */; };
+		BA181FBC216567A300286BCE /* IntHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA181FBB216567A300286BCE /* IntHelper.swift */; };
+		BA181FBD216567B100286BCE /* IntHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA181FBB216567A300286BCE /* IntHelper.swift */; };
 		BA2B6B5E215AC822008D34A7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B6B5D215AC822008D34A7 /* Helpers.swift */; };
 		BA5BBDBE2164EF6E000A153E /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA5BBDBC2164EF6E000A153E /* Interface.storyboard */; };
 		BA5BBDC02164EF6F000A153E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5BBDBF2164EF6F000A153E /* Assets.xcassets */; };
@@ -108,6 +111,7 @@
 		06E67E4D215B0E5400A12A9F /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		BA181FB1216547F500286BCE /* AssignmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentRow.swift; sourceTree = "<group>"; };
 		BA181FB321654DD200286BCE /* AssignmentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsController.swift; sourceTree = "<group>"; };
+		BA181FBB216567A300286BCE /* IntHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntHelper.swift; sourceTree = "<group>"; };
 		BA2B6B5D215AC822008D34A7 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BA47C4752164FEAD00CC7E0E /* NameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRow.swift; sourceTree = "<group>"; };
 		BA5BBDBA2164EF6E000A153E /* Tutr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +284,7 @@
 				BAB9E5DE21517345001249AF /* LaunchScreen.storyboard */,
 				BAB9E5E121517345001249AF /* Info.plist */,
 				BA2B6B5D215AC822008D34A7 /* Helpers.swift */,
+				BA181FBB216567A300286BCE /* IntHelper.swift */,
 				BAE0CBE8215D7CF9001A1190 /* NotificationName+AssignmentsChanged.swift */,
 			);
 			path = Other;
@@ -463,8 +468,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5BBDE92164F0E0000A153E /* InterfaceController.swift in Sources */,
+				BA181FB921655FEA00286BCE /* Assignment.swift in Sources */,
 				BA181FB2216547F500286BCE /* AssignmentRow.swift in Sources */,
 				BA181FB421654DD200286BCE /* AssignmentsController.swift in Sources */,
+				BA181FBD216567B100286BCE /* IntHelper.swift in Sources */,
 				BAC379772164FFB8000556AC /* NameRow.swift in Sources */,
 				BAC3797921650677000556AC /* WatchStudents.swift in Sources */,
 				BA5BBDEB2164F0E0000A153E /* ExtensionDelegate.swift in Sources */,
@@ -482,6 +489,7 @@
 				06C31F18215A8FC500C4B697 /* StudentAssignmentCell.swift in Sources */,
 				BAF02C802155647000E00241 /* OnboardingViewController.swift in Sources */,
 				BAB02D4B21593F7D00C3F384 /* ActiveUser.swift in Sources */,
+				BA181FBC216567A300286BCE /* IntHelper.swift in Sources */,
 				BA65652B2163ECFA004CCC81 /* ShortcutManager.swift in Sources */,
 				BAB9E5F221528230001249AF /* RoundImageView.swift in Sources */,
 				06C86E772154846E00EFFE9E /* Teacher.swift in Sources */,

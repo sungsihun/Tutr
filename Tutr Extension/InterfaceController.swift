@@ -14,7 +14,7 @@ import WatchConnectivity
 class InterfaceController: WKInterfaceController {
 
     @IBOutlet weak var table: WKInterfaceTable!
-    var studentDict = [String:[String]]()
+    var studentDict = [String:Data]()
     let sharedStudents = WatchStudents.sharedInstance
     
     override func awake(withContext context: Any?) {

@@ -66,7 +66,7 @@ extension ExtensionDelegate: WCSessionDelegate {
     
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        guard let students = applicationContext["studentDict"] as? [String:[String]] else { fatalError() }
+        guard let students = applicationContext["studentDict"] as? [String:Data] else { fatalError() }
         let sharedStudents = WatchStudents.sharedInstance
         sharedStudents.studentDict = students
         DispatchQueue.main.async {

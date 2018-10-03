@@ -13,12 +13,17 @@ import Foundation
 class AssignmentsController: WKInterfaceController {
 
     @IBOutlet weak var table: WKInterfaceTable!
-    var assignments = [String]()
+    var assignments = [Assignment]()
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        if let assignments = context as? [String] {
-            self.assignments = assignments
+        if let assignmentsData = context as? Data {
+            do {
+                let assignments = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(assignmentsData) as! [Assignment]
+                self.assignments = assignments
+            } catch {
+                print(error.localizedDescription)
+            }
         }
         // Configure interface objects here.
     }
@@ -38,7 +43,7 @@ class AssignmentsController: WKInterfaceController {
         table.setNumberOfRows(assignments.count, withRowType: "AssignmentRow")
         for i in 0..<assignments.count {
             if let row = table.rowController(at: i) as? AssignmentRow {
-                row.assignmentLabel.setText(assignments[i])
+                row.assignmentLabel.setText(assignments[i].assignmentTitle)
             }
         }
     }

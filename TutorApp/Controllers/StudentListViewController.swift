@@ -138,11 +138,11 @@ class StudentListViewController: UIViewController {
     
     @objc private func sendStudentsToWatch() {
         if WCSession.isSupported() {
-            var studentDict = [String:[String]]()
+            var studentDict = [String:Data]()
             for student in students {
                 student.filterAssignments(by: ActiveUser.shared.current as! Teacher)
-                let assignmentNames = student.assignments.map { $0.assignmentTitle }
-                studentDict[student.name] = assignmentNames
+                let assignmentsData = NSKeyedArchiver.archivedData(withRootObject: student.assignments)
+                studentDict[student.name] = assignmentsData
             }
             let session = WCSession.default
             if session.isWatchAppInstalled {

@@ -12,7 +12,7 @@ class WatchStudents {
     
     static let sharedInstance = WatchStudents()
     
-    var studentDict = [String:[String]]()
+    var studentDict = [String:Data]()
     
     
 }
