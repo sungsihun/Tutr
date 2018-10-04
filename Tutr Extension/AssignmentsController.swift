@@ -18,6 +18,7 @@ class AssignmentsController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         if let assignmentsData = context as? Data {
+            NSKeyedUnarchiver.setClass(Assignment.self, forClassName: "Assignment")
             do {
                 let assignments = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(assignmentsData) as! [Assignment]
                 self.assignments = assignments
@@ -43,6 +44,8 @@ class AssignmentsController: WKInterfaceController {
         table.setNumberOfRows(assignments.count, withRowType: "AssignmentRow")
         for i in 0..<assignments.count {
             if let row = table.rowController(at: i) as? AssignmentRow {
+                let assignment = assignments[i]
+                if assignment.isComplete { row.assignmentLabel.setTextColor(UIColor.green) }
                 row.assignmentLabel.setText(assignments[i].assignmentTitle)
             }
         }

@@ -141,7 +141,9 @@ class StudentListViewController: UIViewController {
             var studentDict = [String:Data]()
             for student in students {
                 student.filterAssignments(by: ActiveUser.shared.current as! Teacher)
-                let assignmentsData = NSKeyedArchiver.archivedData(withRootObject: student.assignments)
+                let assignments = student.assignments
+                NSKeyedArchiver.setClassName("Assignment", for: Assignment.self)
+                let assignmentsData = NSKeyedArchiver.archivedData(withRootObject: assignments)
                 studentDict[student.name] = assignmentsData
             }
             let session = WCSession.default
